@@ -4,7 +4,8 @@
   "description": "CSUS Senior Project for N.Sync",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test", 
+    "start": "nodejs index.js"
   },
   "repository": {
     "type": "git",
