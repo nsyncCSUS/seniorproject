@@ -4,7 +4,7 @@
   "description": "CSUS Senior Project for N.Sync",
   "main": "index.js",
   "scripts": {
-    "test": "test", 
+    "test": "test",
     "start": "nodejs index.js"
   },
   "repository": {
@@ -20,6 +20,7 @@
     "angular": "^1.4.3",
     "bootstrap": "^3.3.5",
     "express": "^4.13.1",
+    "grunt-cli": "^0.1.13",
     "jquery": "^2.1.4"
   }
 }
