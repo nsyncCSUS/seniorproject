@@ -1,6 +1,6 @@
 (function() {
 
-var app = angular.module('app', [ 'ngRoute', 'ngAnimate', 'dashboardController']);
+var app = angular.module('app', [ 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController', 'usersController', 'groupsController', 'eventsController']);
 
 app.config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 

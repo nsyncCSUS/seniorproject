@@ -1,5 +1,5 @@
 
-var app = angular.module('eventService'); 
+var app = angular.module('eventService', []); 
 
 app.service('EventService', [function() {
 

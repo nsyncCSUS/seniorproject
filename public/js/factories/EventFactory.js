@@ -1,5 +1,5 @@
 
-var app = angular.module('eventFactory'); 
+var app = angular.module('eventFactory', []); 
 
 /**
  * Factory class for Event objects 

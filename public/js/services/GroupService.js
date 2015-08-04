@@ -1,5 +1,5 @@
 
-var app = angular.module('groupService'); 
+var app = angular.module('groupService', []); 
 
 app.service('GroupService', [function() {
 
