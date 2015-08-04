@@ -1,5 +1,5 @@
 
-var app = angular.module('app'); 
+var app = angular.module('userFactory'); 
 
 app.factory('UserFactory', [function() {
 
