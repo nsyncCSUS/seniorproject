@@ -10,6 +10,25 @@ var users = require('./routes/users');
 var groups = require('./routes/groups');
 var events = require('./routes/events');
 
+//this will aquire my database login file
+var dbConfig = require('./db/db.js');
+var mongoose = require('mongoose');
+var uriUtil = require('mongodb-uri');
+
+/* //Problem isolation: Cannot connect to the database
+//connection setup
+var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },  
+                replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } }; 
+
+var mongooseUri = uriUtil.formatMongoose(dbConfig.url)
+
+//Connect to the DB 
+mongoose.connect(mongooseUri, options);
+
+//create the models for each of the collections
+//this first model will deal with the users collection
+mongoose.model('Users', {FirstName: String, MiddleName: String, LastName: String, Description: String, Email: String, Birthday: Date, Age: Number, City: String, State: String, ZipCode: Number, PhoneNum: Number, Picture: String, VolunteeredTo: String, CreatorOf: String, OrganizerOf: String, SubscribedTo: String, GooglePlus: String, Facebook: String, LinkenIn: String, Twitter: String, Interests: String, Skills: String })
+*/
 var app = express();
 
 // view engine setup
@@ -60,5 +79,10 @@ app.use(function(err, req, res, next) {
   });
 });
 
+//the following code will deal with the user GET code
+//this code will mainly deal with the users page
+app.get('/users', function (req, res){
+	console.log('I received a GET request');
+});
 
 module.exports = app;
