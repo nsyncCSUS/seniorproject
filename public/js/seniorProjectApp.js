@@ -1,6 +1,8 @@
 (function() {
 
-var app = angular.module('app', [ 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController', 'usersController', 'groupsController', 'eventsController']);
+var app = angular.module('app', [ 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController', 
+                                  'usersController', 'groupsController', 'eventsController', 'signupController', 
+                                  'loginController', 'searchController']);
 
 app.config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
@@ -27,6 +29,18 @@ app.config([ '$routeProvider', '$locationProvider', function($routeProvider, $lo
 	.when('/events', {
 		templateUrl : '/partials/events.jade',
 		controller : 'EventsController'
+	})
+	.when('/signup', {
+		templateUrl : '/partials/signup.jade',
+		controller : 'SignupController'
+	})
+	.when('/login', {
+		templateUrl : '/partials/login.jade',
+		controller : 'LoginController'
+	})
+	.when('/search', {
+		templateUrl : '/partials/search.jade',
+		controller : 'SearchController'
 	})
 	.otherwise({
 		redirectTo : '/home'

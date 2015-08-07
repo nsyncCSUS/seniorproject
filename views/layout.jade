@@ -18,6 +18,9 @@ html(ng-app='app')
         script(src='/js/controllers/GroupsController.js')
         script(src='/js/controllers/HomeController.js')
         script(src='/js/controllers/UsersController.js')
+        script(src='/js/controllers/SignupController.js')
+        script(src='/js/controllers/LoginController.js')
+        script(src='/js/controllers/SearchController.js')
         
         script(src='/js/factories/EventFactory.js')
         script(src='/js/factories/GroupFactory.js')
@@ -28,7 +31,6 @@ html(ng-app='app')
         script(src='/js/services/UserService.js')
         
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
     
     nav.navbar.navbar-default.navbar-fixed-top
         .container-fluid
@@ -52,6 +54,10 @@ html(ng-app='app')
                         a(href='/groups') Group
                     li
                         a(href='/events') Events
+                    li
+                        a(href='/signup') Sign Up
+                    li
+                        a(href='/login') Log In
     
   body
     block content

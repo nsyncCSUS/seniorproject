@@ -1,1 +1,25 @@
 h1 Home
+
+img.img-responsive(src='//placehold.it/1920x200')
+
+hr
+
+.well
+    form.form-horizontal
+        .form-group
+            .col-xs-8.col-sm-10.col-md-10.col-lg-10
+                input.form-control#searchBox(type='text', placeholder='Enter a user, group, or event', ng-model='searchbox') 
+            .col-xs-4.col-sm-2.col-md-2.col-lg-2
+                button.btn.btn-default(ng-click='search(searchbox)') Search
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                h3 Filters
+
+hr
+
+.well
+    div(ng-show='searching()')
+        h3 {{searchtext}}
+        button.btn.btn-default(ng-click='stopSearching()') Stop Searching
+    div(ng-show='!searching()')
+        h3 Not Searching
+    
