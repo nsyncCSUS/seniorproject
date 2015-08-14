@@ -1,8 +1,8 @@
+var app = angular.module('userFactory', []);
 
-var app = angular.module('userFactory', []); 
+app.factory('UserFactory', [ function() {
 
-app.factory('UserFactory', [function() {
+	var factory = {};
 
-}]); 
-
-
+	return factory;
+} ]);
