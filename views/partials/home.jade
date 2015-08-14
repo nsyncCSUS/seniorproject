@@ -7,9 +7,9 @@ hr
 .well
     form.form-horizontal
         .form-group
-            .col-xs-8.col-sm-10.col-md-10.col-lg-10
+            .col-xs-8.col-sm-10.col-md-11.col-lg-11
                 input.form-control#searchBox(type='text', placeholder='Enter a user, group, or event', ng-model='searchbox') 
-            .col-xs-4.col-sm-2.col-md-2.col-lg-2
+            .col-xs-4.col-sm-2.col-md-1.col-lg-1
                 button.btn.btn-default(ng-click='search(searchbox)') Search
             .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 h3 Filters
@@ -18,8 +18,53 @@ hr
 
 .well
     div(ng-show='searching()')
-        h3 {{searchtext}}
+        h4 Search Text: {{searchtext}}
         button.btn.btn-default(ng-click='stopSearching()') Stop Searching
+        hr
+        
+        ul.nav.nav-tabs
+            li#users(ng-click='setCurrentTab("users")', ng-class='{ active:getCurrentTab("users") }')
+                a(href='') Users
+            li#groups(ng-click='setCurrentTab("groups")', ng-class='{ active:getCurrentTab("groups") }')
+                a(href='') Groups
+            li#events(ng-click='setCurrentTab("events")', ng-class='{ active:getCurrentTab("events") }')
+                a(href='') Events
+                
+        div(ng-show='getCurrentTab("users")')
+            div(ng-repeat='user in usersSearchResults')
+                .panel.panel-default
+                    img.img-responsive(src='{{user.picture}}', height='64', width='64')
+                    h6 Name: {{user.fname}} {{user.lname}}
+                    h6 Age: {{user.age}}
+                    h6 Interests:
+                    div(ng-repeat='interest in user.interests')
+                        h6 -{{interest.type}}
+        div(ng-show='getCurrentTab("groups")')
+            div(ng-repeat='group in groupsSearchResults')
+                .panel.panel-default
+                    img.img-responsive(src='{{group.picture}}', height='64', width='64')
+                    h6 Name: {{group.gname}}
+                    h6 Description: {{group.description}}
+                    h6 Interests:
+                    div(ng-repeat='interest in group.interests')
+                        h6 -{{interest.type}}
+        div(ng-show='getCurrentTab("events")')
+            div(ng-repeat='event in eventsSearchResults')
+                .panel.panel-default
+                    img.img-responsive(src='{{event.picture}}', height='64', width='64')
+                    h6 Name: {{event.ename}}
+                    h6 Description: {{event.description}}
+                    h6 Volunteer List:
+                    div(ng-repeat='volunteer in event.volunteerList')
+                        img.img-responsive(src='{{volunteer.picture}}', height='64', width='64')
+                        h6 Name: {{volunteer.fname}} {{volunteer.lname}}
+                        h6 Age: {{volunteer.age}}
+                        h6 Interests:
+                        div(ng-repeat='interest in volunteer.interests')
+                            h6 -{{interest.type}}
+                    h6 Interests:
+                    div(ng-repeat='interest in event.interests')
+                        h6 -{{interest.type}}
     div(ng-show='!searching()')
         h3 Not Searching
     

@@ -1,13 +1,12 @@
-
-var app = angular.module('eventFactory', []); 
+var app = angular.module('eventFactory', []);
 
 /**
- * Factory class for Event objects 
+ * Factory class for Event objects
  */
-app.factory('EventFactory', [function() {
-  
-  
-  
-}]); 
+app.factory('EventFactory', [ function() {
 
+	var factory = {};
 
+	return factory;
+
+} ]);
