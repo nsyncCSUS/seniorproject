@@ -2,7 +2,7 @@
 
 	var app = angular.module('app', [ 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController', 
 	                                  'usersController', 'groupsController', 'eventsController', 'signupController', 
-	                                  'loginController', 'searchController']);
+	                                  'loginController']);
 	
 	app.config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	
