@@ -1,11 +1,13 @@
 doctype html
 html(ng-app='app')
     head
+        //https://developers.google.com/speed/pagespeed/
+        // suggestion made by google pagesspeed 
         // http://stackoverflow.com/questions/436411/where-is-the-best-place-to-put-script-tags-in-html-markup
         
         meta(name="viewport" content="width=device-width, initial-scale=0.85, maximum-scale=1, user-scalable=no")
         // CSS
-        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" async)
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" )
         //link(rel='stylesheet', href='/stylesheets/supernice.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
         // JS
@@ -14,24 +16,24 @@ html(ng-app='app')
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js" async)
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js" async)
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js" async)
-        script(src='/js/seniorProjectApp.js')
-        script(src='/js/controllers/DashboardController.js')
-        script(src='/js/controllers/EventsController.js')
-        script(src='/js/controllers/GroupsController.js')
-        script(src='/js/controllers/HomeController.js')
-        script(src='/js/controllers/UsersController.js')
-        script(src='/js/controllers/SignupController.js')
-        script(src='/js/controllers/LoginController.js')
+        script(src='/js/seniorProjectApp.js' async)
+        script(src='/js/controllers/DashboardController.js' async)
+        script(src='/js/controllers/EventsController.js' async)
+        script(src='/js/controllers/GroupsController.js' async)
+        script(src='/js/controllers/HomeController.js' async)
+        script(src='/js/controllers/UsersController.js' async)
+        script(src='/js/controllers/SignupController.js' async)
+        script(src='/js/controllers/LoginController.js' async)
         
-        script(src='/js/factories/HomeFactory.js')
-        script(src='/js/factories/EventFactory.js')
-        script(src='/js/factories/GroupFactory.js')
-        script(src='/js/factories/UserFactory.js')
+        script(src='/js/factories/HomeFactory.js' async)
+        script(src='/js/factories/EventFactory.js' async)
+        script(src='/js/factories/GroupFactory.js' async)
+        script(src='/js/factories/UserFactory.js' async)
         
-        script(src='/js/services/HomeService.js')
-        script(src='/js/services/EventService.js')
-        script(src='/js/services/GroupService.js')
-        script(src='/js/services/UserService.js')
+        script(src='/js/services/HomeService.js' async)
+        script(src='/js/services/EventService.js' async)
+        script(src='/js/services/GroupService.js' async)
+        script(src='/js/services/UserService.js' async)
         
     title= title
     
