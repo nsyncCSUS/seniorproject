@@ -1,7 +1,7 @@
 (function() {
-	var app = angular.module('loginController', []);
+	var app = angular.module('loginController', ['loginService']);
 
-	app.controller('LoginController', [ '$scope', function($scope) {
+	app.controller('LoginController', [ '$scope', 'LoginService', function($scope, LoginService) {
 
 	} ]);
 

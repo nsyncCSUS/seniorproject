@@ -1,11 +1,11 @@
 (function() {
 
-	var app = angular.module('eventFactory', []);
+	var app = angular.module('dashboardFactory', []);
 
 	/**
 	 * Factory class for Event objects
 	 */
-	app.factory('EventFactory', [ function() {
+	app.factory('DashboardFactory', [ function() {
 
 		var factory = {};
 

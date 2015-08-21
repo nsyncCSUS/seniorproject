@@ -20,16 +20,25 @@ html(ng-app='app')
         script(src='/js/controllers/UsersController.js')
         script(src='/js/controllers/SignupController.js')
         script(src='/js/controllers/LoginController.js')
+        script(src='/js/controllers/CreateGroupController.js')
+        script(src='/js/controllers/CreateEventController.js')
         
         script(src='/js/factories/HomeFactory.js')
         script(src='/js/factories/EventFactory.js')
         script(src='/js/factories/GroupFactory.js')
         script(src='/js/factories/UserFactory.js')
+        script(src='/js/factories/DashboardFactory.js')
         
         script(src='/js/services/HomeService.js')
         script(src='/js/services/EventService.js')
         script(src='/js/services/GroupService.js')
         script(src='/js/services/UserService.js')
+        script(src='/js/services/DashboardService.js')
+        script(src='/js/services/CreateEventService.js')
+        script(src='/js/services/CreateGroupService.js')
+        script(src='/js/services/LoginService.js')
+        script(src='/js/services/LogoutService.js')
+        script(src='/js/services/SignupService.js')
         
     title= title
     
@@ -55,11 +64,17 @@ html(ng-app='app')
                         a(href='/groups') Group
                     li(data-toggle='collapse', data-target='.navbar-collapse.in')
                         a(href='/events') Events
+                    li(data-toggle='collapse', data-target='.navbar-collapse.in')
+                        a(href='/create/group') Create Group
+                    li(data-toggle='collapse', data-target='.navbar-collapse.in')
+                        a(href='/create/event') Create Event
                 ul.nav.navbar-nav.pull-right
                     li(data-toggle='collapse', data-target='.navbar-collapse.in')
                         a(href='/signup') Sign Up
                     li(data-toggle='collapse', data-target='.navbar-collapse.in')
                         a(href='/login') Log In
+                    li(data-toggle='collapse', data-target='.navbar-collapse.in')
+                        a(href='/logout') Log Out
     
   body
     block content
