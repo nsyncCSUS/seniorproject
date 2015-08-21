@@ -38,9 +38,17 @@
 			templateUrl : '/partials/login.jade',
 			controller : 'LoginController'
 		})
-		.when('/search', {
-			templateUrl : '/partials/search.jade',
-			controller : 'SearchController'
+		.when('/logout', {
+			templateUrl : '/partials/logout.jade',
+			controller : 'LogoutController'
+		})
+		.when('/create/group', {
+			templateUrl : '/partials/createGroup.jade',
+			controller : 'CreateGroupController'
+		})
+		.when('/create/event', {
+			templateUrl : '/partials/createEvent.jade',
+			controller : 'CreateEventController'
 		})
 		.otherwise({
 			redirectTo : '/home'
