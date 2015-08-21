@@ -1,7 +1,12 @@
 (function() {
 	var app = angular.module('usersController', [ 'userService', 'userFactory' ]);
 
-	app.controller('UsersController', [ '$scope', 'UserService', 'UserFactory', function($scope, UserService, UserFactory) {
+	app.controller('UsersController', [ '$scope', '$routeParams', 'UserService', 'UserFactory', function($scope, $routeParams, UserService, UserFactory) {
+
+		$scope.userId = $routeParams.userId;
+		
+		// Problematic code
+		/*		
 		var refresh = function(){
 			UserService.get('/users').success(function(response)
 			{
@@ -9,7 +14,16 @@
 			});
 		};
 		refresh();
-	
+		 */
+		
+		function refresh(){
+			// Problematic code
+			//UserService.get('/users').success(function test(response)
+			//{
+				console.log("I got the data");
+			//});
+		};
+		refresh();
 	
 	
 	}]);

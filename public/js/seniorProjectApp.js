@@ -22,11 +22,23 @@
 			templateUrl : '/partials/users.jade',
 			controller : 'UsersController'
 		})
+		.when('/users/:userId', {
+			templateUrl : '/partials/users.jade',
+			controller : 'UsersController'
+		})
 		.when('/groups', {
 			templateUrl : '/partials/groups.jade',
 			controller : 'GroupsController'
 		})
+		.when('/groups/:groupId', {
+			templateUrl : '/partials/groups.jade',
+			controller : 'GroupsController'
+		})
 		.when('/events', {
+			templateUrl : '/partials/events.jade',
+			controller : 'EventsController'
+		})
+		.when('/events/:eventId', {
 			templateUrl : '/partials/events.jade',
 			controller : 'EventsController'
 		})
