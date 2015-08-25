@@ -1,8 +1,11 @@
+(function() {
 
-var app = angular.module('groupFactory', []); 
+	var app = angular.module('groupFactory', []);
 
-app.factory('GroupFactory', [function() {
+	app.factory('GroupFactory', [ function() {
 
-}]); 
+		var factory = {};
 
-
+		return factory;
+	} ]);
+})();

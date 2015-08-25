@@ -13,22 +13,23 @@ var events = require('./routes/events');
 //this will aquire my database login file
 var dbConfig = require('./db/db.js');
 var mongoose = require('mongoose');
-var uriUtil = require('mongodb-uri');
+//var uriUtil = require('mongodb-uri'); <<<<<<<<<<<<<<< PROBLEM + updated mongoose to latest version (use npm update)
 
-/* //Problem isolation: Cannot connect to the database
+//Problem isolation: Cannot connect to the database
 //connection setup
 var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },  
                 replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } }; 
 
-var mongooseUri = uriUtil.formatMongoose(dbConfig.url)
+//var mongooseUri = uriUtil.formatMongoose(dbConfig.url) <<<<<<<<<<<<<<< NO LONGER NEEDED
 
 //Connect to the DB 
-mongoose.connect(mongooseUri, options);
+mongoose.connect(dbConfig.url, options); // Corrected URI
 
 //create the models for each of the collections
 //this first model will deal with the users collection
-mongoose.model('Users', {FirstName: String, MiddleName: String, LastName: String, Description: String, Email: String, Birthday: Date, Age: Number, City: String, State: String, ZipCode: Number, PhoneNum: Number, Picture: String, VolunteeredTo: String, CreatorOf: String, OrganizerOf: String, SubscribedTo: String, GooglePlus: String, Facebook: String, LinkenIn: String, Twitter: String, Interests: String, Skills: String })
-*/
+// ************ MOVED TO ./db/models/user.js *******************************
+//mongoose.model('Users', {FirstName: String, MiddleName: String, LastName: String, Description: String, Email: String, Birthday: Date, Age: Number, City: String, State: String, ZipCode: Number, PhoneNum: Number, Picture: String, VolunteeredTo: String, CreatorOf: String, OrganizerOf: String, SubscribedTo: String, GooglePlus: String, Facebook: String, LinkenIn: String, Twitter: String, Interests: String, Skills: String })
+
 var app = express();
 
 // view engine setup

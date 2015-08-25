@@ -1,8 +1,8 @@
+(function() {
+	var app = angular.module('userService', []);
 
-var app = angular.module('userService', []); 
+	app.service('UserService', [ function() {
 
-app.service('UserService', [function() {
+	} ]);
 
-}]); 
-
-
+})();
