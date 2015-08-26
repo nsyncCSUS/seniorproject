@@ -35,7 +35,7 @@ UsersController.prototype = {
     var data = {}; 
     if(id !== null && id !== undefined) {
       // Perform actions to do with this specific user. 
-      if(testUser.id === id) {
+      if(testUser.id == id) {
         data = testUser; 
       }
     } else {

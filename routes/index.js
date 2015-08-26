@@ -19,10 +19,6 @@ router.get('/partials/:page', function(req, res, next) {
 	res.render('partials/' + page);
 });
 
-router.get('*', function(req, res, next) {
-	res.render('index', { title: 'Senior Project' });
-});
-
 // NOTE: All these routing functions must come after 
 // the initial utility routes or else they'll interfere
 // with each other. 
@@ -106,6 +102,11 @@ router.delete('/:controller1/:id1/:controller2/:id2', function(request, response
   var controller = Controllers[request.params.controller1]; 
   controller[request.params.controller2].delete(request, response); 
 }); 
+
+router.get('*', function(req, res, next) {
+	res.render('index', { title: 'Senior Project' });
+});
+
 
 
 module.exports = router;
