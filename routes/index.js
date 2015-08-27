@@ -14,6 +14,7 @@ router.get('/', function(req, res, next) {
 	res.render('index', { title: 'Senior Project' });
 });
 
+
 router.get('/partials/:page', function(req, res, next) {
 	var page = req.params.page;
 	res.render('partials/' + page);
@@ -30,8 +31,14 @@ router.get('/partials/:page', function(req, res, next) {
  */
 router.get('/:controller', function(request, response) {
   var controller = Controllers[request.params.controller]; 
-  controller.get(request, response);
+  if(controller == null || controller == undefined) {
+    // Send 404
+    response.status(404).send('Not Found');
+  } else {
+    controller.get(request, response);
+  }
 }); 
+
 
 /**
  * John
@@ -40,7 +47,12 @@ router.get('/:controller', function(request, response) {
  */
 router.get('/:controller/:id', function(request, response) {
   var controller = Controllers[request.params.controller]
-  controller.get(request, response); 
+  if(controller == null || controller == undefined) {
+    // Send 404
+    response.status(404).send('Not Found');
+  } else {
+    controller.get(request, response); 
+  }
 }); 
 
 
@@ -51,7 +63,12 @@ router.get('/:controller/:id', function(request, response) {
  */
 router.post('/:controller', function(request, response) {
   var controller = Controllers[request.params.controller]; 
-  controller.post(request, response); 
+  if(controller == null || controller == undefined) {
+    // Send 404
+    response.status(404).send('Not Found');
+  } else {
+    controller.post(request, response); 
+  }
 }); 
 
 
@@ -62,7 +79,12 @@ router.post('/:controller', function(request, response) {
  */
 router.put('/:controller/:id', function(request, response) {
   var controller = Controllers[request.params.controller]; 
-  controller.put(request, response); 
+  if(controller == null || controller == undefined) {
+    // Send 404
+    response.status(404).send('Not Found');
+  } else {
+    controller.put(request, response); 
+  }
 }); 
 
 
@@ -73,36 +95,107 @@ router.put('/:controller/:id', function(request, response) {
  */
 router.delete('/:controller/:id', function(request, response) {
   var controller = Controllers[request.params.controller]; 
-  controller.delete(request, response); 
+  if(controller == null || controller == undefined) {
+    // Send 404
+    response.status(404).send('Not Found');
+  } else {
+    controller.delete(request, response); 
+  }
 }); 
 
+
+
+// Compound url requests for nested controller actions
 
 router.get('/:controller1/:id1/:controller2', function(request, response) {
-  console.log('GET ' + request.params.controller1 + ', ' + request.params.controller2); 
-  var controller = Controllers[request.params.controller1]; 
-  controller[request.params.controller2].get(request, response); 
+  // console.log('GET ' + request.params.controller1 + ', ' + request.params.controller2); 
+  var controller1 = Controllers[request.params.controller1]; 
+  if(controller1 == null || controller1 == undefined) {
+    response.status(404).send('Not Found');
+    return;
+  } 
+  
+  var controller2 = controll1[request.params.controller2];
+  if(controller2 == null || controller2 == undefined) {
+    response.status(404).send('Not Found');
+    return;
+  } 
+  
+  controller2[request.params.controller2].get(request, response); 
 }); 
+
 
 router.get('/:controller1/:id1/:controller2/:id2', function(request, response) {
-  var controller = Controllers[request.params.controller1]; 
-  controller[request.params.controller2].get(request, response); 
+  var controller1 = Controllers[request.params.controller1]; 
+  if(controller1 == null || controller1 == undefined) {
+    response.status(404).send('Not Found');
+    return;
+  } 
+  
+  var controller2 = controll1[request.params.controller2];
+  if(controller2 == null || controller2 == undefined) {
+    response.status(404).send('Not Found');
+    return;
+  } 
+  
+  controller2[request.params.controller2].get(request, response); 
 }); 
+
 
 router.post('/:controller1/:id1/:controller2', function(request, response) {
-  var controller = Controllers[request.params.controller1]; 
-  controller[request.params.controller2].post(request, response); 
+  var controller1 = Controllers[request.params.controller1]; 
+  if(controller1 == null || controller1 == undefined) {
+    response.status(404).send('Not Found');
+    return;
+  } 
+  
+  var controller2 = controll1[request.params.controller2];
+  if(controller2 == null || controller2 == undefined) {
+    response.status(404).send('Not Found');
+    return;
+  } 
+  
+  controller2[request.params.controller2].post(request, response);  
 }); 
+
 
 router.put('/:controller1/:id1/:controller2/:id2', function(request, response) {
-  var controller = Controllers[request.params.controller1]; 
-  controller[request.params.controller2].put(request, response); 
+  var controller1 = Controllers[request.params.controller1]; 
+  if(controller1 == null || controller1 == undefined) {
+    response.status(404).send('Not Found');
+    return;
+  } 
+  
+  var controller2 = controll1[request.params.controller2];
+  if(controller2 == null || controller2 == undefined) {
+    response.status(404).send('Not Found');
+    return;
+  } 
+  
+  controller2[request.params.controller2].put(request, response);  
 }); 
+
 
 router.delete('/:controller1/:id1/:controller2/:id2', function(request, response) {
-  var controller = Controllers[request.params.controller1]; 
-  controller[request.params.controller2].delete(request, response); 
+  var controller1 = Controllers[request.params.controller1]; 
+  if(controller1 == null || controller1 == undefined) {
+    response.status(404).send('Not Found');
+    return;
+  } 
+  
+  var controller2 = controll1[request.params.controller2];
+  if(controller2 == null || controller2 == undefined) {
+    response.status(404).send('Not Found');
+    return;
+  } 
+  
+  controller2[request.params.controller2].delete(request, response); 
 }); 
 
+
+/**
+ * Render index if no route matched
+ */
 router.get('*', function(req, res, next) {
 	res.render('index', { title: 'Senior Project' });
 });
