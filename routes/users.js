@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');  // mongose module
 var User = require('../db/models/user'); // mongoose model
+var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
 // HL checks the database for user if usere does not exist
 // put user into the database
@@ -27,14 +28,7 @@ router.post('/', function(req , res) {
           password : req.body.password
         }
       });
-
         console.log(newUser);
-      //  newUser.userAuth.userName = 5;
-
-        // set the user's local credentails
-        //newUser.userName= req.body.username;
-      //  newUser.password = req.body.password;
-
         //save user
         newUser.save(function(err){
           if(err){
@@ -46,7 +40,40 @@ router.post('/', function(req , res) {
 
       }
     });
+});
 
+//HL the users name then password to see if they match
+// if they match a token is generated and returned in the
+// res object
+router.post('/login', function(req, res){
+  console.log('login');
+  User.findOne({'userAuth.userName': req.body.username}, function(err,user){
+    if(err){
+      console.log('Error in Signup:' + err);
+    }
+    if(!user){
+      console.log("User not found");
+      res.json({ success: false, message: 'Authentication failed. Wrong Username.' });
+    }else if(user){
+      if(user.userAuth.password != req.body.password){
+        console.log(req.body.password);
+        console.log(user.userAuth.password);
+        console.log('Wrong password');
+        res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+      }else {
+        console.log('token created');
+        var token = jwt.sign(user,'secret',{
+          expiresInMinutes: 1440 // expires in 24 hours
+        });
+        
+        res.json({
+          success:true,
+          message:"Token Created",
+          token:  token
+        });
+      }
+    }
+  });
 });
 
 module.exports = router;
