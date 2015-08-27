@@ -1,7 +1,17 @@
 (function() {
 	var app = angular.module('signupController', ['signupService']);
+	app.controller('SignupController', [ '$scope','$http','$location', function($scope,$http,$location) {
 
-	app.controller('SignupController', [ '$scope', 'SignupService', function($scope, SignupService) {
+		$scope.register = function (){
+			console.log($scope.user.username);
+			console.log($scope.user.password);
+			$http.post('/users',$scope.user);
+			console.log('back to app');
+			 $location.path('/home');
+		};
+
+
+
 
 	} ]);
 

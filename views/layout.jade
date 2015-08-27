@@ -1,9 +1,13 @@
 doctype html
 html(ng-app='app')
     head
+        //https://developers.google.com/speed/pagespeed/
+        // suggestion made by google pagesspeed 
+        // http://stackoverflow.com/questions/436411/where-is-the-best-place-to-put-script-tags-in-html-markup
+        
         meta(name="viewport" content="width=device-width, initial-scale=0.85, maximum-scale=1, user-scalable=no")
         // CSS
-        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" )
         //link(rel='stylesheet', href='/stylesheets/supernice.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
         // JS
@@ -40,6 +44,7 @@ html(ng-app='app')
         script(src='/js/services/LoginService.js')
         script(src='/js/services/LogoutService.js')
         script(src='/js/services/SignupService.js')
+
         
     title= title
     

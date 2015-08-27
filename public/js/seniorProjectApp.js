@@ -1,11 +1,11 @@
 (function() {
 
-	var app = angular.module('app', [ 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController', 
-	                                  'usersController', 'groupsController', 'eventsController', 'signupController', 
+	var app = angular.module('app', [ 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController',
+	                                  'usersController', 'groupsController', 'eventsController', 'signupController',
 	                                  'loginController']);
-	
+
 	app.config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-	
+
 		$routeProvider
 		.when('/', {
 			redirectTo : '/home'
@@ -44,7 +44,7 @@
 		})
 		.when('/signup', {
 			templateUrl : '/partials/signup.jade',
-			controller : 'SignupController'
+			controller : 'SignupController',
 		})
 		.when('/login', {
 			templateUrl : '/partials/login.jade',
@@ -65,7 +65,7 @@
 		.otherwise({
 			redirectTo : '/home'
 		});
-	
+
 		$locationProvider.html5Mode({enabled: true, requireBase: false});
 	}]);
 
