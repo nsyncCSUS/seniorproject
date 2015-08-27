@@ -41,7 +41,7 @@ app.factory('authInterceptor', function ($rootScope, $q, $window) {
 	app.config([ '$routeProvider', '$locationProvider','$httpProvider', function($routeProvider, $locationProvider,$httpProvider) {
 		$httpProvider.interceptors.push('authInterceptor');	// Everytime there is an http request the authInterceptor object will append the
 		// token to the config.header. On the serverside express-jwt module will check this token if the route is protected
-
+		
 		$routeProvider
 		.when('/', {
 			redirectTo : '/home'
