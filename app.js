@@ -10,6 +10,7 @@ var users = require('./routes/users');
 var groups = require('./routes/groups');
 var events = require('./routes/events');
 
+var expressJwt = require('express-jwt');
 
 //this will aquire my database login file
 var dbConfig = require('./db/db.js');
@@ -45,10 +46,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 app.use('/', index);
 app.use('/users', users);
 app.use('/groups', groups);
 app.use('/events', events);
+
 
 
 // catch 404 and forward to error handler

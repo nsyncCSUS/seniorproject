@@ -2,7 +2,29 @@
 
 	var app = angular.module('app', [ 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController',
 	                                  'usersController', 'groupsController', 'eventsController', 'signupController',
-																		'loginController']);
+																		'loginController','logoutController']);
+
+//Creates object authInterceptor, attaches the token to the config.header
+app.factory('authInterceptor', function ($rootScope, $q, $window) {
+    return {
+      request: function (config) {
+        config.headers = config.headers || {};
+        if ($window.sessionStorage.token) {
+					console.log($window.sessionStorage.token);
+          config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+        }
+        return config;
+      },
+      response: function (response) {
+        if (response.status === 401) {
+          // handle the case where the user is not authenticated
+        }
+        return response || $q.when(response);
+      }
+    };
+  });
+
+
 // Uses the method .on to detect if an angular route has beend changed if that is the case
 // run the condition, checks the route access and also checks if the use is logged in
 	app.run(function(LoginService,$rootScope,$location) {
@@ -16,7 +38,9 @@
 	});
 });
 
-	app.config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+	app.config([ '$routeProvider', '$locationProvider','$httpProvider', function($routeProvider, $locationProvider,$httpProvider) {
+		$httpProvider.interceptors.push('authInterceptor');	// Everytime there is an http request the authInterceptor object will append the
+		// token to the config.header. On the serverside express-jwt module will check this token if the route is protected
 
 		$routeProvider
 		.when('/', {

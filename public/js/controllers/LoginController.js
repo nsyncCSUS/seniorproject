@@ -19,5 +19,15 @@
 				LoginService.isLogged = 'True';
 			});
 		};
+
+		$scope.testAuth = function(){
+			$http.get('/groups');
+		};
+		$scope.testAuth2 = function(){
+			$http.get('/events');
+		};
+
+
+
 	} ]);
 })();
