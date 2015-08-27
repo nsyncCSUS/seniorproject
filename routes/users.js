@@ -1,12 +1,16 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-var User = require('../db/models/user');
+var mongoose = require('mongoose');  // mongose module
+var User = require('../db/models/user'); // mongoose model
 
+// HL checks the database for user if usere does not exist
+// put user into the database
 router.post('/', function(req , res) {
+  //  The req.body contains the user passed in from signupController.js
   console.log(req.body.username);
-
-
+    // Findone is a built in function in mongoose
+    // first argument is passing in the req.body.username and checking it with the databases
+    // userAuth.userName(this is the naming convention from the database)
     User.findOne({'userAuth.userName' : req.body.username}, function(err, user) {
       // error checking
       if(err){

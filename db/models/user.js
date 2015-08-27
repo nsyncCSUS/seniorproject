@@ -1,12 +1,12 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.model('User', {
-
+//HL userAuth: set when registering look@signupcontroller or routes/user.js
 	userAuth: {
 			userName: String,
 			password: String,
 	},
-	
+
 	fb : {
 		id : String,
 		access_token : String,
