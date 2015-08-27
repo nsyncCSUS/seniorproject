@@ -44,14 +44,17 @@ UsersController.prototype = {
 
     response.send(data); 
   },
+  
 
   post: function(request, response) {
     response.send({message: "Hello"}); 
   },
 
+
   put: function(request, response) {
     response.send({}); 
   }, 
+
 
   delete: function(request, response) {
     response.send({}); 
@@ -82,15 +85,18 @@ UsersController.prototype = {
       response.send(data); 
     },
 
+
     post: function(request, response) {
       response.send({}); 
     },
 
+
     put: function(request, response) {
       response.send({}); 
     }, 
+    
 
-    delete: function(request, respons) {
+    delete: function(request, response) {
       response.send({}); 
     },
   },
@@ -103,13 +109,23 @@ UsersController.prototype = {
    * do with a user's subscribed Groups. 
    */
   groups: {
+    
+    /**
+     * Return a user's subscribed groups.
+     * 
+     * If an id is specified for a specific group, then return
+     * that group. Otherwise, return all groups associated with 
+     * a user.
+     */
     get: function(request, response) {
       var id1 = request.params.id1; 
       var id2 = request.params.id2; 
       var data = {}; 
+      
       if(id1 == null || id1 == undefined) {
         // No user specified: Illegal access 
         // Return 404
+        response.status(404).send('Not Found');
       } else if(id1 == testUser.id) {
         if(id2 == null || id2 == undefined) {
           // Request for all group 
@@ -120,18 +136,22 @@ UsersController.prototype = {
         }
       } else {
         // return 404 
+        response.status(404).send('Not Found');
       }
 
       response.send(data); 
     }, 
 
+
     post: function(request, response) {
       response.send({}); 
     }, 
 
+
     put: function(request, response) {
       response.send({}); 
     }, 
+
 
     delete: function(request, response) {
       response.send({}); 

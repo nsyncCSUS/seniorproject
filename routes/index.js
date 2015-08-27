@@ -3,9 +3,13 @@ var router = express.Router();
 
 // Import controllers
 var UsersController = require('./users.js'); 
+var GroupsController = require('./groups.js');
+var EventsController = require('./events.js');
 
 var Controllers = {
   users: new UsersController(), 
+  groups: new GroupsController(),
+  events: new EventsController(),
 };
 
 
@@ -19,6 +23,7 @@ router.get('/partials/:page', function(req, res, next) {
 	var page = req.params.page;
 	res.render('partials/' + page);
 });
+
 
 // NOTE: All these routing functions must come after 
 // the initial utility routes or else they'll interfere
