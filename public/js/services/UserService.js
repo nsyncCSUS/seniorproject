@@ -24,7 +24,7 @@
             if(item3 != null && item3 != undefined) url += item3 + '/';
             if(item4 != null && item4 != undefined) url += item4 + '/';
             return url;
-        }
+        };
     
 
         /**
