@@ -3,7 +3,10 @@
  */
 
 module.exports = function(grunt) {
+
+    // Load all tasks into grunt
     grunt.loadTasks('test/tasks');
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         uglify: {
@@ -13,7 +16,6 @@ module.exports = function(grunt) {
             build: {
                 src: 'src/<%= pkg.name %>.js',
                 dest: 'build/<%= pkg.name %>.min.js'
-                    //'src/<%= pkg.name %>.js': ['build/<%= pkg.name %>.min.js']
             }
         },
         insert: {
