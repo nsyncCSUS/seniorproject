@@ -1,3 +1,192 @@
 h1 Events
 
 h6 {{eventId}}
+
+.well
+    .container-fluid
+        button.btn.btn-default(ng-click='toggleAdmin()') Toggle Admin
+        | {{isAdmin}}
+
+div.groupRow
+    .container-fluid
+        .col-xs-12.col-sm-10.col-md-11.col-lg-11
+            h2
+                a Group
+        div(ng-show='isAdmin')
+            .col-xs-12.col-sm-2.col-md-1.col-lg-1
+                h2 Edit
+
+div.titleRow
+    .container-fluid
+        .col-xs-12.col-sm-12.col-md-4.col-lg-4
+            h3 Title
+        .col-xs-4.col-sm-2.col-md-1.col-lg-1
+            h3 Start Time
+        .col-xs-4.col-sm-2.col-md-1.col-lg-1
+            h3 End Time
+        .col-xs-12.col-sm-6.col-md-4.col-lg-4
+            h3 Location
+        .col-xs-4.col-sm-2.col-md-2.col-lg-2
+            h3 Volunteer
+
+div.descriptionRow
+    h2.text-center Description
+    .container-fluid
+        .col-xs-12.col-sm-6.col-md-4.col-lg-4
+            img.img-responsive.img-thumbnail(src="//placehold.it/500x500")
+        .col-xs-12.col-sm-6.col-md-6.col-lg-6
+            p Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description
+
+div.organizersRow
+    h2.text-center Organizers
+    .hidden-xs
+        .container-fluid
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                .carousel.slide#organizerCarousel(data-ride='carousel')
+                    .carousel-inner
+                        .item.active
+                            .row
+                                .col-sm-3.col-md-3.col-lg-3
+                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    .carousel-caption
+                                        h6 Organizer 1
+                                .col-sm-3.col-md-3.col-lg-3
+                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    .carousel-caption
+                                        h6 Organizer 2
+                                .col-sm-3.col-md-3.col-lg-3
+                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    .carousel-caption
+                                        h6 Organizer 3
+                                .col-sm-3.col-md-3.col-lg-3
+                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    .carousel-caption
+                                        h6 Organizer 4
+                        .item
+                            .row
+                                .col-sm-3.col-md-3.col-lg-3
+                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    .carousel-caption
+                                        h6 Organizer 5
+                                .col-sm-3.col-md-3.col-lg-3
+                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    .carousel-caption
+                                        h6 Organizer 6
+                                .col-sm-3.col-md-3.col-lg-3
+                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    .carousel-caption
+                                        h6 Organizer 7
+                                .col-sm-3.col-md-3.col-lg-3
+                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    .carousel-caption
+                                        h6 Organizer 8
+                    a.left.carousel-control(href='#organizerCarousel', data-slide='prev')
+                        span.glyphicon.glyphicon-chevron-left
+                    a.right.carousel-control(href='#organizerCarousel', data-slide='next')
+                        span.glyphicon.glyphicon-chevron-right
+    .visible-xs
+        .container-fluid
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                .carousel.slide#organizerCarousel-xs(data-ride='carousel')
+                    .carousel-inner
+                        .item.active
+                            .row
+                                .col-xs-6
+                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    .carousel-caption
+                                        h6 Organizer 1
+                                .col-xs-6
+                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    .carousel-caption
+                                        h6 Organizer 2
+                        .item
+                            .row
+                                .col-xs-6
+                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    .carousel-caption
+                                        h6 Organizer 3
+                                .col-xs-6
+                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    .carousel-caption
+                                        h6 Organizer 4
+                        .item
+                            .row
+                                .col-xs-6
+                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    .carousel-caption
+                                        h6 Organizer 5
+                                .col-xs-6
+                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    .carousel-caption
+                                        h6 Organizer 6
+                        .item
+                            .row
+                                .col-xs-6
+                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    .carousel-caption
+                                        h6 Organizer 7
+                                .col-xs-6
+                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    .carousel-caption
+                                        h6 Organizer 8
+                    a.left.carousel-control(href='#organizerCarousel-xs', data-slide='prev')
+                        span.glyphicon.glyphicon-chevron-left
+                    a.right.carousel-control(href='#organizerCarousel-xs', data-slide='next')
+                        span.glyphicon.glyphicon-chevron-right
+
+div.volunteersRow
+    h2.text-center Volunteers
+    .container-fluid
+        .col-xs-12.col-sm-12.col-md-6.col-lg-6
+            .col-xs-3.col-sm-4.col-md-4.col-lg-4
+                img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+            .col-xs-9.col-sm-8.col-md-8.col-lg-8
+                    h6 Name
+                    h6 Age
+                    h6 City
+                    h6 Volunteering in
+                        img.img-responsive(src='//placehold.it/32x32')
+                    h6 Interests
+                        img.img-responsive(src='//placehold.it/32x32')
+                    h6 Social Media
+                        img.img-responsive(src='//placehold.it/32x32')
+        .col-xs-12.col-sm-12.col-md-6.col-lg-6
+            .col-xs-3.col-sm-4.col-md-4.col-lg-4
+                img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+            .col-xs-9.col-sm-8.col-md-8.col-lg-8
+                    h6 Name
+                    h6 Age
+                    h6 City
+                    h6 Volunteering in
+                        img.img-responsive(src='//placehold.it/32x32')
+                    h6 Interests
+                        img.img-responsive(src='//placehold.it/32x32')
+                    h6 Social Media
+                        img.img-responsive(src='//placehold.it/32x32')
+        .col-xs-12.col-sm-12.col-md-6.col-lg-6
+            .col-xs-3.col-sm-4.col-md-4.col-lg-4
+                img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+            .col-xs-9.col-sm-8.col-md-8.col-lg-8
+                    h6 Name
+                    h6 Age
+                    h6 City
+                    h6 Volunteering in
+                        img.img-responsive(src='//placehold.it/32x32')
+                    h6 Interests
+                        img.img-responsive(src='//placehold.it/32x32')
+                    h6 Social Media
+                        img.img-responsive(src='//placehold.it/32x32')
+        .col-xs-12.col-sm-12.col-md-6.col-lg-6
+            .col-xs-3.col-sm-4.col-md-4.col-lg-4
+                img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+            .col-xs-9.col-sm-8.col-md-8.col-lg-8
+                    h6 Name
+                    h6 Age
+                    h6 City
+                    h6 Volunteering in
+                        img.img-responsive(src='//placehold.it/32x32')
+                    h6 Interests
+                        img.img-responsive(src='//placehold.it/32x32')
+                    h6 Social Media
+                        img.img-responsive(src='//placehold.it/32x32')
+            
