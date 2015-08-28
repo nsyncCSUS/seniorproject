@@ -8,54 +8,54 @@ function EventsController() {
 
 EventsController.prototype = {
     get: function(request, response) {
-        
+
     },
-    
+
     put: function(request, response) {
-        
+
     },
-    
+
     post: function(request, response) {
-        
+
     },
-    
+
     delete: function(request, response) {
-        
+
     },
-    
+
     groups: {
         get: function(request, response) {
-        
+
         },
-        
+
         put: function(request, response) {
-            
+
         },
-        
+
         post: function(request, response) {
-            
+
         },
-        
+
         delete: function(request, response) {
-            
+
         },
     },
-    
+
     users: {
         get: function(request, response) {
-            
+
         },
-        
+
         put: function(request, response) {
-            
+
         },
-        
+
         post: function(request, response) {
-            
+
         },
-        
+
         delete: function(request, response) {
-            
+
         },
     },
 };

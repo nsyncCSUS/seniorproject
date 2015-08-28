@@ -2,26 +2,28 @@ var express = require('express');
 var router = express.Router();
 
 // Import controllers
-var UsersController = require('./users.js'); 
+var UsersController = require('./users.js');
 var GroupsController = require('./groups.js');
 var EventsController = require('./events.js');
 
 var Controllers = {
-  users: new UsersController(), 
-  groups: new GroupsController(),
-  events: new EventsController(),
+    users: new UsersController(),
+    groups: new GroupsController(),
+    events: new EventsController(),
 };
 
 
 
 router.get('/', function(req, res, next) {
-	res.render('index', { title: 'Senior Project' });
+    res.render('index', {
+        title: 'Senior Project'
+    });
 });
 
 
 router.get('/partials/:page', function(req, res, next) {
-	var page = req.params.page;
-	res.render('partials/' + page);
+    var page = req.params.page;
+    res.render('partials/' + page);
 });
 
 
@@ -35,14 +37,14 @@ router.get('/partials/:page', function(req, res, next) {
  * Route root requests to controllers. 
  */
 router.get('/:controller', function(request, response) {
-  var controller = Controllers[request.params.controller]; 
-  if(controller == null || controller == undefined) {
-    // Send 404
-    response.status(404).send('Not Found');
-  } else {
-    controller.get(request, response);
-  }
-}); 
+    var controller = Controllers[request.params.controller];
+    if (controller == null || controller == undefined) {
+        // Send 404
+        response.status(404).send('Not Found');
+    } else {
+        controller.get(request, response);
+    }
+});
 
 
 /**
@@ -51,14 +53,14 @@ router.get('/:controller', function(request, response) {
  * Route specific get requests to controller. 
  */
 router.get('/:controller/:id', function(request, response) {
-  var controller = Controllers[request.params.controller]
-  if(controller == null || controller == undefined) {
-    // Send 404
-    response.status(404).send('Not Found');
-  } else {
-    controller.get(request, response); 
-  }
-}); 
+    var controller = Controllers[request.params.controller]
+    if (controller == null || controller == undefined) {
+        // Send 404
+        response.status(404).send('Not Found');
+    } else {
+        controller.get(request, response);
+    }
+});
 
 
 /**
@@ -67,14 +69,14 @@ router.get('/:controller/:id', function(request, response) {
  * Route Post requests to controllers 
  */
 router.post('/:controller', function(request, response) {
-  var controller = Controllers[request.params.controller]; 
-  if(controller == null || controller == undefined) {
-    // Send 404
-    response.status(404).send('Not Found');
-  } else {
-    controller.post(request, response); 
-  }
-}); 
+    var controller = Controllers[request.params.controller];
+    if (controller == null || controller == undefined) {
+        // Send 404
+        response.status(404).send('Not Found');
+    } else {
+        controller.post(request, response);
+    }
+});
 
 
 /**
@@ -83,14 +85,14 @@ router.post('/:controller', function(request, response) {
  * Route Update requests to controllers 
  */
 router.put('/:controller/:id', function(request, response) {
-  var controller = Controllers[request.params.controller]; 
-  if(controller == null || controller == undefined) {
-    // Send 404
-    response.status(404).send('Not Found');
-  } else {
-    controller.put(request, response); 
-  }
-}); 
+    var controller = Controllers[request.params.controller];
+    if (controller == null || controller == undefined) {
+        // Send 404
+        response.status(404).send('Not Found');
+    } else {
+        controller.put(request, response);
+    }
+});
 
 
 /**
@@ -99,110 +101,124 @@ router.put('/:controller/:id', function(request, response) {
  * Route Delete requests to contorllers
  */
 router.delete('/:controller/:id', function(request, response) {
-  var controller = Controllers[request.params.controller]; 
-  if(controller == null || controller == undefined) {
-    // Send 404
-    response.status(404).send('Not Found');
-  } else {
-    controller.delete(request, response); 
-  }
-}); 
+    var controller = Controllers[request.params.controller];
+    if (controller == null || controller == undefined) {
+        // Send 404
+        response.status(404).send('Not Found');
+    } else {
+        controller.delete(request, response);
+    }
+});
 
 
 
 // Compound url requests for nested controller actions
 
 router.get('/:controller1/:id1/:controller2', function(request, response) {
-  // console.log('GET ' + request.params.controller1 + ', ' + request.params.controller2); 
-  var controller1 = Controllers[request.params.controller1]; 
-  if(controller1 == null || controller1 == undefined) {
-    response.status(404).send('Not Found');
-    return;
-  } 
-  
-  var controller2 = controll1[request.params.controller2];
-  if(controller2 == null || controller2 == undefined) {
-    response.status(404).send('Not Found');
-    return;
-  } 
-  
-  controller2[request.params.controller2].get(request, response); 
-}); 
+    // console.log('GET ' + request.params.controller1 + ', ' + request.params.controller2); 
+    var controller1 = Controllers[request.params.controller1];
+    if (controller1 == null || controller1 == undefined) {
+        response.status(404).send('Not Found');
+        return;
+    }
+
+    var controller2 = controll1[request.params.controller2];
+    if (controller2 == null || controller2 == undefined) {
+        response.status(404).send('Not Found');
+        return;
+    }
+
+    controller2.get(request, response);
+});
 
 
+/**
+ * Get some nested element from some parent element
+ */
 router.get('/:controller1/:id1/:controller2/:id2', function(request, response) {
-  var controller1 = Controllers[request.params.controller1]; 
-  if(controller1 == null || controller1 == undefined) {
-    response.status(404).send('Not Found');
-    return;
-  } 
-  
-  var controller2 = controll1[request.params.controller2];
-  if(controller2 == null || controller2 == undefined) {
-    response.status(404).send('Not Found');
-    return;
-  } 
-  
-  controller2[request.params.controller2].get(request, response); 
-}); 
+    var controller1 = Controllers[request.params.controller1];
+    if (controller1 == null || controller1 == undefined) {
+        response.status(404).send('Not Found');
+        return;
+    }
+
+    var controller2 = controll1[request.params.controller2];
+    if (controller2 == null || controller2 == undefined) {
+        response.status(404).send('Not Found');
+        return;
+    }
+
+    controller2.get(request, response);
+});
 
 
+/**
+ * Add some nested element to another element
+ */
 router.post('/:controller1/:id1/:controller2', function(request, response) {
-  var controller1 = Controllers[request.params.controller1]; 
-  if(controller1 == null || controller1 == undefined) {
-    response.status(404).send('Not Found');
-    return;
-  } 
-  
-  var controller2 = controll1[request.params.controller2];
-  if(controller2 == null || controller2 == undefined) {
-    response.status(404).send('Not Found');
-    return;
-  } 
-  
-  controller2[request.params.controller2].post(request, response);  
-}); 
+    var controller1 = Controllers[request.params.controller1];
+    if (controller1 == null || controller1 == undefined) {
+        response.status(404).send('Not Found');
+        return;
+    }
+
+    var controller2 = controll1[request.params.controller2];
+    if (controller2 == null || controller2 == undefined) {
+        response.status(404).send('Not Found');
+        return;
+    }
+
+    controller2.post(request, response);
+});
 
 
+/**
+ * Update some nested element
+ */
 router.put('/:controller1/:id1/:controller2/:id2', function(request, response) {
-  var controller1 = Controllers[request.params.controller1]; 
-  if(controller1 == null || controller1 == undefined) {
-    response.status(404).send('Not Found');
-    return;
-  } 
-  
-  var controller2 = controll1[request.params.controller2];
-  if(controller2 == null || controller2 == undefined) {
-    response.status(404).send('Not Found');
-    return;
-  } 
-  
-  controller2[request.params.controller2].put(request, response);  
-}); 
+    var controller1 = Controllers[request.params.controller1];
+    if (controller1 == null || controller1 == undefined) {
+        response.status(404).send('Not Found');
+        return;
+    }
+
+    var controller2 = controll1[request.params.controller2];
+    if (controller2 == null || controller2 == undefined) {
+        response.status(404).send('Not Found');
+        return;
+    }
+
+    controller2.put(request, response);
+});
 
 
+/**
+ * Delete some nested element from a specified element
+ */
 router.delete('/:controller1/:id1/:controller2/:id2', function(request, response) {
-  var controller1 = Controllers[request.params.controller1]; 
-  if(controller1 == null || controller1 == undefined) {
-    response.status(404).send('Not Found');
-    return;
-  } 
-  
-  var controller2 = controll1[request.params.controller2];
-  if(controller2 == null || controller2 == undefined) {
-    response.status(404).send('Not Found');
-    return;
-  } 
-  
-  controller2[request.params.controller2].delete(request, response); 
-}); 
+    var controller1 = Controllers[request.params.controller1];
+    if (controller1 == null || controller1 == undefined) {
+        response.status(404).send('Not Found');
+        return;
+    }
+
+    var controller2 = controll1[request.params.controller2];
+    if (controller2 == null || controller2 == undefined) {
+        response.status(404).send('Not Found');
+        return;
+    }
+
+    controller2.delete(request, response);
+});
 
 
 /**
  * Render index if no route matched
  */
 router.get('*', function(req, res, next) {
-	res.render('index', { title: 'Senior Project' });
+    res.render('index', {
+        title: 'Senior Project'
+    });
 });
 
 

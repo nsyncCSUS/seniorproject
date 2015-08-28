@@ -2,24 +2,30 @@ var express = require('express');
 var router = express.Router();
 
 function UsersController() {
-  //console.log("Initializing Users Controller..."); 
+    //console.log("Initializing Users Controller..."); 
 };
 
 
 var testUser = {
-  id: 1, 
-  fname: "Test", 
-  lname: "User", 
-  events: [ 
-    {id: 1, name: "Test Event 1"},
-    {id: 2, name: "Test Event 2"}
-  ], 
+    id: 1,
+    fname: "Test",
+    lname: "User",
+    events: [{
+        id: 1,
+        name: "Test Event 1"
+    }, {
+        id: 2,
+        name: "Test Event 2"
+    }],
 
-  groups: [ 
-    {id: 1, name: "Test Group 1"},
-    {id: 2, name: "Test Group 2"}
-  ],
-}; 
+    groups: [{
+        id: 1,
+        name: "Test Group 1"
+    }, {
+        id: 2,
+        name: "Test Group 2"
+    }],
+};
 
 
 /**
@@ -30,133 +36,139 @@ var testUser = {
  * NOTE: Replace later with Mongoose calls. 
  */
 UsersController.prototype = {
-  get: function(request, response) {
-    var id = request.params.id; 
-    var data = {}; 
-    if(id !== null && id !== undefined) {
-      // Perform actions to do with this specific user. 
-      if(testUser.id == id) {
-        data = testUser; 
-      }
-    } else {
-      data = [testUser]; 
-    }
-
-    response.send(data); 
-  },
-  
-
-  post: function(request, response) {
-    response.send({message: "Hello"}); 
-  },
-
-
-  put: function(request, response) {
-    response.send({}); 
-  }, 
-
-
-  delete: function(request, response) {
-    response.send({}); 
-  }, 
-
-  /**
-   * John
-   *
-   * Secondary controller for handling nested actions. 
-   */
-  events: {
     get: function(request, response) {
-      var id1 = request.params.id1; 
-      var id2 = request.params.id2; 
-      var data = {}; 
-      if(id1 == null || id1 == undefined) {
-        // No user specified; Return illegal access 
-      } else if(id1 == testUser.id) {
-        if(id2 == null || id2 == undefined) {
-          data = testUser.events || {}; 
+        var id = request.params.id;
+        var data = {};
+        if (id !== null && id !== undefined) {
+            // Perform actions to do with this specific user. 
+            if (testUser.id == id) {
+                data = testUser;
+            }
         } else {
-          data = testUser.events.filter(function(item) {return item.id == id2;}); 
+            data = [testUser];
         }
-      } else {
-        // Return 404 
-      }
 
-      response.send(data); 
+        response.send(data);
     },
 
 
     post: function(request, response) {
-      response.send({}); 
+        response.send({
+            message: "Hello"
+        });
     },
 
 
     put: function(request, response) {
-      response.send({}); 
-    }, 
-    
+        response.send({});
+    },
+
 
     delete: function(request, response) {
-      response.send({}); 
+        response.send({});
     },
-  },
 
-
-  /**
-   * John
-   *
-   * Intermediary controller for handling actions to 
-   * do with a user's subscribed Groups. 
-   */
-  groups: {
-    
     /**
-     * Return a user's subscribed groups.
-     * 
-     * If an id is specified for a specific group, then return
-     * that group. Otherwise, return all groups associated with 
-     * a user.
+     * John
+     *
+     * Secondary controller for handling nested actions. 
      */
-    get: function(request, response) {
-      var id1 = request.params.id1; 
-      var id2 = request.params.id2; 
-      var data = {}; 
-      
-      if(id1 == null || id1 == undefined) {
-        // No user specified: Illegal access 
-        // Return 404
-        response.status(404).send('Not Found');
-      } else if(id1 == testUser.id) {
-        if(id2 == null || id2 == undefined) {
-          // Request for all group 
-          data = testUser.groups || {}; 
-        } else {
-          // Request for specific groups 
-          data = testUser.groups.filter(function(item) {return item.id == id2;}); 
-        }
-      } else {
-        // return 404 
-        response.status(404).send('Not Found');
-      }
+    events: {
+        get: function(request, response) {
+            var id1 = request.params.id1;
+            var id2 = request.params.id2;
+            var data = {};
+            if (id1 == null || id1 == undefined) {
+                // No user specified; Return illegal access 
+            } else if (id1 == testUser.id) {
+                if (id2 == null || id2 == undefined) {
+                    data = testUser.events || {};
+                } else {
+                    data = testUser.events.filter(function(item) {
+                        return item.id == id2;
+                    });
+                }
+            } else {
+                // Return 404 
+            }
 
-      response.send(data); 
-    }, 
+            response.send(data);
+        },
 
 
-    post: function(request, response) {
-      response.send({}); 
-    }, 
+        post: function(request, response) {
+            response.send({});
+        },
 
 
-    put: function(request, response) {
-      response.send({}); 
-    }, 
+        put: function(request, response) {
+            response.send({});
+        },
 
 
-    delete: function(request, response) {
-      response.send({}); 
-    }, 
-  },
+        delete: function(request, response) {
+            response.send({});
+        },
+    },
+
+
+    /**
+     * John
+     *
+     * Intermediary controller for handling actions to 
+     * do with a user's subscribed Groups. 
+     */
+    groups: {
+
+        /**
+         * Return a user's subscribed groups.
+         * 
+         * If an id is specified for a specific group, then return
+         * that group. Otherwise, return all groups associated with 
+         * a user.
+         */
+        get: function(request, response) {
+            var id1 = request.params.id1;
+            var id2 = request.params.id2;
+            var data = {};
+
+            if (id1 == null || id1 == undefined) {
+                // No user specified: Illegal access 
+                // Return 404
+                response.status(404).send('Not Found');
+            } else if (id1 == testUser.id) {
+                if (id2 == null || id2 == undefined) {
+                    // Request for all group 
+                    data = testUser.groups || {};
+                } else {
+                    // Request for specific groups 
+                    data = testUser.groups.filter(function(item) {
+                        return item.id == id2;
+                    });
+                }
+            } else {
+                // return 404 
+                response.status(404).send('Not Found');
+            }
+
+            response.send(data);
+        },
+
+
+        post: function(request, response) {
+            response.send({});
+        },
+
+
+        put: function(request, response) {
+            response.send({});
+        },
+
+
+        delete: function(request, response) {
+            response.send({});
+        },
+    },
 };
 
 module.exports = UsersController;
