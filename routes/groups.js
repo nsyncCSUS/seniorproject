@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/data/:id', function(req, res) {
-	
+	// Get group from db
 	var json = 
 	{
 			id : "id123",
@@ -35,8 +35,11 @@ router.get('/data/:id', function(req, res) {
 				type : "technology"
 			}, ]
 	};
-	console.log("Got a request from /groups/" + req.params.id);
-	console.log("Sending " + json.name);
+	
+	console.log("Got a request from /data/groups/" + req.params.id);
+	console.log("Sending Group '" + json.name + "'");
+	
+	// Send group information back as a json
 	res.json(json);
 });
 

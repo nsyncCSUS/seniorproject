@@ -11,11 +11,11 @@
 		$scope.isEditing = false;
 		$scope.currentDate = new Date();
 		
-		//$scope.group = GroupService.getGroup($routeParams.groupId);
-    $scope.group = {};
-    $http.get('/groups/data').success(function(response) {
-        $scope.group = response.params.group; 
-    });
+		$scope.group = {};
+		
+		$scope.getGroup = GroupService.getGroup({groupId: $routeParams.groupId}, function(res) {
+			$scope.group = res.data;
+		});
 
 		/*
 		 * Opens an external link
