@@ -28,6 +28,19 @@ a {
 	right: 1%;
 	top: 80px;
 }
+
+.not-selected {
+	opacity: 0.5;
+}
+
+.selected {
+    opacity: 1;
+	background: rgba(39, 62, 84, 0.82);
+	overflow: hidden;
+	height: 100%;
+	z-index: 2;
+}
+
 /**********************************************************************
     Event CSS START
 **********************************************************************/

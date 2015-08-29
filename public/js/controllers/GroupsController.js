@@ -12,8 +12,9 @@
 		$scope.currentDate = new Date();
 		
 		$scope.group = {};
+		$scope.savedSuccessMsg = {};
 		
-		$scope.getGroup = GroupService.getGroup({groupId: $routeParams.groupId}, function(res) {
+		GroupService.getGroup({groupId: $routeParams.groupId}, function(res) {
 			$scope.group = res.data;
 		});
 
@@ -59,6 +60,13 @@
 			
 			return false;
 		}
+		
+		$scope.hasPicture = function() {
+			if ($scope.group.picture != null && $scope.group.picture.length > 0)
+				return true;
+			else
+				return false;
+		}
 
 		/***********************************************************************
 		 * Editing Functions
@@ -90,7 +98,9 @@
 			$scope.isEditing = false;
 			$scope.backupGroup = {};
 			// Send changes to server
-			
+			GroupService.saveGroup({groupId: $routeParams.groupId, groupData: $scope.group}, function(res) {
+				$scope.savedSuccessMsg = res.data.msg;
+			});
 			// Keep changes made
 		}
 		
