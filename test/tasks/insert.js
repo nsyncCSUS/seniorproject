@@ -1,6 +1,20 @@
 var fs = require('fs');
+var mongo = require('mongojs'); 
+var mongoose = require('mongoose'); 
 
 module.exports = function(grunt) {
+
+    /** 
+     * Configuration settings for insert and delete functions.
+     * Should be factored out into a file at a later time so
+     * people can configure it on their own. 
+     */ 
+    var Config = Object.freeze({
+	url: '',
+	port: '27017',
+    }); 
+
+
     /**
      * Task for inserting data into database.
      * Run this task to insert data, and run
@@ -15,6 +29,8 @@ module.exports = function(grunt) {
         var file = fs.readFileSync(path, 'utf8');
         var data = JSON.parse(file);
         //grunt.log.write("\nFname: " + data.user.fname + "\n"); 
+
+	var db = mongo.connect(Config.url, Config.port); 
 
         grunt.log.write('\nSuccessfully inserted data\n').ok();
     });

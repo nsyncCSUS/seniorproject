@@ -1,6 +1,17 @@
 var fs = require('fs'); 
+var mongo = require('mongojs'); 
+var mongoose = require('mongoose'); 
 
 module.exports = function(grunt) {
+
+    /**
+     * Configuration settings for grunt tasks
+     */ 
+    var Config = Object.freeze({
+	url: '',
+	port: '27017'
+    }); 
+
 
     /**
      * Task for removing data from database. 
@@ -15,6 +26,8 @@ module.exports = function(grunt) {
         var path = this.data;
         var data = JSON.parse(fs.readFileSync(path));
         //grunt.log.write("\nFname: " + data.user.fname + "\n"); 
+
+	var db = mongo.connect(Config.url, Config.port); 
 
         grunt.log.write('\nSuccessfully removed data').ok();
     });
