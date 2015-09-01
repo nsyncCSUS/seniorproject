@@ -165,3 +165,27 @@
 	} ]);
 
 })();
+
+
+/*
+	info: {
+		id : 				String,
+		groupName : 		String,
+		picture : 			String,
+		creationDate : 		String,
+			//city : 			String,
+			//state : 			String,
+			//zipCode : 		Number,
+		description : 		String,
+		googlePlusURL : 	String,
+		facebookURL : 		String,
+		linkInURL : 		String,
+		twitterURL: 		String,
+		personalWebsiteURL: String,
+		events:			[{id: String}, {id: String}, ...],
+		organizers:		[{id: String}, {id: String}, ...],
+		subscribers:		[{id: String}, {id: String}, ...],
+		interests: 	[{type: String}, {type: String}, ...]
+
+	}
+*/
