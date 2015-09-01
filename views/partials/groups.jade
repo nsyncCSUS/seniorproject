@@ -225,5 +225,5 @@ div(ng-show='isAdmin')
     h2.text-center Subscribers
     .container-fluid
         .col-xs-12.col-sm-12.col-md-12.col-lg-12
-            img.subscriber-thumbnail.cursor-pointer(ng-repeat='subscriber in group.subscribers', ng-src="{{subscriber.picture}}", ng-if='hasPicture("user", $index)', tooltip='{{subscriber.name}}')
-            img.img-thumbnail.not-selected.cursor-pointer(ng-repeat='subscriber in group.subscribers', src="//placehold.it/65x64", ng-if='!hasPicture("user", $index)', tooltip='{{subscriber.name}}')
+            img.img-thumbnail.subscriber-thumbnail.cursor-pointer(ng-repeat='subscriber in group.subscribers', ng-src="{{subscriber.picture}}", ng-if='hasPicture("user", $index)', tooltip='{{subscriber.name}}')
+            img.img-thumbnail.subscriber-thumbnail.cursor-pointer(ng-repeat='subscriber in group.subscribers', src="//placehold.it/65x64", ng-if='!hasPicture("user", $index)', tooltip='{{subscriber.name}}')
