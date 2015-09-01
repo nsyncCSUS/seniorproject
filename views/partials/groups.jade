@@ -37,29 +37,19 @@ div(ng-show='isAdmin')
             .hidden-xs
                 .col-xs-12.col-sm-6.col-md-6.col-lg-6
                     .navbar-btn.pull-right(ng-show='!getIsEditing()')
-                        button.btn.btn-default(ng-disabled='!checkIfHas("googlePlus")', ng-click='goTo(group.googlePlusURL)')
-                            a G
-                        button.btn.btn-default(ng-disabled='!checkIfHas("facebook")', ng-click='goTo(group.facebookURL)')
-                            a F
-                        button.btn.btn-default(ng-disabled='!checkIfHas("twitter")', ng-click='goTo(group.twitterURL)')
-                            a T
-                        button.btn.btn-default(ng-disabled='!checkIfHas("linkedIn")', ng-click='goTo(group.linkedInURL)')
-                            a L
-                        button.btn.btn-default(ng-disabled='!checkIfHas("website")', ng-click='goTo(group.personalWebsiteURL)')
-                            a W
+                        img.btn.btn-sm(ng-src='/images/social-media/googlePlus.png', ng-disabled='!checkIfHas("googlePlus")', ng-click='goTo(group.googlePlusURL)')
+                        img.btn.btn-sm(ng-src='/images/social-media/facebook.png', ng-disabled='!checkIfHas("facebook")', ng-click='goTo(group.facebookURL)')
+                        img.btn.btn-sm(ng-src='/images/social-media/twitter.png', ng-disabled='!checkIfHas("twitter")', ng-click='goTo(group.twitterURL)')
+                        img.btn.btn-sm(ng-src='/images/social-media/linkedIn.png', ng-disabled='!checkIfHas("linkedIn")', ng-click='goTo(group.linkedInURL)')
+                        img.btn.btn-sm(ng-src='/images/social-media/website.png', ng-disabled='!checkIfHas("website")', ng-click='goTo(group.personalWebsiteURL)')
             .visible-xs
                 .col-xs-12.col-sm-6.col-md-6.col-lg-6
                     .navbar-btn(ng-show='!getIsEditing()')
-                        button.btn.btn-default(ng-disabled='!checkIfHas("googlePlus")', ng-click='goTo(group.googlePlusURL)')
-                            a G
-                        button.btn.btn-default(ng-disabled='!checkIfHas("facebook")', ng-click='goTo(group.facebookURL)')
-                            a F
-                        button.btn.btn-default(ng-disabled='!checkIfHas("twitter")', ng-click='goTo(group.twitterURL)')
-                            a T
-                        button.btn.btn-default(ng-disabled='!checkIfHas("linkedIn")', ng-click='goTo(group.linkedInURL)')
-                            a L
-                        button.btn.btn-default(ng-disabled='!checkIfHas("website")', ng-click='goTo(group.personalWebsiteURL)')
-                            a W 
+                        img.btn.btn-sm(ng-src='/images/social-media/googlePlus.png', ng-disabled='!checkIfHas("googlePlus")', ng-click='goTo(group.googlePlusURL)')
+                        img.btn.btn-sm(ng-src='/images/social-media/facebook.png', ng-disabled='!checkIfHas("facebook")', ng-click='goTo(group.facebookURL)')
+                        img.btn.btn-sm(ng-src='/images/social-media/twitter.png', ng-disabled='!checkIfHas("twitter")', ng-click='goTo(group.twitterURL)')
+                        img.btn.btn-sm(ng-src='/images/social-media/linkedIn.png', ng-disabled='!checkIfHas("linkedIn")', ng-click='goTo(group.linkedInURL)')
+                        img.btn.btn-sm(ng-src='/images/social-media/website.png', ng-disabled='!checkIfHas("website")', ng-click='goTo(group.personalWebsiteURL)')
                             
         .col-xs-12.col-sm-4.col-md-4.col-lg-4
             img.img-responsive.img-thumbnail.center-item(ng-if='hasPicture("group")', ng-src="{{group.picture}}")
