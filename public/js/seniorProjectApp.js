@@ -1,8 +1,8 @@
 (function() {
 
-	var app = angular.module('app', [ 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController', 
+	var app = angular.module('app', [ 'ui.bootstrap', 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController', 
 	                                  'usersController', 'groupsController', 'eventsController', 'signupController', 
-	                                  'loginController']);
+	                                  'loginController', 'logoutController', 'createGroupController', 'createEventController']);
 	
 	app.config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	
