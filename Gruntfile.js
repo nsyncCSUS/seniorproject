@@ -19,12 +19,12 @@ module.exports = function(grunt) {
             }
         },
         insert: {
-            "data.1": "test/data/data.1.json",
-            "data.2": "test/data/data.2.json"
+            "data.1": "test/data/data.groups.1.json",
+            "data.2": "test/data/data.users.1.json"
         },
         delete: {
-            "data.1": "test/data/data.1.json",
-            "data.2": "test/data/data.2.json"
+            "data.1": "test/data/data.groups.1.json",
+            "data.2": "test/data/data.users.1.json"
         }
     });
 
