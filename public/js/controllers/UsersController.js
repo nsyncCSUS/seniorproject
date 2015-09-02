@@ -25,13 +25,6 @@
 		};
 		refresh();
 	
-
-    $scope.users = []; 
-    $scope.getUsers = function() {
-        UserService.get({}, function(response) {
-            $scope.users = response.data; 
-        }); 
-    };
 	
 	}]);
 
