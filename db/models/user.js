@@ -15,7 +15,7 @@ module.exports = mongoose.model('User', {
 		displayName : String,
 		lastStatus : String
 	},
-
+	
 	user : {
 		FirstName : String,
 		MiddleName : String,
@@ -40,5 +40,5 @@ module.exports = mongoose.model('User', {
 		Interests : String,
 		Skills : String
 	}
-
+	
 });
