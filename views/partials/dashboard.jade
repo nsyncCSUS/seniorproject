@@ -1,1 +1,148 @@
 h1 Dashboard
+
+div.upcomingEvents
+	h2.text-center Upcoming Events
+	.container-fluid
+		.col-xs-12.col-sm-6.col-md-4.col-lg-1
+			h3 Group
+		.col-xs-4.col-sm-2.col-md-1.col-lg-1
+			h3 Event Title
+		div.organizersRow
+			.hidden-xs
+				.container-fluid
+					.col-xs-12.col-sm-12.col-md-12.col-lg-12
+						.carousel.slide#profilepicCarousel(data-ride='carousel')
+							.carousel-inner
+								.item.active
+									.row
+										.col-sm-3.col-md-3.col-lg-3
+											img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+											.carousel-caption
+												h6 Profile Picture 1
+										.col-sm-3.col-md-3.col-lg-3
+											img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+											.carousel-caption
+												h6 Profile Picture 2
+										.col-sm-3.col-md-3.col-lg-3
+											img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+											.carousel-caption
+												h6 Profile Picture 3
+										.col-sm-3.col-md-3.col-lg-3
+											img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+											.carousel-caption
+												h6 Profile Picture 4
+								.item
+									.row
+										.col-sm-3.col-md-3.col-lg-3
+											img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+											.carousel-caption
+												h6 Profile Picture 5
+										.col-sm-3.col-md-3.col-lg-3
+											img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+											.carousel-caption
+												h6 Profile Picture 6
+										.col-sm-3.col-md-3.col-lg-3
+											img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+											.carousel-caption
+												h6 Profile Picture 7
+										.col-sm-3.col-md-3.col-lg-3
+											img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+											.carousel-caption
+												h6 Profile Picture 8
+							a.left.carousel-control(href='#profilepicCarousel', data-slide='prev')
+								span.glyphicon.glyphicon-chevron-left
+							a.right.carousel-control(href='#profilepicCarousel', data-slide='next')
+								span.glyphicon.glyphicon-chevron-right
+			.visible-xs
+				.container-fluid
+					.col-xs-12.col-sm-12.col-md-12.col-lg-12
+						.carousel.slide#profilepicCarousel-xs(data-ride='carousel')
+							.carousel-inner
+								.item.active
+									.row
+										.col-xs-6
+											img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+											.carousel-caption
+												h6 Profile Picture 1
+										.col-xs-6
+											img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+											.carousel-caption
+												h6 Profile Picture 2
+								.item
+									.row
+										.col-xs-6
+											img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+											.carousel-caption
+												h6 Profile Picture 3
+										.col-xs-6
+											img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+											.carousel-caption
+												h6 Profile Picture 4
+								.item
+									.row
+										.col-xs-6
+											img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+											.carousel-caption
+												h6 Profile Picture 5
+										.col-xs-6
+											img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+											.carousel-caption
+												h6 Profile Picture 6
+								.item
+									.row
+										.col-xs-6
+											img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+											.carousel-caption
+												h6 Profile Picture 7
+										.col-xs-6
+											img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+											.carousel-caption
+												h6 Profile Picture 8
+							a.left.carousel-control(href='#profilepicCarousel-xs', data-slide='prev')
+								span.glyphicon.glyphicon-chevron-left
+							a.right.carousel-control(href='#profilepicCarousel-xs', data-slide='next')
+								span.glyphicon.glyphicon-chevron-right
+			
+div.yourGroupEvents
+	h2.text-center Your Group Events
+	.container-fluid
+		.col-xs-12.col-sm-6.col-md-4.col-lg-1
+			h3 Event Title
+		.col-xs-4.col-sm-2.col-md-1.col-lg-1
+			h3 Date
+		.col-xs-4.col-sm-2.col-md-1.col-lg-1
+			h3 Time
+			
+div.yourEvents
+	h2.text-center Your Events
+	.container-fluid
+		.col-xs-12.col-sm-6.col-md-4.col-lg-1
+			h3 Event Title
+		.col-xs-4.col-sm-2.col-md-1.col-lg-1
+			h3 Date
+		.col-xs-4.col-sm-2.col-md-1.col-lg-1
+			h3 Time
+			
+div.history
+	h2.text-center History
+	.container-fluid
+		.col-xs-12.col-sm-6.col-md-4.col-lg-1
+			h3 Event Participated
+		.col-xs-4.col-sm-2.col-md-1.col-lg-1
+			h3 Participated
+		.col-xs-4.col-sm-2.col-md-1.col-lg-1
+			h3 Not Participated
+	.container-fluid
+		.col-xs-12.col-sm-6.col-md-4.col-lg-1
+			h3 Event Participated
+		.col-xs-4.col-sm-2.col-md-1.col-lg-1
+			h3 Participated
+		.col-xs-4.col-sm-2.col-md-1.col-lg-1
+			h3 Not Participated
+	.container-fluid
+		.col-xs-12.col-sm-6.col-md-4.col-lg-1
+			h3 Event Participated
+		.col-xs-4.col-sm-2.col-md-1.col-lg-1
+			h3 Participated
+		.col-xs-4.col-sm-2.col-md-1.col-lg-1
+			h3 Not Participated
