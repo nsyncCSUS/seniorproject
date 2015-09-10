@@ -3,10 +3,15 @@ h1 Dashboard Page
 div.upcomingEvents
 	h2.text-center Upcoming Events
 	.container-fluid
-		.col-xs-12.col-sm-6.col-md-4.col-lg-1
-			h3 Group
-		.col-xs-4.col-sm-2.col-md-1.col-lg-1
-			h3 Event Title
+		.col-xs-12.col-sm-6.col-md-4.col-lg-4
+			h3.text-center Group
+		.col-xs-12.col-sm-2.col-md-1.col-lg-8
+			h3.text-center Event Title
+		.col-xs-6.col-sm-6.col-md-4.col-lg-4
+			img.img-responsive(src="//placehold.it/1000x1000")
+		.col-xs-12.col-sm-6.col-md-4.col-lg-4
+			h3 Most awesome dogs and cats exhibition!!!!
+		
 		div.organizersRow
 			.hidden-xs
 				.container-fluid
@@ -103,46 +108,48 @@ div.upcomingEvents
 							a.right.carousel-control(href='#profilepicCarousel-xs', data-slide='next')
 								span.glyphicon.glyphicon-chevron-right
 			
-div.yourGroupEvents
-	h2.text-center Your Group Events
-	.container-fluid
-		.col-xs-12.col-sm-6.col-md-4.col-lg-1
-			h3 Event Title
-		.col-xs-4.col-sm-2.col-md-1.col-lg-1
-			h3 Date
-		.col-xs-4.col-sm-2.col-md-1.col-lg-1
-			h3 Time
-			
-div.yourEvents
-	h2.text-center Your Events
-	.container-fluid
-		.col-xs-12.col-sm-6.col-md-4.col-lg-1
-			h3 Event Title
-		.col-xs-4.col-sm-2.col-md-1.col-lg-1
-			h3 Date
-		.col-xs-4.col-sm-2.col-md-1.col-lg-1
-			h3 Time
+.row		
+	.col-xs-12.col-sm-6.col-md-4.col-lg-8
+		div.yourEvents
+			h2.text-center Your Group Events
+			.container-fluid
+				.col-xs-12.col-sm-6.col-md-4.col-lg-4
+					h3 Event Title
+				.col-xs-4.col-sm-2.col-md-1.col-lg-4
+					h3 Date
+				.col-xs-4.col-sm-2.col-md-1.col-lg-4
+					h3 Time
+	.col-xs-12.col-sm-6.col-md-4.col-lg-4
+		div.calendar
+
+.row		
+	.col-xs-12.col-sm-6.col-md-4.col-lg-8
+		div.yourEvents
+			h2.text-center Your Events
+			.container-fluid
+				.col-xs-12.col-sm-6.col-md-4.col-lg-4
+					h3 Event Title
+				.col-xs-4.col-sm-2.col-md-1.col-lg-4
+					h3 Date
+				.col-xs-4.col-sm-2.col-md-1.col-lg-4
+					h3 Time
+	.col-xs-12.col-sm-6.col-md-4.col-lg-4
+		div.calendar
+			h2 Calendar
+			h3 Pick the day, and Your Events will display all events for this day.
+	
 			
 div.history
 	h2.text-center History
 	.container-fluid
-		.col-xs-12.col-sm-6.col-md-4.col-lg-1
+		
+		.col-xs-12.col-sm-6.col-md-4.col-lg-12
 			h3 Event Participated
-		.col-xs-4.col-sm-2.col-md-1.col-lg-1
-			h3 Participated
-		.col-xs-4.col-sm-2.col-md-1.col-lg-1
-			h3 Not Participated
-	.container-fluid
-		.col-xs-12.col-sm-6.col-md-4.col-lg-1
-			h3 Event Participated
-		.col-xs-4.col-sm-2.col-md-1.col-lg-1
-			h3 Participated
-		.col-xs-4.col-sm-2.col-md-1.col-lg-1
-			h3 Not Participated
-	.container-fluid
-		.col-xs-12.col-sm-6.col-md-4.col-lg-1
-			h3 Event Participated
-		.col-xs-4.col-sm-2.col-md-1.col-lg-1
-			h3 Participated
-		.col-xs-4.col-sm-2.col-md-1.col-lg-1
-			h3 Not Participated
+		
+		.col-xs-12.col-sm-6.col-md-4.col-lg-2
+			img.img-responsive(src="//placehold.it/125x125")
+		.col-xs-4.col-sm-2.col-md-1.col-lg-4
+			button.btn Participated
+		.col-xs-4.col-sm-2.col-md-1.col-lg-4
+			button.btn Not Participated
+	
