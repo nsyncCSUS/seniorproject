@@ -1,10 +1,29 @@
 var mongoose = require('mongoose');
 
+// Also consider:
+// var Schema = mongoose.Shema;
+// var UserSchema = new Schema({
+//     name: String,
+//     email: String 
+// });
+//
+// Spawning a model from a schema:
+// var User = new mongoose.model('User', UserSchema);
+// 
+// Adding Methods to Model:
+// UserSchema.methods.getName = function() {
+//     return this.name;
+// }; 
+// 
+// Creating a new User: 
+// var user = new User({name: 'John'});
+
+
 module.exports = mongoose.model('User', {
 
 	userAuth: {
 			userName: String,
-			password: String,
+			password: String 
 	},
 	
 	fb : {
