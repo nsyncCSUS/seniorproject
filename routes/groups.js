@@ -20,6 +20,12 @@ router.get('/data/:id', function(req, res) {
 			events : [ {
 				id : "event1",
 				name : "event1",
+				interests : [{type: "animals"}, {type: "education"}, {type: "environment"}, {type: "people"}, {type: "recreation"}, {type: "technology"}, {type: "youth"}],
+				volunteers: [{id: "v1", name: "v1", picture: "//placehold.it/250x250"}]
+			},
+			{
+				id : "event2",
+				name : "event2",
 				interests : [{type: "animals"}, {type: "education"}, {type: "environment"}, {type: "people"}, {type: "recreation"}, {type: "technology"}, {type: "youth"}]
 			}
 			],

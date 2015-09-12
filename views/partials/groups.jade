@@ -112,37 +112,38 @@ div(ng-show='isAdmin')
                             h3 {{event.name}}
                         .col-xs-12.col-sm-12.col-md-3.col-lg-3
                             img.img-responsive.img-thumbnail(src='{{event.picture}}')
-                        .col-xs-12.col-sm-12.col-md-9.col-lg-9
-                            .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                img.img-thumbnail(ng-src='/images/interests/{{interest.type}}.png', ng-repeat='interest in event.interests | orderBy: "type"', tooltip='{{interest.type}}')
-                            .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                h4 Start Time {{event.startTimeDate | date:'medium'}}
-                            .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                h4 End Time {{event.endTimeDate | date:'medium'}}
-                            .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                h4 {{event.volunteerList.length}} of {{event.maxVolunteers}}
-                            .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                                .col-xs-2.col-sm-2.col-md-2.col-lg-2(ng-repeat='volunteer in event.volunteerList')
-                                    img.img-responsive.img-rounded(ng-src="{{volunteer.picture}}")
+                        .row
+                            .col-xs-12.col-sm-12.col-md-9.col-lg-9
+                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                    img.img-thumbnail(ng-src='/images/interests/{{interest.type}}.png', ng-repeat='interest in event.interests | orderBy: "type"', tooltip='{{interest.type}}')
+                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                    h4 Start Time {{event.startTimeDate | date:'medium'}}
+                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                    h4 End Time {{event.endTimeDate | date:'medium'}}
+                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                    h4 {{event.volunteerList.length}} of {{event.maxVolunteers}}
+                                .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                    .col-xs-2.col-sm-2.col-md-2.col-lg-2(ng-repeat='volunteer in event.volunteers')
+                                        img.img-responsive.img-rounded(ng-src="{{volunteer.picture}}", tooltip='{{volunteer.name}}')
                             
                     .item(ng-repeat-end, ng-if='!$first')
                         .col-xs-12.col-sm-12.col-md-12.col-lg-12
                             h3 {{event.name}}
                         .col-xs-12.col-sm-12.col-md-3.col-lg-3
                             img.img-responsive.img-thumbnail(src='{{event.picture}}')
-                        .col-xs-12.col-sm-12.col-md-9.col-lg-9
-                            .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                h4 Filters
-                                img.img-circle(ng-src='/images/interests/{{interest.type}}', ng-repeat='interest in group.interestList | orderBy: "type"', tooltip='{{interest.type}}')
-                            .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                h4 Start Time {{event.startTimeDate | date:'medium'}}
-                            .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                h4 End Time {{event.endTimeDate | date:'medium'}}
-                            .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                h4 {{event.volunteerList.length}} of {{event.maxVolunteers}}
-                            .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                                .col-xs-2.col-sm-2.col-md-2.col-lg-2(ng-repeat='volunteer in event.volunteerList')
-                                    img.img-responsive.img-rounded(ng-src="{{volunteer.picture}}")
+                        .row
+                            .col-xs-12.col-sm-12.col-md-9.col-lg-9
+                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                    img.img-thumbnail(ng-src='/images/interests/{{interest.type}}.png', ng-repeat='interest in event.interests | orderBy: "type"', tooltip='{{interest.type}}')
+                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                    h4 Start Time {{event.startTimeDate | date:'medium'}}
+                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                    h4 End Time {{event.endTimeDate | date:'medium'}}
+                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                    h4 {{event.volunteerList.length}} of {{event.maxVolunteers}}
+                                .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                    .col-xs-2.col-sm-2.col-md-2.col-lg-2(ng-repeat='volunteer in event.volunteers')
+                                        img.img-responsive.img-rounded(ng-src="{{volunteer.picture}}")
                         
                     .item
                         .col-xs-12.col-sm-12.col-md-12.col-lg-12
