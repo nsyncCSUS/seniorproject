@@ -16,7 +16,7 @@ var Constants = Object.freeze({
 /**
  * Function for returning a 404 error 
  */
-function Http404(repsonse) {
+function Http404(response) {
   return response.status(404).send(Constants.Http404Message); 
 }; 
 
