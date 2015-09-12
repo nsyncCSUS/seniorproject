@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
+
 var users = require('./users.js'); 
 var groups = require('./groups.js'); 
 var events = require('./events.js'); 
-
 
 
 router.get('/', function(req, res, next) {
@@ -28,34 +28,22 @@ router.get('/', function(req, res, next) {
 });*/ 
 
 
-router.get('/src/:page', function(req, res, next) {
+/*router.get('/src/:page', function(req, res, next) {
     var page = req.params.page;
-    //try {
-        //return res.render('src/' + page);
-        console.log(page); 
-        res.render(page); 
-    //} catch (e) {
-    //    return res.status(404).send('Not Found');
-    //}
-});
+    console.log(page); 
+    res.render(page); 
+    res.render('index', {
+        title: 'Senior Project'
+    });
+});*/ 
 
 
-/*
-router.get('/partials/:page', function(req, res, next) {
-    var page = req.params.page;
-    res.render('partials/' + page);
-});
-*/
-
-
-// NOTE: All these routing functions must come after 
-// the initial utility routes or else they'll interfere
-// with each other. 
 
 
 router.use('/users', users); 
 router.use('/groups', groups); 
 router.use('/events', events); 
+
 
 
 /**

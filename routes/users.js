@@ -4,50 +4,28 @@ var mongoose = require('mongoose'); // mongose module
 var User = require('../db/models/user'); // mongoose model
 var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
-function UsersController() {
-    //console.log("Initializing Users Controller..."); 
+
+var testUser = {
+    id: 1,
+    fname: "Test",
+    lname: "User",
+    events: [{
+        id: 1,
+        name: "Test Event 1"
+    }, {
+        id: 2,
+        name: "Test Event 2"
+    }],
+
+    groups: [{
+        id: 1,
+        name: "Test Group 1"
+    }, {
+        id: 2,
+        name: "Test Group 2"
+    }]
 };
 
-
-// HL checks the database for user if usere does not exist
-// put user into the database
-router.post('/', function(req, res) {
-    //  The req.body contains the user passed in from signupController.js
-    console.log(req.body.username);
-    // Findone is a built in function in mongoose
-    // first argument is passing in the req.body.username and checking it with the databases
-    // userAuth.userName(this is the naming convention from the database)
-    User.findOne({
-        'userAuth.userName': req.body.username
-    }, function(err, user) {
-        // error checking
-        if (err) {
-            console.log('Error in Signup:' + err);
-        }
-        //if user already exsists
-        if (user) {
-            console.log('Username taken try again' + req.body.username);
-        } else {
-            // if no user exist create one
-            var newUser = new User({
-                userAuth: {
-                    userName: req.body.username,
-                    password: req.body.password
-                }
-            });
-            console.log(newUser);
-            //save user
-            newUser.save(function(err) {
-                if (err) {
-                    console.log('Error in saving user:' + err);
-                    throw err;
-                }
-                console.log('User registration sucess');
-            });
-
-        }
-    });
-});
 
 //HL the users name then password to see if they match
 // if they match a token is generated and returned in the
@@ -92,26 +70,6 @@ router.post('/login', function(req, res) {
 });
 
 
-/*var testUser = {
-    id: 1,
-    fname: "Test",
-    lname: "User",
-    events: [{
-        id: 1,
-        name: "Test Event 1"
-    }, {
-        id: 2,
-        name: "Test Event 2"
-    }],
-
-    groups: [{
-        id: 1,
-        name: "Test Group 1"
-    }, {
-        id: 2,
-        name: "Test Group 2"
-    }],
-};*/ 
 
 
 var router = express.Router(); 

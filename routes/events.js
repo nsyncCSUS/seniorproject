@@ -34,4 +34,66 @@ router.delete('/:id2', function(request, response, next) {});
 router.use('/:id1/users', users); 
 router.use('/:id1/groups', groups); 
 
-module.exports = router;
+
+function EventsController() {
+    // Events Controller Object
+};
+
+EventsController.prototype = {
+    get: function(request, response) {
+
+    },
+
+    put: function(request, response) {
+
+    },
+
+    post: function(request, response) {
+
+    },
+
+    delete: function(request, response) {
+
+    },
+
+    groups: {
+        get: function(request, response) {
+
+        },
+
+        put: function(request, response) {
+
+        },
+
+        post: function(request, response) {
+
+        },
+
+        delete: function(request, response) {
+
+        },
+    },
+
+    users: {
+        get: function(request, response) {
+
+        },
+
+        put: function(request, response) {
+
+        },
+
+        post: function(request, response) {
+
+        },
+
+        delete: function(request, response) {
+
+        },
+    },
+};
+
+
+
+module.exports = EventsController;
+// module.exports = router;
