@@ -1,8 +1,99 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 body {
-  padding-top: 40px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	padding-top: 40px;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+	color: #00B7FF;
 }
+
+.center-item {
+   display:block;
+   margin: 0 auto;
+}
+
+.cursor-pointer {
+   cursor: pointer;
+}
+
+.container-fluid {
+    padding: 0px;
+}
+
+.float-right {
+    z-index: 10;
+    position: fixed;
+    right: 1%;
+    top: 80px;
+}
+
+.float-btm {
+    z-index: 10;
+    position: fixed;
+    top: 90%;
+    right: 50%;
+}
+
+.not-selected {
+	opacity: 0.5;
+}
+
+.selected {
+    opacity: 1;
+	background: rgba(39, 62, 84, 0.82);
+	overflow: hidden;
+	height: 100%;
+	z-index: 2;
+}
+
+.subscriber-thumbnail {
+	width: 64px;
+	height: 64px;
+}
+
+/**********************************************************************
+    DIV CSS START
+**********************************************************************/
+.titleRow {
+    background-color: #eeeeee;
+}
+
+.calendarRow {
+    background-color: #cccccc;
+}
+
+.upcomingEventsRow {
+    background-color: #eeeeee;
+}
+
+.organizersRow {
+    background-color: #cccccc;
+}
+
+.subsribersRow {
+    background-color: #eeeeee;
+}
+
+.descriptionRow {
+    background-color: #e5e5e5;
+}
+
+.organizersRow {
+    background-color: #eeeeee;
+}
+
+.volunteersRow {
+    background-color: #e5e5e5;
+}
+
+.carousel-control {
+  padding-top:10%;
+  width:5%;
+}
+/**********************************************************************
+    Event CSS END
+**********************************************************************/
