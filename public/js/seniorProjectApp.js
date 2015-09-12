@@ -51,56 +51,56 @@
                 templateUrl: '/partials/home.jade',
                 controller: 'HomeController',
                 access: {
-                    isFree: false
+                    isFree: true
                 }
             })
             .when('/dashboard', {
                 templateUrl: '/partials/dashboard.jade',
                 controller: 'DashboardController',
                 access: {
-                    isFree: false
+                    isFree: true
                 }
             })
             .when('/users', {
                 templateUrl: '/partials/users.jade',
                 controller: 'UsersController',
                 access: {
-                    isFree: false
+                    isFree: true
                 }
             })
             .when('/users/:userId', {
                 templateUrl: '/partials/users.jade',
                 controller: 'UsersController',
                 access: {
-                    isFree: false
+                    isFree: true
                 }
             })
             .when('/groups', {
                 templateUrl: '/partials/groups.jade',
                 controller: 'GroupsController',
                 access: {
-                    isFree: false
+                    isFree: true
                 }
             })
             .when('/groups/:groupId', {
                 templateUrl: '/partials/groups.jade',
                 controller: 'GroupsController',
                 access: {
-                    isFree: false
+                    isFree: true
                 }
             })
             .when('/events', {
                 templateUrl: '/partials/events.jade',
                 controller: 'EventsController',
                 access: {
-                    isFree: false
+                    isFree: true
                 }
             })
             .when('/events/:eventId', {
                 templateUrl: '/partials/events.jade',
                 controller: 'EventsController',
                 access: {
-                    isFree: false
+                    isFree: true
                 }
             })
             .when('/signup', {
@@ -128,14 +128,14 @@
                 templateUrl: '/partials/createGroup.jade',
                 controller: 'CreateGroupController',
                 access: {
-                    isFree: false
+                    isFree: true
                 }
             })
             .when('/create/event', {
                 templateUrl: '/partials/createEvent.jade',
                 controller: 'CreateEventController',
                 access: {
-                    isFree: false
+                    isFree: true
                 }
             })
             .otherwise({
