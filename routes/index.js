@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
     /*res.render('index', {
         title: 'Senior Project'
     });*/ 
-   res.render('build/app/index.html'); 
+   res.render('views/index.html'); 
 });
 
 
