@@ -18,6 +18,9 @@
     
     
     
+    /**
+     * Global API Endpoint for Events 
+     */
     var router = express.Router(); 
     router.get('/', function(request, response, next) {}); 
     router.get('/:id', function(request, response, next) {}); 
@@ -25,6 +28,11 @@
     router.post('/', function(request, response, next) {}); 
     router.delete('/:id', function(request, response, next) {}); 
     
+    
+    
+    /**
+     * Nested Endpoint for Subscribed Users
+     */
     var users = express.Router({mergeParams: true}); 
     router.get('/', function(request, response, next) {}); 
     router.get('/:id2', function(request, response, next) {}); 
@@ -32,16 +40,24 @@
     router.post('/', function(request, response, next) {}); 
     router.delete('/:id2', function(request, response, next) {}); 
     
+    
+    
+    /**
+     * Nested Endpoint for Associated Groups 
+     */
     var groups = express.Router({mergeParams: true}); 
-    router.get('/', function(request, response, next) {}); 
+    router.get('/', function(request, response, next) {
+        
+    }); 
+    
     router.get('/:id2', function(request, response, next) {}); 
     router.put('/:id2', function(request, response, next) {}); 
     router.post('/', function(request, response, next) {}); 
     router.delete('/:id2', function(request, response, next) {}); 
     
+    
     router.use('/:id1/users', users); 
     router.use('/:id1/groups', groups); 
-    
     
     module.exports = router;
     
