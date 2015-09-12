@@ -1,8 +1,8 @@
 (function() {
-	var app = angular.module('signupService', []);
+    var app = angular.module('signupService', []);
 
-	app.service('SignupService', [ function() {
+    app.service('SignupService', [function() {
 
-	} ]);
+    }]);
 
 })();
