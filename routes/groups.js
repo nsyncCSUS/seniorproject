@@ -21,7 +21,12 @@ router.get('/data/:id', function(req, res) {
 				id : "event1",
 				name : "event1",
 				interests : [{type: "animals"}, {type: "education"}, {type: "environment"}, {type: "people"}, {type: "recreation"}, {type: "technology"}, {type: "youth"}]
-			}
+			},
+			{
+				id : "event2",
+				name : "event2",
+				interests : [{type: "environment"}, {type: "people"}, {type: "recreation"}, {type: "technology"}, {type: "youth"}]
+			},
 			],
 			organizers : [ {
 				id : "org1",
