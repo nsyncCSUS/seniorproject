@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
     /*res.render('index', {
         title: 'Senior Project'
     });*/ 
-   res.render('views/index.html'); 
+   res.render('index.jade'); 
 });
 
 
@@ -28,14 +28,14 @@ router.get('/', function(req, res, next) {
 });*/ 
 
 
-/*router.get('/src/:page', function(req, res, next) {
+router.get('/partials/:page', function(req, res, next) {
     var page = req.params.page;
     console.log(page); 
-    res.render(page); 
-    res.render('index', {
-        title: 'Senior Project'
-    });
-});*/ 
+    res.render('partials/' + page); 
+    //res.render('index', {
+    //    title: 'Senior Project'
+    //});
+}); 
 
 
 

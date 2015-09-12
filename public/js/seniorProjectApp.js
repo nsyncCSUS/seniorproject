@@ -48,91 +48,91 @@
                 redirectTo: '/home'
             })
             .when('/home', {
-                templateUrl: '/views/app/home/home.jade',
+                templateUrl: '/partials/home.jade',
                 controller: 'HomeController',
                 access: {
                     isFree: false
                 }
             })
             .when('/dashboard', {
-                templateUrl: '/views/app/dashboard/dashboard.jade',
+                templateUrl: '/partials/dashboard.jade',
                 controller: 'DashboardController',
                 access: {
                     isFree: false
                 }
             })
             .when('/users', {
-                templateUrl: '/views/app/users/users.jade',
+                templateUrl: '/partials/users.jade',
                 controller: 'UsersController',
                 access: {
                     isFree: false
                 }
             })
             .when('/users/:userId', {
-                templateUrl: '/views/app/users/users.jade',
+                templateUrl: '/partials/users.jade',
                 controller: 'UsersController',
                 access: {
                     isFree: false
                 }
             })
             .when('/groups', {
-                templateUrl: '/views/app/groups/groups.jade',
+                templateUrl: '/partials/groups.jade',
                 controller: 'GroupsController',
                 access: {
                     isFree: false
                 }
             })
             .when('/groups/:groupId', {
-                templateUrl: '/views/app/groups/groups.jade',
+                templateUrl: '/partials/groups.jade',
                 controller: 'GroupsController',
                 access: {
                     isFree: false
                 }
             })
             .when('/events', {
-                templateUrl: '/views/app/events/events.jade',
+                templateUrl: '/partials/events.jade',
                 controller: 'EventsController',
                 access: {
                     isFree: false
                 }
             })
             .when('/events/:eventId', {
-                templateUrl: '/views/app/events/events.jade',
+                templateUrl: '/partials/events.jade',
                 controller: 'EventsController',
                 access: {
                     isFree: false
                 }
             })
             .when('/signup', {
-                templateUrl: '/views/app/login/signup.jade',
+                templateUrl: '/partials/signup.jade',
                 controller: 'SignupController',
                 access: {
                     isFree: true
                 }
             })
             .when('/login', {
-                templateUrl: '/views/app/login/login.jade',
+                templateUrl: '/partials/login.jade',
                 controller: 'LoginController',
                 access: {
                     isFree: true
                 }
             })
             .when('/logout', {
-                templateUrl: '/views/app/login/logout.jade',
+                templateUrl: '/partials/logout.jade',
                 controller: 'LogoutController',
                 access: {
                     isFree: true
                 }
             })
             .when('/create/group', {
-                templateUrl: '/views/app/groups/createGroup.jade',
+                templateUrl: '/partials/createGroup.jade',
                 controller: 'CreateGroupController',
                 access: {
                     isFree: false
                 }
             })
             .when('/create/event', {
-                templateUrl: '/views/app/events/createEvent.jade',
+                templateUrl: '/partials/createEvent.jade',
                 controller: 'CreateEventController',
                 access: {
                     isFree: false
