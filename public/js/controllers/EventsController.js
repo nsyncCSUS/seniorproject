@@ -1,24 +1,24 @@
 (function() {
-	var app = angular.module('eventsController', [ 'eventService', 'eventFactory' ]);
+    var app = angular.module('eventsController', ['eventService', 'eventFactory']);
 
-	app.controller('EventsController', [ '$scope', '$routeParams', 'EventService', 'EventFactory', function($scope, $routeParams, EventService, EventFactory) {
+    app.controller('EventsController', ['$scope', '$routeParams', 'EventService', 'EventFactory', function($scope, $routeParams, EventService, EventFactory) {
 
-		/***************************************************************************
-		 * Variables (includes ones from scope too)
-		 **************************************************************************/
-		$scope.eventId = $routeParams.eventId;
+        /***************************************************************************
+         * Variables (includes ones from scope too)
+         **************************************************************************/
+        $scope.eventId = $routeParams.eventId;
 
-	
-		/***************************************************************************
-		 * Admin Testing
-		 **************************************************************************/
-		$scope.isAdmin = false;
-		$scope.toggleAdmin = function() {
-			$scope.isAdmin = !$scope.isAdmin;
-		}
-		
-		
-	} ]);
+
+        /***************************************************************************
+         * Admin Testing
+         **************************************************************************/
+        $scope.isAdmin = false;
+        $scope.toggleAdmin = function() {
+            $scope.isAdmin = !$scope.isAdmin;
+        }
+
+
+    }]);
 
 })();
 

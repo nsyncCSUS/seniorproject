@@ -1,8 +1,8 @@
 (function() {
-	var app = angular.module('createEventService', []);
+    var app = angular.module('createEventService', []);
 
-	app.service('CreateEventService', [ function() {
+    app.service('CreateEventService', [function() {
 
-	} ]);
+    }]);
 
 })();
