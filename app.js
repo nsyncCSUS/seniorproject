@@ -10,6 +10,7 @@ var users = require('./routes/users');
 var groups = require('./routes/groups');
 var events = require('./routes/events');
 
+
 //this will aquire my database login file
 var dbConfig = require('./db/db.js');
 var mongoose = require('mongoose');
@@ -17,12 +18,12 @@ var mongoose = require('mongoose');
 
 //Problem isolation: Cannot connect to the database
 //connection setup
-var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },  
-                replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } }; 
+var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+                replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };
 
 //var mongooseUri = uriUtil.formatMongoose(dbConfig.url) <<<<<<<<<<<<<<< NO LONGER NEEDED
 
-//Connect to the DB 
+//Connect to the DB
 mongoose.connect(dbConfig.url, options); // Corrected URI
 
 //create the models for each of the collections
@@ -44,10 +45,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
 app.use('/users', users);
 app.use('/groups', groups);
 app.use('/events', events);
+app.use('/', index);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

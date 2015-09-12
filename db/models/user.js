@@ -1,6 +1,12 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.model('User', {
+
+	userAuth: {
+			userName: String,
+			password: String,
+	},
+	
 	fb : {
 		id : String,
 		access_token : String,
@@ -15,7 +21,7 @@ module.exports = mongoose.model('User', {
 		displayName : String,
 		lastStatus : String
 	},
-
+	
 	user : {
 		FirstName : String,
 		MiddleName : String,
@@ -40,5 +46,4 @@ module.exports = mongoose.model('User', {
 		Interests : String,
 		Skills : String
 	}
-
 });

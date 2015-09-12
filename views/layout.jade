@@ -1,9 +1,13 @@
 doctype html
 html(ng-app='app')
     head
+        //https://developers.google.com/speed/pagespeed/
+        // suggestion made by google pagesspeed 
+        // http://stackoverflow.com/questions/436411/where-is-the-best-place-to-put-script-tags-in-html-markup
+        
         meta(name="viewport" content="width=device-width, initial-scale=0.85, maximum-scale=1, user-scalable=no")
         // CSS
-        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" )
         //link(rel='stylesheet', href='/stylesheets/supernice.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
         // JS
@@ -12,6 +16,7 @@ html(ng-app='app')
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js")
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js")
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js")
+        script(src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.3.js")
         script(src='/js/seniorProjectApp.js')
         script(src='/js/controllers/DashboardController.js')
         script(src='/js/controllers/EventsController.js')
