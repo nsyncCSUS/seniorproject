@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');  // mongose module
 var User = require('../db/models/user'); // mongoose model
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
+var bcrypt   = require('bcrypt-nodejs');
 
 // HL checks the database for user if usere does not exist
 // put user into the database
@@ -22,10 +23,12 @@ router.post('/', function(req , res) {
         console.log('Username taken try again'+ req.body.username);
       }else {
         // if no user exist create one
+          console.log(req.body.password);
+          console.log(user);
         var newUser = new User({
             userAuth : {
           userName : req.body.username,
-          password : req.body.password
+          password : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null)
         }
       });
         console.log(newUser);
@@ -55,7 +58,7 @@ router.post('/login', function(req, res){
       console.log("User not found");
       res.json({ success: false, message: 'Authentication failed. Wrong Username.' });
     }else if(user){
-      if(user.userAuth.password != req.body.password){
+      if(!bcrypt.compareSync(req.body.password, user.userAuth.password)){
         console.log(req.body.password);
         console.log(user.userAuth.password);
         console.log('Wrong password');
