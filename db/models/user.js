@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
+var bcrypt   = require('bcrypt-nodejs');
 
-module.exports = mongoose.model('User', {
+
+var userSchema = new mongoose.Schema({
 //HL userAuth: set when registering look@signupcontroller or routes/user.js
 	userAuth: {
 			userName: String,
@@ -48,3 +50,5 @@ module.exports = mongoose.model('User', {
 	}
 
 });
+
+module.exports = mongoose.model('User',userSchema);

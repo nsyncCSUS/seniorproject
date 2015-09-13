@@ -10,6 +10,11 @@
 			LoginService.isLogged= false;
 		};
 
+        $scope.$on('$viewContentLoaded', function() {
+            $scope.logout();
+            console.log("User logged out");
+        });
+        
 	} ]);
 
 })();
