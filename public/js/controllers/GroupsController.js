@@ -14,6 +14,11 @@
 		$scope.group = {};
 		$scope.savedSuccessMsg = {};
 		
+		$scope.loaded = false;
+
+		/***************************************************************************
+		 * Get Group Information
+		 **************************************************************************/
 		// Gets the group data from server
 		GroupService.getGroup({groupId: $routeParams.groupId}, function(res) {
 			$scope.group = res.data;
@@ -24,11 +29,13 @@
 			buildOrganizers();
 			// Build one for mobile view also
 			buildOrganizersXS();
-			
 			// Get Subscribers by ID
-			
+			$scope.loaded = true;
 		});
 
+		/***************************************************************************
+		 * Building Functions
+		 **************************************************************************/
 		/* Builds the organizers list to be compatible with row based bootstrap carousel (SM-MD-LG version)
 		 * group = {
 		 * 			organizers: [{1}, {2}, {3}, ...]
@@ -96,17 +103,89 @@
 			//console.log($scope.group.organizersBuiltXS);
 		};
 
+
+		
+
+		/***********************************************************************
+		 * Boolean Functions
+		 **********************************************************************/
 		/*
-		 * Opens an external link
+		 * Checks if the gorup has a picture, the view will display a default
+		 * picture if no picture is found.
 		 */
-		$scope.goTo = function(url) {
-			if (url.indexOf("//") > -1)
-				$window.open(url, '_blank');
-			else{
-				var validURL = "//" + url;
-				$window.open(validURL, '_blank');
+		$scope.hasPicture = function(type1, index1, type2, index2) {
+			switch(type1){
+			case "group":
+				if ($scope.group.picture != null){
+					if ($scope.group.picture.length > 0)
+						return true;
+					else
+						return false;
+					}
+				else{
+					if ($scope.loaded == false)
+						return true;
+					else
+						return false;
+				}
+			case "organizer":
+				if ($scope.group.organizersBuilt != null){
+					if ($scope.group.organizersBuilt[index1].organizers[index2].picture != null){
+						if ($scope.group.organizersBuilt[index1].organizers[index2].picture.length > 0)
+							return true;
+						else
+							return false;
+						}
+					else
+						return false;
+				}
+			case "organizerXS":
+				if ($scope.group.organizersBuiltXS != null){
+					if ($scope.group.organizersBuiltXS[index1].organizers[index2].picture != null){
+						if ($scope.group.organizersBuiltXS[index1].organizers[index2].picture.length > 0)
+							return true;
+						else
+							return false;
+						}
+					else
+						return false;
+				}
+			case "subscriber":
+				if ($scope.group.subscribers != null){
+					if ($scope.group.subscribers[index1].picture != null){
+						if ($scope.group.subscribers[index1].picture.length > 0)
+							return true;
+						else
+							return false;
+						}
+					else
+						return false;
+				}
+			case "event":
+				if ($scope.group.events != null){
+					if (type2 != null) {
+						switch(type2){
+						case "volunteer":
+							if ($scope.group.events[index1].volunteers[index2].picture != null) {
+								if ($scope.group.events[index1].volunteers[index2].picture.length > 0) 
+									return true;
+								else
+									return false;
+							}
+						}
+					}
+					else{
+						if ($scope.group.events[index1].picture != null){
+							if ($scope.group.events[index1].picture.length > 0)
+								return true;
+							else
+								return false;
+							}
+						else
+							return false;
+					}
+				}
 			}
-				
 		}
 		
 		/*
@@ -137,51 +216,6 @@
 			}
 			
 			return false;
-		}
-		
-
-		/***********************************************************************
-		 * Has Functions (for checks)
-		 **********************************************************************/
-		/*
-		 * Checks if the gorup has a picture, the view will display a default
-		 * picture if no picture is found.
-		 */
-		$scope.hasPicture = function(type, index) {
-			switch(type){
-			case "group":
-				if ($scope.group.picture != null){
-					if ($scope.group.picture.length > 0)
-						return true;
-					else
-						return false;
-					}
-				else
-					return true;
-			case "user":
-				if ($scope.subscribers != null){
-					if ($scope.subscribers[index].picture != null){
-						alert($scope.subscribers[index])
-						if ($scope.subscribers[index].picture.length > 0)
-							return true;
-						else
-							return false;
-						}
-					else
-						return true;
-				}
-			case "event":
-				if ($scope.events != null){
-					if ($scope.events[index].picture != null){
-						if ($scope.events[index].picture.length > 0)
-							return true;
-						else
-							return false;
-						}
-					else
-						return true;
-				}
-			}
 		}
 		
 		/*
@@ -234,6 +268,13 @@
 			});
 			// Keep changes made
 		}
+
+		/***************************************************************************
+		 * Subscribe Button
+		 **************************************************************************/
+		$scope.subscribe = function() {
+			
+		}
 		
 		/***************************************************************************
 		 * Admin Testing
@@ -241,6 +282,23 @@
 		$scope.isAdmin = false;
 		$scope.toggleAdmin = function() {
 			$scope.isAdmin = !$scope.isAdmin;
+		}
+
+		
+		/***************************************************************************
+		 * MISC Functions
+		 **************************************************************************/
+		/*
+		 * Opens an external link
+		 */
+		$scope.goTo = function(url) {
+			if (url.indexOf("//") > -1)
+				$window.open(url, '_blank');
+			else{
+				var validURL = "//" + url;
+				$window.open(validURL, '_blank');
+			}
+				
 		}
 		
 	} ]);

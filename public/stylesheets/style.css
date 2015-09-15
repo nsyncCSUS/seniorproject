@@ -51,8 +51,15 @@ a {
 }
 
 .subscriber-thumbnail {
-	width: 64px;
-	height: 64px;
+    width: 64px;
+    height: 64px;
+}
+
+.inviteOrganizer:hover {
+    border: 2px solid #00ff00;
+}
+.removeOrganizer:hover {
+    border: 2px solid #ff0000;
 }
 
 /**********************************************************************

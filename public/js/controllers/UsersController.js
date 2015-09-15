@@ -30,11 +30,12 @@
 
 })();
 /*
-	info: {
+	user: {
 		firstName : 	String,
 		middleName : 	String,
 		lastName : 		String,
 		description : 	String,
+		picture:		String,
 		email : 		String,
 		birthday : 		Date,
 		age : 			Number,
@@ -42,7 +43,6 @@
 		state : 		String,
 		zipCode : 		Number,
 		phoneNum : 		Number,
-		picture : 		String,
 		googlePlus : 	String,
 		facebook : 		String,
 		linkedIn : 		String,
