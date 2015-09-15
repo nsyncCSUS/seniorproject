@@ -20,7 +20,7 @@ div.upcomingEvents
 			.col-xs-9.col-sm-12.col-md-3.col-lg-12
 				h4 End Time {{event.endTimeDate | date:'medium'}}
 			.col-xs-9.col-sm-12.col-md-3.col-lg-12
-				h4 {{event.volunteerList.length}} of Y {{event.maxVolunteers}} will participate.
+				h4 {{event.volunteers.length}} of Y {{event.maxVolunteers}} will participate.
 			.col-xs-6.col-sm-12.col-md-12.col-lg-12
 				.col-xs-2.col-sm-2.col-md-2.col-lg-2(ng-repeat='volunteer in event.volunteerList')
 					img.img-responsive.img-rounded(ng-src="{{volunteer.picture}}")
@@ -171,7 +171,7 @@ div.history
 		.col-xs-12.col-sm-6.col-md-4.col-lg-2
 			img.img-responsive(src="//placehold.it/125x125")
 		.col-xs-4.col-sm-2.col-md-1.col-lg-4
-			button.btn Participated
+			button.btn Volunteered
 		.col-xs-4.col-sm-2.col-md-1.col-lg-4
-			button.btn Not Participated
+			button.btn Not Volunteered
 	

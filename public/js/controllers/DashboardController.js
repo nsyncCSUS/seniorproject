@@ -26,13 +26,14 @@
 		}); */
 		
 		$scope.event = {
-			startTimeDate: '09/12/2015', 
-			endTimeDate: '09/24/2015',
+			startTimeDate: "2015-08-26T18:50:10.111Z", 
+			endTimeDate: "2015-09-26T18:50:10.111Z",
+			volunteers: [{name: 'John'}],
 			yourEventsDate: '09/14/2015',
 			yourEventsTime: '12:00PM',
 			yourGroupEventsDate: '09/15/2015',
 			yourGroupEventsTime: '3:00PM',
-			volunteerList: [{name: 'John'}],
+			
 			yourGroupEvents: [{groupEventTitle: 'Event 1', time: 'Time 1', date: 'Date 1'},
 				{groupEventTitle: 'Event 2', time: 'Time 2', date: 'Date 2'}]
 		}
