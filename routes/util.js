@@ -4,9 +4,18 @@
     
     // var exports = {}; 
     
-    exports.takeEventProjection = function(event) {}; 
-    exports.takeUserProjection = function(user) {};
-    exports.takeGroupProjection = function(group) {};
+    exports.takeEventProjection = function(event) {
+        
+    }; 
+    
+    exports.takeUserProjection = function(user) {
+        
+    };
+    
+    exports.takeGroupProjection = function(group) {
+        
+    };
+    
     
     /**
      * Function for logging internal server error

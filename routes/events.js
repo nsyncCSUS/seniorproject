@@ -27,7 +27,7 @@
         var event = request.params.event; 
         Event.find(event, function(err, events) {
             if(err) util.err(err, response)
-            else response.send(events); 
+            else response.send({events: events}); 
         });
         
         return response.end();
@@ -38,7 +38,7 @@
         var id = request.params.id; 
         Event.findById(id, function(err, event) {
             if(err) util.err(err, response);
-            else response.send(event);
+            else response.send({event: event});
         });
         
         return response.end(); 
@@ -52,7 +52,7 @@
             if(err) return util.err(err, response); 
         }); 
         
-        response.end(); 
+        return response.end(); 
     }); 
     
     
@@ -80,7 +80,7 @@
             }
         });
         
-        response.end();
+        return response.end();
     }); 
     
     
@@ -90,28 +90,49 @@
      */
     var users = express.Router({mergeParams: true}); 
     router.get('/', function(request, response, next) {
+        var id = request.params.id1; 
+        Event.findById(id, function(err, event) {
+            if(err) {
+                util.err(err, response); 
+                return response.end(); 
+            } else {
+                var users = event.users.map(function(index, item) {
+                    return util.takeUserProjection(item); 
+                });
+                
+                response.send({users: users}); 
+            }
+        });
         
+        return response.end(); 
     }); 
     
     
     router.get('/:id2', function(request, response, next) {
+        var id1 = request.params.id1; 
+        var id2 = request.params.id2; 
         
+        Event.findById(id1, function(err, event) {
+            if(err) {
+                util.err(err, response); 
+                return response.end();
+            } else {
+                var users = event.users.filter(function(index, item) {
+                    return item.id == id2; 
+                }); 
+                
+                var user = users.pop(); 
+                response.send({user: user});
+            }
+        });
+        
+        return response.end(); 
     }); 
     
     
-    // router.put('/:id2', function(request, response, next) {
-        
-    // }); 
-    
-    
-    // router.post('/', function(request, response, next) {
-        
-    // }); 
-    
-    
-    // router.delete('/:id2', function(request, response, next) {
-        
-    // }); 
+    // router.put('/:id2', function(request, response, next) {}); 
+    // router.post('/', function(request, response, next) {}); 
+    // router.delete('/:id2', function(request, response, next) {}); 
     
     
     
@@ -120,7 +141,21 @@
      */
     var groups = express.Router({mergeParams: true}); 
     router.get('/', function(request, response, next) {
+        var id1 = request.params.id1; 
+        Event.findById(id1, function(err, event) {
+            if(err) {
+                util.err(err, response); 
+                return response.end(); 
+            } else {
+                var groups = event.groups.map(function(index, item) {
+                    return util.takeGroupProjection(item);
+                });
+                
+                return response.send({groups: groups});
+            }
+        });
         
+        return response.end();
     }); 
     
     router.get('/:id2', function(request, response, next) {
