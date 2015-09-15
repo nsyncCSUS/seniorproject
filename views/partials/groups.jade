@@ -27,39 +27,40 @@ div(ng-show='isAdmin')
 
 .titleRow
     .container-fluid
-        .col-xs-12.col-sm-12.col-md-9.col-lg-9
-            h2 {{group.name}}
         .col-xs-12.col-sm-12.col-md-12.col-lg-12
-            .col-xs-12.col-sm-6.col-md-6.col-lg-6
-                .navbar-btn(ng-show='!getIsEditing()')
-                    img.img-thumbnail(ng-src='/images/interests/{{interest.type}}.png', ng-repeat='interest in group.interests', tooltip='{{interest.type}}')
-                    
-            .hidden-xs
-                .col-xs-12.col-sm-6.col-md-6.col-lg-6
-                    .navbar-btn.pull-right(ng-show='!getIsEditing()')
-                        img.btn.btn-sm(ng-src='/images/social-media/googlePlus.png', ng-disabled='!checkIfHas("googlePlus")', ng-click='goTo(group.googlePlusURL)')
-                        img.btn.btn-sm(ng-src='/images/social-media/facebook.png', ng-disabled='!checkIfHas("facebook")', ng-click='goTo(group.facebookURL)')
-                        img.btn.btn-sm(ng-src='/images/social-media/twitter.png', ng-disabled='!checkIfHas("twitter")', ng-click='goTo(group.twitterURL)')
-                        img.btn.btn-sm(ng-src='/images/social-media/linkedIn.png', ng-disabled='!checkIfHas("linkedIn")', ng-click='goTo(group.linkedInURL)')
-                        img.btn.btn-sm(ng-src='/images/social-media/website.png', ng-disabled='!checkIfHas("website")', ng-click='goTo(group.personalWebsiteURL)')
-            .visible-xs
+            h2 {{group.name}}
+        .row
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 .col-xs-12.col-sm-6.col-md-6.col-lg-6
                     .navbar-btn(ng-show='!getIsEditing()')
-                        img.btn.btn-sm(ng-src='/images/social-media/googlePlus.png', ng-disabled='!checkIfHas("googlePlus")', ng-click='goTo(group.googlePlusURL)')
-                        img.btn.btn-sm(ng-src='/images/social-media/facebook.png', ng-disabled='!checkIfHas("facebook")', ng-click='goTo(group.facebookURL)')
-                        img.btn.btn-sm(ng-src='/images/social-media/twitter.png', ng-disabled='!checkIfHas("twitter")', ng-click='goTo(group.twitterURL)')
-                        img.btn.btn-sm(ng-src='/images/social-media/linkedIn.png', ng-disabled='!checkIfHas("linkedIn")', ng-click='goTo(group.linkedInURL)')
-                        img.btn.btn-sm(ng-src='/images/social-media/website.png', ng-disabled='!checkIfHas("website")', ng-click='goTo(group.personalWebsiteURL)')
-                            
+                        img.img-thumbnail(ng-src='/images/interests/{{interest.type}}.png', ng-repeat='interest in group.interests', tooltip='{{interest.type}}')
+                        
+                .hidden-xs
+                    .col-xs-12.col-sm-6.col-md-6.col-lg-6
+                        .navbar-btn.pull-right(ng-show='!getIsEditing()')
+                            img.btn.btn-sm(ng-src='/images/social-media/googlePlus.png', ng-disabled='!checkIfHas("googlePlus")', ng-click='goTo(group.googlePlusURL)', tooltip='{{group.googlePlusURL}}')
+                            img.btn.btn-sm(ng-src='/images/social-media/facebook.png', ng-disabled='!checkIfHas("facebook")', ng-click='goTo(group.facebookURL)', tooltip='{{group.facebookURL}}')
+                            img.btn.btn-sm(ng-src='/images/social-media/twitter.png', ng-disabled='!checkIfHas("twitter")', ng-click='goTo(group.twitterURL)', tooltip='{{group.twitterURL}}')
+                            img.btn.btn-sm(ng-src='/images/social-media/linkedIn.png', ng-disabled='!checkIfHas("linkedIn")', ng-click='goTo(group.linkedInURL)', tooltip='{{group.linkedInURL}}')
+                            img.btn.btn-sm(ng-src='/images/social-media/website.png', ng-disabled='!checkIfHas("website")', ng-click='goTo(group.personalWebsiteURL)', tooltip='{{group.personalWebsiteURL}}')
+                .visible-xs
+                    .col-xs-12.col-sm-6.col-md-6.col-lg-6
+                        .navbar-btn(ng-show='!getIsEditing()')
+                            img.btn.btn-sm(ng-src='/images/social-media/googlePlus.png', ng-disabled='!checkIfHas("googlePlus")', ng-click='goTo(group.googlePlusURL)', tooltip='{{group.googlePlusURL}}')
+                            img.btn.btn-sm(ng-src='/images/social-media/facebook.png', ng-disabled='!checkIfHas("facebook")', ng-click='goTo(group.facebookURL)', tooltip='{{group.facebookURL}}')
+                            img.btn.btn-sm(ng-src='/images/social-media/twitter.png', ng-disabled='!checkIfHas("twitter")', ng-click='goTo(group.twitterURL)', tooltip='{{group.twitterURL}}')
+                            img.btn.btn-sm(ng-src='/images/social-media/linkedIn.png', ng-disabled='!checkIfHas("linkedIn")', ng-click='goTo(group.linkedInURL)', tooltip='{{group.linkedInURL}}')
+                            img.btn.btn-sm(ng-src='/images/social-media/website.png', ng-disabled='!checkIfHas("website")', ng-click='goTo(group.personalWebsiteURL)', tooltip='{{group.personalWebsiteURL}}')
+                                
         .col-xs-12.col-sm-4.col-md-4.col-lg-4
-            img.img-responsive.img-thumbnail.center-item(ng-if='hasPicture("group")', ng-src="{{group.picture}}")
-            img.img-responsive.img-thumbnail.center-item(ng-if='!hasPicture("group")', ng-src="//placehold.it/500x500")
+            img.img-responsive.img-thumbnail.center-item(ng-if='hasPicture("group")', src="{{group.picture}}")
+            img.img-responsive.img-thumbnail.center-item(ng-if='!hasPicture("group")', src="//placehold.it/500x500")
             div(ng-show='getIsEditing()')
                 .form-group
                     input(type='file') 
                     | Might have to use external module for file inputs
             div(ng-show='!getIsEditing()')
-                button.btn.btn-default.center-item
+                button.btn.btn-default.center-item(ng-click='subscribe()')
                     h4 Subscribe/Unsubscribe
         .col-xs-12.col-sm-8.col-md-8.col-lg-8
             div(ng-show='!getIsEditing()')
@@ -93,7 +94,7 @@ div(ng-show='isAdmin')
         .col-xs-10.col-sm-6.col-md-4.col-lg-4
             .carousel.slide
                 .item.active
-                    h2.text-center Upcoming Events
+                    h2.text-center <strong>{{group.events.length}}</strong> Upcoming Events
             div(ng-show='hasMultipleEvents()')
                 a.left.carousel-control(href='#upcomingEventsCarousel', data-slide='prev')
                     span.glyphicon.glyphicon-chevron-left
@@ -104,81 +105,63 @@ div(ng-show='isAdmin')
     
     // Upcoming Events 1 x Y
     .container-fluid
-        .col-xs-12.col-sm-12.col-md-12.col-lg-12
-            .carousel.slide#upcomingEventsCarousel(data-ride='carousel')
-                .carousel-inner
-                    .item.active(ng-repeat-start='event in group.events', ng-if='$first')
-                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                            h3 {{event.name}}
-                        .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                            img.img-responsive.img-thumbnail(src='{{event.picture}}')
-                        .row
-                            .col-xs-12.col-sm-12.col-md-9.col-lg-9
-                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                    img.img-thumbnail(ng-src='/images/interests/{{interest.type}}.png', ng-repeat='interest in event.interests | orderBy: "type"', tooltip='{{interest.type}}')
-                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                    h4 Start Time {{event.startTimeDate | date:'medium'}}
-                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                    h4 End Time {{event.endTimeDate | date:'medium'}}
-                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                    h4 {{event.volunteerList.length}} of {{event.maxVolunteers}}
-                                .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                                    .col-xs-2.col-sm-2.col-md-2.col-lg-2(ng-repeat='volunteer in event.volunteers')
-                                        img.img-responsive.img-rounded(ng-src="{{volunteer.picture}}", tooltip='{{volunteer.name}}')
-                            
-                    .item(ng-repeat-end, ng-if='!$first')
-                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                            h3 {{event.name}}
-                        .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                            img.img-responsive.img-thumbnail(src='{{event.picture}}')
-                        .row
-                            .col-xs-12.col-sm-12.col-md-9.col-lg-9
-                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                    img.img-thumbnail(ng-src='/images/interests/{{interest.type}}.png', ng-repeat='interest in event.interests | orderBy: "type"', tooltip='{{interest.type}}')
-                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                    h4 Start Time {{event.startTimeDate | date:'medium'}}
-                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                    h4 End Time {{event.endTimeDate | date:'medium'}}
-                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                    h4 {{event.volunteerList.length}} of {{event.maxVolunteers}}
-                                .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                                    .col-xs-2.col-sm-2.col-md-2.col-lg-2(ng-repeat='volunteer in event.volunteers')
-                                        img.img-responsive.img-rounded(ng-src="{{volunteer.picture}}")
-                        
-                    .item
-                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                            h3 Event Name2
-                        .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                            img.img-responsive.img-thumbnail(src="//placehold.it/200x200")
-                        
-                        .col-xs-12.col-sm-12.col-md-9.col-lg-9
-                            .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                h4 Filters
-                            .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                h4 Start Time
-                            .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                h4 End Time
-                            .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                                h4 X of Y
+        .row
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                .carousel.slide#upcomingEventsCarousel(data-ride='carousel')
+                    .carousel-inner
+                        .item.active(ng-repeat-start='event in group.events', ng-if='$first')
                             .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                                .col-xs-2.col-sm-2.col-md-2.col-lg-2
-                                    img.img-responsive.img-rounded(src="//placehold.it/128x128")
-                                .col-xs-2.col-sm-2.col-md-2.col-lg-2
-                                    img.img-responsive.img-rounded(src="//placehold.it/128x128")
-                                .col-xs-2.col-sm-2.col-md-2.col-lg-2
-                                    img.img-responsive.img-rounded(src="//placehold.it/128x128")
-                                .col-xs-2.col-sm-2.col-md-2.col-lg-2
-                                    img.img-responsive.img-rounded(src="//placehold.it/128x128")
-                                .col-xs-2.col-sm-2.col-md-2.col-lg-2
-                                    img.img-responsive.img-rounded(src="//placehold.it/128x128")
-                                .col-xs-2.col-sm-2.col-md-2.col-lg-2
-                                    img.img-responsive.img-rounded(src="//placehold.it/128x128")
-                                .col-xs-2.col-sm-2.col-md-2.col-lg-2
-                                    img.img-responsive.img-rounded(src="//placehold.it/128x128")
+                                a(ng-href='/events/{{event.id}}/')
+                                    h3 {{event.name}}
+                            .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                a(ng-href='/events/{{event.id}}/')
+                                    img.img-responsive.img-thumbnail(src='{{event.picture}}')
+                            .col-xs-12.col-sm-12.col-md-9.col-lg-9
+                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                    img.img-thumbnail(ng-src='/images/interests/{{interest.type}}.png', ng-repeat='interest in event.interests | orderBy: "type"', tooltip='{{interest.type}}')
+                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                    h4 Start Time 
+                                    h5 {{event.startTimeDate | date:'medium'}}
+                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                    h4 End Time 
+                                    h5 {{event.endTimeDate | date:'medium'}}
+                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                    h4 Volunteers
+                                    h5 {{event.volunteers.length}} of {{event.maxVolunteers}}
+                                .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                    .col-xs-2.col-sm-2.col-md-2.col-lg-2(ng-repeat='volunteer in event.volunteers')
+                                        a(ng-href='/users/{{volunteer.id}}/')
+                                            img.img-responsive.img-rounded(ng-src="{{volunteer.picture}}", tooltip='{{volunteer.firstName}} {{volunteer.lastName}}', ng-if='hasPicture("event", $parent.$index, "volunteer", $index)')
+                                            img.img-responsive.img-rounded(ng-src="//placehold.it/250x250", tooltip='{{volunteer.firstName}} {{volunteer.lastName}}', ng-if='!hasPicture("event", $parent.$index, "volunteer", $index)')
+                                
+                        .item(ng-repeat-end, ng-if='!$first')
+                            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                a(ng-href='/events/{{event.id}}/')
+                                    h3 {{event.name}}
+                            .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                a(ng-href='/events/{{event.id}}/')
+                                    img.img-responsive.img-thumbnail(src='{{event.picture}}')
+                            .col-xs-12.col-sm-12.col-md-9.col-lg-9
+                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                    img.img-thumbnail(ng-src='/images/interests/{{interest.type}}.png', ng-repeat='interest in event.interests | orderBy: "type"', tooltip='{{interest.type}}')
+                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                    h4 Start Time 
+                                    h5 {{event.startTimeDate | date:'medium'}}
+                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                    h4 End Time 
+                                    h5 {{event.endTimeDate | date:'medium'}}
+                                .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                                    h4 Volunteers
+                                    h5 {{event.volunteers.length}} of {{event.maxVolunteers}}
+                                .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                    .col-xs-2.col-sm-2.col-md-2.col-lg-2(ng-repeat='volunteer in event.volunteers')
+                                        a(ng-href='/users/{{volunteer.id}}/')
+                                            img.img-responsive.img-rounded(ng-src="{{volunteer.picture}}", tooltip='{{volunteer.firstName}} {{volunteer.lastName}}', ng-if='hasPicture("event", $parent.$index, "volunteer", $index)')
+                                            img.img-responsive.img-rounded(ng-src="//placehold.it/250x250", tooltip='{{volunteer.firstName}} {{volunteer.lastName}}', ng-if='!hasPicture("event", $parent.$index, "volunteer", $index)')
 
 
 .organizersRow(ng-show='!getIsEditing()')
-    h2.text-center Organizers
+    h2.text-center <strong>{{group.organizers.length}}</strong> Organizers
     .hidden-xs
         .container-fluid
             .col-xs-12.col-sm-12.col-md-12.col-lg-12
@@ -187,15 +170,23 @@ div(ng-show='isAdmin')
                         .item.active(ng-repeat-start='organizerRow in group.organizersBuilt', ng-if='$first')
                             .row
                                 .col-sm-3.col-md-3.col-lg-3(ng-repeat='organizer in organizerRow.organizers')
-                                    img.img-responsive.img-thumbnail.center-item.cursor-pointer(src="//placehold.it/250x250")
+                                    p {{$parent.$index}}
+                                    p {{$index}}
+                                    a(ng-href='/users/{{organizer.id}}/')
+                                        img.img-responsive.img-thumbnail.center-item.cursor-pointer(src='{{organizer.picture}}', ng-if='hasPicture("organizer", $parent.$index, "", $index)')
+                                        img.img-responsive.img-thumbnail.center-item.cursor-pointer(src='//placehold.it/350x350', ng-if='!hasPicture("organizer", $parent.$index, "", $index)')
                                     .carousel-caption.cursor-pointer
-                                        h6 {{organizer.name}}
+                                        h6  {{organizer.firstName}} {{organizer.lastName}}
                         .item(ng-repeat-end='organizerRow in group.organizersBuilt', ng-if='!$first')
                             .row
                                 .col-sm-3.col-md-3.col-lg-3(ng-repeat='organizer in organizerRow.organizers')
-                                    img.img-responsive.img-thumbnail.center-item.cursor-pointer(src="//placehold.it/250x250")
+                                    p {{$parent.$index}}
+                                    p {{$index}}
+                                    a(ng-href='/users/{{organizer.id}}/')
+                                        img.img-responsive.img-thumbnail.center-item.cursor-pointer(src='{{organizer.picture}}', ng-if='hasPicture("organizer", $parent.$index, null, $index)')
+                                        img.img-responsive.img-thumbnail.center-item.cursor-pointer(src='//placehold.it/350x350', ng-if='!hasPicture("organizer", $parent.$index, null, $index)')
                                     .carousel-caption.cursor-pointer
-                                        h6 {{organizer.name}}
+                                        h6  {{organizer.firstName}} {{organizer.lastName}}
                     a.left.carousel-control(href='#organizersCarousel', data-slide='prev')
                         span.glyphicon.glyphicon-chevron-left
                     a.right.carousel-control(href='#organizersCarousel', data-slide='next')
@@ -208,23 +199,31 @@ div(ng-show='isAdmin')
                         .item.active(ng-repeat-start='organizerRow in group.organizersBuiltXS', ng-if='$first')
                             .row
                                 .col-xs-6(ng-repeat='organizer in organizerRow.organizers')
-                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    p {{$parent.$index}}
+                                    p {{$index}}
+                                    img.img-responsive.img-thumbnail.center-item.cursor-pointer(src='{{organizer.picture}}', ng-show='hasPicture("organizerXS", $parent.$index, "", $index)')
+                                    img.img-responsive.img-thumbnail.center-item.cursor-pointer(src='//placehold.it/350x350', ng-show='!hasPicture("organizerXS", $parent.$index, "", $index)')
                                     .carousel-caption.cursor-pointer
-                                        h6 {{organizer.name}}
+                                        h6  {{organizer.firstName}} {{organizer.lastName}}
                         .item(ng-repeat-end='organizerRow in group.organizersBuiltXS', ng-if='!$first')
                             .row
                                 .col-xs-6(ng-repeat='organizer in organizerRow.organizers')
-                                    img.img-responsive.img-thumbnail.center-item(src="//placehold.it/250x250")
+                                    p {{$parent.$index}}
+                                    p {{$index}}
+                                    img.img-responsive.img-thumbnail.center-item.cursor-pointer(src='{{organizer.picture}}', ng-show='hasPicture("organizerXS", $parent.$index, "", $index)')
+                                    img.img-responsive.img-thumbnail.center-item.cursor-pointer(src='//placehold.it/350x350', ng-show='!hasPicture("organizerXS", $parent.$index, "", $index)')
                                     .carousel-caption.cursor-pointer
-                                        h6 {{organizer.name}}
+                                        h6  {{organizer.firstName}} {{organizer.lastName}}
                     a.left.carousel-control(href='#organizersCarousel-xs', data-slide='prev')
                         span.glyphicon.glyphicon-chevron-left
                     a.right.carousel-control(href='#organizersCarousel-xs', data-slide='next')
                         span.glyphicon.glyphicon-chevron-right
 
 .subsribersRow(ng-show='!getIsEditing()')
-    h2.text-center Subscribers
+    h2.text-center <strong>{{group.subscribers.length}}</strong> Subscribers
     .container-fluid
         .col-xs-12.col-sm-12.col-md-12.col-lg-12
-            img.img-thumbnail.subscriber-thumbnail.cursor-pointer(ng-repeat='subscriber in group.subscribers', ng-src="{{subscriber.picture}}", ng-if='hasPicture("user", $index)', tooltip='{{subscriber.name}}')
-            img.img-thumbnail.subscriber-thumbnail.cursor-pointer(ng-repeat='subscriber in group.subscribers', src="//placehold.it/65x64", ng-if='!hasPicture("user", $index)', tooltip='{{subscriber.name}}')
+            a(ng-href='/users/{{subscriber.id}}/', ng-repeat='subscriber in group.subscribers')
+                img.img-thumbnail.subscriber-thumbnail.cursor-pointer(src="{{subscriber.picture}}", ng-if='hasPicture("subscriber", $index)', tooltip='{{subscriber.firstName}} {{subscriber.lastName}}')
+            a(ng-href='/users/{{subscriber.id}}/', ng-repeat='subscriber in group.subscribers')
+                img.img-thumbnail.subscriber-thumbnail.cursor-pointer(src="//placehold.it/65x64", ng-if='!hasPicture("subscriber", $index)', tooltip='{{subscriber.firstName}} {{subscriber.lastName}}')
