@@ -151,16 +151,16 @@
     var events = express.Router({mergeParams: true}); 
     router.get('/', function(request, response, next) {}); 
     router.get('/:id2', function(request, response, next) {}); 
-    router.put('/:id2', function(request, response, next) {}); 
-    router.post('/', function(request, response, next) {}); 
-    router.delete('/:id2', function(request, response, next) {}); 
+    // router.put('/:id2', function(request, response, next) {}); 
+    // router.post('/', function(request, response, next) {}); 
+    // router.delete('/:id2', function(request, response, next) {}); 
     
     var groups = express.Router({mergeParams: true}); 
     router.get('/', function(request, response, next) {}); 
     router.get('/:id2', function(request, response, next) {}); 
-    router.put('/:id2', function(request, response, next) {}); 
-    router.post('/', function(request, response, next) {}); 
-    router.delete('/:id2', function(request, response, next) {}); 
+    // router.put('/:id2', function(request, response, next) {}); 
+    // router.post('/', function(request, response, next) {}); 
+    // router.delete('/:id2', function(request, response, next) {}); 
     
     
     router.use('/:id1/events', events); 

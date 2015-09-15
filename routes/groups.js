@@ -72,17 +72,17 @@
     return Http404(response); 
   }); 
   
-  events.put('/:id', function(request, response, next) {
-    return Http404(response); 
-  }); 
+  // events.put('/:id', function(request, response, next) {
+  //   return Http404(response); 
+  // }); 
   
-  events.post('/', function(request, response, next) {
-    return Http404(response); 
-  }); 
+  // events.post('/', function(request, response, next) {
+  //   return Http404(response); 
+  // }); 
   
-  events.delete('/:id', function(request, response, next) {
-    return Http404(response); 
-  }); 
+  // events.delete('/:id', function(request, response, next) {
+  //   return Http404(response); 
+  // }); 
   
   
   
@@ -99,17 +99,17 @@
     return Http404(response); 
   }); 
   
-  users.put('/:id', function(request, response, next) {
-    return Http404(response); 
-  }); 
+  // users.put('/:id', function(request, response, next) {
+  //   return Http404(response); 
+  // }); 
   
-  users.post('/', function(request, response, next) {
-    return Http404(response); 
-  }); 
+  // users.post('/', function(request, response, next) {
+  //   return Http404(response); 
+  // }); 
   
-  users.delete('/:id', function(request, response, next) {
-    return Http404(response); 
-  }); 
+  // users.delete('/:id', function(request, response, next) {
+  //   return Http404(response); 
+  // }); 
   
   
   // Attach nested routers to global router 
