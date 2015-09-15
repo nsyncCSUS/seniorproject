@@ -20,7 +20,7 @@ div.upcomingEvents
 			.col-xs-9.col-sm-12.col-md-3.col-lg-12
 				h4 End Time {{event.endTimeDate | date:'medium'}}
 			.col-xs-9.col-sm-12.col-md-3.col-lg-12
-				h4 X {{event.volunteerList.length}} of Y {{event.maxVolunteers}} will participate.
+				h4 {{event.volunteerList.length}} of Y {{event.maxVolunteers}} will participate.
 			.col-xs-6.col-sm-12.col-md-12.col-lg-12
 				.col-xs-2.col-sm-2.col-md-2.col-lg-2(ng-repeat='volunteer in event.volunteerList')
 					img.img-responsive.img-rounded(ng-src="{{volunteer.picture}}")
@@ -133,6 +133,14 @@ div.upcomingEvents
 					h3 Date
 				.col-xs-4.col-sm-2.col-md-1.col-lg-4
 					h3 Time
+			.container-fluid(ng-repeat='e in event.yourGroupEvents')	<!--goes through the list contained in yourGroupEvents-->
+				.col-xs-12.col-sm-6.col-md-4.col-lg-4
+					h4 {{e.groupEventTitle}}
+				.col-xs-4.col-sm-2.col-md-1.col-lg-4
+					h4 {{e.date | date:'medium'}}
+				.col-xs-4.col-sm-2.col-md-1.col-lg-4
+					h4 {{e.time | date:'medium'}}
+					
 	.col-xs-12.col-sm-6.col-md-4.col-lg-4
 		div.calendar
 
@@ -144,9 +152,9 @@ div.upcomingEvents
 				.col-xs-12.col-sm-6.col-md-4.col-lg-4
 					h3 Event Title
 				.col-xs-4.col-sm-2.col-md-1.col-lg-4
-					h3 Date
+					h3 Date {{event.yourEventsDate | date:'medium'}}
 				.col-xs-4.col-sm-2.col-md-1.col-lg-4
-					h3 Time
+					h3 Time {{event.yourEventsTime | date:'medium'}}
 	.col-xs-12.col-sm-6.col-md-4.col-lg-4
 		div.calendar
 			h2 Calendar
