@@ -23,7 +23,7 @@
 })();
 
 /*
-	info: {
+	event: {
 		id: 			String,		
 		creatorId: 		String,
 		groupId: 		String,
@@ -40,6 +40,5 @@
 		maxVolunteers: String,
 		volunteers:	[{id: String}, {id: String}, ...],
 		interests: [{type: String}, {type: String}, ...]
-		
 	}
 */
