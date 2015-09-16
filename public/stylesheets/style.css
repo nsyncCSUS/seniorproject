@@ -90,6 +90,18 @@ a {
     background-color: #e5e5e5;
 }
 
+.calendar {
+    background-color: #e5e5e5;
+}
+
+.yourEvents {
+    background-color: #e5e5e5;
+}
+
+.yourGroupEvents{
+	background-color: #e5e5e5;
+}
+
 .carousel-control {
   padding-top:10%;
   width:5%;
