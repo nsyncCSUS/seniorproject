@@ -1,6 +1,7 @@
 (function() {
 
-    var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController',
+    // 'ui.bootstrap', 
+    var app = angular.module('app', ['ngRoute', 'ngAnimate', 'homeController', 'dashboardController',
         'usersController', 'groupsController', 'eventsController', 'signupController',
         'loginController', 'logoutController', 'createGroupController', 'createEventController'
     ]);
