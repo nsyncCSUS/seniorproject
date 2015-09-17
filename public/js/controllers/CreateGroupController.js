@@ -50,14 +50,16 @@
 			subscribedTo : 	[],
 			interests : 	[{type: "Technology"}]
 		};
-		
-		$scope.group.organizers = [];
+
+
+            $scope.group.organizers = [];
 		$scope.group.organizers.push(user);
 		
 		// Build an array for displaying organizers in a carousel
 		buildOrganizers();
 		// Build one for mobile view also
 		buildOrganizersXS();
+
 
 		/***************************************************************************
 		 * Building Functions
