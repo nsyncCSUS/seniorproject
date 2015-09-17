@@ -89,7 +89,17 @@
 				               {id : "sub10", firstName : "sub10", lastName: "1", picture : "//placekitten.com/g/358/355/"}],
 				interests : [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]
 		};
+		
+		$scope.group.organizersToAdd = [];
 		$scope.savedSuccessMsg = {};
+
+		$scope.animalsSelected = "";
+		$scope.educationSelected = "";
+		$scope.environmentSelected = "";
+		$scope.peopleSelected = "";
+		$scope.recreationSelected = "";
+		$scope.technologySelected = "";
+		$scope.youthSelected = "";
 		
 		$scope.loaded = false;
 
@@ -115,7 +125,9 @@
 		// Build an array for displaying organizers in a carousel
 		buildOrganizers();
 		// Build one for mobile view also
-		//buildOrganizersXS();
+		buildOrganizersXS();
+		// Build the interests for editing
+		buildInterests();
 		// Get Subscribers by ID
 		$scope.loaded = true;
 		/***************************************************************************
@@ -151,14 +163,153 @@
 					currentIndex++;
 				}
 			}, $scope.group.organizersBuilt); // Used as "this" above
-			//console.log($scope.group.organizersBuilt);
+			////console.log($scope.group.organizersBuilt);
 		};
 
-        $scope.group = {};
-        $scope.savedSuccessMsg = {};
+
+		/* Builds the organizers list to be compatible with row based bootstrap carousel (XS version)
+		 * group = {
+		 * 			organizers: [{1}, {2}, {3}, ...]
+		 * 			organizersBuiltXS: [
+		 * 							{ organizers: [ {1},{2} ] }, // $first
+		 * 							{ organizers: [ {3},{4} ] },
+		 * 							{ organizers: [ {5},{6} ] },
+		 * 							{ organizers: [ {7},{8} ] }
+		 * 							]
+		 * 			}
+		 */
+		function buildOrganizersXS() {
+			// Split into 2 x Y arrays
+			var currentRow = 0;
+			var currentIndex = 0;
+			$scope.group.organizersBuiltXS = [{organizers: []}];
+			angular.forEach($scope.group.organizers, function(organizer) {
+				// Add new row if the row is filled
+				if (currentIndex === 2) {
+					this.push({organizers: []});
+					currentRow++;
+					currentIndex = 0;
+					this[currentRow].organizers.push(organizer);
+					currentIndex++;
+				}
+				// Push an organizer to current working row
+				else {
+					this[currentRow].organizers.push(organizer);
+					currentIndex++;
+				}
+			}, $scope.group.organizersBuiltXS); // Used as "this" above
+			////console.log($scope.group.organizersBuiltXS);
+		};
+		
+		function buildInterests() {
+			angular.forEach($scope.group.interests, function(interest) {
+				switch(interest.type){
+				case "Animals":
+					$scope.animalsSelected = "selected";
+					break;
+				case "Education":
+					$scope.educationSelected = "selected";
+					break;
+				case "Environment":
+					$scope.environmentSelected = "selected";
+					break;
+				case "People":
+					$scope.peopleSelected = "selected";
+					break;
+				case "Recreation":
+					$scope.recreationSelected = "selected";
+					break;
+				case "Technology":
+					$scope.technologySelected = "selected";
+					break;
+				case "Youth":
+					$scope.youthSelected = "selected";
+					break;
+				}
+			});
+		};
+		
+		function clearInterests() {
+			$scope.animalsSelected = "";
+			$scope.educationSelected = "";
+			$scope.environmentSelected = "";
+			$scope.peopleSelected = "";
+			$scope.recreationSelected = "";
+			$scope.technologySelected = "";
+			$scope.youthSelected = "";
+		}
 
 
-
+		/***************************************************************************
+		 * Adding/Removing Interests Function
+		 **************************************************************************/
+		$scope.addInterest = function (interest) {
+			var hasInterest = false;
+			var newInterests = [];
+			angular.forEach($scope.group.interests, function(currentInterest, index) {
+				//console.log(currentInterest.type);
+				if (currentInterest.type === interest){
+					//console.log("removed " + interest);
+					hasInterest = true;
+					switch(interest) {
+					case "Animals":
+						$scope.animalsSelected = "";
+						break;
+					case "Education":
+						$scope.educationSelected = "";
+						break;
+					case "Environment":
+						$scope.environmentSelected = "";
+						break;
+					case "People":
+						$scope.peopleSelected = "";
+						break;
+					case "Recreation":
+						$scope.recreationSelected = "";
+						break;
+					case "Technology":
+						$scope.technologySelected = "";
+						break;
+					case "Youth":
+						$scope.youthSelected = "";
+						break;
+					}
+				}
+				else {
+					//console.log(currentInterest);
+					newInterests.push(currentInterest);
+				}
+			});
+			if (hasInterest === false){
+				//console.log("added " + interest);
+				newInterests.push({type: interest});
+				switch(interest) {
+				case "Animals":
+					$scope.animalsSelected = "selected";
+					break;
+				case "Education":
+					$scope.educationSelected = "selected";
+					break;
+				case "Environment":
+					$scope.environmentSelected = "selected";
+					break;
+				case "People":
+					$scope.peopleSelected = "selected";
+					break;
+				case "Recreation":
+					$scope.recreationSelected = "selected";
+					break;
+				case "Technology":
+					$scope.technologySelected = "selected";
+					break;
+				case "Youth":
+					$scope.youthSelected = "selected";
+					break;
+				}
+			}
+			$scope.group.interests = newInterests;
+			//console.log($scope.group.interests);
+		}
 		
 
 		/***********************************************************************
@@ -184,6 +335,17 @@
 						return false;
 				}
 			case "organizer":
+				if ($scope.group.organizers != null){
+					if ($scope.group.organizers[index1].picture != null){
+						if ($scope.group.organizers[index1].picture.length > 0)
+							return true;
+						else
+							return false;
+						}
+					else
+						return false;
+				}
+			case "organizerBuilt":
 				if ($scope.group.organizersBuilt != null){
 					if ($scope.group.organizersBuilt[index1].organizers[index2].picture != null){
 						if ($scope.group.organizersBuilt[index1].organizers[index2].picture.length > 0)
@@ -194,7 +356,7 @@
 					else
 						return false;
 				}
-			case "organizerXS":
+			case "organizerBuiltXS":
 				if ($scope.group.organizersBuiltXS != null){
 					if ($scope.group.organizersBuiltXS[index1].organizers[index2].picture != null){
 						if ($scope.group.organizersBuiltXS[index1].organizers[index2].picture.length > 0)
@@ -288,17 +450,53 @@
 				return false;
 		}
 
+		$scope.hasOrganizers = function() {
+			return true;
+			if ($scope.group.organizersToAdd != null && $scope.group.organizersToAdd.length > 0)
+				return true;
+			else
+				return false;
+		}
+		/***********************************************************************
+		 * Editing Functions
+		 **********************************************************************/
+		$scope.getIsEditing = function() {
+			if ($scope.isEditing === true)
+				return true;
+			else
+				return false;
+		}
+		
+		$scope.enableEdit = function() {
+			$scope.isEditing = true;
+			
+			// Backup contents on page
+			$scope.group_bak = {};
+			angular.copy($scope.group, $scope.group_bak);
+		}
 
-            // Build an array for displaying organizers in a carousel
-            buildOrganizers();
-            // Build one for mobile view also
-            //buildOrganizersXS();
-
-            // Get Subscribers by ID
+		$scope.cancelEdit = function() {
+			$scope.isEditing = false;
+			
+			// Restore contents on page
+			angular.copy($scope.group_bak, $scope.group);
+			$scope.group_bak = {};
+			
+			// Reset interests for editing
+			clearInterests();
+			buildInterests();
+		}
 
 		$scope.submitEdit = function() {
 			$scope.isEditing = false;
-			$scope.backupGroup = {};
+			$scope.group_bak = {};
+			$scope.animalsSelected_bak = "";
+			$scope.educationSelected_bak = "";
+			$scope.environmentSelected_bak = "";
+			$scope.peopleSelected_bak = "";
+			$scope.recreationSelected_bak = "";
+			$scope.technologySelected_bak = "";
+			$scope.youthSelected_bak = "";
 			// Send changes to server
 			GroupService.saveGroup({groupId: $routeParams.groupId, groupData: $scope.group}, function(res) {
 				$scope.savedSuccessMsg = res.data.msg;
