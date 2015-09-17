@@ -2,16 +2,16 @@ var express = require('express');
 var router = express.Router();
 
 
-var users = require('./users.js'); 
-var groups = require('./groups.js'); 
-var events = require('./events.js'); 
+var users = require('./users.js');
+var groups = require('./groups.js');
+var events = require('./events.js');
 
 
 router.get('/', function(req, res, next) {
     /*res.render('index', {
         title: 'Senior Project'
-    });*/ 
-   res.render('build/app/index.html'); 
+    });*/
+    res.render('build/app/index.html');
 });
 
 
@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
     } catch (e) {
         return res.status(404).send('Not Found'); 
     } 
-});*/ 
+});*/
 
 
 /*router.get('/src/:page', function(req, res, next) {
@@ -35,14 +35,14 @@ router.get('/', function(req, res, next) {
     res.render('index', {
         title: 'Senior Project'
     });
-});*/ 
+});*/
 
 
 
 
-router.use('/users', users); 
-router.use('/groups', groups); 
-router.use('/events', events); 
+router.use('/users', users);
+router.use('/groups', groups);
+router.use('/events', events);
 
 
 
