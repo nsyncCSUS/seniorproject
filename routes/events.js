@@ -1,24 +1,8 @@
-var express = require('express');
-var router = express.Router();
-// Expressjwt module checks if the token given is correct
-// the token is given though angular every time there is an http request
-// check authInterceptor in seniorprojectapp.js
-var expressJwt = require('express-jwt');
-router.use(expressJwt({secret: 'secret'}));
-
-// Debugg detle 
-router.get('/',function(req,res){
-console.log(req.body);
-console.log(res.rawHeaders);
-res.json('finished');
-});
 
 (function(module) {
     'use strict';
 
     var express = require('express');
-    var router = express.Router();
-
     // Expressjwt module checks if the token given is correct
     // the token is given though angular every time there is an http request
     // check authInterceptor in seniorprojectapp.js
@@ -119,7 +103,7 @@ res.json('finished');
     });
 
     
-    router.get('/', function(request, response, next) {
+    users.get('/', function(request, response, next) {
         var id = request.params.id1;
         Event.findById(id, function(err, event) {
             if (err) {
@@ -140,7 +124,7 @@ res.json('finished');
     });
 
 
-    router.get('/:id2', function(request, response, next) {
+    users.get('/:id2', function(request, response, next) {
         var id1 = request.params.id1;
         var id2 = request.params.id2;
 
@@ -154,7 +138,7 @@ res.json('finished');
                 });
 
                 var user = users.pop();
-                response.send({
+                return response.send({
                     user: user
                 });
             }
@@ -164,9 +148,9 @@ res.json('finished');
     });
 
 
-    // router.put('/:id2', function(request, response, next) {}); 
-    // router.post('/', function(request, response, next) {}); 
-    // router.delete('/:id2', function(request, response, next) {}); 
+    // users.put('/:id2', function(request, response, next) {}); 
+    // users.post('/', function(request, response, next) {}); 
+    // users.delete('/:id2', function(request, response, next) {}); 
 
 
 
@@ -176,7 +160,9 @@ res.json('finished');
     var groups = express.Router({
         mergeParams: true
     });
-    router.get('/', function(request, response, next) {
+
+    
+    groups.get('/', function(request, response, next) {
         var id1 = request.params.id1;
         Event.findById(id1, function(err, event) {
             if (err) {
@@ -196,14 +182,28 @@ res.json('finished');
         return response.end();
     });
 
-    router.get('/:id2', function(request, response, next) {
+    groups.get('/:id2', function(request, response, next) {
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        Event.findById(id1, function(err, event) {
+            if(err) {
+                return util.err(err, response);
+            } else {
+                var group = event.groups.filter(function(index, item) {
+                    return item._id == id2; 
+                })[0];
 
+                return response.send({group: group}); 
+            }
+        });
+
+        return response.end(); 
     });
 
 
-    // router.put('/:id2', function(request, response, next) {}); 
-    // router.post('/', function(request, response, next) {}); 
-    // router.delete('/:id2', function(request, response, next) {}); 
+    // groups.put('/:id2', function(request, response, next) {}); 
+    // groups.post('/', function(request, response, next) {}); 
+    // groups.delete('/:id2', function(request, response, next) {}); 
 
 
     router.use('/:id1/users', users);

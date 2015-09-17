@@ -143,7 +143,7 @@
     /**
      * Global User router 
      */
-    var router = express.Router();
+    //var router = express.Router();
     router.get('/', function(request, response, next) {
         //var user = util.takeUserProjection(request.params.user);
         var user = request.params.user; 
@@ -211,7 +211,7 @@
     });
 
     
-    router.get('/', function(request, response, next) {
+    events.get('/', function(request, response, next) {
         var id1 = request.params.id1;
         //var event = util.takeEventProjection(request.params.event);
         var event = request.params.event; 
@@ -229,7 +229,7 @@
     });
 
 
-    router.get('/:id2', function(request, response, next) {
+    events.get('/:id2', function(request, response, next) {
         var id1 = request.params.id1;
         var id2 = request.params.id2;
         User.findById(id1, function(err, user) {
@@ -249,9 +249,9 @@
     });
 
 
-    // router.put('/:id2', function(request, response, next) {}); 
-    // router.post('/', function(request, response, next) {}); 
-    // router.delete('/:id2', function(request, response, next) {}); 
+    // events.put('/:id2', function(request, response, next) {}); 
+    // events.post('/', function(request, response, next) {}); 
+    // events.delete('/:id2', function(request, response, next) {}); 
 
 
 
@@ -263,7 +263,7 @@
     });
 
     
-    router.get('/', function(request, response, next) {
+    groups.get('/', function(request, response, next) {
         var id1 = request.params.id1;
         User.findById(id1, function(err, user) {
             if(err) {
@@ -281,7 +281,7 @@
     });
 
     
-    router.get('/:id2', function(request, response, next) {
+    groups.get('/:id2', function(request, response, next) {
         var id1 = request.params.id1;
         var id2 = request.params.id2;
         User.findById(id1, function(err, user) {
@@ -302,9 +302,9 @@
         return response.end(); 
     });
 
-    // router.put('/:id2', function(request, response, next) {}); 
-    // router.post('/', function(request, response, next) {}); 
-    // router.delete('/:id2', function(request, response, next) {}); 
+    // groups.put('/:id2', function(request, response, next) {}); 
+    // groups.post('/', function(request, response, next) {}); 
+    // groups.delete('/:id2', function(request, response, next) {}); 
 
 
     router.use('/:id1/events', events);
