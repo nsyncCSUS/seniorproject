@@ -57,7 +57,8 @@
         Event.findByIdAndUpdate(id, util.takeEventProjection(event), function(err, event) {
             if (err) {
                 util.err(err, response);
-            } 
+            }
+            
             return response.end(); 
         });
 
