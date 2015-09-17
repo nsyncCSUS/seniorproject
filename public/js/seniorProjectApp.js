@@ -33,10 +33,10 @@
         $rootScope.$on('$routeChangeStart', function(e, curr, prev) {
             console.log(curr);
             console.log(prev);
-            console.log(prev.access.isFree);
-            if (!curr.access.isFree && !LoginService.isLogged) {
-                $location.path('/login');
-            }
+            //console.log(prev.access.isFree);
+            //if (!curr.access.isFree && !LoginService.isLogged) {
+            //    $location.path('/login');
+            //}
         });
     });
 
@@ -47,10 +47,10 @@
         $rootScope.$on('$routeChangeStart', function(e, curr, prev) {
             console.log(curr);
             console.log(prev);
-            console.log(prev.access.isFree);
-            if (!curr.access.isFree && !LoginService.isLogged) {
-                $location.path('/login');
-            }
+            //console.log(prev.access.isFree);
+            //if (!curr.access.isFree && !LoginService.isLogged) {
+            //    $location.path('/login');
+            //}
         });
     });
 

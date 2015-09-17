@@ -7,8 +7,8 @@
 		//put all logic in controller
 		//$scope will stores data
 		//$scope.message = "A new message";
-		//$scope.event = {startTimeDate:"string"}	//will store startTimeDate inside of event, and it will store event inside of scope
-		$scope.event = {startTimeDate: event.startTimeDate}	//will store startTimeDate inside of event, and it will store event inside of scope
+		$scope.event = {startTimeDate:"string"}	//will store startTimeDate inside of event, and it will store event inside of scope
+	    $scope.event = {startTimeDate: $scope.event.startTimeDate}	//will store startTimeDate inside of event, and it will store event inside of scope
 		
 		
 		// Call service function with a callback. The first argument 

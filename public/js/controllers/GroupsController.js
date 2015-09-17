@@ -115,7 +115,7 @@
 		// Build an array for displaying organizers in a carousel
 		buildOrganizers();
 		// Build one for mobile view also
-		buildOrganizersXS();
+		//buildOrganizersXS();
 		// Get Subscribers by ID
 		$scope.loaded = true;
 		/***************************************************************************
@@ -292,7 +292,7 @@
             // Build an array for displaying organizers in a carousel
             buildOrganizers();
             // Build one for mobile view also
-            buildOrganizersXS();
+            //buildOrganizersXS();
 
             // Get Subscribers by ID
 
