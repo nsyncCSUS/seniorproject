@@ -86,9 +86,10 @@ res.json('finished');
         event.save(function(err) {
             if (err) {
                 util.err(err, response);
-                return response.end();
             }
-        })
+            
+            return response.end();
+        });
 
         return response.status(200).end();
     });

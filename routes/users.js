@@ -1,22 +1,8 @@
-<<<<<<< HEAD
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');  // mongose module
-var User = require('../db/models/user'); // mongoose model
-var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
-var bcrypt   = require('bcrypt-nodejs');
 
-||||||| merged common ancestors
-
-
-=======
-
->>>>>>> john/api
 (function(module) {
     'use strict';
 
     var express = require('express');
-    var router = express.Router();
     var mongoose = require('mongoose'); // mongose module
     var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
@@ -42,6 +28,7 @@ var bcrypt   = require('bcrypt-nodejs');
     }
 
 
+    var router = express.Router();
     router.post('/', function(req, res) {
         console.log(req.body.username);
 

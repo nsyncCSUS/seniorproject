@@ -10,16 +10,8 @@ var events = require('./events.js');
 router.get('/', function(req, res, next) {
     /*res.render('index', {
         title: 'Senior Project'
-<<<<<<< HEAD
     });*/ 
    res.render('index.jade'); 
-||||||| merged common ancestors
-    });*/ 
-   res.render('build/app/index.html'); 
-=======
-    });*/
-    res.render('build/app/index.html');
->>>>>>> john/api
 });
 
 
@@ -39,25 +31,15 @@ router.get('/', function(req, res, next) {
 router.get('/partials/:page', function(req, res, next) {
     var page = req.params.page;
     console.log(page); 
-<<<<<<< HEAD
     res.render('partials/' + page); 
     //res.render('index', {
     //    title: 'Senior Project'
     //});
 }); 
-||||||| merged common ancestors
-    res.render(page); 
-    res.render('index', {
-        title: 'Senior Project'
-    });
-});*/ 
-=======
-    res.render(page); 
-    res.render('index', {
-        title: 'Senior Project'
-    });
-});*/
->>>>>>> john/api
+//    res.render(page); 
+//    res.render('index', {
+//        title: 'Senior Project'
+//    });
 
 
 
