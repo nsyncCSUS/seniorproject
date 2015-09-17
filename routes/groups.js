@@ -117,7 +117,7 @@
     /**
      * Nested Router for Events 
      */
-    var events = express.Router();
+    var events = express.Router({mergeParams: true});
 
     events.get('/', function(request, response, next) {
         var id1 = request.params.id1;
@@ -169,7 +169,7 @@
     /**
      * Nested Router for Users 
      */
-    var users = express.Router();
+    var users = express.Router({mergeParams: true});
 
     
     users.get('/', function(request, response, next) {

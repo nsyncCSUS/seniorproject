@@ -102,6 +102,8 @@
     var users = express.Router({
         mergeParams: true
     });
+
+    
     router.get('/', function(request, response, next) {
         var id = request.params.id1;
         Event.findById(id, function(err, event) {
@@ -113,7 +115,7 @@
                     return util.takeUserProjection(item);
                 });
 
-                response.send({
+                return response.send({
                     users: users
                 });
             }

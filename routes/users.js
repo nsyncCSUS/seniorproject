@@ -5,7 +5,6 @@
     var express = require('express');
     var router = express.Router();
     var mongoose = require('mongoose'); // mongose module
-    var User = require('../db/models/user'); // mongoose model
     var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
     var User = require("../db/models/user");
@@ -146,7 +145,8 @@
      */
     var router = express.Router();
     router.get('/', function(request, response, next) {
-        var user = util.takeUserProjection(request.params.user);
+        //var user = util.takeUserProjection(request.params.user);
+        var user = request.params.user; 
         User.find(user, function(err, users) {
             if (err) {
                 return util.err(err, response);
@@ -176,9 +176,12 @@
 
     router.put('/:id', function(request, response, next) {
         var id = request.params.id;
-        var user = util.takeUserProjection(request.params.user);
+        //var user = util.takeUserProjection(request.params.user);
+        var user = request.params.user; 
         User.findByIdAndUpdate(id, user, function(err) {
-            if (err) return util.err(err, response);
+            if (err) util.err(err, response);
+
+            return response.end(); 
         });
 
         return response.end();
@@ -191,7 +194,8 @@
     router.delete('/:id', function(request, response, next) {
         var id = request.params.id;
         User.findByIdAndRemove(id, function(err) {
-            if (err) return util.err(err, response);
+            if (err) util.err(err, response);
+            return response.end(); 
         });
 
         return response.end();
@@ -205,16 +209,16 @@
     var events = express.Router({
         mergeParams: true
     });
+
+    
     router.get('/', function(request, response, next) {
         var id1 = request.params.id1;
-        var event = util.takeEventProjection(request.params.event);
+        //var event = util.takeEventProjection(request.params.event);
+        var event = request.params.event; 
         User.findById(id1, function(err, user) {
             if (err) return util.err(err, response);
             else {
-                var events = user.events.map(function(index, item) {
-                    return util.takeEventProjection(item);
-                });
-
+                var events = user.events; 
                 return response.send({
                     events: events
                 });
@@ -236,7 +240,7 @@
                 });
 
                 return response.send({
-                    event: util.takeEventProjection(event)
+                    event: event // util.takeEventProjection(event)
                 });
             }
         });
@@ -257,12 +261,45 @@
     var groups = express.Router({
         mergeParams: true
     });
-    router.get('/', function(request, response, next) {
 
+    
+    router.get('/', function(request, response, next) {
+        var id1 = request.params.id1;
+        User.findById(id1, function(err, user) {
+            if(err) {
+                util.err(err, response);
+                return response.end(); 
+            } else {
+                var events = user.events;
+                return response.send({
+                    events: events
+                }); 
+            } 
+        });
+
+        return response.end(); 
     });
 
+    
     router.get('/:id2', function(request, response, next) {
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        User.findById(id1, function(err, user) {
+            if(err) {
+                util.err(err, response);
+                return response.end();
+            } else {
+                var group = user.groups.filter(function(index, item) {
+                    return item._id == id2; 
+                });
 
+                return response.send({
+                    group: group
+                }); 
+            }
+        });
+
+        return response.end(); 
     });
 
     // router.put('/:id2', function(request, response, next) {}); 
