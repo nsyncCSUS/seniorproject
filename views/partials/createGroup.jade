@@ -10,7 +10,7 @@ div
             | &nbsp
             button.btn.btn-danger(ng-click='cancelCreateGroup()') Cancel
             
-.descriptionRow(ng-show='!getIsPreviewing()')
+div(ng-show='!getIsPreviewing()')
     .container-fluid
         .col-xs-12.col-sm-12.col-md-12.col-lg-12
             .col-xs-12.col-sm-12.col-md-8.col-lg-8
@@ -18,6 +18,7 @@ div
                         label(for='groupName') Group Name
                         input.form-control#groupName(ng-model='group.name')
             .col-xs-12.col-sm-12.col-md-4.col-lg-4
+                label(for='interests') Interests
                 .navbar-btn
                     img.img-thumbnail.not-selected.cursor-pointer(src='/images/interests/animals.png', ng-class = 'animalsSelected', ng-click='addInterest("Animals")', tooltip='Animals')
                     img.img-thumbnail.not-selected.cursor-pointer(src='/images/interests/education.png', ng-class = 'educationSelected', ng-click='addInterest("Education")', tooltip='Education')
@@ -78,7 +79,7 @@ div
         div(ng-show='hasOrganizers()')
             .col-xs-12.col-sm-12.col-md-12.col-lg-12
                     hr
-                    label(for='organizersAdded') Organizers Added
+                    label(for='organizersAdded') Organizers to be invited
             .col-xs-12.col-sm-12.col-md-12.col-lg-12#organizersAdded
                 .col-xs-4.col-sm-3.col-md-3.col-lg-2.removeOrganizer
                     h6.text-center Name
@@ -100,7 +101,7 @@ div
         .col-xs-12.col-sm-12.col-md-12.col-lg-12
             .col-xs-12.col-sm-6.col-md-6.col-lg-6
                 .navbar-btn(ng-show='!getIsEditing()')
-                    img.img-thumbnail(ng-src='/images/interests/{{interest.type}}.png', ng-repeat='interest in group.interests', tooltip='{{interest.type}}')
+                    img.img-thumbnail(ng-src='/images/interests/{{interest.type}}.png', ng-repeat='interest in group.interests | orderBy:"type"', tooltip='{{interest.type}}')
                     
             .hidden-xs
                 .col-xs-12.col-sm-6.col-md-6.col-lg-6
