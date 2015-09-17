@@ -115,8 +115,6 @@
                 }); 
             }
         });
-
-        return response.end(); 
     });
 
     
@@ -130,8 +128,6 @@
                 return response.send({group: group}); 
             }
         });
-
-        return response.end(); 
     });
 
     
@@ -145,8 +141,6 @@
 
             return response.end(); 
         });
-
-        return response.end(); 
     });
 
     
@@ -160,8 +154,6 @@
 
             return response.end(); 
         });
-
-        return response.status(200).end(); 
     });
 
     
@@ -174,8 +166,6 @@
 
             return response.end(); 
         });
-
-        return response.end(); 
     });
 
 
@@ -194,8 +184,6 @@
                 return response.send({events: group.events}); 
             }
         });
-
-        return response.end(); 
     });
 
     
@@ -213,8 +201,6 @@
                 return response.send({event: event}); 
             }
         });
-
-        return response.end(); 
     });
     
 
@@ -248,8 +234,6 @@
                 return response.send({users: users}); 
             }
         });
-
-        return response.end(); 
     });
 
     
@@ -267,8 +251,6 @@
                 return response.send({user: user}); 
             }
         });
-
-        return response.end(); 
     });
 
  

@@ -32,8 +32,6 @@
                 });
             }
         });
-
-        return response.end();
     });
 
 
@@ -45,8 +43,6 @@
                 event: event
             });
         });
-
-        return response.end();
     });
 
 
@@ -60,8 +56,6 @@
             
             return response.end(); 
         });
-
-        return response.end();
     });
 
 
@@ -74,8 +68,6 @@
             
             return response.end();
         });
-
-        return response.status(200).end();
     });
 
 
@@ -89,8 +81,6 @@
                 return response.status(200);
             }
         });
-
-        return response.end();
     });
 
 
@@ -119,8 +109,6 @@
                 });
             }
         });
-
-        return response.end();
     });
 
 
@@ -143,8 +131,6 @@
                 });
             }
         });
-
-        return response.end();
     });
 
 
@@ -178,10 +164,9 @@
                 });
             }
         });
-
-        return response.end();
     });
 
+    
     groups.get('/:id2', function(request, response, next) {
         var id1 = request.params.id1;
         var id2 = request.params.id2;
@@ -196,8 +181,6 @@
                 return response.send({group: group}); 
             }
         });
-
-        return response.end(); 
     });
 
 

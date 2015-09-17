@@ -156,8 +156,6 @@
                 });
             }
         });
-
-        response.end();
     });
 
 
@@ -169,8 +167,6 @@
                 user: user
             });
         });
-
-        return response.end();
     });
 
 
@@ -183,8 +179,6 @@
 
             return response.end(); 
         });
-
-        return response.end();
     });
 
 
@@ -197,8 +191,6 @@
             if (err) util.err(err, response);
             return response.end(); 
         });
-
-        return response.end();
     });
 
 
@@ -224,8 +216,6 @@
                 });
             }
         });
-
-        return response.end();
     });
 
 
@@ -244,8 +234,6 @@
                 });
             }
         });
-
-        response.end();
     });
 
 
@@ -276,8 +264,6 @@
                 }); 
             } 
         });
-
-        return response.end(); 
     });
 
     
@@ -298,8 +284,6 @@
                 }); 
             }
         });
-
-        return response.end(); 
     });
 
     // groups.put('/:id2', function(request, response, next) {}); 
