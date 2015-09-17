@@ -174,10 +174,10 @@
         var id = request.params.id;
         //var user = util.takeUserProjection(request.params.user);
         var user = request.params.user; 
-        User.findByIdAndUpdate(id, user, function(err) {
+        User.findByIdAndUpdate(id, user, function(err, user) {
             if (err) util.err(err, response);
 
-            return response.end(); 
+            return response.send({user: user}); 
         });
     });
 

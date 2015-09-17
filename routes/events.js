@@ -38,23 +38,27 @@
     router.get('/:id', function(request, response, next) {
         var id = request.params.id;
         Event.findById(id, function(err, event) {
-            if (err) util.err(err, response);
-            else response.send({
-                event: event
-            });
+            if (err) {
+                util.err(err, response);
+            } else {
+                response.send({
+                    event: event
+                });
+            }
         });
     });
 
 
     router.put('/:id', function(request, response, next) {
         var event = request.params.event;
+        console.log(event); 
         var id = request.params.id;
-        Event.findByIdAndUpdate(id, util.takeEventProjection(event), function(err, event) {
+        Event.findByIdAndUpdate(id, event, function(err, event) {
             if (err) {
-                util.err(err, response);
+                return util.err(err, response);
+            } else {
+                return response.send({event: event});
             }
-            
-            return response.end(); 
         });
     });
 

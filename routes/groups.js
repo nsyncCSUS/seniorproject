@@ -130,22 +130,24 @@
         });
     });
 
-    
+    //Group.findByIdAndUpdate('55fa591b3ee3485c0c9ade81', {name: 'Test Group 1'}, function(err,group) {console.log(group);}); 
     router.put('/:id', function(request, response, next) {
         var id = request.params.id;
-        var group = util.takeGroupProjection(request.params.group); 
-        Group.findByIdAndUpdate(id, group, function(err) {
-            if(err) {
-                util.err(err, response); 
-            }
+        //var group = util.takeGroupProjection(request.params.group);
+        var group = JSON.parse(request.body.group); 
+        Group.findByIdAndUpdate(id, group, {new: true}, function(err, group) {
+            //if(err) {
+            //    util.err(err, response); 
+            //}
 
-            return response.end(); 
+            return response.send({group: group}); 
         });
     });
 
     
     router.post('/', function(request, response, next) {
-        var params = util.takeGroupProjection(request.params.group);
+        //var params = util.takeGroupProjection(request.params.group);
+        var params = request.params.group; 
         var group = new Group(group);
         group.save(function(err) {
             if(err) {
