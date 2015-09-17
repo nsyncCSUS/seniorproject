@@ -2,16 +2,24 @@ var express = require('express');
 var router = express.Router();
 
 
-var users = require('./users.js'); 
-var groups = require('./groups.js'); 
-var events = require('./events.js'); 
+var users = require('./users.js');
+var groups = require('./groups.js');
+var events = require('./events.js');
 
 
 router.get('/', function(req, res, next) {
     /*res.render('index', {
         title: 'Senior Project'
+<<<<<<< HEAD
     });*/ 
    res.render('index.jade'); 
+||||||| merged common ancestors
+    });*/ 
+   res.render('build/app/index.html'); 
+=======
+    });*/
+    res.render('build/app/index.html');
+>>>>>>> john/api
 });
 
 
@@ -25,24 +33,38 @@ router.get('/', function(req, res, next) {
     } catch (e) {
         return res.status(404).send('Not Found'); 
     } 
-});*/ 
+});*/
 
 
 router.get('/partials/:page', function(req, res, next) {
     var page = req.params.page;
     console.log(page); 
+<<<<<<< HEAD
     res.render('partials/' + page); 
     //res.render('index', {
     //    title: 'Senior Project'
     //});
 }); 
+||||||| merged common ancestors
+    res.render(page); 
+    res.render('index', {
+        title: 'Senior Project'
+    });
+});*/ 
+=======
+    res.render(page); 
+    res.render('index', {
+        title: 'Senior Project'
+    });
+});*/
+>>>>>>> john/api
 
 
 
 
-router.use('/users', users); 
-router.use('/groups', groups); 
-router.use('/events', events); 
+router.use('/users', users);
+router.use('/groups', groups);
+router.use('/events', events);
 
 
 

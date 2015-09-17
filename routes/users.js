@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');  // mongose module
@@ -5,79 +6,86 @@ var User = require('../db/models/user'); // mongoose model
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var bcrypt   = require('bcrypt-nodejs');
 
+||||||| merged common ancestors
+
+
+=======
+
+>>>>>>> john/api
 (function(module) {
     'use strict';
-    
+
     var express = require('express');
     var router = express.Router();
     var mongoose = require('mongoose'); // mongose module
-    var User = require('../db/models/user'); // mongoose model
     var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
-    
+
     var User = require("../db/models/user");
     var Group = require("../db/models/group");
     var Event = require("../db/models/event");
-    var util = require("./util"); 
-    
-    
+    var util = require("./util");
+
+
     /**
      * Collection of relevant constants
      */
     var Constants = Object.freeze({
         Http404Message: 'Not Found'
     });
-    
-    
+
+
     /**
      * Function for returning an Http404
      */
     function Http404(response) {
         return response.status(404).send(Constants.Http404Message);
     }
-    
-    
-    router.post('/', function(req , res) {
-      console.log(req.body.username);
-    
-    
-        User.findOne({'userAuth.userName' : req.body.username}, function(err, user) {
-          // error checking
-          if(err){
-            console.log('Error in Signup:' + err);
-          }
-          //if user already exsists
-          if(user){
-            console.log('Username taken try again'+ req.body.username);
-          }else {
-            // if no user exist create one
-            var newUser = new User({
-                userAuth : {
-              userName : req.body.username,
-              password : req.body.password
+
+
+    router.post('/', function(req, res) {
+        console.log(req.body.username);
+
+
+        User.findOne({
+            'userAuth.userName': req.body.username
+        }, function(err, user) {
+            // error checking
+            if (err) {
+                console.log('Error in Signup:' + err);
             }
-          });
-    
-            console.log(newUser);
-          //  newUser.userAuth.userName = 5;
-    
-            // set the user's local credentails
-            //newUser.userName= req.body.username;
-          //  newUser.password = req.body.password;
-    
-            //save user
-            newUser.save(function(err){
-              if(err){
-                console.log('Error in saving user:' + err);
-                throw err;
-              }
-              console.log('User registration sucess');
-            });
-    
-          }
+            //if user already exsists
+            if (user) {
+                console.log('Username taken try again' + req.body.username);
+            } else {
+                // if no user exist create one
+                var newUser = new User({
+                    userAuth: {
+                        userName: req.body.username,
+                        password: req.body.password
+                    }
+                });
+
+                console.log(newUser);
+                //  newUser.userAuth.userName = 5;
+
+                // set the user's local credentails
+                //newUser.userName= req.body.username;
+                //  newUser.password = req.body.password;
+
+                //save user
+                newUser.save(function(err) {
+                    if (err) {
+                        console.log('Error in saving user:' + err);
+                        throw err;
+                    }
+                    console.log('User registration sucess');
+                });
+
+            }
         });
-    
+
     });
-    
+
     var testUser = {
         id: 1,
         fname: "Test",
@@ -89,7 +97,7 @@ var bcrypt   = require('bcrypt-nodejs');
             id: 2,
             name: "Test Event 2"
         }],
-    
+
         groups: [{
             id: 1,
             name: "Test Group 1"
@@ -98,8 +106,8 @@ var bcrypt   = require('bcrypt-nodejs');
             name: "Test Group 2"
         }]
     };
-    
-    
+
+
     //HL the users name then password to see if they match
     // if they match a token is generated and returned in the
     // res object
@@ -131,7 +139,7 @@ var bcrypt   = require('bcrypt-nodejs');
                     var token = jwt.sign(user, 'secret', {
                         expiresInMinutes: 1440 // expires in 24 hours
                     });
-    
+
                     res.json({
                         success: true,
                         message: "Token Created",
@@ -141,132 +149,181 @@ var bcrypt   = require('bcrypt-nodejs');
             }
         });
     });
-    
-    
-    
-    
+
+
+
+
     /**
      * Global User router 
      */
-    var router = express.Router(); 
+    var router = express.Router();
     router.get('/', function(request, response, next) {
-        var user = util.takeUserProjection(request.params.user); 
+        //var user = util.takeUserProjection(request.params.user);
+        var user = request.params.user; 
         User.find(user, function(err, users) {
-            if(err) {
-                return util.err(err, response); 
+            if (err) {
+                return util.err(err, response);
             } else {
-                return response.send({users: users}); 
+                return response.send({
+                    users: users
+                });
             }
-        }); 
-        
-        response.end(); 
-    }); 
-    
-    
+        });
+
+        response.end();
+    });
+
+
     router.get('/:id', function(request, response, next) {
-        var id = request.params.id; 
+        var id = request.params.id;
         User.findById(id, function(err, user) {
-            if(err) return util.err(err, response); 
-            else return response.send({user: user}); 
-        }); 
-        
-        return response.end(); 
-    }); 
-    
-    
+            if (err) return util.err(err, response);
+            else return response.send({
+                user: user
+            });
+        });
+
+        return response.end();
+    });
+
+
     router.put('/:id', function(request, response, next) {
-        var id = request.params.id; 
-        var user = util.takeUserProjection(request.params.user); 
+        var id = request.params.id;
+        //var user = util.takeUserProjection(request.params.user);
+        var user = request.params.user; 
         User.findByIdAndUpdate(id, user, function(err) {
-            if(err) return util.err(err, response); 
-        }); 
-        
-        return response.end(); 
-    }); 
-    
-    
+            if (err) util.err(err, response);
+
+            return response.end(); 
+        });
+
+        return response.end();
+    });
+
+
     // Function handled by Huy's function above 
     // router.post('/', function(request, response, next) {}); 
-    
+
     router.delete('/:id', function(request, response, next) {
-        var id = request.params.id; 
+        var id = request.params.id;
         User.findByIdAndRemove(id, function(err) {
-            if(err) return util.err(err, response); 
-        }); 
-        
-        return response.end(); 
-    }); 
-    
-    
-    
+            if (err) util.err(err, response);
+            return response.end(); 
+        });
+
+        return response.end();
+    });
+
+
+
     /**
      * Nested router for handling event requests 
      */
-    var events = express.Router({mergeParams: true}); 
+    var events = express.Router({
+        mergeParams: true
+    });
+
+    
     router.get('/', function(request, response, next) {
-        var id1 = request.params.id1; 
-        var event = util.takeEventProjection(request.params.event); 
+        var id1 = request.params.id1;
+        //var event = util.takeEventProjection(request.params.event);
+        var event = request.params.event; 
         User.findById(id1, function(err, user) {
-            if(err) return util.err(err, response); 
+            if (err) return util.err(err, response);
             else {
-                var events = user.events.map(function(index, item) {
-                    return util.takeEventProjection(item); 
+                var events = user.events; 
+                return response.send({
+                    events: events
                 });
-                
-                return response.send({events: events});
             }
-        }); 
-        
-        return response.end(); 
-    }); 
-    
-    
+        });
+
+        return response.end();
+    });
+
+
     router.get('/:id2', function(request, response, next) {
-        var id1 = request.params.id1; 
-        var id2 = request.params.id2; 
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
         User.findById(id1, function(err, user) {
-            if(err) return util.err(err, response); 
+            if (err) return util.err(err, response);
             else {
                 var event = user.events.filter(function(index, item) {
-                    return event._id == id2; 
-                }); 
-                
-                return response.send({event: util.takeEventProjection(event)}); 
+                    return event._id == id2;
+                });
+
+                return response.send({
+                    event: event // util.takeEventProjection(event)
+                });
             }
-        }); 
-        
-        response.end(); 
-    }); 
-    
-    
+        });
+
+        response.end();
+    });
+
+
     // router.put('/:id2', function(request, response, next) {}); 
     // router.post('/', function(request, response, next) {}); 
     // router.delete('/:id2', function(request, response, next) {}); 
-    
-    
-    
+
+
+
     /**
      * Nested router for handling group requests 
      */
-    var groups = express.Router({mergeParams: true}); 
+    var groups = express.Router({
+        mergeParams: true
+    });
+
+    
     router.get('/', function(request, response, next) {
-        
-    }); 
+        var id1 = request.params.id1;
+        User.findById(id1, function(err, user) {
+            if(err) {
+                util.err(err, response);
+                return response.end(); 
+            } else {
+                var events = user.events;
+                return response.send({
+                    events: events
+                }); 
+            } 
+        });
+
+        return response.end(); 
+    });
+
     
     router.get('/:id2', function(request, response, next) {
-        
-    }); 
-    
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        User.findById(id1, function(err, user) {
+            if(err) {
+                util.err(err, response);
+                return response.end();
+            } else {
+                var group = user.groups.filter(function(index, item) {
+                    return item._id == id2; 
+                });
+
+                return response.send({
+                    group: group
+                }); 
+            }
+        });
+
+        return response.end(); 
+    });
+
     // router.put('/:id2', function(request, response, next) {}); 
     // router.post('/', function(request, response, next) {}); 
     // router.delete('/:id2', function(request, response, next) {}); 
-    
-    
-    router.use('/:id1/events', events); 
-    router.use('/:id1/groups', groups); 
-    
-    
-    module.exports = router;
-    
-})(module);
 
+
+    router.use('/:id1/events', events);
+    router.use('/:id1/groups', groups);
+
+
+    module.exports = router;
+
+})(module);
