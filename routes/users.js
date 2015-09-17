@@ -1,4 +1,9 @@
-
+var express = require('express');
+var router = express.Router();
+var mongoose = require('mongoose');  // mongose module
+var User = require('../db/models/user'); // mongoose model
+var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
+var bcrypt   = require('bcrypt-nodejs');
 
 (function(module) {
     'use strict';
