@@ -7,7 +7,7 @@
 		//$scope will stores data
 		//$scope.message = "A new message";
 		//$scope.event = {startTimeDate:"string"}	//will store startTimeDate inside of event, and it will store event inside of scope
-		$scope.event = {startTimeDate: event.startTimeDate}	//will store startTimeDate inside of event, and it will store event inside of scope
+		$scope.event = {startTimeDate: event.startTimeDate};	//will store startTimeDate inside of event, and it will store event inside of scope
 		
 		
 		// Call service function with a callback. The first argument 
@@ -25,19 +25,34 @@
 			$scope.event = response.event;
 		}); */
 		
-		$scope.event = {
-			startTimeDate: "2015-08-26T18:50:10.111Z", 
-			endTimeDate: "2015-09-26T18:50:10.111Z",
-			volunteers: [{name: 'John'}],
-			yourEventsDate: '09/14/2015',
-			yourEventsTime: '12:00PM',
-			yourGroupEventsDate: '09/15/2015',
-			yourGroupEventsTime: '3:00PM',
-			
-			yourGroupEvents: [{groupEventTitle: 'Event 1', time: 'Time 1', date: 'Date 1'},
-				{groupEventTitle: 'Event 2', time: 'Time 2', date: 'Date 2'}]
+		$scope.upcomingEvents = [//yourGroupEvents: [{groupEventTitle: 'Event 1', time: 'Time 1', date: 'Date 1'},
+		         				//{groupEventTitle: 'Event 2', time: 'Time 2', date: 'Date 2'}]
+		                         
+		                         {startTimeDate: "2015-08-26T18:50:10.111Z", 
+								 endTimeDate: "2015-09-26T18:50:10.111Z", 
+								 name: 'Event 1', volunteers: [{name: 'Kris'}, {name: 'Vadzim'}]},	
+								 
+								 {startTimeDate: "2016-08-26T18:50:10.111Z", 
+								 endTimeDate: "2016-09-26T18:50:10.111Z", 
+								 name: 'Event 2', volunteers: [{name: 'Anthony'}, {name: 'Huy'}, {name: 'Shane'}]}];
+		
+		
+		/*
+		 * Checks if there are more than 1 upcoming events, the view will display
+		 * arrows to move across events if that is the case.
+		 */
+		$scope.hasMultipleEvents = function() {
+			if ($scope.upcomingEvents != null){
+				if ($scope.upcomingEvents.length >= 2)
+					return true;
+				else
+					return false;
+			}
+			else
+				return false;
 		}
-	} ]);
+		
+		}]);
 
 })();
 
@@ -71,7 +86,7 @@
 /*
 	group: {
 		id : 				String,
-		groupName : 		String,
+		name : 		String,
 		picture : 			String,
 		creationDate : 		String,
 			//city : 			String,
@@ -96,7 +111,7 @@
 		id: 			String,		
 		creatorId: 		String,
 		groupId: 		String,
-		eventName: 		String,
+		name: 		String,
 		description: 	String,
 		picture: 		String,
 		creationDate: 	DateTime,
