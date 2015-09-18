@@ -50,10 +50,10 @@
 
 
     router.put('/:id', function(request, response, next) {
-        var event = request.params.event;
-        console.log(event); 
         var id = request.params.id;
-        Event.findByIdAndUpdate(id, event, function(err, event) {
+        //console.log(event); 
+        var event = JSON.parse(request.body.event); 
+        Event.findByIdAndUpdate(id, event, {new: true}, function(err, event) {
             if (err) {
                 return util.err(err, response);
             } else {
