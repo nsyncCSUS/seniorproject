@@ -4,12 +4,27 @@
    
     var mongoose = require('mongoose');
     var Schema = mongoose.Schema;
+    var User = require('./user');
+    var Group = require('./group'); 
     
     /**
      * Schema for Event objects 
      */
     var EventSchema = new Schema({
-        name: String 
+        EventName: String,
+        //Group: Group,
+        Description: String,
+        CreationDate: Date,
+        StartTimeDate: Date,
+        EndTimeDate: Date,
+        Address: String,
+        City: String,
+        State: String,
+        Zipcode: String,
+        //VolunteerList: [User],
+        //CreationUser: User,
+        MaxVolunteers: Number,
+        Interests: [String] 
     });
     
     
