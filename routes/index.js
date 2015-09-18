@@ -44,9 +44,9 @@ router.get('/partials/:page', function(req, res, next) {
 
 
 
-router.use('/users', users);
-router.use('/groups', groups);
-router.use('/events', events);
+router.use('/api/users', users);
+router.use('/api/groups', groups);
+router.use('/api/events', events);
 
 
 

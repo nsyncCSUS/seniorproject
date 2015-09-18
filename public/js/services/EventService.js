@@ -8,10 +8,9 @@
          * A list of relevant constants for http functions
          */
         this.Constants = Object.freeze({
-            users: 'users',
-            groups: 'groups',
-            events: 'events',
-
+            users: '/api/users',
+            groups: '/api/groups',
+            events: '/api/events' 
         });
 
 
