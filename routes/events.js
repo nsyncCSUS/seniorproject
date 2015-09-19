@@ -63,18 +63,34 @@
     });
 
 
+    // Create a new event, add the creation user to the event
+    // and to the event's volunteer list, add event to user's
+    // subscribed events list 
     router.post('/', function(request, response, next) {
-        var event = new Event(util.takeEventProjection(request.params.event));
-        event.save(function(err) {
-            if (err) {
-                util.err(err, response);
-            }
-            
-            return response.end();
+        var userId = request.body.user._id; 
+        var event = new Event(request.params.event);
+        User.find(userId, function(err, user) {
+            if(err) return util.err(err, response);
+            return event.save(function(err) {
+                if (err) {
+                    return util.err(err, response);
+                }
+                
+                event.CreationUser = user;
+                user.update({$push: {Events: event}}, function(err) {
+                    if(err) util.err(err, response); 
+                }); 
+
+                event.update({$push: {SubscribedUsers: user}}, function(err) {
+                    if(err) util.err(err, response); 
+                });
+                return response.send(event); 
+            });
         });
     });
 
 
+    // Delete event
     router.delete('/:id', function(request, response, next) {
         var id = request.params.id;
         Event.findByIdAndRemove(id, function(err) {
@@ -167,6 +183,7 @@
         }); 
     });
 
+    
     /**
      * Remove a user from an Event's volunteer list
      */
@@ -188,14 +205,16 @@
 
     
 
-    /**
-     * Nested Endpoint for Associated Groups 
-     */
+
+    // Removing Group routes: This route isn't necessary
+    // since there is only one group associated with an
+    // event.
+    
+    /*
     var groups = express.Router({
         mergeParams: true
     });
 
-    
     groups.get('/', function(request, response, next) {
         var id1 = request.params.id1;
         Event.findById(id1, function(err, event) {
@@ -213,7 +232,6 @@
             }
         });
     });
-
     
     groups.get('/:id2', function(request, response, next) {
         var id1 = request.params.id1;
@@ -230,7 +248,7 @@
             }
         });
     });
-
+     */
 
     // groups.put('/:id2', function(request, response, next) {}); 
     // groups.post('/', function(request, response, next) {}); 
