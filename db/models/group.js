@@ -4,6 +4,7 @@
     
     var mongoose = require('mongoose');
     var Schema = mongoose.Schema;
+    var ObjectId = Schema.ObjectId; 
     var Event = require('./event');
     var User = require('./user'); 
     
@@ -29,7 +30,7 @@
         }],
         
         SubscriptionList: [{
-            type: Objectid,
+            type: ObjectId,
             ref: 'User'
         }],
         

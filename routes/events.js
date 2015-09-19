@@ -67,9 +67,9 @@
     // and to the event's volunteer list, add event to user's
     // subscribed events list 
     router.post('/', function(request, response, next) {
-        var userId = request.body.user._id; 
-        var event = new Event(request.params.event);
-        User.find(userId, function(err, user) {
+        var username = request.body.username; 
+        var event = new Event(request.params.event); 
+        User.find({'userAuth.userName': username}, function(err, user) {
             if(err) return util.err(err, response);
             return event.save(function(err) {
                 if (err) {
@@ -84,6 +84,7 @@
                 event.update({$push: {SubscribedUsers: user}}, function(err) {
                     if(err) util.err(err, response); 
                 });
+                
                 return response.send(event); 
             });
         });
@@ -108,12 +109,12 @@
     /**
      * Nested Endpoint for Subscribed Users
      */
-    var users = express.Router({
+    var volunteers = express.Router({
         mergeParams: true
     });
 
     
-    users.get('/', function(request, response, next) {
+    volunteers.get('/', function(request, response, next) {
         var id = request.params.id1;
         Event.findById(id, function(err, event) {
             if (err) {
@@ -132,7 +133,7 @@
     });
 
 
-    users.get('/:id2', function(request, response, next) {
+    volunteers.get('/:id2', function(request, response, next) {
         var id1 = request.params.id1;
         var id2 = request.params.id2;
 
@@ -160,7 +161,7 @@
      * Note: You can't add a non-existant user to an 
      * event, so we require a second id. 
      */
-    users.post('/:id2', function(request, response, next) {
+    volunteers.post('/:id2', function(request, response, next) {
         var id1 = request.params.id1; 
         var id2 = request.params.id2;
 
@@ -187,7 +188,7 @@
     /**
      * Remove a user from an Event's volunteer list
      */
-    users.delete('/:id2', function(request, response, next) {
+    volunteers.delete('/:id2', function(request, response, next) {
         var id1 = request.params.id1;
         var id2 = request.params.id2;
         
@@ -253,10 +254,9 @@
     // groups.put('/:id2', function(request, response, next) {}); 
     // groups.post('/', function(request, response, next) {}); 
     // groups.delete('/:id2', function(request, response, next) {}); 
-
-
-    router.use('/:id1/users', users);
-    router.use('/:id1/groups', groups);
+    //router.use('/:id1/groups', groups);
+    
+    router.use('/:id1/volunteers', volunteers);
 
     module.exports = router;
 

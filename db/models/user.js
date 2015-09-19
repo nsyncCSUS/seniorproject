@@ -1,12 +1,11 @@
-var mongoose = require('mongoose');
-var bcrypt   = require('bcrypt-nodejs');
-
 
 (function(module) {
-	'use strict';
-	
-	var mongoose = require('mongoose');
-	var Schema = mongoose.Schema;
+    'use strict';
+    
+    var bcrypt   = require('bcrypt-nodejs');
+    var mongoose = require('mongoose');
+    var Schema = mongoose.Schema;
+    var ObjectId = Schema.ObjectId; 
 	
 	// Also consider:
 	// var Schema = mongoose.Shema;
@@ -30,7 +29,11 @@ var bcrypt   = require('bcrypt-nodejs');
 	var UserSchema = new Schema({
 	
 		userAuth: {
-		    userName: String,
+		    userName: {
+                        type: String,
+                        required: true,
+                        unique: true 
+                    },
 		    password: String 
 		},
 		
