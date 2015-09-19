@@ -11,14 +11,28 @@
      * Schema for Group Objects 
      */
     var GroupSchema = new Schema({
-        GroupName: String, 
-        //EventList: [Event],
+        GroupName: String,
+        
+        EventList: [{
+            type: ObjectId,
+            ref: 'Event'
+        }],
+        
         CreationDate: Date,
         city: String,
         state: String,
         zipcode: String,
-        //OrganizerList: [User],
-        //SubscriptionList: [User],
+        
+        OrganizerList: [{
+            type: ObjectId,
+            ref: 'User'
+        }],
+        
+        SubscriptionList: [{
+            type: Objectid,
+            ref: 'User'
+        }],
+        
         Decsription: String,
         //GooglePlus: {},
         //Facebook: {},

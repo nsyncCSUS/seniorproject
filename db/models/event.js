@@ -12,7 +12,12 @@
      */
     var EventSchema = new Schema({
         EventName: String,
-        //Group: Group,
+        
+        Group: {
+            type: ObjectId,
+            ref: 'Group'
+        },
+        
         Description: String,
         CreationDate: Date,
         StartTimeDate: Date,
@@ -21,12 +26,20 @@
         City: String,
         State: String,
         Zipcode: String,
-        //VolunteerList: [User],
-        //CreationUser: User,
+        
+        VolunteerList: [{
+            type: ObjectId,
+            ref: 'User'
+        }],
+        
+        CreationUser: {
+            type: ObjectId,
+            ref: 'User'
+        },
+        
         MaxVolunteers: Number,
         Interests: [String] 
     });
-    
     
     var Event = mongoose.model('Event', EventSchema);
     module.exports = Event;

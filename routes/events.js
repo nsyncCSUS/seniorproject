@@ -138,11 +138,55 @@
     });
 
 
-    // users.put('/:id2', function(request, response, next) {}); 
-    // users.post('/', function(request, response, next) {}); 
-    // users.delete('/:id2', function(request, response, next) {}); 
+    /**
+     * Add a user to an event Subscription List 
+     * 
+     * Note: You can't add a non-existant user to an 
+     * event, so we require a second id. 
+     */
+    users.post('/:id2', function(request, response, next) {
+        var id1 = request.params.id1; 
+        var id2 = request.params.id2;
 
+        // Get requested event 
+        Event.findById(id1, function(err, event) {
+            if(err) util.err(err, response);
 
+            // Get Requested user 
+            User.findById(id2, function(err, user) {
+                if(err) util.err(err, response);
+
+                // Update event by adding foreign reference
+                Event.update(event, {$push: {VolunteerList: user}}, function(err, event) {
+                    if(err) return util.err(err, response);
+
+                    // Return Response as Json 
+                    return response.json(event); 
+                }); 
+            }); 
+        }); 
+    });
+
+    /**
+     * Remove a user from an Event's volunteer list
+     */
+    users.delete('/:id2', function(request, response, next) {
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        
+        Event.findById(id1, function(err, event) {
+            if(err) return util.err(err, response);
+            
+            return User.findById(id2, function(err, user) {
+                return Event.update(event, {$remove: {VolunteerList: user}}, function(err, event) {
+                    
+                    if(err) util.err(err, response); 
+                });
+            });
+        }); 
+    });
+
+    
 
     /**
      * Nested Endpoint for Associated Groups 
