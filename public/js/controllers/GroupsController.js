@@ -534,9 +534,9 @@
 })();
 
 /*
-	info: {
+	group: {
 		id : 				String,
-		groupName : 		String,
+		name :		 		String,
 		picture : 			String,
 		creationDate : 		String,
 			//city : 			String,
