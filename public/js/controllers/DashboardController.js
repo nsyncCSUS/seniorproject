@@ -28,13 +28,17 @@
 		$scope.upcomingEvents = [//yourGroupEvents: [{groupEventTitle: 'Event 1', time: 'Time 1', date: 'Date 1'},
 		         				//{groupEventTitle: 'Event 2', time: 'Time 2', date: 'Date 2'}]
 		                         
-		                         {startTimeDate: "2015-08-26T18:50:10.111Z", 
+		                         {picture : "//placekitten.com/g/500/500/",	
+		                         startTimeDate: "2015-08-26T18:50:10.111Z", 
 								 endTimeDate: "2015-09-26T18:50:10.111Z", 
-								 name: 'Event 1', volunteers: [{name: 'Kris'}, {name: 'Vadzim'}]},	
+								 name: 'Event 1', volunteers: [{id: '49', firstName: 'Kris', lastName: 'Tadlok', picture: 'https://pbs.twimg.com/profile_images/2382660015/ducati_dog_profile.gif'}, {id: '50', firstName: 'Vadzim', lastName: 'Savenok', picture: 'https://lh3.googleusercontent.com/-fBggJD3y3Go/UgAEKqWlLkI/AAAAAAAAAAo/tjfjrjykw3Q/s426/BigDog_GooglePlusProfile.jpg'}],
+		                         maxVolunteers: '25', interests: [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]},	
 								 
-								 {startTimeDate: "2016-08-26T18:50:10.111Z", 
+								 {picture : "//placekitten.com/g/501/500/",
+		                         startTimeDate: "2016-08-26T18:50:10.111Z", 
 								 endTimeDate: "2016-09-26T18:50:10.111Z", 
-								 name: 'Event 2', volunteers: [{name: 'Anthony'}, {name: 'Huy'}, {name: 'Shane'}]}];
+								 name: 'Event 2', volunteers: [{name: 'Anthony'}, {name: 'Huy'}, {name: 'Shane'}, {name: 'John'}, {name: 'Vadzim'}, {name: 'Kris'}],
+								 maxVolunteers: '35', interests: [{type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]}];
 		
 		
 		/*
@@ -50,6 +54,85 @@
 			}
 			else
 				return false;
+		}
+		
+		/*
+		 * Checks if the gorup has a picture, the view will display a default
+		 * picture if no picture is found.
+		 */
+		$scope.hasPicture = function(type1, index1, type2, index2) {
+			switch(type1){
+			case "group":
+				if ($scope.group.picture != null){
+					if ($scope.group.picture.length > 0)
+						return true;
+					else
+						return false;
+					}
+				else{
+					if ($scope.loaded == false)
+						return true;
+					else
+						return false;
+				}
+			case "organizer":
+				if ($scope.group.organizersBuilt != null){
+					if ($scope.group.organizersBuilt[index1].organizers[index2].picture != null){
+						if ($scope.group.organizersBuilt[index1].organizers[index2].picture.length > 0)
+							return true;
+						else
+							return false;
+						}
+					else
+						return false;
+				}
+			case "organizerXS":
+				if ($scope.group.organizersBuiltXS != null){
+					if ($scope.group.organizersBuiltXS[index1].organizers[index2].picture != null){
+						if ($scope.group.organizersBuiltXS[index1].organizers[index2].picture.length > 0)
+							return true;
+						else
+							return false;
+						}
+					else
+						return false;
+				}
+			case "subscriber":
+				if ($scope.group.subscribers != null){
+					if ($scope.group.subscribers[index1].picture != null){
+						if ($scope.group.subscribers[index1].picture.length > 0)
+							return true;
+						else
+							return false;
+						}
+					else
+						return false;
+				}
+			case "event":
+				if ($scope.upcomingEvents != null){
+					if (type2 != null) {
+						switch(type2){
+						case "volunteer":
+							if ($scope.upcomingEvents[index1].volunteers[index2].picture != null) {
+								if ($scope.upcomingEvents[index1].volunteers[index2].picture.length > 0) 
+									return true;
+								else
+									return false;
+							}
+						}
+					}
+					else{
+						if ($scope.upcomingEvents[index1].picture != null){
+							if ($scope.upcomingEvents[index1].picture.length > 0)
+								return true;
+							else
+								return false;
+							}
+						else
+							return false;
+					}
+				}
+			}
 		}
 		
 		}]);

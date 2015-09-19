@@ -51,8 +51,20 @@ a {
 }
 
 .subscriber-thumbnail {
+    background: url("http://imgc.allpostersimages.com/images/P-473-488-90/21/2144/JLBCD00Z/posters/adriano-bacchella-belgian-malinois-shepherd-dog-profile-portrait.jpg") 50% 50% no-repeat; /* 50% 50% centers image in div */
+    width: 250px;
+    height: 250px;
+}
+
+.subscriber-thumbnail_original {
     width: 64px;
     height: 64px;
+}
+
+.thumb1 { 
+    background: url(blah.jpg) 50% 50% no-repeat; /* 50% 50% centers image in div */
+    width: 250px;
+    height: 250px;
 }
 
 .inviteOrganizer:hover {
@@ -73,8 +85,12 @@ a {
     background-color: #cccccc;
 }
 
-.upcomingEventsRow {
-    background-color: #eeeeee;
+.upcomingEvents {
+    background-color: #e5e5e5;
+}
+
+.history {
+    background-color: #e5e5e5;
 }
 
 .organizersRow {
