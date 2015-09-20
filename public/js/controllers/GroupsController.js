@@ -9,6 +9,7 @@
 		$scope.groupId = $routeParams.groupId;
 		
 		$scope.isEditing = false;
+		$scope.isSearching = false;
 		$scope.currentDate = new Date();
 		
 		$scope.group =  
@@ -89,9 +90,10 @@
 				               {id : "sub10", firstName : "sub10", lastName: "1", picture : "//placekitten.com/g/358/355/"}],
 				interests : [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]
 		};
-		
+
 		$scope.group.organizersToAdd = [];
-		$scope.savedSuccessMsg = {};
+		$scope.searchResults = [];
+		$scope.alerts = [];
 
 		$scope.animalsSelected = "";
 		$scope.educationSelected = "";
@@ -104,7 +106,7 @@
 		$scope.loaded = false;
 
 		/***************************************************************************
-		 * Get Group Information
+		 * Get Functions
 		 **************************************************************************/
 		// Gets the group data from server
 		/*
@@ -124,6 +126,50 @@
 		buildInterests();
 		// Get Subscribers by ID
 		$scope.loaded = true;
+		
+		
+		
+		
+		
+		$scope.searchUsers = function() {
+			$scope.searchResultsPristine = true;
+			$scope.isSearching = true;
+			// Get search results from server
+			$scope.searchResults = [{
+				id :			"huy",
+				firstName : 	"Huy",
+				lastName : 		"Le"
+			},{
+				id :			"kris",
+				firstName : 	"Kristopher",
+				lastName : 		"Tadlock",
+				picture : 		"//placekitten.com/g/1001/1001/"
+			},{
+				id :			"vadzim",
+				firstName : 	"Vadzim",
+				lastName : 		"LN",
+				picture : 		"//placekitten.com/g/1002/1002/"
+			},{
+				id :			"shane",
+				firstName : 	"Shane",
+				lastName : 		"Singh",
+				picture : 		"//placekitten.com/g/1003/1003/"
+			},{
+				id :			"john",
+				firstName : 	"John",
+				lastName : 		"LN",
+				picture : 		"//placekitten.com/g/1004/1004/"
+			}
+			];
+			
+			// If the user is already in Organizers to be added list, give the CSS style to that user
+			angular.forEach($scope.group.organizersToAdd, function(currentOrganizerToAdd) {
+				angular.forEach($scope.searchResults, function(currentSearchResult) {
+					if (currentSearchResult.id === currentOrganizerToAdd.id)
+						currentSearchResult.added = "added";
+				});
+			});
+		}
 		/***************************************************************************
 		 * Building Functions
 		 **************************************************************************/
@@ -303,8 +349,69 @@
 			$scope.group.interests = newInterests;
 			//console.log($scope.group.interests);
 		}
-		
 
+		/***************************************************************************
+		 * Adding/Removing Organizers Function
+		 **************************************************************************/
+		/*
+		 * Adds an organizer to $scope.group.organizersToAdd array
+		 */
+		$scope.addOrganizer = function(index) {
+			var alreadyAdded = false;
+			// Checks if the organizers to be added array is empty or not
+			if ($scope.group.organizersToAdd.length > 0){
+				// Checks if user has already been added
+				angular.forEach($scope.group.organizersToAdd, function(currentOrganizerToAdd) {
+					// If user is already in the array, flag will be true
+					if (currentOrganizerToAdd.id === $scope.searchResults[index].id){
+						console.log(currentOrganizerToAdd + "already added");
+						alreadyAdded = true;
+					}
+				});
+			}
+			// If not added yet, add to array + set class to show it has been added
+			if (!alreadyAdded){
+				$scope.group.organizersToAdd.push($scope.searchResults[index]);
+				$scope.searchResultsPristine = false;
+				$scope.searchResults[index].added = "added";
+			}
+			console.log($scope.group.organizersToAdd);
+		}
+
+		/*
+		 * Removes an organizer from $scope.group.organizersToAdd array
+		 */
+		$scope.removeOrganizer = function(index) {
+			// Variable for array to be rebuilt so that there are no empty elements
+			var newOrganizersToAdd = [];
+			// Rebuild $scope.group.organizersToAdd array
+			// Goes through $scope.group.organizersToAdd array to remove "index"
+			angular.forEach($scope.group.organizersToAdd, function(currentOrganizerToAdd) {
+				// If the index to be removed is found
+				//		- do not add to rebuilt array
+				//		- remove class in search results that shows that it has been added if applicable
+				if (currentOrganizerToAdd.id === $scope.group.organizersToAdd[index].id){
+					console.log("removed " + currentOrganizerToAdd);
+					angular.forEach($scope.searchResults, function(currentSearchResult) {
+						if (currentSearchResult.id === currentOrganizerToAdd.id)
+							currentSearchResult.added = "";
+					});
+				}
+				// Otherwise, add organizer to be added to rebuilt array
+				else {
+					console.log(currentOrganizerToAdd);
+					newOrganizersToAdd.push(currentOrganizerToAdd);
+				}
+			});
+			// Sets the rebuilt array
+			$scope.group.organizersToAdd = newOrganizersToAdd;
+			console.log($scope.group.organizersToAdd);
+		}
+
+		$scope.closeAlert = function(index) {
+		    $scope.alerts.splice(index, 1);
+		  };
+		  
 		/***********************************************************************
 		 * Boolean Functions
 		 **********************************************************************/
@@ -338,6 +445,8 @@
 					else
 						return false;
 				}
+				else 
+					return false;
 			case "organizerBuilt":
 				if ($scope.group.organizersBuilt != null){
 					if ($scope.group.organizersBuilt[index1].organizers[index2].picture != null){
@@ -349,6 +458,8 @@
 					else
 						return false;
 				}
+				else 
+					return false;
 			case "organizerBuiltXS":
 				if ($scope.group.organizersBuiltXS != null){
 					if ($scope.group.organizersBuiltXS[index1].organizers[index2].picture != null){
@@ -360,6 +471,8 @@
 					else
 						return false;
 				}
+				else 
+					return false;
 			case "subscriber":
 				if ($scope.group.subscribers != null){
 					if ($scope.group.subscribers[index1].picture != null){
@@ -371,6 +484,8 @@
 					else
 						return false;
 				}
+				else 
+					return false;
 			case "event":
 				if ($scope.group.events != null){
 					if (type2 != null) {
@@ -395,6 +510,34 @@
 							return false;
 					}
 				}
+				else 
+					return false;
+			case "searchedUser":
+				if ($scope.searchResults != null && $scope.searchResults.length > 0){
+					if ($scope.searchResults[index1].picture != null){
+						if ($scope.searchResults[index1].picture.length > 0)
+							return true;
+						else
+							return false;
+					}
+					else
+						return false;
+				}
+				else 
+					return false;
+			case "organizerToAdd":
+				if ($scope.group.organizersToAdd != null){
+					if ($scope.group.organizersToAdd[index1].picture != null){
+						if ($scope.group.organizersToAdd[index1].picture.length > 0)
+							return true;
+						else
+							return false;
+					}
+					else
+						return false;
+				}
+				else 
+					return false;
 			}
 		}
 		
@@ -427,7 +570,7 @@
 			
 			return false;
 		}
-		
+
 		/*
 		 * Checks if there are more than 1 upcoming events, the view will display
 		 * arrows to move across events if that is the case.
@@ -442,9 +585,33 @@
 			else
 				return false;
 		}
+		
+		/*
+		 * Checks if there are more than n organizers
+		 */
+		$scope.hasOrganizers = function(amount) {
+			if ($scope.group.organizers != null){
+				if ($scope.group.organizers.length >= amount)
+					return true;
+				else
+					return false;
+			}
+			else
+				return false;
+		}
 
-		$scope.hasOrganizers = function() {
-			return true;
+		$scope.getIsSearching = function() {
+			return $scope.isSearching;
+		}
+		
+		$scope.hasResults = function() {
+			if ($scope.searchResults.length > 0)
+				return true;
+			else
+				return false;
+		}
+		
+		$scope.hasOrganizersToAdd = function() {
 			if ($scope.group.organizersToAdd != null && $scope.group.organizersToAdd.length > 0)
 				return true;
 			else
@@ -492,7 +659,14 @@
 			$scope.youthSelected_bak = "";
 			// Send changes to server
 			GroupService.saveGroup({groupId: $routeParams.groupId, groupData: $scope.group}, function(res) {
-				$scope.savedSuccessMsg = res.data.msg;
+				switch(res.data.msg){
+				case true:
+					$scope.alerts.push({type: "success", msg: "Saved Successful"});
+					break;
+				case false:
+					$scope.alerts.push({type: "danger", msg: "Saved Failed"});
+					break;
+				}
 			});
 			// Keep changes made
 		}

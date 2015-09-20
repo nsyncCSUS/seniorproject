@@ -36,6 +36,8 @@ a {
     position: fixed;
     top: 90%;
     right: 50%;
+    width: 250px;
+    margin-right: -125px;
 }
 
 .not-selected {
@@ -103,7 +105,13 @@ a {
     margin-left: -25px;
 }
 
+.added {
+    position:relative;
+    display:inline-block;
+    opacity: .4;
+}
 
+.added:hover
 
 
 /**********************************************************************
