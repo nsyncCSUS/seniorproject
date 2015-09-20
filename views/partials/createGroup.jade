@@ -63,36 +63,26 @@ div(ng-show='!getIsPreviewing()')
         .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 label(for='searchResults') Search Results
         .col-xs-12.col-sm-12.col-md-12.col-lg-12#searchResults
-            .col-xs-4.col-sm-3.col-md-3.col-lg-2.inviteOrganizer
-                h6.text-center Name
-                img.img-responsive.img-thumbnail(src='//placekitten.com/g/250/250')
-            .col-xs-4.col-sm-3.col-md-3.col-lg-2.inviteOrganizer
-                h6.text-center Name2
-                img.img-responsive.img-thumbnail(src='//placekitten.com/g/250/251')
-            .col-xs-4.col-sm-3.col-md-3.col-lg-2.inviteOrganizer
-                h6.text-center Name3
-                img.img-responsive.img-thumbnail(src='//placekitten.com/g/250/252')
-            .col-xs-4.col-sm-3.col-md-3.col-lg-2.inviteOrganizer
-                h6.text-center Name4
-                img.img-responsive.img-thumbnail(src='//placekitten.com/g/250/253')
+            .col-xs-4.col-sm-3.col-md-3.col-lg-2.cursor-pointer(ng-repeat='user in searchResults', ng-click='addOrganizer($index)')
+                h6.text-center {{user.firstName}}
+                h6.text-center {{user.lastName}}
+                .add
+                    img.img-responsive.img-thumbnail(src='{{user.picture}}')
+                    .addOverlay
+                        span.glyphicon.glyphicon-plus.glyphicon-lg-center
                 
         div(ng-show='hasOrganizers()')
             .col-xs-12.col-sm-12.col-md-12.col-lg-12
                     hr
                     label(for='organizersAdded') Organizers to be invited
             .col-xs-12.col-sm-12.col-md-12.col-lg-12#organizersAdded
-                .col-xs-4.col-sm-3.col-md-3.col-lg-2.removeOrganizer
-                    h6.text-center Name
-                    img.img-responsive.img-thumbnail(src='//placekitten.com/g/250/250')
-                .col-xs-4.col-sm-3.col-md-3.col-lg-2.removeOrganizer
-                    h6.text-center Name2
-                    img.img-responsive.img-thumbnail(src='//placekitten.com/g/250/251')
-                .col-xs-4.col-sm-3.col-md-3.col-lg-2.removeOrganizer
-                    h6.text-center Name3
-                    img.img-responsive.img-thumbnail(src='//placekitten.com/g/250/252')
-                .col-xs-4.col-sm-3.col-md-3.col-lg-2.removeOrganizer
-                    h6.text-center Name4
-                    img.img-responsive.img-thumbnail(src='//placekitten.com/g/250/253')
+                .col-xs-4.col-sm-3.col-md-3.col-lg-2.cursor-pointer(ng-repeat='user in group.organizersToAdd', ng-click='removeOrganizer($index)')
+                    h6.text-center {{user.firstName}}
+                h6.text-center {{user.lastName}}
+                    .remove
+                        img.img-responsive.img-thumbnail(src='{{user.picture}}')
+                        .removeOverlay
+                            span.glyphicon.glyphicon-minus.glyphicon-lg-center
         
 .titleRow(ng-show='getIsPreviewing()')
     .container-fluid

@@ -11,6 +11,33 @@
 		$scope.group.interests = [];
 		
 		$scope.group.organizersToAdd = [];
+		$scope.searchResults = [{
+			id :			"huy",
+			firstName : 	"Huy",
+			lastName : 		"Le",
+			picture : 		"//placekitten.com/g/1000/1000/"
+		},{
+			id :			"kris",
+			firstName : 	"Kristopher",
+			lastName : 		"Tadlock",
+			picture : 		"//placekitten.com/g/1001/1001/"
+		},{
+			id :			"vadzim",
+			firstName : 	"Vadzim",
+			lastName : 		"LN",
+			picture : 		"//placekitten.com/g/1002/1002/"
+		},{
+			id :			"shane",
+			firstName : 	"Shane",
+			lastName : 		"Singh",
+			picture : 		"//placekitten.com/g/1003/1003/"
+		},{
+			id :			"john",
+			firstName : 	"John",
+			lastName : 		"LN",
+			picture : 		"//placekitten.com/g/1004/1004/"
+		}
+		];
 		
 		$scope.isPreviewing = false;
 
@@ -211,8 +238,8 @@
 		/***************************************************************************
 		 * Adding/Removing Organizers Function
 		 **************************************************************************/
-		$scope.addOrganizer = function() {
-			
+		$scope.addOrganizer = function(index) {
+			$scope.group.organizersToAdd.push($scope.searchResults[index]);
 		}
 		
 		$scope.removeOrganizer = function() {
