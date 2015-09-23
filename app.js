@@ -12,11 +12,6 @@ var events = require('./routes/events');
 
 var expressJwt = require('express-jwt');
 
-var formidable = require('formidable');
-var path = require('path');     //used for file path
-var fs =require('fs-extra');    //File System-needed for renaming file etc
-
-
 
 
 
@@ -41,15 +36,6 @@ mongoose.connect(dbConfig.url, options); // Corrected URI
 //mongoose.model('Users', {FirstName: String, MiddleName: String, LastName: String, Description: String, Email: String, Birthday: Date, Age: Number, City: String, State: String, ZipCode: Number, PhoneNum: Number, Picture: String, VolunteeredTo: String, CreatorOf: String, OrganizerOf: String, SubscribedTo: String, GooglePlus: String, Facebook: String, LinkenIn: String, Twitter: String, Interests: String, Skills: String })
 
 var app = express();
-
-var multipart = require('connect-multiparty');
-
-app.use(multipart({
-    uploadDir: './temp/'
-}));
-
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -64,36 +50,6 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-/*
-app.route('/upload')
- .post(function (req, res, next) {
-
-  var form = new formidable.IncomingForm();
-    //Formidable uploads to operating systems tmp dir by default
-    form.uploadDir = "./temp";       //set upload directory
-    form.keepExtensions = true;     //keep file extension
-
-    form.parse(req, function(err, fields, files) {
-      console.log(files);
-        console.log(fields);
-        res.writeHead(200, {'content-type': 'text/plain'});
-        res.write('received upload:\n\n');
-        console.log("form.bytesReceived");
-        //TESTING
-        if(err)
-          return handleError(req, res, err);
-
-        //Formidable changes the name of the uploaded file
-        //Rename the file to its original name
-          res.end();
-    });
-});
-
-
-*/
-
-
 
 app.use('/', index);
 app.use('/users', users);

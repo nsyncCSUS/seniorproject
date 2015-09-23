@@ -10,8 +10,6 @@ var imgur = require('imgur');
 imgur.setCredentials('imgurSP', '123456');
 
 
-var formidable = require('formidable');
-var path = require('path');     //used for file path
 var fs =require('fs-extra');    //File System-needed for renaming file etc
 
 
