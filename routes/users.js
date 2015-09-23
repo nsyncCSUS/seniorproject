@@ -5,6 +5,61 @@ var User = require('../db/models/user'); // mongoose model
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var bcrypt   = require('bcrypt-nodejs');
 
+//file upload
+var imgur = require('imgur');
+imgur.setCredentials('imgurSP', '123456');
+
+
+var formidable = require('formidable');
+var path = require('path');     //used for file path
+var fs =require('fs-extra');    //File System-needed for renaming file etc
+
+
+router.post('/test',function(){
+  console.log('severside test');
+    fs.remove('./temp');
+res.end();
+});
+
+
+router.post('/upload', function(req,res,next){
+  console.log(req.files);
+  console.log(req.files.file.path);
+  imgur.uploadFile(req.files.file.path).then(function (json) {
+        console.log(json.data.link);
+    })
+    .catch(function (err) {
+        console.error(err.message);
+    });
+
+ res.end();
+/*
+
+  var form = new formidable.IncomingForm();
+    //Formidable uploads to operating systems tmp dir by default
+    form.uploadDir = "./temp";       //set upload directory
+    form.keepExtensions = true;     //keep file extension
+
+    form.parse(req.body.file, function(err, fields, files) {
+      console.log(files);
+        console.log(fields);
+
+        console.log("form.bytesReceived");
+        //TESTING
+        if(err)
+          console.log(err);
+
+        //Formidable changes the name of the uploaded file
+        //Rename the file to its original name
+          res.end();
+
+  });
+*/
+});
+
+
+
+
 // HL checks the database for user if usere does not exist
 // put user into the database
 router.post('/', function(req , res) {
@@ -68,7 +123,7 @@ router.post('/login', function(req, res){
         var token = jwt.sign(user,'secret',{
           expiresInMinutes: 1440 // expires in 24 hours
         });
-        
+
         res.json({
           success:true,
           message:"Token Created",
