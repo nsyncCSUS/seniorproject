@@ -8,8 +8,10 @@ router.use(expressJwt({secret: 'secret'}));
 
 // Debugg detle 
 router.get('/',function(req,res){
-console.log(req.body);
-console.log(res.rawHeaders);
+console.log(req);
+    console.log("event test");
+console.log(req.headers);
+    
 res.json('finished');
 });
 
