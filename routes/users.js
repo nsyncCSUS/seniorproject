@@ -15,7 +15,9 @@ var fs =require('fs-extra');    //File System-needed for renaming file etc
 
 router.post('/test',function(){
   console.log('severside test');
-    fs.remove('./temp');
+  fs.emptyDir('./temp/', function (err) {
+  if (!err) console.log('success!');
+});
 res.end();
 });
 
@@ -25,6 +27,14 @@ router.post('/upload', function(req,res,next){
   console.log(req.files.file.path);
   imgur.uploadFile(req.files.file.path).then(function (json) {
         console.log(json.data.link);
+
+        var filename = req.files.file.path;
+      filename =  filename.split("\\").pop();
+        console.log(filename);
+        fs.remove('./temp/'+filename, function (err) {
+        if (!err) console.log('success!');
+      });
+
     })
     .catch(function (err) {
         console.error(err.message);

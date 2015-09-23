@@ -11,6 +11,8 @@ var groups = require('./routes/groups');
 var events = require('./routes/events');
 
 var expressJwt = require('express-jwt');
+var multipart = require('connect-multiparty');
+
 
 
 
@@ -39,6 +41,13 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+
+app.use(multipart({
+    uploadDir: './temp/'
+}));
+
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
