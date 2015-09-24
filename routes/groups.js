@@ -136,10 +136,6 @@
         //console.log(request.body.group); 
         var group = JSON.parse(request.body.group); 
         Group.findByIdAndUpdate(id, group, {new: true}, function(err, group) {
-            //if(err) {
-            //    util.err(err, response); 
-            //}
-
             return response.send({group: group}); 
         });
     });
@@ -192,7 +188,8 @@
             if(err) {
                 return util.err(err, response);
             } else {
-                return response.send({events: group.events}); 
+                var events = group.events || []; 
+                return response.send({events: events}); 
             }
         });
     });
@@ -207,7 +204,7 @@
             } else {
                 var event = group.events.filter(function(index, item) {
                     return item._id == id2;
-                }).pop();
+                }).pop() || {};
 
                 return response.send({event: event}); 
             }
@@ -230,17 +227,22 @@
     /**
      * Router for Requesting volunteers 
      */
-    var volunteers = exress.Router({mergeParams: true}); 
+    var volunteers = express.Router({mergeParams: true}); 
 
     // Get the full list of volunteers from a group 
     volunteers.get('/', function(request, response) {
         var id1 = request.params.id1;
         return Group.findById(id1, function(err, group) {
-            if(err) return util.err(err, response);
-            return response.send(group.SubscriptionList); 
+            if(err) {
+                return util.err(err, response);
+            } else {
+                var subscribers = group.SubscriptionList || []; 
+                return response.send({'volunteers': subscribers});
+            }
         }); 
     }); 
 
+    
     // Get a particular volunteer's information 
     volunteers.get('/:id2', function(request, response) {
         var id1 = request.params.id1;
@@ -252,7 +254,8 @@
 
             return response.send({Volunteer: user}); 
         }); 
-    }); 
+    });
+    
 
     // Add a user to the list of volunteers 
     volunteers.post('/:id2', function(request, response) {
@@ -270,6 +273,7 @@
         }); 
     }); 
 
+    
     // Delete a user from the list of volunteers
     volunteers.delete('/:id2', function(request, response) { 
         var id1 = request.params.id1;
@@ -297,11 +301,16 @@
     organizers.get('/', function(request, response) {
         var id1 = request.params.id1;
         return Group.findById(id1, function(err, group) {
-            if(err) return util.err(err, response);
-            return response.send({OrganizerList: group.OrganizerList}); 
+            if(err) {
+                return util.err(err, response);
+            } else {
+                var organizers = group.OrganizerList || []; 
+                return response.send({OrganizerList: organizers});
+            }
         }); 
     });
 
+    
     // Get a particular organizer 
     organizers.get('/:id2', function(request, response) {
         var id1 = request.params.id1;
@@ -310,12 +319,13 @@
             if(err) return util.err(err, response);
             var user = group.OrganizerList.filter(function(item) {
                 return item._id == id2; 
-            });
+            }) || {};
 
             return response.send({Organizer: user}); 
         }); 
     }); 
 
+    
     // Add user to organizers list
     organizers.post('/:id2', function(request, response) {
         var id1 = request.params.id1;
@@ -331,7 +341,8 @@
             }); 
         }); 
     });
-
+    
+    
     // Remove an organizer from the organizer list 
     organizers.delete('/:id2', function(request, response) { 
         var id1 = request.params.id1;
@@ -358,5 +369,5 @@
     module.exports = router;
 
 
-})(module);
+})(module); 
 

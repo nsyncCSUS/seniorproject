@@ -121,12 +121,10 @@
                 util.err(err, response);
                 return response.end();
             } else {
-                var users = event.users.map(function(index, item) {
-                    return util.takeUserProjection(item);
-                });
+                var volunteers = event.VolunteerList; 
 
                 return response.send({
-                    users: users
+                    VolunteerList: volunteers
                 });
             }
         });

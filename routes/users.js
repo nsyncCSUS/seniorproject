@@ -205,15 +205,15 @@
     
     events.get('/', function(request, response, next) {
         var id1 = request.params.id1;
-        //var event = util.takeEventProjection(request.params.event);
         var event = request.params.event; 
-        User.findById(id1, function(err, user) {
-            if (err) return util.err(err, response);
-            else {
-                var events = user.events; 
+        return User.findById(id1, function(err, user) {
+            if (err) {
+                return util.err(err, response);
+            } else {
+                var events = user.events || []; 
                 return response.send({
-                    events: events
-                });
+                    events: events 
+                 });
             }
         });
     });
@@ -230,15 +230,15 @@
                 });
 
                 return response.send({
-                    event: event // util.takeEventProjection(event)
+                    event: event 
                 });
             }
         });
     });
 
-
-    // events.put('/:id2', function(request, response, next) {}); 
+    
     // events.post('/', function(request, response, next) {}); 
+    // events.put('/:id2', function(request, response, next) {}); 
     // events.delete('/:id2', function(request, response, next) {}); 
 
 
@@ -258,9 +258,9 @@
                 util.err(err, response);
                 return response.end(); 
             } else {
-                var events = user.events;
+                var groups = user.groups || [];
                 return response.send({
-                    events: events
+                    groups: groups
                 }); 
             } 
         });
@@ -286,8 +286,9 @@
         });
     });
 
-    // groups.put('/:id2', function(request, response, next) {}); 
+    
     // groups.post('/', function(request, response, next) {}); 
+    // groups.put('/:id2', function(request, response, next) {}); 
     // groups.delete('/:id2', function(request, response, next) {}); 
 
 
