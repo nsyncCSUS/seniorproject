@@ -2,7 +2,7 @@ h1 Dashboard Page
 
 .well
     ul.nav.nav-tabs
-            li#yourEvents(ng-click='setCurrentTab("yourEvents")', ng-class='{ active:getCurrentTab("yourEvents") }')
+            li#yourEvents(ng-click='setCurrentTab("yourEvents")', ng-class='{ active:getCurrentTab("yourEvents") }', ng-init='setCurrentTab("yourEvents")')
                 a(href='') Your Upcoming Events
             li#groupEvents(ng-click='setCurrentTab("groupEvents")', ng-class='{ active:getCurrentTab("groupEvents") }')
                 a(href='') Your Groups Upcoming Events
@@ -10,7 +10,7 @@ h1 Dashboard Page
                 a(href='') Events History
                 
     div(ng-show='getCurrentTab("yourEvents")')
-        div.upcomingEvents  
+        div.upcomingEvents 
             h2.text-center
                 .col-xs-1.col-sm-3.col-md-4.col-lg-4
                 .col-xs-10.col-sm-6.col-md-4.col-lg-4
@@ -96,7 +96,7 @@ h1 Dashboard Page
                             h3 Date
                         .col-xs-4.col-sm-2.col-md-1.col-lg-4
                             h3 Time
-                    div(ng-repeat='e in upcomingEvents')    <!--goes through the list contained in upcomingEvents-->
+                    div(ng-repeat='e in user.subscribedTo')    <!--goes through the list contained in upcomingEvents-->
                         .col-xs-12.col-sm-6.col-md-4.col-lg-4
                             h4 {{e.name}}
                         .col-xs-4.col-sm-2.col-md-1.col-lg-4
@@ -121,7 +121,13 @@ h1 Dashboard Page
                     button.btn Volunteered
                 .col-xs-4.col-sm-2.col-md-1.col-lg-4
                     button.btn Not Volunteered
-            
+            div(ng-repeat='e in user.volunteeredTo | FilterHistory')    <!--goes through the list contained in upcomingEvents-->
+                        .col-xs-12.col-sm-6.col-md-4.col-lg-4
+                            h4 {{e.name}}
+                        .col-xs-4.col-sm-2.col-md-1.col-lg-4
+                            h4 {{e.startTimeDate | date:'medium'}}
+                        .col-xs-4.col-sm-2.col-md-1.col-lg-4
+                            h4 {{e.endTimeDate | date:'medium'}}
 <!--         
 .row        
     .col-xs-12.col-sm-6.col-md-4.col-lg-8

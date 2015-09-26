@@ -2,14 +2,17 @@
 	var app = angular.module('dashboardController', ['dashboardService', 'dashboardFactory']);	//creating new module
 	
 	/*create new controller; [] is a list of dependencies to fetch, and pass them all into a constructor function*/
-	app.controller('DashboardController', [ '$scope', 'DashboardService', 'DashboardFactory', 'EventService', function($scope, DashboardService, DashboardFactory, EventService) {
+	app.controller('DashboardController', [ '$scope', 'DashboardService', 'DashboardFactory', 'EventService', 'FilterHistory', function($scope, DashboardService, DashboardFactory, EventService, FilterHistory) {
 		//put all logic in controller
 		//$scope will stores data
 		//$scope.message = "A new message";
 		//$scope.event = {startTimeDate:"string"}	//will store startTimeDate inside of event, and it will store event inside of scope
-		$scope.event = {startTimeDate: event.startTimeDate};	//will store startTimeDate inside of event, and it will store event inside of scope
+		//$scope.event = {startTimeDate: event.startTimeDate};	//will store startTimeDate inside of event, and it will store event inside of scope
 		
 		this.selectedTab = "yourEvents";
+		$scope.currentDate = new Date();	//returns current date and time
+		
+		
 		// Call service function with a callback. The first argument 
 		// is the data you want to pass to the Http request, and the 
 		// second argument is a function to be called when the Http
@@ -24,6 +27,30 @@
 		EventService.getEvent({startTimeDate: event.startTimeDate}, function(response){
 			$scope.event = response.event;
 		}); */
+		
+//		$scope.user = {
+//				firstName : 	"",
+//				middleName : 	"",
+//				lastName : 		"",
+//				description : 	"",
+//				picture:		"",
+//				email : 		"",
+//				birthday : 		"",
+//				age : 			"",
+//				city : 			"",
+//				state : 		"",
+//				zipCode : 		"",
+//				phoneNum : 		"",
+//				googlePlus : 	"",
+//				facebook : 		"",
+//				linkedIn : 		"",
+//				twitter : 		"",
+//				volunteeredTo : [{id: ""}, {id: ""}],
+//				creatorOf : 	[{id: ""}, {id: ""}],
+//				organizerOf : 	[{id: ""}, {id: ""}],
+//				subscribedTo : 	[{id: ""}, {id: ""}],
+//				interests : 	[{type: ""}, {type: ""}]
+//			};
 		
 		$scope.user = {
 				firstName : 	"",
@@ -42,10 +69,43 @@
 				facebook : 		"",
 				linkedIn : 		"",
 				twitter : 		"",
-				volunteeredTo : [{id: ""}, {id: ""}],
+				volunteeredTo : [//yourGroupEvents: [{groupEventTitle: 'Event 1', time: 'Time 1', date: 'Date 1'},
+		         				//{groupEventTitle: 'Event 2', time: 'Time 2', date: 'Date 2'}]
+		                         
+		                         {picture : "//placekitten.com/g/500/500/",	
+		                         volunteered: null,  
+		                         startTimeDate: "2015-08-26T18:50:10.111Z", 
+								 endTimeDate: "2015-09-26T18:50:10.111Z", 
+								 name: 'Event 2', volunteers: [{id: '49', firstName: 'Kris', lastName: 'Tadlok', picture: 'https://pbs.twimg.com/profile_images/2382660015/ducati_dog_profile.gif'}, {id: '50', firstName: 'Vadzim', lastName: 'Savenok', picture: 'https://lh3.googleusercontent.com/-fBggJD3y3Go/UgAEKqWlLkI/AAAAAAAAAAo/tjfjrjykw3Q/s426/BigDog_GooglePlusProfile.jpg'}],
+		                         maxVolunteers: '25', interests: [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]},	
+								 
+								 {picture : "//placekitten.com/g/501/500/",
+		                         startTimeDate: "2016-08-26T18:50:10.111Z", 
+								 endTimeDate: "2016-09-26T18:50:10.111Z", 
+								 name: 'Event 3', volunteers: [{name: 'Anthony'}, {name: 'Huy'}, {name: 'Shane'}, {name: 'John'}, {name: 'Vadzim'}, {name: 'Kris'}],
+								 maxVolunteers: '35', interests: [{type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]}],
 				creatorOf : 	[{id: ""}, {id: ""}],
 				organizerOf : 	[{id: ""}, {id: ""}],
-				subscribedTo : 	[{id: ""}, {id: ""}],
+				subscribedTo : 	[//yourGroupEvents: [{groupEventTitle: 'Event 1', time: 'Time 1', date: 'Date 1'},
+		         				//{groupEventTitle: 'Event 2', time: 'Time 2', date: 'Date 2'}]
+		                         
+				               	{picture : "//placekitten.com/g/500/500/",	
+			                         startTimeDate: "2015-08-26T18:50:10.111Z", 
+									 endTimeDate: "2015-09-26T18:50:10.111Z", 
+									 name: 'Event 1', volunteers: [{id: '49', firstName: 'Kris', lastName: 'Tadlok', picture: 'https://pbs.twimg.com/profile_images/2382660015/ducati_dog_profile.gif'}, {id: '50', firstName: 'Vadzim', lastName: 'Savenok', picture: 'https://lh3.googleusercontent.com/-fBggJD3y3Go/UgAEKqWlLkI/AAAAAAAAAAo/tjfjrjykw3Q/s426/BigDog_GooglePlusProfile.jpg'}],
+			                         maxVolunteers: '25', interests: [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]},
+				               	 
+		                         {picture : "//placekitten.com/g/500/500/",	
+		                         startTimeDate: "2015-08-26T18:50:10.111Z", 
+								 endTimeDate: "2015-09-26T18:50:10.111Z", 
+								 name: 'Event 2', volunteers: [{id: '49', firstName: 'Kris', lastName: 'Tadlok', picture: 'https://pbs.twimg.com/profile_images/2382660015/ducati_dog_profile.gif'}, {id: '50', firstName: 'Vadzim', lastName: 'Savenok', picture: 'https://lh3.googleusercontent.com/-fBggJD3y3Go/UgAEKqWlLkI/AAAAAAAAAAo/tjfjrjykw3Q/s426/BigDog_GooglePlusProfile.jpg'}],
+		                         maxVolunteers: '25', interests: [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]},	
+								 
+								 {picture : "//placekitten.com/g/501/500/",
+		                         startTimeDate: "2016-08-26T18:50:10.111Z", 
+								 endTimeDate: "2016-09-26T18:50:10.111Z", 
+								 name: 'Event 3', volunteers: [{name: 'Anthony'}, {name: 'Huy'}, {name: 'Shane'}, {name: 'John'}, {name: 'Vadzim'}, {name: 'Kris'}],
+								 maxVolunteers: '35', interests: [{type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]}],
 				interests : 	[{type: ""}, {type: ""}]
 			};
 		
