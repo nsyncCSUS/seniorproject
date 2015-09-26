@@ -2,7 +2,7 @@
 	var app = angular.module('dashboardController', ['dashboardService', 'dashboardFactory']);	//creating new module
 	
 	/*create new controller; [] is a list of dependencies to fetch, and pass them all into a constructor function*/
-	app.controller('DashboardController', [ '$scope', 'DashboardService', 'DashboardFactory', 'EventService', 'FilterHistory', function($scope, DashboardService, DashboardFactory, EventService, FilterHistory) {
+	app.controller('DashboardController', [ '$scope', 'DashboardService', 'DashboardFactory', 'EventService', function($scope, DashboardService, DashboardFactory, EventService) {
 		//put all logic in controller
 		//$scope will stores data
 		//$scope.message = "A new message";
@@ -73,7 +73,7 @@
 		         				//{groupEventTitle: 'Event 2', time: 'Time 2', date: 'Date 2'}]
 		                         
 		                         {picture : "//placekitten.com/g/500/500/",	
-		                         volunteered: null,  
+		                         //volunteered: null,  
 		                         startTimeDate: "2015-08-26T18:50:10.111Z", 
 								 endTimeDate: "2015-09-26T18:50:10.111Z", 
 								 name: 'Event 2', volunteers: [{id: '49', firstName: 'Kris', lastName: 'Tadlok', picture: 'https://pbs.twimg.com/profile_images/2382660015/ducati_dog_profile.gif'}, {id: '50', firstName: 'Vadzim', lastName: 'Savenok', picture: 'https://lh3.googleusercontent.com/-fBggJD3y3Go/UgAEKqWlLkI/AAAAAAAAAAo/tjfjrjykw3Q/s426/BigDog_GooglePlusProfile.jpg'}],

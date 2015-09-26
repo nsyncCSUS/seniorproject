@@ -3,11 +3,11 @@ h1 Dashboard Page
 .well
     ul.nav.nav-tabs
             li#yourEvents(ng-click='setCurrentTab("yourEvents")', ng-class='{ active:getCurrentTab("yourEvents") }', ng-init='setCurrentTab("yourEvents")')
-                a(href='') Your Upcoming Events
+                a(href='') Upcoming Events
             li#groupEvents(ng-click='setCurrentTab("groupEvents")', ng-class='{ active:getCurrentTab("groupEvents") }')
-                a(href='') Your Groups Upcoming Events
+                a(href='') Groups Events
             li#eventsHistory(ng-click='setCurrentTab("eventsHistory")', ng-class='{ active:getCurrentTab("eventsHistory") }')
-                a(href='') Events History
+                a(href='') Past Events
                 
     div(ng-show='getCurrentTab("yourEvents")')
         div.upcomingEvents 
