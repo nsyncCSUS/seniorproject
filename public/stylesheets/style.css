@@ -8,7 +8,7 @@ body {
 }
 
 a {
-	color: #00B7FF;
+	
 }
 
 .center-item {
@@ -150,9 +150,13 @@ a {
 }
 
 .carousel-control {
-  padding-top:10%;
   width:5%;
 }
 /**********************************************************************
     Event CSS END
 **********************************************************************/
+
+.event-item { 
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}

@@ -15,25 +15,28 @@
 		$scope.group =  
 		{
 				id : "nsync",
-				name : "N.Sync()",
+				name: "N.Sync()",
 				picture : "//placekitten.com/g/500/500/",
 				creationDate : "2015-08-26T18:50:10.111Z",
 				city : "Sacramento",
 				state : "CA",
 				zipCode : 95828,
-				description : "Senior project group ftw!!!!!",
+				description: "sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem blandit non.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate pellentesque lorem. Donec erat ante, sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem bland center",
 				googlePlusURL : "www.google.com",
 				facebookURL : "https://facebook.com",
 				linkedInURL : "https://linkedin.com",
 				twitterURL : "https://twitter.com",
 				events : [ {
 					id : "event1",
-					name : "event1",
+					creatorId: "",
+					groupId: "",
+					name : "Awesome Event Number 1 asdf asdf asdf asdf",
+					description: "sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem blandit non.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate pellentesque lorem. Donec erat ante, sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem bland center",
 					picture : "//placekitten.com/g/501/500/",
 					startTimeDate : "2015-08-26T18:50:10.111Z",
 					endTimeDate : "2015-08-27T18:50:10.111Z",
+					location: {street: "1234 cool st", city: "Sacramento", state: "CA", zipcode: "95828"},
 					maxVolunteers : 50,
-					interests : [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}],
 					volunteers: [{id: "v1", firstName: "Kitten 1", lastName: "1"}, 
 					             {id: "v2", firstName: "Kitten 2", lastName: "1", picture: "//placekitten.com/g/250/251"}, 
 					             {id: "v3", firstName: "Kitten 3", lastName: "1"}, 
@@ -44,16 +47,21 @@
 					             {id: "v8", firstName: "Kitten 8", lastName: "1", picture: "//placekitten.com/g/250/257"}, 
 					             {id: "v9", firstName: "Kitten 9", lastName: "1", picture: "//placekitten.com/g/250/258"}, 
 					             {id: "v10", firstName: "Kitten 10", lastName: "1", picture: "//placekitten.com/g/250/259"}, 
-					             {id: "v11", firstName: "Kitten 11", lastName: "1", picture: "//placekitten.com/g/250/260"}]
+					             {id: "v11", firstName: "Kitten 11", lastName: "1", picture: "//placekitten.com/g/250/260"}],
+					interests : [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]
+									
 				},
 				{
 					id : "event2",
-					name : "event2",
+					creatorId: "",
+					groupId: "",
+					name : "Awesome Event Number 2 asdf asdf asdf asdf",
+					description: "aaaaaaaaaa bbbbbbbbbbbbbbb cccccccccccccccc dddddddddddddddddd eeeeeeeeeeeeeeeeeee fffffffffffffffffff gggggggggggggggggg hhhhhhhhhhhhhh iiiiiiiiiiiiiiiiiiii jjjjjjjjjjjjjjjjjjjj",
 					picture : "//placekitten.com/g/503/500/",
+					location: {street: "4321 cool st", city: "Sacramento", state: "CA", zipcode: "95828"},
 					startTimeDate : "2015-08-28T18:50:10.111Z",
 					endTimeDate : "2015-08-29T18:50:10.111Z",
 					maxVolunteers : 50,
-					interests : [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}],
 					volunteers: [{id: "v1", firstName: "Kitten 1", lastName: "1", picture: "//placekitten.com/g/251/250"}, 
 					             {id: "v2", firstName: "Kitten 2", lastName: "1", picture: "//placekitten.com/g/251/251"}, 
 					             {id: "v3", firstName: "Kitten 3", lastName: "1", picture: "//placekitten.com/g/251/252"}, 
@@ -69,7 +77,8 @@
 					             {id: "v13", firstName: "Kitten 13", lastName: "1", picture: "//placekitten.com/g/251/262"}, 
 					             {id: "v14", firstName: "Kitten 14", lastName: "1", picture: "//placekitten.com/g/251/263"}, 
 					             {id: "v15", firstName: "Kitten 15", lastName: "1", picture: "//placekitten.com/g/251/264"}, 
-					             {id: "v16", firstName: "Kitten 16", lastName: "1", picture: "//placekitten.com/g/251/265"}]
+					             {id: "v16", firstName: "Kitten 16", lastName: "1", picture: "//placekitten.com/g/251/265"}],
+					interests : [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}]
 				}
 				],
 				organizers : [{id : "org1", firstName : "org1", lastName: "1"},
@@ -707,25 +716,66 @@
 
 })();
 
+
+/*
+	user: {
+		firstName : 	String,
+		middleName : 	String,
+		lastName : 		String,
+		description : 	String,
+		picture:		String,
+		email : 		String,
+		birthday : 		Date,
+		age : 			Number,
+		location :		{city: String, state: String, zipcode: String},	
+		phoneNum : 		Number,
+		googlePlus : 	String,
+		facebook : 		String,
+		linkedIn : 		String,
+		twitter : 		String,
+		volunteeredTo : [{id: String}, {id: String}, ...],
+		creatorOf : 	[{id: String}, {id: String}, ...],
+		organizerOf : 	[{id: String}, {id: String}, ...],
+		subscribedTo : 	[{id: String}, {id: String}, ...],
+		interests : 	[{type: String}, {type: String}, ...]
+	}
+*/
+
 /*
 	group: {
 		id : 				String,
-		name :		 		String,
+		name : 				String,
 		picture : 			String,
 		creationDate : 		String,
-			//city : 			String,
-			//state : 			String,
-			//zipCode : 		Number,
+		location :			[{city: String, state: String, zipcode: String}, ...],
 		description : 		String,
 		googlePlusURL : 	String,
 		facebookURL : 		String,
 		linkInURL : 		String,
 		twitterURL: 		String,
 		personalWebsiteURL: String,
-		events:			[{id: String}, {id: String}, ...],
-		organizers:		[{id: String}, {id: String}, ...],
+		events:				[{id: String}, {id: String}, ...],
+		organizers:			[{id: String}, {id: String}, ...],
 		subscribers:		[{id: String}, {id: String}, ...],
-		interests: 	[{type: String}, {type: String}, ...]
+		interests: 			[{type: String}, {type: String}, ...]
 
+	}
+*/
+
+/*
+	event: {
+		id: 			String,		
+		creatorId: 		String,
+		groupId: 		String,
+		name: 			String,
+		description: 	String,
+		picture: 		String,
+		creationDate: 	DateTime,
+		startTimeDate: 	DateTime,
+		endTimeDate: 	DateTime,
+		location :		{street: String, city: String, state: String, zipcode: String},	
+		maxVolunteers: 	Number,
+		volunteers:		[{id: String}, {id: String}, ...],
+		interests: 		[{type: String}, {type: String}, ...]
 	}
 */
