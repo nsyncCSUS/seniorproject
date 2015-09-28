@@ -26,14 +26,14 @@
 
                 $scope.searchtext = searchbox;
                 $scope.searchbox = '';
-                this.currentTab = 'users';
+                this.currentTab = 'events';
 
+                // Get Events
+                $scope.eventsSearchResults = HomeService.getEventSearchResults();
                 // Get users
                 $scope.usersSearchResults = HomeService.getUserSearchResults();
                 // Get Groups
                 $scope.groupsSearchResults = HomeService.getGroupSearchResults();
-                // Get Events
-                $scope.eventsSearchResults = HomeService.getEventSearchResults();
             }
         }
 
