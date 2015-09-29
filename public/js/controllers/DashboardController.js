@@ -95,7 +95,7 @@
 									 name: 'Event 1', volunteers: [{id: '49', firstName: 'Kris', lastName: 'Tadlok', picture: 'https://pbs.twimg.com/profile_images/2382660015/ducati_dog_profile.gif'}, {id: '50', firstName: 'Vadzim', lastName: 'Savenok', picture: 'https://lh3.googleusercontent.com/-fBggJD3y3Go/UgAEKqWlLkI/AAAAAAAAAAo/tjfjrjykw3Q/s426/BigDog_GooglePlusProfile.jpg'}],
 			                         maxVolunteers: '25', interests: [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]},
 				               	 
-		                         {picture : "//placekitten.com/g/500/500/",	
+		                         {picture : "//placekitten.com/g/501/500/",	
 		                         startTimeDate: "2015-08-26T18:50:10.111Z", 
 								 endTimeDate: "2015-09-26T18:50:10.111Z", 
 								 name: 'Event 2', volunteers: [{id: '49', firstName: 'Kris', lastName: 'Tadlok', picture: 'https://pbs.twimg.com/profile_images/2382660015/ducati_dog_profile.gif'}, {id: '50', firstName: 'Vadzim', lastName: 'Savenok', picture: 'https://lh3.googleusercontent.com/-fBggJD3y3Go/UgAEKqWlLkI/AAAAAAAAAAo/tjfjrjykw3Q/s426/BigDog_GooglePlusProfile.jpg'}],
@@ -248,9 +248,7 @@
 		email : 		String,
 		birthday : 		Date,
 		age : 			Number,
-		city : 			String,
-		state : 		String,
-		zipCode : 		Number,
+		location :		{city: String, state: String, zipcode: String},	
 		phoneNum : 		Number,
 		googlePlus : 	String,
 		facebook : 		String,
@@ -267,22 +265,20 @@
 /*
 	group: {
 		id : 				String,
-		name : 		String,
+		name : 				String,
 		picture : 			String,
 		creationDate : 		String,
-			//city : 			String,
-			//state : 			String,
-			//zipCode : 		Number,
+		location :			[{city: String, state: String, zipcode: String}, ...],
 		description : 		String,
 		googlePlusURL : 	String,
 		facebookURL : 		String,
 		linkInURL : 		String,
 		twitterURL: 		String,
 		personalWebsiteURL: String,
-		events:			[{id: String}, {id: String}, ...],
-		organizers:		[{id: String}, {id: String}, ...],
+		events:				[{id: String}, {id: String}, ...],
+		organizers:			[{id: String}, {id: String}, ...],
 		subscribers:		[{id: String}, {id: String}, ...],
-		interests: 	[{type: String}, {type: String}, ...]
+		interests: 			[{type: String}, {type: String}, ...]
 
 	}
 */
@@ -292,18 +288,15 @@
 		id: 			String,		
 		creatorId: 		String,
 		groupId: 		String,
-		name: 		String,
+		name: 			String,
 		description: 	String,
 		picture: 		String,
 		creationDate: 	DateTime,
 		startTimeDate: 	DateTime,
 		endTimeDate: 	DateTime,
-		address: 		String,
-		city: 			String,
-		state: 			String,
-		zipcode: 		Number,		
-		maxVolunteers: String,
-		volunteers:	[{id: String}, {id: String}, ...],
-		interests: [{type: String}, {type: String}, ...]
+		location :		{street: String, city: String, state: String, zipcode: String},	
+		maxVolunteers: 	Number,
+		volunteers:		[{id: String}, {id: String}, ...],
+		interests: 		[{type: String}, {type: String}, ...]
 	}
 */

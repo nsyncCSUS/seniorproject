@@ -97,5 +97,13 @@ router.post('/', function(req, res) {
 	res.json({msg: true});
 });
 
+router.put('/data/:id', function(req, res) {
+	// Post new group to db (data is in req.body)
+	console.log("Got a PUT request for a new group");
+	console.log("Posted Group '" + req.body.name + "' success.");
+	
+	res.json({msg: true});
+});
+
 router.post('/')
 module.exports = router;

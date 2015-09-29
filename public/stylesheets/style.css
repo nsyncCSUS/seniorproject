@@ -8,7 +8,7 @@ body {
 }
 
 a {
-	color: #00B7FF;
+	
 }
 
 .center-item {
@@ -36,6 +36,8 @@ a {
     position: fixed;
     top: 90%;
     right: 50%;
+    width: 250px;
+    margin-right: -125px;
 }
 
 .not-selected {
@@ -51,28 +53,66 @@ a {
 }
 
 .subscriber-thumbnail {
-    background: url("http://imgc.allpostersimages.com/images/P-473-488-90/21/2144/JLBCD00Z/posters/adriano-bacchella-belgian-malinois-shepherd-dog-profile-portrait.jpg") 50% 50% no-repeat; /* 50% 50% centers image in div */
-    width: 250px;
-    height: 250px;
-}
-
-.subscriber-thumbnail_original {
     width: 64px;
     height: 64px;
 }
 
-.thumb1 { 
-    background: url(blah.jpg) 50% 50% no-repeat; /* 50% 50% centers image in div */
-    width: 250px;
-    height: 250px;
+.add:hover {
+    border: 2px solid #000000;
+    position:relative;
+    display:inline-block;
 }
 
-.inviteOrganizer:hover {
-    border: 2px solid #00ff00;
+.remove:hover {
+    border: 2px solid #000000;
+    position:relative;
+    display:inline-block;
 }
-.removeOrganizer:hover {
-    border: 2px solid #ff0000;
+
+.addOverlay{
+    display: none;
 }
+.removeOverlay{
+    display: none;
+}
+
+.add:hover .addOverlay {
+    background-color: #00ff00;
+    opacity: .6;
+    position: absolute;
+    display:inline-block;
+    width:100%;
+    height:100%;
+    top: 0;
+    left: 0;
+}
+.remove:hover .removeOverlay {
+    background-color: #ff0000;
+    opacity: .6;
+    position: absolute;
+    display:inline-block;
+    width:100%;
+    height:100%;
+    top: 0;
+    left: 0;
+}
+
+.glyphicon-lg-center {
+    font-size: 50px;
+    top: 50%;
+    left: 50%;
+    margin-top: -25px;
+    margin-left: -25px;
+}
+
+.added {
+    position:relative;
+    display:inline-block;
+    opacity: .4;
+}
+
+.added:hover
+
 
 /**********************************************************************
     DIV CSS START
@@ -85,12 +125,8 @@ a {
     background-color: #cccccc;
 }
 
-.upcomingEvents {
-    background-color: #e5e5e5;
-}
-
-.history {
-    background-color: #e5e5e5;
+.upcomingEventsRow {
+    background-color: #eeeeee;
 }
 
 .organizersRow {
@@ -113,22 +149,14 @@ a {
     background-color: #e5e5e5;
 }
 
-.calendar {
-    background-color: #e5e5e5;
-}
-
-.yourEvents {
-    background-color: #e5e5e5;
-}
-
-.yourGroupEvents{
-	background-color: #e5e5e5;
-}
-
 .carousel-control {
-  padding-top:10%;
   width:5%;
 }
 /**********************************************************************
     Event CSS END
 **********************************************************************/
+
+.event-item { 
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}

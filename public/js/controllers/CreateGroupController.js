@@ -11,8 +11,10 @@
 		$scope.group.interests = [];
 		
 		$scope.group.organizersToAdd = [];
+		$scope.searchResults = [];
 		
 		$scope.isPreviewing = false;
+		$scope.isSearching = false;
 
 		$scope.animalsSelected = "";
 		$scope.educationSelected = "";
@@ -92,6 +94,21 @@
 				}
 			}, $scope.group.organizersBuilt); // Used as "this" above
 			//console.log($scope.group.organizersBuilt);
+			angular.forEach($scope.group.organizersToAdd, function(organizer) {
+				// Add new row if the row is filled
+				if (currentIndex === 4) {
+					this.push({organizers: []});
+					currentRow++;
+					currentIndex = 0;
+					this[currentRow].organizers.push(organizer);
+					currentIndex++;
+				}
+				else {
+					this[currentRow].organizers.push(organizer);
+					currentIndex++;
+				}
+			}, $scope.group.organizersBuilt); // Used as "this" above
+			//console.log($scope.group.organizersBuilt);
 		};
 
 		/* Builds the organizers list to be compatible with row based bootstrap carousel (XS version)
@@ -126,7 +143,68 @@
 				}
 			}, $scope.group.organizersBuiltXS); // Used as "this" above
 			//console.log($scope.group.organizersBuiltXS);
-		};		
+			angular.forEach($scope.group.organizersToAdd, function(organizer) {
+				// Add new row if the row is filled
+				if (currentIndex === 2) {
+					this.push({organizers: []});
+					currentRow++;
+					currentIndex = 0;
+					this[currentRow].organizers.push(organizer);
+					currentIndex++;
+				}
+				// Push an organizer to current working row
+				else {
+					this[currentRow].organizers.push(organizer);
+					currentIndex++;
+				}
+			}, $scope.group.organizersBuiltXS); // Used as "this" above
+			//console.log($scope.group.organizersBuiltXS);
+		};	
+		
+
+		/***************************************************************************
+		 * Get Functions
+		 **************************************************************************/
+		$scope.searchUsers = function() {
+			$scope.searchResultsPristine = true;
+			$scope.isSearching = true;
+			// Get search results from server
+			$scope.searchResults = [{
+				id :			"huy",
+				firstName : 	"Huy",
+				lastName : 		"Le"
+			},{
+				id :			"kris",
+				firstName : 	"Kristopher",
+				lastName : 		"Tadlock",
+				picture : 		"//placekitten.com/g/1001/1001/"
+			},{
+				id :			"vadzim",
+				firstName : 	"Vadzim",
+				lastName : 		"LN",
+				picture : 		"//placekitten.com/g/1002/1002/"
+			},{
+				id :			"shane",
+				firstName : 	"Shane",
+				lastName : 		"Singh",
+				picture : 		"//placekitten.com/g/1003/1003/"
+			},{
+				id :			"john",
+				firstName : 	"John",
+				lastName : 		"LN",
+				picture : 		"//placekitten.com/g/1004/1004/"
+			}
+			];
+			
+			// If the user is already in Organizers to be added list, give the CSS style to that user
+			angular.forEach($scope.group.organizersToAdd, function(currentOrganizerToAdd) {
+				angular.forEach($scope.searchResults, function(currentSearchResult) {
+					if (currentSearchResult.id === currentOrganizerToAdd.id)
+						currentSearchResult.added = "added";
+				});
+			});
+		}
+		
 		/***************************************************************************
 		 * Posting Functions
 		 **************************************************************************/
@@ -142,9 +220,13 @@
 		 **************************************************************************/
 		$scope.addInterest = function (interest) {
 			var hasInterest = false;
+			// Variable for array to be rebuilt so that there are no empty elements
 			var newInterests = [];
+			// Rebuild interests array
+			// Checks if the interest selected is in the interest's array
 			angular.forEach($scope.group.interests, function(currentInterest, index) {
 				console.log(currentInterest.type);
+				// If in array, remove class to show that it is now unselected
 				if (currentInterest.type === interest){
 					console.log("removed " + interest);
 					hasInterest = true;
@@ -172,11 +254,13 @@
 						break;
 					}
 				}
+				// Otherwise, add to rebuilt array
 				else {
 					console.log(currentInterest);
 					newInterests.push(currentInterest);
 				}
 			});
+			// Add interest if it was not in array
 			if (hasInterest === false){
 				console.log("added " + interest);
 				newInterests.push({type: interest});
@@ -204,6 +288,7 @@
 					break;
 				}
 			}
+			// Set the new interest array
 			$scope.group.interests = newInterests;
 			console.log($scope.group.interests);
 		}
@@ -211,12 +296,59 @@
 		/***************************************************************************
 		 * Adding/Removing Organizers Function
 		 **************************************************************************/
-		$scope.addOrganizer = function() {
-			
+		/*
+		 * Adds an organizer to $scope.group.organizersToAdd array
+		 */
+		$scope.addOrganizer = function(index) {
+			var alreadyAdded = false;
+			// Checks if the organizers to be added array is empty or not
+			if ($scope.group.organizersToAdd.length > 0){
+				// Checks if user has already been added
+				angular.forEach($scope.group.organizersToAdd, function(currentOrganizerToAdd) {
+					// If user is already in the array, flag will be true
+					if (currentOrganizerToAdd.id === $scope.searchResults[index].id){
+						console.log(currentOrganizerToAdd + "already added");
+						alreadyAdded = true;
+					}
+				});
+			}
+			// If not added yet, add to array + set class to show it has been added
+			if (!alreadyAdded){
+				$scope.group.organizersToAdd.push($scope.searchResults[index]);
+				$scope.searchResultsPristine = false;
+				$scope.searchResults[index].added = "added";
+			}
+			console.log($scope.group.organizersToAdd);
 		}
-		
-		$scope.removeOrganizer = function() {
-			
+
+		/*
+		 * Removes an organizer from $scope.group.organizersToAdd array
+		 */
+		$scope.removeOrganizer = function(index) {
+			// Variable for array to be rebuilt so that there are no empty elements
+			var newOrganizersToAdd = [];
+			// Rebuild $scope.group.organizersToAdd array
+			// Goes through $scope.group.organizersToAdd array to remove "index"
+			angular.forEach($scope.group.organizersToAdd, function(currentOrganizerToAdd) {
+				// If the index to be removed is found
+				//		- do not add to rebuilt array
+				//		- remove class in search results that shows that it has been added if applicable
+				if (currentOrganizerToAdd.id === $scope.group.organizersToAdd[index].id){
+					console.log("removed " + currentOrganizerToAdd);
+					angular.forEach($scope.searchResults, function(currentSearchResult) {
+						if (currentSearchResult.id === currentOrganizerToAdd.id)
+							currentSearchResult.added = "";
+					});
+				}
+				// Otherwise, add organizer to be added to rebuilt array
+				else {
+					console.log(currentOrganizerToAdd);
+					newOrganizersToAdd.push(currentOrganizerToAdd);
+				}
+			});
+			// Sets the rebuilt array
+			$scope.group.organizersToAdd = newOrganizersToAdd;
+			console.log($scope.group.organizersToAdd);
 		}
 
 		/***************************************************************************
@@ -249,6 +381,8 @@
 					else
 						return false;
 				}
+				else 
+					return false;
 			case "organizerXS":
 				if ($scope.group.organizersBuiltXS != null){
 					if ($scope.group.organizersBuiltXS[index1].organizers[index2].picture != null){
@@ -260,6 +394,8 @@
 					else
 						return false;
 				}
+				else 
+					return false;
 			case "subscriber":
 				if ($scope.group.subscribers != null){
 					if ($scope.group.subscribers[index1].picture != null){
@@ -271,6 +407,8 @@
 					else
 						return false;
 				}
+				else 
+					return false;
 			case "event":
 				if ($scope.group.events != null){
 					if (type2 != null) {
@@ -295,6 +433,34 @@
 							return false;
 					}
 				}
+				else 
+					return false;
+			case "searchedUser":
+				if ($scope.searchResults != null && $scope.searchResults.length > 0){
+					if ($scope.searchResults[index1].picture != null){
+						if ($scope.searchResults[index1].picture.length > 0)
+							return true;
+						else
+							return false;
+					}
+					else
+						return false;
+				}
+				else 
+					return false;
+			case "organizerToAdd":
+				if ($scope.group.organizersToAdd != null){
+					if ($scope.group.organizersToAdd[index1].picture != null){
+						if ($scope.group.organizersToAdd[index1].picture.length > 0)
+							return true;
+						else
+							return false;
+					}
+					else
+						return false;
+				}
+				else 
+					return false;
 			}
 		}
 
@@ -328,8 +494,35 @@
 			return false;
 		}
 		
-		$scope.hasOrganizers = function() {
-			return true;
+		/*
+		 * Checks if there are more than n organizers
+		 */
+		$scope.hasOrganizers = function(amount) {
+			var total = 0;
+			if ($scope.group.organizers != null){
+				total += $scope.group.organizers.length;
+			}
+			if ($scope.group.organizersToAdd != null){
+				total += $scope.group.organizersToAdd.length;
+			}
+			if (total > amount)
+				return true;
+			else
+				return false;
+		}
+		
+		$scope.getIsSearching = function() {
+			return $scope.isSearching;
+		}
+		
+		$scope.hasResults = function() {
+			if ($scope.searchResults.length > 0)
+				return true;
+			else
+				return false;
+		}
+		
+		$scope.hasOrganizersToAdd = function() {
 			if ($scope.group.organizersToAdd != null && $scope.group.organizersToAdd.length > 0)
 				return true;
 			else
@@ -341,6 +534,10 @@
 		 **************************************************************************/
 		$scope.enablePreview = function() {
 			$scope.isPreviewing = true;
+			// Build an array for displaying organizers in a carousel
+			buildOrganizers();
+			// Build one for mobile view also
+			buildOrganizersXS();
 		}
 		
 		$scope.cancelPreview = function() {
@@ -367,24 +564,64 @@
 
 
 /*
+	user: {
+		firstName : 	String,
+		middleName : 	String,
+		lastName : 		String,
+		description : 	String,
+		picture:		String,
+		email : 		String,
+		birthday : 		Date,
+		age : 			Number,
+		location :		{city: String, state: String, zipcode: String},	
+		phoneNum : 		Number,
+		googlePlus : 	String,
+		facebook : 		String,
+		linkedIn : 		String,
+		twitter : 		String,
+		volunteeredTo : [{id: String}, {id: String}, ...],
+		creatorOf : 	[{id: String}, {id: String}, ...],
+		organizerOf : 	[{id: String}, {id: String}, ...],
+		subscribedTo : 	[{id: String}, {id: String}, ...],
+		interests : 	[{type: String}, {type: String}, ...]
+	}
+*/
+
+/*
 	group: {
 		id : 				String,
-		groupName : 		String,
+		name : 				String,
 		picture : 			String,
 		creationDate : 		String,
-			//city : 			String,
-			//state : 			String,
-			//zipCode : 		Number,
+		location :			[{city: String, state: String, zipcode: String}, ...],
 		description : 		String,
 		googlePlusURL : 	String,
 		facebookURL : 		String,
 		linkInURL : 		String,
 		twitterURL: 		String,
 		personalWebsiteURL: String,
-		events:			[{id: String}, {id: String}, ...],
-		organizers:		[{id: String}, {id: String}, ...],
+		events:				[{id: String}, {id: String}, ...],
+		organizers:			[{id: String}, {id: String}, ...],
 		subscribers:		[{id: String}, {id: String}, ...],
-		interests: 	[{type: String}, {type: String}, ...]
+		interests: 			[{type: String}, {type: String}, ...]
 
+	}
+*/
+
+/*
+	event: {
+		id: 			String,		
+		creatorId: 		String,
+		groupId: 		String,
+		name: 			String,
+		description: 	String,
+		picture: 		String,
+		creationDate: 	DateTime,
+		startTimeDate: 	DateTime,
+		endTimeDate: 	DateTime,
+		location :		{street: String, city: String, state: String, zipcode: String},	
+		maxVolunteers: 	Number,
+		volunteers:		[{id: String}, {id: String}, ...],
+		interests: 		[{type: String}, {type: String}, ...]
 	}
 */

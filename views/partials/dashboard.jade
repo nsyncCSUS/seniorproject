@@ -1,6 +1,6 @@
 h1 Dashboard Page
 
-.well
+div
     ul.nav.nav-tabs
             li#yourEvents(ng-click='setCurrentTab("yourEvents")', ng-class='{ active:getCurrentTab("yourEvents") }', ng-init='setCurrentTab("yourEvents")')
                 a(href='') Upcoming Events
@@ -46,9 +46,10 @@ h1 Dashboard Page
                                         h4 End Time 
                                         h5 {{event.endTimeDate | date:'medium'}}
                                     .col-xs-12.col-sm-12.col-md-3.col-lg-4
+                                        h4 Will participate
                                         h5 {{event.volunteers.length}} of {{event.maxVolunteers}}
-                                    .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                                        h2.text-center Volunteers
+                                    .col-xs-12.col-sm-12.col-md-12.col-lg-12.panel-default
+                                        h2.text-center.panel-heading Volunteers
                                         .col-xs-2.col-sm-2.col-md-2.col-lg-2(ng-repeat='volunteer in event.volunteers')
                                             a(ng-href='/users/{{volunteer.id}}/')
                                                 img.img-responsive.img-rounded(ng-src="{{volunteer.picture}}", tooltip='{{volunteer.firstName}} {{volunteer.lastName}}', ng-if='hasPicture("event", $parent.$index, "volunteer", $index)')
@@ -71,36 +72,33 @@ h1 Dashboard Page
                                         h4 End Time 
                                         h5 {{event.endTimeDate | date:'medium'}}
                                     .col-xs-12.col-sm-12.col-md-3.col-lg-4
+                                        h4 Will participate
                                         h5 {{event.volunteers.length}} of {{event.maxVolunteers}}
-                                    .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                                        h2.text-center Volunteers
+                                    .col-xs-12.col-sm-12.col-md-12.col-lg-12.panel-default
+                                        h2.text-center.panel-heading Volunteers
                                         .col-xs-2.col-sm-2.col-md-2.col-lg-2(ng-repeat='volunteer in event.volunteers')
                                             a(ng-href='/users/{{volunteer.id}}/')
                                                 img.img-responsive.img-rounded(ng-src="{{volunteer.picture}}", tooltip='{{volunteer.firstName}} {{volunteer.lastName}}', ng-if='hasPicture("event", $parent.$index, "volunteer", $index)')
                                                 img.img-responsive.img-rounded(ng-src="//placehold.it/250x250", tooltip='{{volunteer.firstName}} {{volunteer.lastName}}', ng-if='!hasPicture("event", $parent.$index, "volunteer", $index)')
  
     div(ng-show='getCurrentTab("groupEvents")')       
-        .row        
-            .col-xs-12.col-sm-6.col-md-4.col-lg-8
-                div.yourEvents
-                    h2.text-center Your Group Events
-                    .container-fluid
-                        .col-xs-12.col-sm-6.col-md-4.col-lg-4
-                            h3 Event Title
-                        .col-xs-4.col-sm-2.col-md-1.col-lg-4
-                            h3 Date
-                        .col-xs-4.col-sm-2.col-md-1.col-lg-4
-                            h3 Time
-                    div(ng-repeat='e in user.subscribedTo')    <!--goes through the list contained in upcomingEvents-->
-                        .col-xs-12.col-sm-6.col-md-4.col-lg-4
-                            h4 {{e.name}}
-                        .col-xs-4.col-sm-2.col-md-1.col-lg-4
-                            h4 {{e.startTimeDate | date:'medium'}}
-                        .col-xs-4.col-sm-2.col-md-1.col-lg-4
-                            h4 {{e.endTimeDate | date:'medium'}}
-                            
-            .col-xs-12.col-sm-6.col-md-4.col-lg-4
-                div.calendar
+        div.yourEvents
+            h2.text-center Your Group Events
+            div(ng-repeat='e in user.subscribedTo')    <!--goes through the list contained in upcomingEvents-->
+                .col-xs-12.col-sm-6.col-md-4.col-lg-12 
+                    .col-xs-12.col-sm-6.col-md-4.col-lg-3
+                        img.img-responsive(src = "{{e.picture}}")
+                    .col-xs-12.col-sm-6.col-md-4.col-lg-1
+                        h4 {{e.name}}
+                    .col-xs-4.col-sm-2.col-md-1.col-lg-3
+                        h4 {{e.startTimeDate | date:'medium'}}
+                    .col-xs-4.col-sm-2.col-md-1.col-lg-3
+                        h4 {{e.endTimeDate | date:'medium'}}
+                .col-xs-12.col-sm-6.col-md-4.col-lg-12
+                    hr
+                   
+            //.col-xs-12.col-sm-6.col-md-4.col-lg-4
+            //    div.calendar
 
     div(ng-show='getCurrentTab("eventsHistory")')         
         div.history
