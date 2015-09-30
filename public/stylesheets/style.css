@@ -74,7 +74,6 @@ a {
     height: 64px;
 }
 
-<<<<<<< HEAD
 .add:hover {
     border: 2px solid #000000;
     position:relative;
@@ -85,27 +84,7 @@ a {
     border: 2px solid #000000;
     position:relative;
     display:inline-block;
-||||||| merged common ancestors
-.inviteOrganizer:hover {
-    border: 2px solid #00ff00;
-=======
-.add:hover {
-    border: 2px solid #000000;
-    position:relative;
-    display:inline-block;
->>>>>>> vadzimBranch
 }
-<<<<<<< HEAD
-
-.addOverlay{
-    display: none;
-}
-.removeOverlay{
-    display: none;
-||||||| merged common ancestors
-.removeOrganizer:hover {
-    border: 2px solid #ff0000;
-=======
 
 .remove:hover {
     border: 2px solid #000000;
@@ -129,7 +108,6 @@ a {
     height:100%;
     top: 0;
     left: 0;
->>>>>>> vadzimBranch
 }
 .remove:hover .removeOverlay {
     background-color: #ff0000;
@@ -237,20 +215,9 @@ a {
 }
 /**********************************************************************
     Event CSS END
-<<<<<<< HEAD
 **********************************************************************/
 
 .event-item { 
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
-||||||| merged common ancestors
-**********************************************************************/
-=======
-**********************************************************************/
-
-.event-item { 
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    font-weight: bold;
-}
->>>>>>> vadzimBranch
