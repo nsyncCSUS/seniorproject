@@ -40,20 +40,6 @@
         });
     });
 
-
-    // Uses the method .on to detect if an angular route has beend changed if that is the case
-    // run the condition, checks the route access and also checks if the use is logged in
-    app.run(function(LoginService, $rootScope, $location) {
-        $rootScope.$on('$routeChangeStart', function(e, curr, prev) {
-            console.log(curr);
-            console.log(prev);
-            //console.log(prev.access.isFree);
-            //if (!curr.access.isFree && !LoginService.isLogged) {
-            //    $location.path('/login');
-            //}
-        });
-    });
-
     app.config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
         $httpProvider.interceptors.push('authInterceptor'); // Everytime there is an http request the authInterceptor object will append the
         // token to the config.header. On the serverside express-jwt module will check this token if the route is protected
@@ -168,10 +154,10 @@
      * Overrite refresh back event to redirect back 
      * to application root. 
      */
-    angular.module('app').run(['$document', '$window', function($document, $window) {
+    /*angular.module('app').run(['$document', '$window', function($document, $window) {
         $window.onunload = function(event) {
             $window.location.href = '/';
         };
-    }]);
+    }]);*/
 
 })();
