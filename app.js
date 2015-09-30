@@ -4,11 +4,18 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var sass = require('node-sass-middleware'); 
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var groups = require('./routes/groups');
 var events = require('./routes/events');
+
+var expressJwt = require('express-jwt');
+var multipart = require('connect-multiparty');
+
+
+
 
 
 //this will aquire my database login file
@@ -32,23 +39,42 @@ mongoose.connect(dbConfig.url, options); // Corrected URI
 //mongoose.model('Users', {FirstName: String, MiddleName: String, LastName: String, Description: String, Email: String, Birthday: Date, Age: Number, City: String, State: String, ZipCode: Number, PhoneNum: Number, Picture: String, VolunteeredTo: String, CreatorOf: String, OrganizerOf: String, SubscribedTo: String, GooglePlus: String, Facebook: String, LinkenIn: String, Twitter: String, Interests: String, Skills: String })
 
 var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+
+app.use(multipart({
+    uploadDir: './temp/'
+}));
+
+
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({limit: "50mb"}));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// John: Adding sass compiler to project 
+app.use(sass({
+    src: __dirname + '/sass',
+    dest: __dirname + '/public/stylesheets',
+    debug: true 
+}));
+
+
+app.use('/', index);
 app.use('/users', users);
 app.use('/groups', groups);
 app.use('/events', events);
 app.use('/', index);
+
 
 
 // catch 404 and forward to error handler

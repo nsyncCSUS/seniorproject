@@ -50,19 +50,20 @@ module.exports = function(grunt) {
                 files: [{ 
                     expand: true, 
                     cwd: '', 
-                    src: ['src/**/*.jade'], // 'src/error.jade'], 
+                    src: ['src/**/*.jade'], 
                     dest: 'build/',
                     ext: '.html'
                 }] 
             }
         },
         insert: {
+
             "data.1": "test/data/data.groups.1.json",
-            "data.2": "test/data/data.users.1.json" 
+            "data.2": "test/data/data.users.1.json"
         },
         delete: {
             "data.1": "test/data/data.groups.1.json",
-            "data.2": "test/data/data.users.1.json" 
+            "data.2": "test/data/data.users.1.json"
         },
         jshint: {
             options: {
