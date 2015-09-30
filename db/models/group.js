@@ -3,13 +3,44 @@
     'use strict';
     
     var mongoose = require('mongoose');
-    var Schema = mongoose.Schema; 
+    var Schema = mongoose.Schema;
+    var ObjectId = Schema.ObjectId; 
+    var Event = require('./event');
+    var User = require('./user'); 
     
     /**
      * Schema for Group Objects 
      */
     var GroupSchema = new Schema({
-        name: String
+        GroupName: String,
+        
+        EventList: [{
+            type: ObjectId,
+            ref: 'Event'
+        }],
+        
+        CreationDate: Date,
+        city: String,
+        state: String,
+        zipcode: String,
+        
+        OrganizerList: [{
+            type: ObjectId,
+            ref: 'User'
+        }],
+        
+        SubscriptionList: [{
+            type: ObjectId,
+            ref: 'User'
+        }],
+        
+        Decsription: String,
+        //GooglePlus: {},
+        //Facebook: {},
+        //LinkedIn: {},
+        //Twitter: {},
+        //Website: {},
+        Interests: [String] 
     }); 
     
     

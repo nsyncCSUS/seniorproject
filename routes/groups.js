@@ -130,30 +130,37 @@
         });
     });
 
-    
+
     router.put('/:id', function(request, response, next) {
         var id = request.params.id;
-        var group = util.takeGroupProjection(request.params.group); 
-        Group.findByIdAndUpdate(id, group, function(err) {
-            if(err) {
-                util.err(err, response); 
-            }
-
-            return response.end(); 
+        //console.log(request.body.group); 
+        var group = JSON.parse(request.body.group); 
+        Group.findByIdAndUpdate(id, group, {new: true}, function(err, group) {
+            return response.send({group: group}); 
         });
     });
 
-    
-    router.post('/', function(request, response, next) {
-        var params = util.takeGroupProjection(request.params.group);
-        var group = new Group(group);
-        group.save(function(err) {
-            if(err) {
-                util.err(err, response); 
-            }
 
-            return response.end(); 
-        });
+    // Get user by username, create group, add user as
+    // creation user, add user to subscribers list,
+    // add user to organizers list, add group to user's
+    // groups list 
+    router.post('/', function(request, response, next) {
+        var username = request.body.username; 
+        var params = request.params.group; 
+        var group = new Group(group);
+
+        User.findOne({'userAuth.userName': username}, function(err, user) {
+            if(err) return util.err(err, response); 
+            group.CreationUser = user;
+            return group.save(function(err, group) {
+                if(err) util.err(err, response); 
+                return group.update({$push:{}}, function(err, group) {
+                    if(err) return util.err(err, response); 
+                    return response.send({group: group}); 
+                }); 
+            }); 
+        }); 
     });
 
     
@@ -181,7 +188,8 @@
             if(err) {
                 return util.err(err, response);
             } else {
-                return response.send({events: group.events}); 
+                var events = group.events || []; 
+                return response.send({events: events}); 
             }
         });
     });
@@ -196,7 +204,7 @@
             } else {
                 var event = group.events.filter(function(index, item) {
                     return item._id == id2;
-                })[0];
+                }).pop() || {};
 
                 return response.send({event: event}); 
             }
@@ -204,74 +212,162 @@
     });
     
 
-    // events.put('/:id2', function(request, response, next) {
-    //   return Http404(response); 
-    // }); 
-
+    // Must have a group specified to create an event? 
     // events.post('/', function(request, response, next) {
     //   return Http404(response); 
     // }); 
 
+    // Cannot delete an event from a group without deleting the
+    // whole event. 
     // events.delete('/:id2', function(request, response, next) {
     //   return Http404(response); 
     // }); 
 
 
-
     /**
-     * Nested Router for Users 
+     * Router for Requesting volunteers 
      */
-    var users = express.Router({mergeParams: true});
+    var volunteers = express.Router({mergeParams: true}); 
 
-    
-    users.get('/', function(request, response, next) {
+    // Get the full list of volunteers from a group 
+    volunteers.get('/', function(request, response) {
         var id1 = request.params.id1;
-        Group.findById(id1, function(err, group) {
+        return Group.findById(id1, function(err, group) {
             if(err) {
                 return util.err(err, response);
             } else {
-                var users = group.users; 
-                return response.send({users: users}); 
+                var subscribers = group.SubscriptionList || []; 
+                return response.send({'volunteers': subscribers});
             }
-        });
+        }); 
+    }); 
+
+    
+    // Get a particular volunteer's information 
+    volunteers.get('/:id2', function(request, response) {
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        return Group.findById(id2, function(err, group) {
+            var user = group.VolunteerList.filter(function(item) {
+                return item._id == id2; 
+            }).pop();
+
+            return response.send({Volunteer: user}); 
+        }); 
+    });
+    
+
+    // Add a user to the list of volunteers 
+    volunteers.post('/:id2', function(request, response) {
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        return Group.findById(id1, function(err, group) {
+            if(err) return util.err(err, response); 
+            return User.findById(id2, function(err, user) {
+                if(err) return util.err(err, response);
+                return group.update({$push:{VolunteerList:user}}, function(err, group) {
+                    if(err) return util.err(err, response);
+                    return response.send({group: group}); 
+                }); 
+            }); 
+        }); 
+    }); 
+
+    
+    // Delete a user from the list of volunteers
+    volunteers.delete('/:id2', function(request, response) { 
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        return Group.findById(id1, function(err, group) {
+            if(err) return util.err(err, response);
+            return User.findById(id2, function(err, user) {
+                if(err) return util.err(err, response); 
+                return group.update({$remove:{VolunteerList: user}}, function(err, group) {
+                    if(err) return util.err(err, response);
+                    return response.send({group: group}); 
+                }); 
+            }); 
+        }); 
+    }); 
+    
+
+    /**
+     * Nested Router for handling Organizer requests 
+     */
+    var organizers = express.Router({mergeParams: true}); 
+
+
+    // Get the full organizer list
+    organizers.get('/', function(request, response) {
+        var id1 = request.params.id1;
+        return Group.findById(id1, function(err, group) {
+            if(err) {
+                return util.err(err, response);
+            } else {
+                var organizers = group.OrganizerList || []; 
+                return response.send({OrganizerList: organizers});
+            }
+        }); 
     });
 
     
-    users.get('/:id2', function(request, response, next) {
+    // Get a particular organizer 
+    organizers.get('/:id2', function(request, response) {
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        return Group.findById(id1, function(err, group) {
+            if(err) return util.err(err, response);
+            var user = group.OrganizerList.filter(function(item) {
+                return item._id == id2; 
+            }) || {};
+
+            return response.send({Organizer: user}); 
+        }); 
+    }); 
+
+    
+    // Add user to organizers list
+    organizers.post('/:id2', function(request, response) {
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        return Group.findById(id1, function(err, group) {
+            if(err) return util.err(err, response);
+            return User.findById(id2, function(err, user) {
+                if(err) return util.err(err, response);
+                return group.update({$push:{OrganizerList:user}}, function(err, group) {
+                    if(err) return util.err(err, response);
+                    return response.send({group: group}); 
+                }); 
+            }); 
+        }); 
+    });
+    
+    
+    // Remove an organizer from the organizer list 
+    organizers.delete('/:id2', function(request, response) { 
         var id1 = request.params.id1;
         var id2 = request.params.id2;
         Group.findById(id1, function(err, group) {
-            if(err) {
-                return util.err(err, response);
-            } else {
-                var user = group.users.filter(function(index, item) {
-                    return item._id == id2; 
-                });
+            if(err) return util.err(err, response);
+            return User.findById(id2, function(err, user) {
+                if(err) return util.err(err, response);
+                return group.update({$remove:{OrganizerList:user}}, function(err, group) {
+                    if(err) return util.err(err, response);
+                    return response.send({group: group}); 
+                }); 
+            }); 
+        }); 
+    }); 
 
-                return response.send({user: user}); 
-            }
-        });
-    });
-
- 
-    // users.put('/:id', function(request, response, next) {
-    //   return Http404(response); 
-    // }); 
-
-    // users.post('/', function(request, response, next) {
-    //   return Http404(response); 
-    // }); 
-
-    // users.delete('/:id', function(request, response, next) {
-    //   return Http404(response); 
-    // }); 
-
-
-    // Attach nested routers to global router 
-    router.use('/events', events);
-    router.use('/users', users);
+    
+    // Attach nested routers to global router
+    //router.use('/users', users);
+    router.use('/:id1/events', events);
+    router.use('/:id1/volunteers', volunteers);
+    router.use('/:id1/organizers', organizers); 
 
     module.exports = router;
 
 
-})(module);
+})(module); 
+
