@@ -124,12 +124,6 @@
 			
 			// Get Organizers by ID
 			
-			// Build an array for displaying organizers in a carousel
-			buildOrganizers();
-			// Build one for mobile view also
-			buildOrganizersXS();
-			// Get Subscribers by ID
-			$scope.loaded = true;
 		});
 		*/
 
@@ -766,6 +760,21 @@
 		subscribers:		[{id: String}, {id: String}, ...],
 		interests: 			[{type: String}, {type: String}, ...]
 
+/*
+	event: {
+		id: 			String,		
+		creatorId: 		String,
+		groupId: 		String,
+		name: 			String,
+		description: 	String,
+		picture: 		String,
+		creationDate: 	DateTime,
+		startTimeDate: 	DateTime,
+		endTimeDate: 	DateTime,
+		location :		{street: String, city: String, state: String, zipcode: String},	
+		maxVolunteers: 	Number,
+		volunteers:		[{id: String}, {id: String}, ...],
+		interests: 		[{type: String}, {type: String}, ...]
 	}
 */
 
