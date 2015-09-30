@@ -83,7 +83,7 @@
 								 {picture : "//placekitten.com/g/501/500/",
 		                         startTimeDate: "2016-08-26T18:50:10.111Z", 
 								 endTimeDate: "2016-09-26T18:50:10.111Z", 
-								 name: 'Event 3', volunteers: [{name: 'Anthony'}, {name: 'Huy'}, {name: 'Shane'}, {name: 'John'}, {name: 'Vadzim'}, {name: 'Kris'0}],
+								 name: 'Event 3', volunteers: [{name: 'Anthony'}, {name: 'Huy'}, {name: 'Shane'}, {name: 'John'}, {name: 'Vadzim'}, {name: 'Kris'}],
 								 maxVolunteers: '35', interests: [{type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]}],
 				creatorOf : 	[{id: ""}, {id: ""}],
 				organizerOf : 	[{id: ""}, {id: ""}],
