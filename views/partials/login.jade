@@ -1,1 +1,9 @@
-h1 LOG IN
+html
+  body
+    h1 Login
+    input(type='text', ng-model='user.username', placeholder='username')
+    br
+    input(type='password', ng-model='user.password', placeholder='password')
+    br
+    br
+    button(ng-click='login()') Login

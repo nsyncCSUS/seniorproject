@@ -2,28 +2,29 @@ h1 Users
 
 h6 {{userId}}
 
-//this code will see if the page will get the information provided by the controller
-table.table
-	thead
-		tr
-			th FirstName
-			th MiddleName
-			th LastName
-			th Description
-			th Email
-			th Birthday
-			th Age
-			th City
-			th ZipCode
-			th PhoneNum
-			th Picture
-			th VolunteeredTo
-			th CreaterOf
-			th OrganizerOf
-			th SubscribedTo
-			th GooglePlus
-			th Facebook
-			th LinkenIn
-			th Twitter
-			th Interests
-			th Skills
+div.aboutMe
+    .col-xs-6
+        img.img-responsive(src='//placehold.it/128x128')
+    .col-xs-6
+        .well
+            h2 About Me
+.row
+    .col-xs-12.col-md-8 
+        button.btn.btn-lg(ng-click='messageUser()') Message User
+.well
+      .row
+            h2.text-center Contact Info
+      .row
+            .col-xs-6.col-md-4 
+               h6 Hello
+      .row
+            .col-xs-6.col-md-4 
+               h6 Hello
+      .row
+            .col-xs-6.col-md-4 
+               h6 Hello
+.row
+      .col-xs-6 
+            h6 Hello 
+      .col-xs-6
+            h6 Hello

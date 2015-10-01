@@ -1,59 +1,198 @@
 (function() {
-	var app = angular.module('eventService', []); 
-	
-	/**
-	 * Event Service
-	 * 
-	 * This Service is meant to act as a wrapper around 
-	 * http calls to the Event controller on the server. 
-	 * This service contains calls to the following routes: 
-	 *
-	 * - GET      /events/
-	 * - GET      /events/:id 
-	 * - PUT      /events/
-	 * - POST     /events/ 
-	 * - DELETE   /events/:id 
-	 *
-	 * - GET      /events/:id/groups
-	 * - GET      /events/:id/users 
-	 * - GET      /events/:id/groups/:id 
-	 * - GET      /events/:id/users/:id 
-	 * - PUT      /events/:id/groups/:id 
-	 * - PUT      /events/:id/users/:id 
-	 * - POST     /events/:id/groups/:id 
-	 * - POST     /events/:id/users/:id 
-	 * - DELETE   /events/:id/groups/:id 
-	 * - DELETE   /events/:id/users/:id 
-	 */
-	app.service('EventService', ['$http', function($http) {
-	  
-	  /**
-	   * Get a list of events. This function retreives a 
-	   * list of events via ajax and returns them to the 
-	   * caller. 
-	   *
-	   * Args: 
-	   * - params: A JSON object containing search parameters
-	   *   to pass to the API. 
-	   * - callback: A function to be called once the http
-	   *   request returns. 
-	   */
-	  this.getEvents = function(params, callback, error) {}; 
-	  this.getEvent = function(params, callback, error) {}; 
-	  this.updateEvent = function(params, callback, error) {}; 
-	  this.createEvent = function(params, callback, error) {}; 
-	
-	  this.getGroupsForEvent = function(params, callback, error) {}; 
-	  this.getGroupForEvent = function(params, callback, error) {}; 
-	  this.getUsersForEvent = function(params, callback, error) {}; 
-	  this.getUserForEvent = function(params, callback, error) {}; 
-	  this.updateGroupForEvent = function(params, callback, error) {}; 
-	  this.updateUserForEvent = function(params, callback, error) {}; 
-	  this.createGroupForEvent = function(params, callback, error) {}; 
-	  this.createUsersForEvent = function(params, callback, error) {}; 
-	  this.deleteGroupForEvent = function(params, callback, error) {}; 
-	  this.deleteUserForEvent = function(params, callback, error) {}; 
-	
-	}]); 
+    var app = angular.module('eventService', []);
+
+    app.service('EventService', ['$http', function($http) {
+
+
+        /**
+         * A list of relevant constants for http functions
+         */
+        this.Constants = Object.freeze({
+            users: 'users',
+            groups: 'groups',
+            events: 'events',
+
+        });
+
+
+        /**
+         * Construct a url from different url components
+         */
+        function constructUrl(item1, item2, item3, item4) {
+            var url = '/';
+            if (item1 != null && item1 != undefined) url += item1 + '/';
+            if (item2 != null && item2 != undefined) url += item2 + '/';
+            if (item3 != null && item3 != undefined) url += item3 + '/';
+            if (item4 != null && item4 != undefined) url += item4 + '/';
+            return url;
+        };
+
+
+        /**
+         * Get users
+         */
+        this.get = function(params, callback, error) {
+            var url = constructUrl(this.Constants.events, params.id);
+            $http.get(url, params).then(function(response) {
+                console.log(response);
+                callback(response);
+            }, function(response) {
+                error(response);
+            });
+        };
+
+
+        this.put = function(params, callback, error) {
+            var url = constructUrl(this.Constants.events, params.id);
+            $http.put(url, params).then(function(response) {
+                console.log(response);
+                callback(response);
+            }, function(response) {
+                error(response);
+            });
+        };
+
+
+        this.post = function(params, callback, error) {
+            var url = constructUrl(this.Constants.events);
+            $http.post(url, params).then(function(response) {
+                console.log(response);
+                callback(response);
+            }, function(response) {
+                error(response);
+            });
+        };
+
+
+        this.delete = function(params, callback, error) {
+            var url = constructUrl(this.Constants.events, params.id);
+            $http.delete(url, params).then(function(response) {
+                console.log(response);
+                callback(response);
+            }, function(response) {
+                error(response);
+            });
+        };
+
+
+        /**
+         * Nested data structure for handling event queries
+         */
+        this.groups = {
+            get: function(params, callback, error) {
+                var url = constructUrl(this.Constants.events,
+                    params.event.id,
+                    this.Constants.events,
+                    params.group.id);
+                $http.get(url, params).then(function(response) {
+                    console.log(response);
+                    callback(response);
+                }, function(response) {
+                    error(response);
+                });
+            },
+
+
+            put: function(params, callback, error) {
+                var url = constructUrl(this.Constants.events,
+                    params.event.id,
+                    this.Constants.events,
+                    params.group.id);
+                $http.put(url, params).then(function(response) {
+                    console.log(response);
+                    callback(response);
+                }, function(response) {
+                    error(response);
+                });
+            },
+
+
+            post: function(params, callback, error) {
+                var url = constructUrl(this.Constants.events,
+                    params.event.id,
+                    this.Constants.events);
+                $http.post(url, params).then(function(response) {
+                    console.log(response);
+                    callback(response);
+                }, function(response) {
+                    error(response);
+                });
+            },
+
+
+            delete: function(params, callback, error) {
+                var url = constructUrl(this.Constants.events,
+                    params.event.id,
+                    this.Constants.events,
+                    params.group.id);
+                $http.delete(url, params).then(function(response) {
+                    console.log(response);
+                    callback(response);
+                }, function(response) {
+                    error(response);
+                });
+            },
+        };
+
+
+        /**
+         * Nested data structure for handling user queries
+         */
+        this.users = {
+            get: function(params, callback, error) {
+                var url = constructUrl(this.Constants.events,
+                    params.event.id,
+                    this.Constants.users,
+                    params.user.id);
+                $http.get(url, params).then(function(response) {
+                    console.log(response);
+                    callback(response);
+                }, function(response) {
+                    error(response);
+                });
+            },
+
+
+            put: function(params, callback, error) {
+                var url = constructUrl(this.Constants.events,
+                    params.event.id,
+                    this.Constants.users,
+                    params.user.id);
+                $http.put(url, params).then(function(response) {
+                    console.log(response);
+                    callback(response);
+                }, function(response) {
+                    error(response);
+                });
+            },
+
+
+            post: function(params, callback, error) {
+                var url = constructUrl(this.Constants.events,
+                    params.event.id,
+                    this.Constants.users);
+                $http.post(url, params).then(function(response) {
+                    console.log(response);
+                    callback(response);
+                }, function(response) {
+                    error(response);
+                });
+            },
+
+
+            delete: function(params, callback, error) {
+                var url = constructUrl(this.Constants.events,
+                    params.event.id,
+                    this.Constants.users,
+                    params.user.id);
+                $http.delete(url, params).then(function(response) {
+                    console.log(response);
+                    callback(response);
+                }, function(response) {
+                    error(response);
+                });
+            },
+        };
+    }]);
 
 })();
