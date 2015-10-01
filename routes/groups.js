@@ -1,210 +1,307 @@
-var express = require('express');
-var router = express.Router();
-// Expressjwt module checks if the token given is correct
-// the token is given though angular every time there is an http request
-// check authInterceptor in seniorprojectapp.js
-var expressJwt = require('express-jwt');
-/*router.use(expressJwt({
-    secret: 'secret'
-}));*/
 
-<<<<<<< HEAD
-router.get('/data/:id', function(req, res) {
-	// Get group from db
-	var json = 
-	{
-			id : "nsync",
-			name : "N.Sync()",
-			picture : "//placekitten.com/g/500/500/",
-			creationDate : "2015-08-26T18:50:10.111Z",
-			city : "Sacramento",
-			state : "CA",
-			zipCode : 95828,
-			description : "Senior project group ftw!!!!!",
-			googlePlusURL : "www.google.com",
-			facebookURL : "https://facebook.com",
-			linkedInURL : "https://linkedin.com",
-			twitterURL : "https://twitter.com",
-			events : [ {
-				id : "event1",
-				name : "event1",
-				picture : "//placekitten.com/g/501/500/",
-				startTimeDate : "2015-08-26T18:50:10.111Z",
-				endTimeDate : "2015-08-27T18:50:10.111Z",
-				maxVolunteers : 50,
-				interests : [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}],
-				volunteers: [{id: "v1", firstName: "Kitten 1", lastName: "1"}, 
-				             {id: "v2", firstName: "Kitten 2", lastName: "1", picture: "//placekitten.com/g/250/251"}, 
-				             {id: "v3", firstName: "Kitten 3", lastName: "1"}, 
-				             {id: "v4", firstName: "Kitten 4", lastName: "1", picture: "//placekitten.com/g/250/253"}, 
-				             {id: "v5", firstName: "Kitten 5", lastName: "1", picture: "//placekitten.com/g/250/254"}, 
-				             {id: "v6", firstName: "Kitten 6", lastName: "1", picture: "//placekitten.com/g/250/255"}, 
-				             {id: "v7", firstName: "Kitten 7", lastName: "1", picture: "//placekitten.com/g/250/256"}, 
-				             {id: "v8", firstName: "Kitten 8", lastName: "1", picture: "//placekitten.com/g/250/257"}, 
-				             {id: "v9", firstName: "Kitten 9", lastName: "1", picture: "//placekitten.com/g/250/258"}, 
-				             {id: "v10", firstName: "Kitten 10", lastName: "1", picture: "//placekitten.com/g/250/259"}, 
-				             {id: "v11", firstName: "Kitten 11", lastName: "1", picture: "//placekitten.com/g/250/260"}]
-			},
-			{
-				id : "event2",
-				name : "event2",
-				picture : "//placekitten.com/g/503/500/",
-				startTimeDate : "2015-08-28T18:50:10.111Z",
-				endTimeDate : "2015-08-29T18:50:10.111Z",
-				maxVolunteers : 50,
-				interests : [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}],
-				volunteers: [{id: "v1", firstName: "Kitten 1", lastName: "1", picture: "//placekitten.com/g/251/250"}, 
-				             {id: "v2", firstName: "Kitten 2", lastName: "1", picture: "//placekitten.com/g/251/251"}, 
-				             {id: "v3", firstName: "Kitten 3", lastName: "1", picture: "//placekitten.com/g/251/252"}, 
-				             {id: "v4", firstName: "Kitten 4", lastName: "1", picture: "//placekitten.com/g/251/253"}, 
-				             {id: "v5", firstName: "Kitten 5", lastName: "1"}, 
-				             {id: "v6", firstName: "Kitten 6", lastName: "1", picture: "//placekitten.com/g/251/255"}, 
-				             {id: "v7", firstName: "Kitten 7", lastName: "1", picture: "//placekitten.com/g/251/256"}, 
-				             {id: "v8", firstName: "Kitten 8", lastName: "1", picture: "//placekitten.com/g/251/257"}, 
-				             {id: "v9", firstName: "Kitten 9", lastName: "1", picture: "//placekitten.com/g/251/258"}, 
-				             {id: "v10", firstName: "Kitten 10", lastName: "1"}, 
-				             {id: "v11", firstName: "Kitten 11", lastName: "1", picture: "//placekitten.com/g/251/260"}, 
-				             {id: "v12", firstName: "Kitten 12", lastName: "1", picture: "//placekitten.com/g/251/261"}, 
-				             {id: "v13", firstName: "Kitten 13", lastName: "1", picture: "//placekitten.com/g/251/262"}, 
-				             {id: "v14", firstName: "Kitten 14", lastName: "1", picture: "//placekitten.com/g/251/263"}, 
-				             {id: "v15", firstName: "Kitten 15", lastName: "1", picture: "//placekitten.com/g/251/264"}, 
-				             {id: "v16", firstName: "Kitten 16", lastName: "1", picture: "//placekitten.com/g/251/265"}]
-			}
-			],
-			organizers : [{id : "org1", firstName : "org1", lastName: "1"},
-			              {id : "org2", firstName : "org2", lastName: "1", picture : "//placekitten.com/g/351/350/"},
-			              {id : "org3", firstName : "org3", lastName: "1", picture : "//placekitten.com/g/352/350/"},
-			              {id : "org4", firstName : "org4", lastName: "1", picture : "//placekitten.com/g/353/350/"},
-			              {id : "org5", firstName : "org5", lastName: "1"},
-			              {id : "org6", firstName : "org6", lastName: "1", picture : "//placekitten.com/g/355/350/"}],
-			subscribers : [{id : "sub1", firstName : "sub1", lastName: "1", picture : "//placekitten.com/g/350/355/"},
-			               {id : "sub2", firstName : "sub2", lastName: "1", picture : "//placekitten.com/g/351/355/"},
-			               {id : "sub3", firstName : "sub3", lastName: "1", picture : "//placekitten.com/g/352/355/"},
-			               {id : "sub4", firstName : "sub4", lastName: "1"},
-			               {id : "sub5", firstName : "sub5", lastName: "1", picture : "//placekitten.com/g/354/355/"},
-			               {id : "sub6", firstName : "sub6", lastName: "1", picture : "//placekitten.com/g/355/355/"},
-			               {id : "sub7", firstName : "sub7", lastName: "1", picture : "//placekitten.com/g/350/355/"},
-			               {id : "sub8", firstName : "sub8", lastName: "1", picture : "//placekitten.com/g/356/355/"},
-			               {id : "sub9", firstName : "sub9", lastName: "1"},
-			               {id : "sub10", firstName : "sub10", lastName: "1", picture : "//placekitten.com/g/358/355/"}],
-			interests : [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]
-	};
-	
-	console.log("Got a GET request for /data/groups/" + req.params.id);
-	console.log("Sending Group '" + json.name + "'");
-	
-	// Send group information back as a json
-	res.json(json);
-});
-=======
-var Constants = Object.freeze({
-  Http404Message: 'Not Found'
-}); 
->>>>>>> refs/remotes/origin/dev
+(function(module) {
+    'use strict';
+
+    var express = require('express');
+    var router = express.Router();
+    var User = require("../db/models/user");
+    var Group = require("../db/models/group");
+    var Event = require("../db/models/event");
+    var util = require("./util.js"); 
 
 
-<<<<<<< HEAD
-router.put('/data/:id', function(req, res) {
-	// Post new group to db (data is in req.body)
-	console.log("Got a PUT request for a new group");
-	console.log("Posted Group '" + req.body.name + "' success.");
-	
-	res.json({msg: true});
-});
-
-router.post('/')
-=======
-/**
- * Function for returning a 404 error 
- */
-function Http404(response) {
-  return response.status(404).send(Constants.Http404Message); 
-}; 
+    // Expressjwt module checks if the token given is correct
+    // the token is given though angular every time there is an http request
+    // check authInterceptor in seniorprojectapp.js
+    var expressJwt = require('express-jwt');
 
 
-/**
- * Global router for Groups  
- */
-var router = express.Router(); 
+    /**
+     * Collection of relevant constants for Routing
+     */
+    var Constants = Object.freeze({
+        Http404Message: 'Not Found'
+    });
 
-router.get('/', function(request, response, next) {
-  return Http404(response); 
-}); 
 
-router.get('/:id', function(request, response, next) {
-  return Http404(response); 
-}); 
+    /**
+     * Function for returning a 404 error 
+     */
+    function Http404(repsonse) {
+        return response.status(404).send(Constants.Http404Message);
+    } 
 
-router.put('/:id', function(request, response, next) {
-  return Http404(response); 
-}); 
 
-router.post('/', function(request, response, next) {
-  return Http404(response); 
-}); 
+    /**
+     * Global router for Groups  
+     */
+    //var router = express.Router();
 
-router.delete('/:id', function(request, response, next) {
-  return Http404(response); 
-}); 
+    router.get('/', function(request, response, next) {
+        var group = util.takeGroupProjection(request.params.group); 
+        Group.find(request.params.group, function(err, groups) {
+            if(err) {
+                util.err(err, response);
+                return response.end(); 
+            } else {
+                return response.send({
+                    groups: groups 
+                }); 
+            }
+        });
+    });
+
+    
+    router.get('/:id', function(request, response, next) {
+        var id = request.params.id;
+        Group.findById(id, function(err, group) {
+            if(err) {
+                util.err(err, response);
+                return response.end();
+            } else {
+                return response.send({group: group}); 
+            }
+        });
+    });
+
+
+    router.put('/:id', function(request, response, next) {
+        var id = request.params.id;
+        //console.log(request.body.group); 
+        var group = JSON.parse(request.body.group); 
+        Group.findByIdAndUpdate(id, group, {new: true}, function(err, group) {
+            return response.send({group: group}); 
+        });
+    });
+
+
+    // Get user by username, create group, add user as
+    // creation user, add user to subscribers list,
+    // add user to organizers list, add group to user's
+    // groups list 
+    router.post('/', function(request, response, next) {
+        var username = request.body.username; 
+        var params = request.params.group; 
+        var group = new Group(group);
+
+        User.findOne({'userAuth.userName': username}, function(err, user) {
+            if(err) return util.err(err, response); 
+            group.CreationUser = user;
+            return group.save(function(err, group) {
+                if(err) util.err(err, response); 
+                return group.update({$push:{}}, function(err, group) {
+                    if(err) return util.err(err, response); 
+                    return response.send({group: group}); 
+                }); 
+            }); 
+        }); 
+    });
+
+    
+    router.delete('/:id', function(request, response, next) {
+        var id = request.params.id;
+        Group.findByIdAndRemove(id, function(err) {
+            if(err) {
+                util.err(err, response);
+            }
+
+            return response.end(); 
+        });
+    });
 
 
 
-/**
- * Nested Router for Events 
- */
-var events = express.Router(); 
+    /**
+     * Nested Router for Events 
+     */
+    var events = express.Router({mergeParams: true});
 
-events.get('/', function(request, response, next) {
-  return Http404(response); 
-}); 
+    events.get('/', function(request, response, next) {
+        var id1 = request.params.id1;
+        Group.findById(id1, function(err, group) {
+            if(err) {
+                return util.err(err, response);
+            } else {
+                var events = group.events || []; 
+                return response.send({events: events}); 
+            }
+        });
+    });
 
-events.get('/:id', function(request, response, next) {
-  return Http404(response); 
-}); 
+    
+    events.get('/:id2', function(request, response, next) {
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        Group.findById(id1, function(err, group) {
+            if(err) {
+                return util.err(err, response);
+            } else {
+                var event = group.events.filter(function(index, item) {
+                    return item._id == id2;
+                }).pop() || {};
 
-events.put('/:id', function(request, response, next) {
-  return Http404(response); 
-}); 
+                return response.send({event: event}); 
+            }
+        });
+    });
+    
 
-events.post('/', function(request, response, next) {
-  return Http404(response); 
-}); 
+    // Must have a group specified to create an event? 
+    // events.post('/', function(request, response, next) {
+    //   return Http404(response); 
+    // }); 
 
-events.delete('/:id', function(request, response, next) {
-  return Http404(response); 
-}); 
-
-
-
-/**
- * Nested Router for Users 
- */
-var users = express.Router(); 
-
-users.get('/', function(request, response, next) {
-  return Http404(response); 
-}); 
-
-users.get('/:id', function(request, response, next) {
-  return Http404(response); 
-}); 
-
-users.put('/:id', function(request, response, next) {
-  return Http404(response); 
-}); 
-
-users.post('/', function(request, response, next) {
-  return Http404(response); 
-}); 
-
-users.delete('/:id', function(request, response, next) {
-  return Http404(response); 
-}); 
+    // Cannot delete an event from a group without deleting the
+    // whole event. 
+    // events.delete('/:id2', function(request, response, next) {
+    //   return Http404(response); 
+    // }); 
 
 
-// Attach nested routers to global router 
-router.use('/events', events); 
-router.use('/users', users); 
+    /**
+     * Router for Requesting volunteers 
+     */
+    var volunteers = express.Router({mergeParams: true}); 
 
->>>>>>> refs/remotes/origin/dev
-module.exports = router;
+    // Get the full list of volunteers from a group 
+    volunteers.get('/', function(request, response) {
+        var id1 = request.params.id1;
+        return Group.findById(id1, function(err, group) {
+            if(err) {
+                return util.err(err, response);
+            } else {
+                var subscribers = group.SubscriptionList || []; 
+                return response.send({'volunteers': subscribers});
+            }
+        }); 
+    }); 
+
+    
+    // Get a particular volunteer's information 
+    volunteers.get('/:id2', function(request, response) {
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        return Group.findById(id2, function(err, group) {
+            var user = group.VolunteerList.filter(function(item) {
+                return item._id == id2; 
+            }).pop();
+
+            return response.send({Volunteer: user}); 
+        }); 
+    });
+    
+
+    // Add a user to the list of volunteers 
+    volunteers.post('/:id2', function(request, response) {
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        return Group.findById(id1, function(err, group) {
+            if(err) return util.err(err, response); 
+            return User.findById(id2, function(err, user) {
+                if(err) return util.err(err, response);
+                return group.update({$push:{VolunteerList:user}}, function(err, group) {
+                    if(err) return util.err(err, response);
+                    return response.send({group: group}); 
+                }); 
+            }); 
+        }); 
+    }); 
+
+    
+    // Delete a user from the list of volunteers
+    volunteers.delete('/:id2', function(request, response) { 
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        return Group.findById(id1, function(err, group) {
+            if(err) return util.err(err, response);
+            return User.findById(id2, function(err, user) {
+                if(err) return util.err(err, response); 
+                return group.update({$remove:{VolunteerList: user}}, function(err, group) {
+                    if(err) return util.err(err, response);
+                    return response.send({group: group}); 
+                }); 
+            }); 
+        }); 
+    }); 
+    
+
+    /**
+     * Nested Router for handling Organizer requests 
+     */
+    var organizers = express.Router({mergeParams: true}); 
+
+
+    // Get the full organizer list
+    organizers.get('/', function(request, response) {
+        var id1 = request.params.id1;
+        return Group.findById(id1, function(err, group) {
+            if(err) {
+                return util.err(err, response);
+            } else {
+                var organizers = group.OrganizerList || []; 
+                return response.send({OrganizerList: organizers});
+            }
+        }); 
+    });
+
+    
+    // Get a particular organizer 
+    organizers.get('/:id2', function(request, response) {
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        return Group.findById(id1, function(err, group) {
+            if(err) return util.err(err, response);
+            var user = group.OrganizerList.filter(function(item) {
+                return item._id == id2; 
+            }) || {};
+
+            return response.send({Organizer: user}); 
+        }); 
+    }); 
+
+    
+    // Add user to organizers list
+    organizers.post('/:id2', function(request, response) {
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        return Group.findById(id1, function(err, group) {
+            if(err) return util.err(err, response);
+            return User.findById(id2, function(err, user) {
+                if(err) return util.err(err, response);
+                return group.update({$push:{OrganizerList:user}}, function(err, group) {
+                    if(err) return util.err(err, response);
+                    return response.send({group: group}); 
+                }); 
+            }); 
+        }); 
+    });
+    
+    
+    // Remove an organizer from the organizer list 
+    organizers.delete('/:id2', function(request, response) { 
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        Group.findById(id1, function(err, group) {
+            if(err) return util.err(err, response);
+            return User.findById(id2, function(err, user) {
+                if(err) return util.err(err, response);
+                return group.update({$remove:{OrganizerList:user}}, function(err, group) {
+                    if(err) return util.err(err, response);
+                    return response.send({group: group}); 
+                }); 
+            }); 
+        }); 
+    }); 
+
+    
+    // Attach nested routers to global router
+    //router.use('/users', users);
+    router.use('/:id1/events', events);
+    router.use('/:id1/volunteers', volunteers);
+    router.use('/:id1/organizers', organizers); 
+
+    module.exports = router;
+
+
+})(module); 
+

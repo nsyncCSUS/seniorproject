@@ -1,16 +1,15 @@
-var fs = require('fs'); 
-var mongo = require('mongojs'); 
-var mongoose = require('mongoose'); 
+var fs = require('fs');
+var mongoose = require('mongoose');
 
 module.exports = function(grunt) {
 
     /**
      * Configuration settings for grunt tasks
-     */ 
+     */
     var Config = Object.freeze({
-	url: '',
-	port: '27017'
-    }); 
+        url: '',
+        port: '27017'
+    });
 
 
     /**
@@ -18,19 +17,17 @@ module.exports = function(grunt) {
      * This is the analog to "insert" and should 
      * be used to remove test data after it is 
      * inserted. 
-     */ 
+     */
     grunt.registerMultiTask('delete', 'Delete data from database', function() {
         grunt.log.write('Removing data...\n\n');
 
-        grunt.log.write('Using file: ' + this.data);
+        grunt.log.write('Using file: ' + this.data + "\n");
+        console.log(__dirname); 
         var path = this.data;
         var data = JSON.parse(fs.readFileSync(path));
-        //grunt.log.write("\nFname: " + data.user.fname + "\n"); 
 
-	var db = mongo.connect(Config.url, Config.port); 
+        //var db = mongo.connect(Config.url, Config.port);
 
         grunt.log.write('\nSuccessfully removed data').ok();
     });
 };
-
-

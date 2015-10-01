@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 
-var users = require('./users.js'); 
-var groups = require('./groups.js'); 
-var events = require('./events.js'); 
+var users = require('./users.js');
+var groups = require('./groups.js');
+var events = require('./events.js');
 
 
 router.get('/', function(req, res, next) {
@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
     } catch (e) {
         return res.status(404).send('Not Found'); 
     } 
-});*/ 
+});*/
 
 
 router.get('/partials/:page', function(req, res, next) {
@@ -36,13 +36,17 @@ router.get('/partials/:page', function(req, res, next) {
     //    title: 'Senior Project'
     //});
 }); 
+//    res.render(page); 
+//    res.render('index', {
+//        title: 'Senior Project'
+//    });
 
 
 
 
-router.use('/users', users); 
-router.use('/groups', groups); 
-router.use('/events', events); 
+router.use('/api/users', users);
+router.use('/api/groups', groups);
+router.use('/api/events', events);
 
 
 
@@ -54,7 +58,6 @@ router.get('*', function(req, res, next) {
         title: 'Senior Project'
     });
 });
-
 
 
 module.exports = router;

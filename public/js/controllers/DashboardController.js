@@ -1,5 +1,5 @@
 (function() {
-<<<<<<< HEAD
+
 	var app = angular.module('dashboardController', ['dashboardService', 'dashboardFactory']);	//creating new module
 	
 	/*create new controller; [] is a list of dependencies to fetch, and pass them all into a constructor function*/
@@ -235,13 +235,6 @@
 		}
 		
 		}]);
-=======
-    var app = angular.module('dashboardController', ['dashboardService', 'dashboardFactory']);
-
-    app.controller('DashboardController', ['$scope', 'DashboardService', 'DashboardFactory', function($scope, DashboardService, DashboardFactory) {
-
-    }]);
->>>>>>> refs/remotes/origin/dev
 
 })();
 

@@ -1,7 +1,7 @@
 (function() {
 
     // 'ui.bootstrap', 
-    var app = angular.module('app', ['ngRoute', 'ngAnimate', 'homeController', 'dashboardController',
+    var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController',
         'usersController', 'groupsController', 'eventsController', 'signupController',
         'loginController', 'logoutController', 'createGroupController', 'createEventController'
     ]);
@@ -33,10 +33,10 @@
         $rootScope.$on('$routeChangeStart', function(e, curr, prev) {
             console.log(curr);
             console.log(prev);
-            console.log(prev.access.isFree);
-            if (!curr.access.isFree && !LoginService.isLogged) {
-                $location.path('/login');
-            }
+            //console.log(prev.access.isFree);
+            //if (!curr.access.isFree && !LoginService.isLogged) {
+            //    $location.path('/login');
+            //}
         });
     });
 
@@ -149,15 +149,15 @@
         });
     }]);
 
-    
+
     /**
      * Overrite refresh back event to redirect back 
      * to application root. 
      */
-    angular.module('app').run(['$document', '$window', function($document, $window) {
+    /*angular.module('app').run(['$document', '$window', function($document, $window) {
         $window.onunload = function(event) {
             $window.location.href = '/';
-        }; 
-    }]); 
+        };
+    }]);*/
 
 })();
