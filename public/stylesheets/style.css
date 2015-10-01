@@ -12,7 +12,7 @@ a {
     color: #00B7FF;
 }
 
- 
+
 
 .center-item {
    display:block;
@@ -43,7 +43,7 @@ a {
     top: 80px;
 }
 
-.event-item { 
+.event-item {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
@@ -178,7 +178,31 @@ a {
     Event CSS END
 **********************************************************************/
 
-.event-item { 
+.event-item {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
+
+/***********************************************************************
+    John's CSS
+***********************************************************************/
+
+
+
+/*.navbar, .navbar-collapse {
+    //background-color: #333;
+    background-color: #0b0715;
+}
+
+html, body {
+    //background-color: #f4f3ee;
+    background-color: #b5b6d7;
+}
+
+.nav, .nav-tabs, .nav li {
+    background-color: #5a5rc4;
+}
+
+.well, .panel, .panel-default, .panel-heading, .panel-body, .panel-footer {
+    //background-color: #9998a5;
+}*/
