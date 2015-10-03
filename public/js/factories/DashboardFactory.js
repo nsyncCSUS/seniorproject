@@ -1,15 +1,15 @@
 (function() {
 
-	var app = angular.module('dashboardFactory', []);
+    var app = angular.module('dashboardFactory', []);
 
-	/**
-	 * Factory class for Event objects
-	 */
-	app.factory('DashboardFactory', [ function() {
+    /**
+     * Factory class for Event objects
+     */
+    app.factory('DashboardFactory', [function() {
 
-		var factory = {};
+        var factory = {};
 
-		return factory;
+        return factory;
 
-	} ]);
+    }]);
 })();

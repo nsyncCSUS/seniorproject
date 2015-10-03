@@ -1,15 +1,23 @@
 doctype html
 html(ng-app='app')
     head
+        //https://developers.google.com/speed/pagespeed/
+        // suggestion made by google pagesspeed 
+        // http://stackoverflow.com/questions/436411/where-is-the-best-place-to-put-script-tags-in-html-markup
+        
         meta(name="viewport" content="width=device-width, initial-scale=0.85, maximum-scale=1, user-scalable=no")
         // CSS
-        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" )
         //link(rel='stylesheet', href='/stylesheets/supernice.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href='/palette.1.scss') 
         // JS
         script(src="http://code.jquery.com/jquery-2.1.4.min.js")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
+          // Taking out min : using min version of angular makes more difficult to debug
+        script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js")
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js")
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js")
         script(src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.3.js")
@@ -24,6 +32,7 @@ html(ng-app='app')
         script(src='/js/controllers/LogoutController.js')
         script(src='/js/controllers/CreateGroupController.js')
         script(src='/js/controllers/CreateEventController.js')
+        script(src='/js/filters/FilterHistory.js') 
         
         script(src='/js/factories/HomeFactory.js')
         script(src='/js/factories/EventFactory.js')
@@ -41,7 +50,9 @@ html(ng-app='app')
         script(src='/js/services/LoginService.js')
         script(src='/js/services/LogoutService.js')
         script(src='/js/services/SignupService.js')
-        
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/7.3.6/ng-file-upload.min.js')
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/7.3.6/ng-file-upload-shim.min.js")
+      
     title= title
     
     nav.navbar.navbar-default.navbar-fixed-top

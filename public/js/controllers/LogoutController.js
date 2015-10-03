@@ -1,26 +1,37 @@
 (function() {
-	var app = angular.module('logoutController', [ 'logoutService' ]);
+    var app = angular.module('logoutController', ['logoutService']);
 
-	app.controller('LogoutController', [ '$scope', 'LogoutService', function($scope, LogoutService) {
+	app.controller('LogoutController', [ '$scope', 'LogoutService','$window','LoginService', function($scope, LogoutService,$window,LoginService) {
 
+		$scope.logout = function(){
+			console.log(window.sessionStorage);
+			window.sessionStorage.clear();
+			console.log(window.sessionStorage);
+			LoginService.isLogged= false;
+		};
+
+        $scope.$on('$viewContentLoaded', function() {
+            $scope.logout();
+            console.log("User logged out");
+        });
+        
 	} ]);
 
 })();
 
+
 /*
-info: {
+user: {
 	firstName : 	String,
 	middleName : 	String,
 	lastName : 		String,
 	description : 	String,
+	picture:		String,
 	email : 		String,
 	birthday : 		Date,
 	age : 			Number,
-	city : 			String,
-	state : 		String,
-	zipCode : 		Number,
+	location :		{city: String, state: String, zipcode: String},	
 	phoneNum : 		Number,
-	picture : 		String,
 	googlePlus : 	String,
 	facebook : 		String,
 	linkedIn : 		String,

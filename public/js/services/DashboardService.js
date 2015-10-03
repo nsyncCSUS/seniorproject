@@ -1,8 +1,8 @@
 (function() {
-	var app = angular.module('dashboardService', []);
+    var app = angular.module('dashboardService', []);
 
-	app.service('DashboardService', [ function() {
+    app.service('DashboardService', [function() {
 
-	} ]);
+    }]);
 
 })();
