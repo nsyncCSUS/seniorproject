@@ -15,7 +15,7 @@
 		$scope.group =  
 		{
 				id : "nsync",
-				name: "N.Sync()",
+				name: "N.Sync().......... .............. ................ ............. ..........................",
 				picture : "//placekitten.com/g/500/500/",
 				creationDate : "2015-08-26T18:50:10.111Z",
 				city : "Sacramento",
