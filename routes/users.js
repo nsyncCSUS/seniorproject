@@ -1,4 +1,3 @@
-
 (function(module) {
     'use strict';
 
@@ -10,7 +9,7 @@
     var Group = require("../db/models/group");
     var Event = require("../db/models/event");
     var util = require("./util");
-
+    var router = express.Router();
 
     /**
      * Collection of relevant constants
@@ -28,7 +27,37 @@
     }
 
 
-    var router = express.Router();
+    router.get('/getall', function(req, res) {
+        console.log('111');
+        User.find({}, function(err, users) {
+            if (err) {
+                throw err;
+            }
+
+            console.log(users);
+
+        });
+        res.end();
+    });
+
+    router.get('/getoneuser', function(req, res) {
+        console.log('111');
+        User.findOne({ 'userAuth.userName':'test3'}, function(err, users) {
+            if (err) {
+                console.log(err);
+                throw err;
+            }
+
+            console.log(users);
+
+        });
+        res.end();
+    });
+
+
+
+
+
     router.post('/', function(req, res) {
         console.log(req.body.username);
 
@@ -146,7 +175,7 @@
     //var router = express.Router();
     router.get('/', function(request, response, next) {
         //var user = util.takeUserProjection(request.params.user);
-        var user = request.params.user; 
+        var user = request.params.user;
         User.find(user, function(err, users) {
             if (err) {
                 return util.err(err, response);
@@ -173,11 +202,15 @@
     router.put('/:id', function(request, response, next) {
         var id = request.params.id;
         //var user = util.takeUserProjection(request.params.user);
-        var user = JSON.parse(request.body.user); 
-        User.findByIdAndUpdate(id, user, {new: true}, function(err, user) {
+        var user = JSON.parse(request.body.user);
+        User.findByIdAndUpdate(id, user, {
+            new: true
+        }, function(err, user) {
             if (err) util.err(err, response);
 
-            return response.send({user: user}); 
+            return response.send({
+                user: user
+            });
         });
     });
 
@@ -189,7 +222,7 @@
         var id = request.params.id;
         User.findByIdAndRemove(id, function(err) {
             if (err) util.err(err, response);
-            return response.end(); 
+            return response.end();
         });
     });
 
@@ -202,18 +235,18 @@
         mergeParams: true
     });
 
-    
+
     events.get('/', function(request, response, next) {
         var id1 = request.params.id1;
-        var event = request.params.event; 
+        var event = request.params.event;
         return User.findById(id1, function(err, user) {
             if (err) {
                 return util.err(err, response);
             } else {
-                var events = user.events || []; 
+                var events = user.events || [];
                 return response.send({
-                    events: events 
-                 });
+                    events: events
+                });
             }
         });
     });
@@ -230,13 +263,13 @@
                 });
 
                 return response.send({
-                    event: event 
+                    event: event
                 });
             }
         });
     });
 
-    
+
     // events.post('/', function(request, response, next) {}); 
     // events.put('/:id2', function(request, response, next) {}); 
     // events.delete('/:id2', function(request, response, next) {}); 
@@ -250,43 +283,43 @@
         mergeParams: true
     });
 
-    
+
     groups.get('/', function(request, response, next) {
         var id1 = request.params.id1;
         User.findById(id1, function(err, user) {
-            if(err) {
+            if (err) {
                 util.err(err, response);
-                return response.end(); 
+                return response.end();
             } else {
                 var groups = user.groups || [];
                 return response.send({
                     groups: groups
-                }); 
-            } 
-        });
-    });
-
-    
-    groups.get('/:id2', function(request, response, next) {
-        var id1 = request.params.id1;
-        var id2 = request.params.id2;
-        User.findById(id1, function(err, user) {
-            if(err) {
-                util.err(err, response);
-                return response.end();
-            } else {
-                var group = user.groups.filter(function(index, item) {
-                    return item._id == id2; 
                 });
-
-                return response.send({
-                    group: group
-                }); 
             }
         });
     });
 
-    
+
+    groups.get('/:id2', function(request, response, next) {
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        User.findById(id1, function(err, user) {
+            if (err) {
+                util.err(err, response);
+                return response.end();
+            } else {
+                var group = user.groups.filter(function(index, item) {
+                    return item._id == id2;
+                });
+
+                return response.send({
+                    group: group
+                });
+            }
+        });
+    });
+
+
     // groups.post('/', function(request, response, next) {}); 
     // groups.put('/:id2', function(request, response, next) {}); 
     // groups.delete('/:id2', function(request, response, next) {}); 

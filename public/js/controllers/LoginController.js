@@ -7,66 +7,75 @@
 (function() {
     var app = angular.module('loginController', ['loginService']);
 
-	app.controller('LoginController', [ 'LoginService','$scope' ,'$http','$location' ,'$window', 'Upload', function(LoginService, $scope, $http, $location, $window, Upload) {
+    app.controller('LoginController', ['LoginService', '$scope', '$http', '$location', '$window', 'Upload', function(LoginService, $scope, $http, $location, $window, Upload) {
 
 
-		// upload later on form submit or something similar
-		    $scope.submit = function() {
-					console.log('testasdf');
-		      if (form.file.$valid && $scope.file && !$scope.file.$error) {
+        // upload later on form submit or something similar
+        $scope.submit = function() {
+            console.log('testasdf');
+            if (form.file.$valid && $scope.file && !$scope.file.$error) {
 
-		        $scope.upload($scope.file);
-		      }
-		    };
+                $scope.upload($scope.file);
+            }
+        };
 
-		    // upload on file select or drop
-		    $scope.upload = function (file) {
-					console.log($scope.myForm);
-					console.log(file);
-		        Upload.upload({
-		            url: '/users/upload',
-		            fields: {'username':'test'},
-		            file: file
-		        }).progress(function (evt) {
-		            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-		            console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-		        }).success(function (data, status, headers, config) {
-		            console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-		        }).error(function (data, status, headers, config) {
-		            console.log('Http status: ' + status);
-		        });
-						$scope.picFile = null;
-						$scope.myForm.$setPristine();
-						$scope.myForm.$setUntouched();
-		    };
-
-
-
-
-
-		$scope.login = function(){
-			$http.post('/users/login',$scope.user)
-			.then(function(response){
-			console.log(response);
-				$window.sessionStorage.token = response.data.token;
-				console.log($window.sessionStorage);
-				$location.path('/home');
-				LoginService.isLogged = 'True';
-			});
-		};
+        // upload on file select or drop
+        $scope.upload = function(file) {
+            console.log($scope.myForm);
+            console.log(file);
+            Upload.upload({
+                url: '/users/upload',
+                fields: {
+                    'username': 'test'
+                },
+                file: file
+            }).progress(function(evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+            }).success(function(data, status, headers, config) {
+                console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+            }).error(function(data, status, headers, config) {
+                console.log('Http status: ' + status);
+            });
+            $scope.picFile = null;
+            $scope.myForm.$setPristine();
+            $scope.myForm.$setUntouched();
+        };
 
 
 
-		$scope.testAuth = function(res){
-        console.log($scope.filepic);
-		};
 
-		$scope.testAuth2 = function(){
-			console.log('testAuth2');
-			$http.post('/users/test');
-		};
 
-	} ]);
+        $scope.login = function() {
+            $http.post('/users/login', $scope.user)
+                .then(function(response) {
+                    console.log(response);
+                    $window.sessionStorage.token = response.data.token;
+                    console.log($window.sessionStorage);
+                    $location.path('/home');
+                    LoginService.isLogged = 'True';
+                });
+        };
+
+
+
+        $scope.testAuth = function(res) {
+
+            console.log('testAuth1');
+            $http.get('/api/users/getoneuser');
+
+        };
+
+        $scope.testAuth2 = function() {
+
+
+            console.log('testAuth2');
+            $http.get('/api/users/getall');
+
+
+        };
+
+    }]);
 })();
 
 /*

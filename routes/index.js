@@ -53,6 +53,7 @@ router.use('/api/events', events);
 /**
  * Render index if no route matched
  */
+
 router.get('*', function(req, res, next) {
     res.render('index', {
         title: 'Senior Project'

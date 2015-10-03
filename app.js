@@ -70,10 +70,7 @@ app.use(sass({
 
 
 app.use('/', index);
-app.use('/users', users);
-app.use('/groups', groups);
-app.use('/events', events);
-app.use('/', index);
+
 
 
 
@@ -108,10 +105,11 @@ app.use(function(err, req, res, next) {
   });
 });
 
+/*
 //the following code will deal with the user GET code
 //this code will mainly deal with the users page
 app.get('/users', function (req, res){
 	console.log('I received a GET request');
 });
-
+*/
 module.exports = app;
