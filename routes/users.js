@@ -27,12 +27,75 @@
     }
 
 
+// req.body.searchString holds the string which will come from home controller/ jade
+
     router.post('/test',function(req,res){
       console.log('tes123123123123123');
+      console.log(req.body);
+      });
+
+
+
+      router.post('/getallevents', function(req, res) {
+        console.log(req.body.searchString);
+          Group.find({}, function(err, users) {
+              if (err) {
+                  throw err;
+              }
+
+              console.log(users);
+
+          });
+          res.end();
+      });
+
+      router.post('/getaevent', function(req, res) {
+          console.log(req.body.searchString);
+        //  req.body.searchString= 'test3';
+          Group.findOne({ 'userAuth.userName':req.body.searchString}, function(err, users) {
+              if (err) {
+                  console.log(err);
+                  throw err;
+              }
+
+              console.log(users);
+
+          });
+
+      });
+
+
+      router.post('/getallevents', function(req, res) {
+        console.log(req.body.searchString);
+          Event.find({}, function(err, users) {
+              if (err) {
+                  throw err;
+              }
+
+              console.log(users);
+
+          });
+          res.end();
+      });
+
+      router.post('/getaevent', function(req, res) {
+          console.log(req.body.searchString);
+        //  req.body.searchString= 'test3';
+          Event.findOne({ 'userAuth.userName':req.body.searchString}, function(err, users) {
+              if (err) {
+                  console.log(err);
+                  throw err;
+              }
+
+              console.log(users);
+
+          });
+
       });
 
 
     router.post('/getallusers', function(req, res) {
+      console.log(req.body.searchString);
         User.find({}, function(err, users) {
             if (err) {
                 throw err;
@@ -45,8 +108,9 @@
     });
 
     router.post('/getauser', function(req, res) {
-        console.log(req);
-        User.findOne({ 'userAuth.userName':'test3'}, function(err, users) {
+        console.log(req.body.searchString);
+      //  req.body.searchString= 'test3';
+        User.findOne({ 'userAuth.userName':req.body.searchString}, function(err, users) {
             if (err) {
                 console.log(err);
                 throw err;

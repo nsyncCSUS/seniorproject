@@ -66,13 +66,14 @@
          });
          */
          //Note: put the params into url encoded you have to decode to extract also its a string
-
+        // Note: http.post will only accept objets not strings
         // HL: anything passed into the jade file angular function will appear in req or
         // You can use $scope since all objects created in jade will also be in thier
         $scope.testAuth = function(req) {
             console.log(req);
-            console.log($scope.test);
-            $http.post('/api/users/getauser', $scope.test);
+            $scope.objectify = {searchString: $scope.test};
+
+            $http.post('/api/users/getauser', $scope.objectify);
 
         };
 
@@ -84,7 +85,8 @@
 
         $scope.testAuth3 = function() {
             console.log('testAuth2');
-            $http.post('/api/users/test','test');
+             $scope.hello = {name: "Boaz"};
+            $http.post('/api/users/test',$scope.hello);
 
         };
 
