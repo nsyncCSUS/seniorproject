@@ -36,7 +36,7 @@
 
 
 
-      router.post('/getallevents', function(req, res) {
+      router.post('/getallgroups', function(req, res) {
         console.log(req.body.searchString);
           Group.find({}, function(err, users) {
               if (err) {
@@ -49,7 +49,7 @@
           res.end();
       });
 
-      router.post('/getaevent', function(req, res) {
+      router.post('/getagroup', function(req, res) {
           console.log(req.body.searchString);
         //  req.body.searchString= 'test3';
           Group.findOne({ 'userAuth.userName':req.body.searchString}, function(err, users) {
