@@ -27,8 +27,12 @@
     }
 
 
-    router.get('/getall', function(req, res) {
-        console.log('111');
+    router.post('/test',function(req,res){
+      console.log('tes123123123123123');
+      });
+
+
+    router.post('/getallusers', function(req, res) {
         User.find({}, function(err, users) {
             if (err) {
                 throw err;
@@ -40,8 +44,8 @@
         res.end();
     });
 
-    router.get('/getoneuser', function(req, res) {
-        console.log('111');
+    router.post('/getauser', function(req, res) {
+        console.log(req);
         User.findOne({ 'userAuth.userName':'test3'}, function(err, users) {
             if (err) {
                 console.log(err);
@@ -51,7 +55,7 @@
             console.log(users);
 
         });
-        res.end();
+
     });
 
 
@@ -170,7 +174,7 @@
 
 
     /**
-     * Global User router 
+     * Global User router
      */
     //var router = express.Router();
     router.get('/', function(request, response, next) {
@@ -215,8 +219,8 @@
     });
 
 
-    // Function handled by Huy's function above 
-    // router.post('/', function(request, response, next) {}); 
+    // Function handled by Huy's function above
+    // router.post('/', function(request, response, next) {});
 
     router.delete('/:id', function(request, response, next) {
         var id = request.params.id;
@@ -229,7 +233,7 @@
 
 
     /**
-     * Nested router for handling event requests 
+     * Nested router for handling event requests
      */
     var events = express.Router({
         mergeParams: true
@@ -270,14 +274,14 @@
     });
 
 
-    // events.post('/', function(request, response, next) {}); 
-    // events.put('/:id2', function(request, response, next) {}); 
-    // events.delete('/:id2', function(request, response, next) {}); 
+    // events.post('/', function(request, response, next) {});
+    // events.put('/:id2', function(request, response, next) {});
+    // events.delete('/:id2', function(request, response, next) {});
 
 
 
     /**
-     * Nested router for handling group requests 
+     * Nested router for handling group requests
      */
     var groups = express.Router({
         mergeParams: true
@@ -320,9 +324,9 @@
     });
 
 
-    // groups.post('/', function(request, response, next) {}); 
-    // groups.put('/:id2', function(request, response, next) {}); 
-    // groups.delete('/:id2', function(request, response, next) {}); 
+    // groups.post('/', function(request, response, next) {});
+    // groups.put('/:id2', function(request, response, next) {});
+    // groups.delete('/:id2', function(request, response, next) {});
 
 
     router.use('/:id1/events', events);

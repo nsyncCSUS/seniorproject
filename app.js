@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var sass = require('node-sass-middleware'); 
+var sass = require('node-sass-middleware');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -61,15 +61,20 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// John: Adding sass compiler to project 
+// John: Adding sass compiler to project
 app.use(sass({
     src: __dirname + '/sass',
     dest: __dirname + '/public/stylesheets',
-    debug: true 
+    debug: true
 }));
 
 
 app.use('/', index);
+app.use('/api/users', users);
+app.use('/api/groups', groups);
+app.use('/api/events', events);
+
+
 
 
 

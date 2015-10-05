@@ -14,8 +14,9 @@ html
 
 
 
-	button(ng-click='testAuth()') test1
+	button(ng-init="test= 'searchtext'", ng-click='testAuth(test)') test1
 	button(ng-click='testAuth2()') test2
+		button(ng-click='testAuth3()') test3
 	br
 
 

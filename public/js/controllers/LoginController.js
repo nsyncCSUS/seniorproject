@@ -57,23 +57,39 @@
                 });
         };
 
+        // needed to pass params you cannot pass data in a get but angular has work around
+        /*
+        $http({
+            url: user.details_path,
+            method: "GET",
+            params: {user_id: user.id}
+         });
+         */
+         //Note: put the params into url encoded you have to decode to extract also its a string
 
-
-        $scope.testAuth = function(res) {
-
-            console.log('testAuth1');
-            $http.get('/api/users/getoneuser');
+        // HL: anything passed into the jade file angular function will appear in req or
+        // You can use $scope since all objects created in jade will also be in thier
+        $scope.testAuth = function(req) {
+            console.log(req);
+            console.log($scope.test);
+            $http.post('/api/users/getauser', $scope.test);
 
         };
 
         $scope.testAuth2 = function() {
-
-
             console.log('testAuth2');
-            $http.get('/api/users/getall');
-
+            $http.post('/api/users/getallusers');
 
         };
+
+        $scope.testAuth3 = function() {
+            console.log('testAuth2');
+            $http.post('/api/users/test','test');
+
+        };
+
+
+
 
     }]);
 })();
@@ -88,7 +104,7 @@ user: {
 	email : 		String,
 	birthday : 		Date,
 	age : 			Number,
-	location :		{city: String, state: String, zipcode: String},	
+	location :		{city: String, state: String, zipcode: String},
 	phoneNum : 		Number,
 	googlePlus : 	String,
 	facebook : 		String,
