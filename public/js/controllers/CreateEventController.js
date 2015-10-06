@@ -6,8 +6,8 @@
         $scope.event = {
                 
         };
-      $scope.event.startTime = new Date();
-      $scope.event.endTime = new Date();
+      $scope.event.startTime = new Date('2015-03-01T00:00:00Z');
+      $scope.event.endTime = new Date('2015-03-01T00:00:00Z');
 
       console.log($scope.event);
       $scope.hstep = 1;
@@ -18,6 +18,7 @@
       var in10Days = new Date();
       in10Days.setDate(in10Days.getDate() + 10);
       
+	  /*
       $scope.dates = {
         date1: new Date('2015-03-01T00:00:00Z'),
         date2: new Date('2015-03-01T12:30:00Z'),
@@ -27,18 +28,17 @@
         date6: new Date(),
         date7: new Date(),
         date8: new Date()
-      };
+      };*/
       
       $scope.open = {
-        date1: false,
-        date2: false,
-        date3: false,
-        date4: false,
-        date5: false,
-        date6: false,
-        date7: false,
-        date8: false
+        startTime: false,
+        endTime: false,
       };
+	  
+	  $scope.timediff = function(start, end){
+		//return moment.utc(moment(end).diff(moment(start))).format("mm")
+		return moment.utc(moment(end).diff(moment(start)))
+	  };
       
       // Disable weekend selection
       $scope.disabled = function(date, mode) {
@@ -68,8 +68,8 @@
       $scope.calculateWatch = $scope.$watch(function() {
         return $scope.dates;
       }, function() {
-        if ($scope.dates.date4 && $scope.dates.date5) {
-          var diff = $scope.dates.date4.getTime() - $scope.dates.date5.getTime();
+        if ($scope.event.startTime && $scope.event.endTime) {
+          var diff = $scope.event.startTime.getTime() - $scope.event.endTime.getTime();
           $scope.dayRange = Math.round(Math.abs(diff/(1000*60*60*24)))
         } else {
           $scope.dayRange = 'n/a';

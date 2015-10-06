@@ -14,29 +14,29 @@ div.descriptionRow
 
 div.titleRow(ng-show='!getIsPreviewing()')
     .container-fluid
-        .col-xs-12.col-sm-12.col-md-4.col-lg-12
-            p.input-group
-                input.form-control(type='text', datetime-picker='MM/dd/yyyy HH:mm', ng-model='dates.date3', is-open='open.date3')
-                span.input-group-btn
-                    button.btn.btn-default(type='button', ng-click="openCalendar($event, 'date3')")
-                        i.fa.fa-calendar
-                    
-        .col-xs-12.col-sm-12.col-md-4.col-lg-12
-            <!--timepicker(ng-model='mytime', ng-change='changed()', hour-step='hstep', minute-step='mstep', show-meridian='ismeridian')-->
+        .col-xs-12.col-sm-12.col-md-4.col-lg-12 
+            .col-xs-12.col-sm-12.col-md-4.col-lg-6
+                .form-inline
+                    label Start Time:
+                    input.form-control(type='text', datetime-picker='MM/dd/yyyy HH:mm', ng-model='event.startTime', ng-disabled = 'true', is-open='open.startTime')
+                    span
+                        button.btn.btn-default(type='button', ng-click="openCalendar($event, 'startTime')")
+                            i.fa.fa-calendar
             
             .col-xs-12.col-sm-12.col-md-4.col-lg-6
-                timepicker(ng-model='event.startTime', hour-step='hstep', minute-step='mstep')
+                .form-inline
+                    label End Time:
+                    input.form-control(type='text', datetime-picker='MM/dd/yyyy HH:mm', ng-model='event.endTime', ng-disabled = 'true', is-open='open.endTime')
+                    span
+                        button.btn.btn-default(type='button', ng-click="openCalendar($event, 'endTime')")
+                            i.fa.fa-calendar
+            label event.duration = timediff(event.startTime,event.endTime)
              
-            .col-xs-12.col-sm-12.col-md-4.col-lg-6
-                timepicker(ng-model='event.endTime', hour-step='hstep', minute-step='mstep')
-                
+                    
+        .col-xs-12.col-sm-12.col-md-4.col-lg-12
             pre.alert.alert-info.
                 Start Time is: {{event.startTime | date:'medium' }}
                 End Time is: {{event.endTime | date:'medium' }}     
-                
-                <!--button.btn.btn-info(type='button', ng-click='toggleMode()') 12H / 24H-->
-                <!--button.btn.btn-default(type='button', ng-click='update()') Set to 14:00-->
-                <!--button.btn.btn-danger(type='button', ng-click='clear()') Clear-->
               
         .col-xs-12.col-sm-12.col-md-4.col-lg-4
           .form-group
@@ -46,12 +46,11 @@ div.titleRow(ng-show='!getIsPreviewing()')
            .form-group
               label(for='startTime') Start Time
               input.form-control#startTime(ng-model='event.startTime')
-              timepicker(ng-model='event.startTime', hour-step='hstep', minute-step='mstep')
+
         .col-xs-4.col-sm-2.col-md-1.col-lg-1
            .form-group
              label(for='endTime') End Time
              input.form-control#endTime(ng-model='event.endTime')
-             timepicker(ng-model='event.endTime', hour-step='hstep', minute-step='mstep')
         .col-xs-12.col-sm-6.col-md-4.col-lg-4
            .form-group
              label(for='eventLocation') Location
