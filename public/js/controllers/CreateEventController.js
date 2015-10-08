@@ -1,7 +1,7 @@
 (function() {
     var app = angular.module('createEventController', ['createEventService']);
 
-    app.controller('CreateEventController', ['$scope', 'CreateEventService', function($scope, CreateEventService) {
+    app.controller('CreateEventController', ['$scope', 'CreateEventService', 'amMoment', function($scope, CreateEventService) {
         
         $scope.event = {
                 
@@ -36,8 +36,8 @@
       };
 	  
 	  $scope.timediff = function(start, end){
-		//return moment.utc(moment(end).diff(moment(start))).format("mm")
-		return moment.utc(moment(end).diff(moment(start)))
+		return moment.utc(moment(end).diff(moment(start))).format("mm")
+		//return moment.utc(moment(end).diff(moment(start)))
 	  };
       
       // Disable weekend selection

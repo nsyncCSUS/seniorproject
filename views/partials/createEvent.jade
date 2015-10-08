@@ -14,51 +14,44 @@ div.descriptionRow
 
 div.titleRow(ng-show='!getIsPreviewing()')
     .container-fluid
-        .col-xs-12.col-sm-12.col-md-4.col-lg-12 
-            .col-xs-12.col-sm-12.col-md-4.col-lg-6
-                .form-inline
-                    label Start Time:
-                    input.form-control(type='text', datetime-picker='MM/dd/yyyy HH:mm', ng-model='event.startTime', ng-disabled = 'true', is-open='open.startTime')
-                    span
-                        button.btn.btn-default(type='button', ng-click="openCalendar($event, 'startTime')")
-                            i.fa.fa-calendar
-            
-            .col-xs-12.col-sm-12.col-md-4.col-lg-6
-                .form-inline
-                    label End Time:
-                    input.form-control(type='text', datetime-picker='MM/dd/yyyy HH:mm', ng-model='event.endTime', ng-disabled = 'true', is-open='open.endTime')
-                    span
-                        button.btn.btn-default(type='button', ng-click="openCalendar($event, 'endTime')")
-                            i.fa.fa-calendar
-            label event.duration = timediff(event.startTime,event.endTime)
-             
-                    
+        //ng-model = 'timediff(event.startTime,event.endTime)'
+      
         .col-xs-12.col-sm-12.col-md-4.col-lg-12
             pre.alert.alert-info.
                 Start Time is: {{event.startTime | date:'medium' }}
                 End Time is: {{event.endTime | date:'medium' }}     
               
-        .col-xs-12.col-sm-12.col-md-4.col-lg-4
-          .form-group
-            label(for='eventName') Name of Event
-            input.form-control#eventName(ng-model='event.name')
-        .col-xs-4.col-sm-2.col-md-1.col-lg-1
-           .form-group
-              label(for='startTime') Start Time
-              input.form-control#startTime(ng-model='event.startTime')
+        .col-xs-12.col-sm-12.col-md-4.col-lg-12
+            .col-xs-12.col-sm-12.col-md-4.col-lg-6
+              .form-group
+                label(for='eventName') Event Name:
+                input.form-control#eventName(ng-model='event.name')
+            
+            .col-xs-12.col-sm-12.col-md-4.col-lg-3
+                label Start Time:
+                .form-inline
+                    input.form-control(type='text', datetime-picker='MM/dd/yyyy HH:mm', ng-model='event.startTime', ng-disabled = 'true', is-open='open.startTime')
+                    span
+                        button.btn.btn-default(type='button', ng-click="openCalendar($event, 'startTime')")
+                            i.fa.fa-calendar
 
-        .col-xs-4.col-sm-2.col-md-1.col-lg-1
-           .form-group
-             label(for='endTime') End Time
-             input.form-control#endTime(ng-model='event.endTime')
-        .col-xs-12.col-sm-6.col-md-4.col-lg-4
-           .form-group
-             label(for='eventLocation') Location
-             input.form-control#eventLocation(ng-model='event.location')
-        .col-xs-4.col-sm-2.col-md-2.col-lg-2
-           .form-group
-             label(for='eventVolunteer') Volunteer
-             input.form-control#eventVolunteer(ng-model='event.volunteer')
+            .col-xs-12.col-sm-12.col-md-4.col-lg-3
+                label End Time:
+                .form-inline
+                    input.form-control(type='text', datetime-picker='MM/dd/yyyy HH:mm', ng-model='event.endTime', ng-disabled = 'true', is-open='open.endTime')
+                    span
+                        button.btn.btn-default(type='button', ng-click="openCalendar($event, 'endTime')")
+                            i.fa.fa-calendar
+
+        .col-xs-12.col-sm-12.col-md-4.col-lg-12            
+            .col-xs-12.col-sm-6.col-md-4.col-lg-6
+               .form-group
+                 label(for='eventLocation') Location
+                 input.form-control#eventLocation(ng-model='event.location')
+            .col-xs-4.col-sm-2.col-md-2.col-lg-6
+               .form-group
+                 label(for='eventVolunteer') Volunteer
+                 input.form-control#eventVolunteer(ng-model='event.volunteer')
 
 div.descriptionRow(ng-show='!getIsPreviewing()')
    h2.text-center Description
