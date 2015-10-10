@@ -70,6 +70,18 @@ a {
     margin-right: -125px;
 }
 
+.subscriber-thumbnail {
+    width: 64px;
+    height: 64px;
+}
+
+.volunteer-thumbnail {
+    width: 64px;
+    height: 64px;
+}
+/**********************************************************************
+    GROUP Edit CSS START
+**********************************************************************/
 .not-selected {
     opacity: 0.5;
 }
@@ -80,11 +92,6 @@ a {
     overflow: hidden;
     height: 100%;
     z-index: 2;
-}
-
-.subscriber-thumbnail {
-    width: 64px;
-    height: 64px;
 }
 
 .add:hover {
@@ -147,48 +154,26 @@ a {
     opacity: .4;
 }
 
-
-
 /**********************************************************************
-    DIV CSS START
+    GROUP Edit CSS END
 **********************************************************************/
-.titleRow {
-    background-color: #eeeeee;
-}
 
-.calendarRow {
-    background-color: #cccccc;
-}
 
-.upcomingEventsRow {
-    background-color: #eeeeee;
-}
-
-.organizersRow {
-    background-color: #cccccc;
-}
-
-.subsribersRow {
-    background-color: #eeeeee;
-}
-
-.descriptionRow {
-    background-color: #e5e5e5;
-}
-
-.organizersRow {
-    background-color: #eeeeee;
-}
-
-.volunteersRow {
-    background-color: #e5e5e5;
-}
-
-.carousel-control {
-  width:5%;
-}
 /**********************************************************************
-    Event CSS END
+    GROUP CSS START
+**********************************************************************/
+.eventRow {
+    padding-left: -3%;
+    border-left: solid;
+    border-bottom: solid;
+    border-top: solid;
+}
+.eventDateRow {
+    border-left: solid thick #ff0000;
+}
+
+/**********************************************************************
+    GROUP CSS END
 **********************************************************************/
 
 .event-item {
