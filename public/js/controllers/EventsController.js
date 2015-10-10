@@ -24,14 +24,11 @@
 		$scope.isSearching = false;
 		$scope.currentDate = new Date();
 		
-		$scope.group =  
-		{
-
-				events : [ {
+		$scope.event =  {
 					id : "event1",
 					creatorId: "",
 					groupId: "",
-					name : "Awesome Event Number 1 asdf asdf asdf asdf",
+					name : "SUPER DUPER AWESOME EVENT!!!!",
 					description: "sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem blandit non.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate pellentesque lorem. Donec erat ante, sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem bland center",
 					picture : "//placekitten.com/g/501/500/",
 					startTimeDate : "2015-08-26T18:50:10.111Z",
@@ -49,17 +46,131 @@
 					             {id: "v9", firstName: "Kitten 9", lastName: "1", picture: "//placekitten.com/g/250/258"}, 
 					             {id: "v10", firstName: "Kitten 10", lastName: "1", picture: "//placekitten.com/g/250/259"}, 
 					             {id: "v11", firstName: "Kitten 11", lastName: "1", picture: "//placekitten.com/g/250/260"}],
-					interests : [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]
-									
-				}
-				],
-				organizers : [{id : "org1", firstName : "org1", lastName: "1"},
-				              {id : "org2", firstName : "org2", lastName: "1", picture : "//placekitten.com/g/351/350/"},
-				              {id : "org3", firstName : "org3", lastName: "1", picture : "//placekitten.com/g/352/350/"},
-				              {id : "org4", firstName : "org4", lastName: "1", picture : "//placekitten.com/g/353/350/"},
-				              {id : "org5", firstName : "org5", lastName: "1"},
-				              {id : "org6", firstName : "org6", lastName: "1", picture : "//placekitten.com/g/355/350/"}],
+					interests : [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]		
 		};
+		
+		/*
+		$scope.hasPicture = function(type1, index1, type2, index2) {
+			switch(type1){
+			case "group":
+				if ($scope.group.picture != null){
+					if ($scope.group.picture.length > 0)
+						return true;
+					else
+						return false;
+					}
+				else{
+					if ($scope.loaded == false)
+						return true;
+					else
+						return false;
+				}
+			case "organizer":
+				if ($scope.group.organizers != null){
+					if ($scope.group.organizers[index1].picture != null){
+						if ($scope.group.organizers[index1].picture.length > 0)
+							return true;
+						else
+							return false;
+						}
+					else
+						return false;
+				}
+				else 
+					return false;
+			case "organizerBuilt":
+				if ($scope.group.organizersBuilt != null){
+					if ($scope.group.organizersBuilt[index1].organizers[index2].picture != null){
+						if ($scope.group.organizersBuilt[index1].organizers[index2].picture.length > 0)
+							return true;
+						else
+							return false;
+						}
+					else
+						return false;
+				}
+				else 
+					return false;
+			case "organizerBuiltXS":
+				if ($scope.group.organizersBuiltXS != null){
+					if ($scope.group.organizersBuiltXS[index1].organizers[index2].picture != null){
+						if ($scope.group.organizersBuiltXS[index1].organizers[index2].picture.length > 0)
+							return true;
+						else
+							return false;
+						}
+					else
+						return false;
+				}
+				else 
+					return false;
+			case "subscriber":
+				if ($scope.group.subscribers != null){
+					if ($scope.group.subscribers[index1].picture != null){
+						if ($scope.group.subscribers[index1].picture.length > 0)
+							return true;
+						else
+							return false;
+						}
+					else
+						return false;
+				}
+				else 
+					return false;
+			case "event":
+				if ($scope.group.events != null){
+					if (type2 != null) {
+						switch(type2){
+						case "volunteer":
+							if ($scope.group.events[index1].volunteers[index2].picture != null) {
+								if ($scope.group.events[index1].volunteers[index2].picture.length > 0) 
+									return true;
+								else
+									return false;
+							}
+						}
+					}
+					else{
+						if ($scope.group.events[index1].picture != null){
+							if ($scope.group.events[index1].picture.length > 0)
+								return true;
+							else
+								return false;
+							}
+						else
+							return false;
+					}
+				}
+				else 
+					return false;
+			case "searchedUser":
+				if ($scope.searchResults != null && $scope.searchResults.length > 0){
+					if ($scope.searchResults[index1].picture != null){
+						if ($scope.searchResults[index1].picture.length > 0)
+							return true;
+						else
+							return false;
+					}
+					else
+						return false;
+				}
+				else 
+					return false;
+			case "organizerToAdd":
+				if ($scope.group.organizersToAdd != null){
+					if ($scope.group.organizersToAdd[index1].picture != null){
+						if ($scope.group.organizersToAdd[index1].picture.length > 0)
+							return true;
+						else
+							return false;
+					}
+					else
+						return false;
+				}
+				else 
+					return false;
+			}
+		}*/
     }]);
 
 })();
