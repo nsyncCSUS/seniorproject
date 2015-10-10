@@ -113,6 +113,17 @@
 		$scope.youthSelected = "";
 		
 		$scope.loaded = false;
+		
+		$scope.limit = [];
+
+		$scope.getLimit = function(i) {
+			return limit[i];
+		}
+		$scope.setLimit = function(i, n) {
+			console.log($scope.limit[i]);
+			$scope.limit.i = n;
+			console.log($scope.limit.i);
+		}
 
 		/***************************************************************************
 		 * Get Functions
