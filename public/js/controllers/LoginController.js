@@ -70,10 +70,11 @@
         // HL: anything passed into the jade file angular function will appear in req or
         // You can use $scope since all objects created in jade will also be in thier
         $scope.testAuth = function(req) {
-            console.log(req);
+            console.log('controller');
+            // Have to convert object to string since post require objects
             $scope.objectify = {searchString: $scope.test};
 
-            $http.post('/api/users/getauser', $scope.objectify);
+            $http.post('/api/users/1', $scope.objectify);
 
         };
 

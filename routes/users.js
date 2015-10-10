@@ -35,6 +35,22 @@
       });
 
 
+      router.post('/1', function(req, res) {
+        console.log(req.body.searchString);
+        console.log('INSIDE POST1');
+          console.log('INSIDE POST1');
+      // Users.index( {"userAuth.userName" : 'text'});
+          console.log('INSIDE POST2');
+          User.find({$text: {$search: "5"}}, function(err, users) {
+              if (err) {
+                  throw err;
+              }
+
+              console.log(users);
+
+          });
+          res.end();
+      });
 
       router.post('/getallgroups', function(req, res) {
         console.log(req.body.searchString);
@@ -121,10 +137,6 @@
         });
 
     });
-
-
-
-
 
     router.post('/', function(req, res) {
         console.log(req.body.username);
