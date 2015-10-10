@@ -12,34 +12,34 @@
      * Schema for Event objects 
      */
     var EventSchema = new Schema({
-        EventName: String,
+        eventName: String,
         
-        Group: {
+        group: {
             type: ObjectId,
             ref: 'Group'
         },
         
-        Description: String,
-        CreationDate: Date,
-        StartTimeDate: Date,
-        EndTimeDate: Date,
-        Address: String,
-        City: String,
-        State: String,
-        Zipcode: String,
+        description: String,
+        creationDate: Date,
+        startTimeDate: Date,
+        endTimeDate: Date,
+        address: String,
+        city: String,
+        state: String,
+        zipcode: String,
         
-        VolunteerList: [{
+        volunteerList: [{
             type: ObjectId,
             ref: 'User'
         }],
         
-        CreationUser: {
+        creationUser: {
             type: ObjectId,
             ref: 'User'
         },
         
-        MaxVolunteers: Number,
-        Interests: [String] 
+        maxVolunteers: Number,
+        interests: [String] 
     });
     
     var Event = mongoose.model('Event', EventSchema);
