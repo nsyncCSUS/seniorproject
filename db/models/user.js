@@ -52,44 +52,19 @@
 		    displayName : String,
 		    lastStatus : String
 		},
-		
-		/*user : {
-			FirstName : String,
-			MiddleName : String,
-			LastName : String,
-			Description : String,
-			Email : String,
-			Birthday : Date,
-			Age : Number,
-			City : String,
-			State : String,
-			ZipCode : Number,
-			PhoneNum : Number,
-			Picture : String,
-			VolunteeredTo : String,
-			CreatorOf : String,
-			OrganizerOf : String,
-			SubscribedTo : String,
-			GooglePlus : String,
-			Facebook : String,
-			LinkenIn : String,
-			Twitter : String,
-			Interests : String,
-			Skills : String
-		 }*/
-            
-            FirstName : String,
-	    MiddleName : String,
-	    LastName : String,
-	    Description : String,
-	    Email : String,
-	    Birthday : Date,
-	    Age : Number,
-	    City : String,
-	    State : String,
-	    ZipCode : Number,
-	    PhoneNum : Number,
-	    Picture : String,
+		            
+            firstName : String,
+	    middleName : String,
+	    lastName : String,
+	    description : String,
+	    email : String,
+	    birthday : Date,
+	    age : Number,
+	    city : String,
+	    state : String,
+	    zipCode : Number,
+	    phoneNum : Number,
+	    picture : String,
 	    //VolunteeredTo : String,
 	    //CreatorOf : String,
 	    //OrganizerOf : String,
@@ -99,38 +74,33 @@
 	    //LinkenIn : String,
 	    //Twitter : String,
 
-            /*VolunteeredTo: [{
-                type: ObjectId,
-                ref: '' 
-             }],*/
-
-            Events: [{
+            events: [{
                 type: ObjectId,
                 ref: 'Event'
             }], 
             
-            CreatedGroups: [{
+            createdGroups: [{
                 type: ObjectId,
                 ref: 'Group' 
             }],
 
-            CreatedEvents: [{
+            createdEvents: [{
                 type: ObjectId,
                 ref: 'Event' 
             }], 
             
-            OrganizerOf: [{
+            organizerOf: [{
                 type: ObjectId,
                 ref: 'Group' 
              }], 
             
-            SubscribedTo: [{
+            subscribedTo: [{
                 type: ObjectId,
                 ref: 'Group' 
             }],
             
-	    Interests : [String],
-	    Skills : [String] 
+	    interests : [String],
+	    skills : [String] 
 	});
 	
 	

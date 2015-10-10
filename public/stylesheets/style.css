@@ -3,7 +3,7 @@
 }
 
 body {
-    padding-top: 40px;
+    padding-top: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -155,8 +155,19 @@ a {
     border-bottom: solid;
     border-top: solid;
 }
+
 .eventDateRow {
     border-left: solid thick #ff0000;
+}
+
+.infoRow {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.oneline {
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 /**********************************************************************

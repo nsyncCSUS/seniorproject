@@ -12,35 +12,35 @@
      * Schema for Group Objects 
      */
     var GroupSchema = new Schema({
-        GroupName: String,
+        groupName: String,
         
-        EventList: [{
+        eventList: [{
             type: ObjectId,
             ref: 'Event'
         }],
         
-        CreationDate: Date,
+        creationDate: Date,
         city: String,
         state: String,
         zipcode: String,
         
-        OrganizerList: [{
+        organizerList: [{
             type: ObjectId,
             ref: 'User'
         }],
         
-        SubscriptionList: [{
+        subscriptionList: [{
             type: ObjectId,
             ref: 'User'
         }],
         
-        Decsription: String,
+        decsription: String,
         //GooglePlus: {},
         //Facebook: {},
         //LinkedIn: {},
         //Twitter: {},
         //Website: {},
-        Interests: [String] 
+        interests: [String] 
     }); 
     
     
