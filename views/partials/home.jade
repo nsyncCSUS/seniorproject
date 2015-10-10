@@ -1,11 +1,14 @@
 
+
 .container-fluid
-    .row
-        .col-xs-12.col-sm-12.col-md-12.col-lg-12
-            .img-responsive
-                img(src='/images/banner/1.png', alt='Cinque Terre', width='320', height='250')
-                img(src='/images/banner/2.png', alt='Cinque Terre', width='320', height='250')
-                img(src='/images/banner/3.png', alt='Cinque Terre', width='320', height='250')
+
+    .box-one(ng-show='!isSearching')
+        .row
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                .img-responsive
+                    img(src='/images/banner/1.png', alt='Cinque Terre', width='320', height='250')
+                    img(src='/images/banner/2.png', alt='Cinque Terre', width='320', height='250')
+                    img(src='/images/banner/3.png', alt='Cinque Terre', width='320', height='250')
 
     hr
 
@@ -18,180 +21,76 @@
                     button.btn.btn-default(ng-click='search(searchbox)') Search
                 .col-xs-12.col-sm-12.col-md-12.col-lg-12
 
-
     .well
-            
-            ul.nav.nav-tabs
-                li#events(ng-click='setCurrentTab("events")', ng-class='{ active:getCurrentTab("events") }')
-                    a(href='') Events
-                li#groups(ng-click='setCurrentTab("groups")', ng-class='{ active:getCurrentTab("groups") }')
-                    a(href='') Groups
-                li#users(ng-click='setCurrentTab("users")', ng-class='{ active:getCurrentTab("users") }')
-                    a(href='') Users
+        div(ng-show='true')
+            //div(ng-repeat='asdfad')
+            div
+                .panel.panel-default
+                    .panel-body
+                        .col-xs-12.col-sm-12.col-md-6.col-lg-6
+                            .row
+                                .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                                    .text-left
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            h4
+                                                a(href='http://localhost:3000') American River Cleanup
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            img(src = '/images/stub photos/event stub 1.jpg', alt='Cinque Terre', width='150', height='150')
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            .event-item
+                                                a(href='http://localhost:3000') Concerned Citizen for Rivers
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            .event-item
+                                                    | 12/31/15 11:50 AM - 12/31/15 11:50 AM
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            .event-item
+                                                    | 1234 Fake Street, Sacramento
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            .event-item
+                                                    | 100 attending of 200
+                                .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                                    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            .event-interests
+                                                img(src = '/images/interests/environment.png', alt='Cinque Terre', width='30', height='30', tooltip = 'environment')
+                                                img(src = '/images/interests/people.png', alt='Cinque Terre', width='30', height='30', tooltip = 'people')
+                                                img(src = '/images/interests/youth.png', alt='Cinque Terre', width='30', height='30', tooltip='youth')
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            .event-description
+                                                |center sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean ad
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            .text-right 
+                                                button.btn.btn-default(ng-click='') Sign-up
 
-            div(ng-show='getCurrentTab("events")')
-                div(ng-repeat='event in eventsSearchResults')
-                    .panel.panel-default
-                        .panel-heading
-                            h4 
-                                a(href='http://localhost:3000') American River Cleanup!
-                        .panel-body
-                            .col-xs-12.col-sm-4.col-md-3.col-lg-2
-                                img(src = '/images/stub photos/event stub 1.jpg', alt='Cinque Terre', width='200', height='200') 
-                                .event-item
-                                    a(href='http://localhost:3000') Concerned Citizens for Rivers
-                                .visible-sm.visible-xs
-                                    br
-                            .col-xs-12.col-sm-8.col-md-9.col-lg-10
-                                .col-xs-12.col-sm-12.col-md-6.col-lg-4
-                                    .event-item
-                                        .visible-lg
-                                            .text-center
-                                                | 100 attending of 200
-                                        .visible-md.visible-sm.visible-xs
-                                            | 100 attending of 200
-                                .col-xs-12.col-sm-12.col-md-6.col-lg-4
-                                    .event-item
-                                        .visible-lg.visible-md
-                                            .text-center
-                                                | Aug 26, 2015 11:50 AM - Aug 26, 2015 11:50 AM
-                                        .visible-sm.visible-xs
-                                            | 1/1/2015 12:00AM - 1/1/2015 12:00PM
-                                .col-xs-12.col-sm-12.col-md-12.col-lg-4
-                                    .event-item
-                                        .visible-lg
-                                            .text-center
-                                                | 1234 Fake Street, Sacramento
-                                        .visible-md.visible-sm.visible-xs
-                                            | 1234 Fake Street, Sacramento
-                                .col-lg-1.visible-lg
-                                    | 
-                                .col-xs-11.col-sm-11.col-md-11.col-lg-11
-                                    hr
-                                    .text-center
-                                        | center sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem blandit non.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        .panel-footer
-                             img(src = '/images/interests/environment.png', alt='Cinque Terre', width='40', height='40')
-                             img(src = '/images/interests/people.png', alt='Cinque Terre', width='40', height='40')
-                             img(src = '/images/interests/youth.png', alt='Cinque Terre', width='40', height='40')
-                        br
-                        .panel-heading
-                            h4 
-                                a(href='http://localhost:3000') Animal Shelter Needs Love
-                        .panel-body
-                            .col-xs-12.col-sm-4.col-md-3.col-lg-2
-                                img(src = '/images/stub photos/event stub 2.jpg', alt='Cinque Terre', width='200', height='200') 
-                                .event-item
-                                    a(href='http://localhost:3000') Folsom Animal Shelter
-                                .visible-sm.visible-xs
-                                    br
-                            .col-xs-12.col-sm-8.col-md-9.col-lg-10
-                                .col-xs-12.col-sm-12.col-md-6.col-lg-4
-                                    .event-item
-                                        .visible-lg
-                                            .text-center
-                                                | 100 attending of 200
-                                        .visible-md.visible-sm.visible-xs
-                                            | 100 attending of 200
-                                .col-xs-12.col-sm-12.col-md-6.col-lg-4
-                                    .event-item
-                                        .visible-lg.visible-md
-                                            .text-center
-                                                | Aug 26, 2015 11:50 AM - Aug 26, 2015 11:50 AM
-                                        .visible-sm.visible-xs
-                                            | 1/1/2015 12:00AM - 1/1/2015 12:00PM
-                                .col-xs-12.col-sm-12.col-md-12.col-lg-4
-                                    .event-item
-                                        .visible-lg
-                                            .text-center
-                                                | 1234 Fake Street, Sacramento
-                                        .visible-md.visible-sm.visible-xs
-                                            | 1234 Fake Street, Sacramento
-                                .col-lg-1.visible-lg
-                                    | 
-                                .col-xs-11.col-sm-11.col-md-11.col-lg-11
-                                    hr
-                                    .text-center
-                                        | center sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem blandit non.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        .panel-footer
-                             img(src = '/images/interests/animals.png', alt='Cinque Terre', width='40', height='40')
-                        br
-                        .panel-heading
-                            h4 
-                                a(href='http://localhost:3000') Hacker Lab Meetup
-                        .panel-body
-                            .col-xs-12.col-sm-4.col-md-3.col-lg-2
-                                img(src = '/images/stub photos/event stub 3.jpg', alt='Cinque Terre', width='200', height='200') 
-                                .event-item
-                                    a(href='http://localhost:3000') Code for Sacramento
-                                .visible-sm.visible-xs
-                                    br
-                            .col-xs-12.col-sm-8.col-md-9.col-lg-10
-                                .col-xs-12.col-sm-12.col-md-6.col-lg-4
-                                    .event-item
-                                        .visible-lg
-                                            .text-center
-                                                | 100 attending of 200
-                                        .visible-md.visible-sm.visible-xs
-                                            | 100 attending of 200
-                                .col-xs-12.col-sm-12.col-md-6.col-lg-4
-                                    .event-item
-                                        .visible-lg.visible-md
-                                            .text-center
-                                                | Aug 26, 2015 11:50 AM - Aug 26, 2015 11:50 AM
-                                        .visible-sm.visible-xs
-                                            | 1/1/2015 12:00AM - 1/1/2015 12:00PM
-                                .col-xs-12.col-sm-12.col-md-12.col-lg-4
-                                    .event-item
-                                        .visible-lg
-                                            .text-center
-                                                | 1234 Fake Street, Sacramento
-                                        .visible-md.visible-sm.visible-xs
-                                            | 1234 Fake Street, Sacramento
-                                .col-lg-1.visible-lg
-                                    | 
-                                .col-xs-11.col-sm-11.col-md-11.col-lg-11
-                                    hr
-                                    .text-center
-                                        | center sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem blandit non.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        .panel-footer
-                             img(src = '/images/interests/technology.png', alt='Cinque Terre', width='40', height='40')
-                             img(src = '/images/interests/people.png', alt='Cinque Terre', width='40', height='40')
-                        br
+                        .col-xs-12.col-sm-12.col-md-6.col-lg-6
+                            .row
+                                .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                                    .text-left
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            h4 
+                                                a(href='http://localhost:3000') Animal Shelter Needs Love
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            img(src = '/images/stub photos/event stub 2.jpg', alt='Cinque Terre', width='150', height='150')
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            .event-item
+                                                a(href='http://localhost:3000') Folsom Animal Center
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            .event-item
+                                                    | 12/31/15 11:50 AM - 12/31/15 11:50 AM
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            .event-item
+                                                    | 1234 Fake Street, Sacramento
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            .event-item
+                                                    | 100 attending of 200
+                                .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                                    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            .event-interests
+                                                img(src = '/images/interests/animals.png', alt='Cinque Terre', width='30', height='30', tooltip='animals')
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            .event-description
+                                                |center sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean ad
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            .text-right
+                                                button.btn.btn-default(ng-click='') Sign-up
 
 
-//                    .panel.panel-default
-//                        img.img-responsive(src='{{event.picture}}', height='64', width='64')
-//                        h6 Name: {{event.ename}}
-//                        h6 Description: {{event.description}}
-//                        h6 Volunteer List:
-//                        div(ng-repeat='volunteer in event.volunteerList')
-//                            img.img-responsive(src='{{volunteer.picture}}', height='64', width='64')
-//                            h6 Name: {{volunteer.fname}} {{volunteer.lname}}
-//                            h6 Age: {{volunteer.age}}
-//                            h6 Interests:
-//                            div(ng-repeat='interest in volunteer.interests')
-//                                h6 -{{interest.type}}
-//                        h6 Interests:
-//                        div(ng-repeat='interest in event.interests')
-//                            h6 -{{interest.type}}               
-            div(ng-show='getCurrentTab("users")')
-                div(ng-repeat='user in usersSearchResults')
-                    .panel.panel-default
-                        img.img-responsive(src='{{user.picture}}', height='64', width='64')
-                        h6 Name: {{user.fname}} {{user.lname}}
-                        h6 Age: {{user.age}}
-                        h6 Interests:
-                        div(ng-repeat='interest in user.interests')
-                            h6 -{{interest.type}}
-            div(ng-show='getCurrentTab("groups")')
-                div(ng-repeat='group in groupsSearchResults')
-                    .panel.panel-default
-                        img.img-responsive(src='{{group.picture}}', height='64', width='64')
-                        h6 Name: {{group.gname}}
-                        h6 Description: {{group.description}}
-                        h6 Interests:
-                        div(ng-repeat='interest in group.interests')
-                            h6 -{{interest.type}}
-
-    
