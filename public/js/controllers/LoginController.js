@@ -80,7 +80,7 @@
 
         $scope.testAuth2 = function() {
             console.log('testAuth2');
-            $http.post('/api/users/getallusers');
+            $http.post('/api/users/2');
 
         };
 
