@@ -10,6 +10,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var groups = require('./routes/groups');
 var events = require('./routes/events');
+var search = require('./routes/search');
 
 var expressJwt = require('express-jwt');
 var multipart = require('connect-multiparty');
@@ -73,7 +74,7 @@ app.use('/', index);
 app.use('/api/users', users);
 app.use('/api/groups', groups);
 app.use('/api/events', events);
-
+app.use('/api/search', search);
 
 
 

@@ -74,7 +74,7 @@
             // Have to convert object to string since post require objects
             $scope.objectify = {searchString: $scope.test};
 
-            $http.post('/api/users/1', $scope.objectify);
+            $http.post('/api/search/keywordsearch', $scope.objectify);
 
         };
 
