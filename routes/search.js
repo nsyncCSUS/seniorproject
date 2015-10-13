@@ -21,11 +21,14 @@ var router = express.Router();
       router.post('/regex', function(req, res) {
         console.log(req.body.searchString);
         console.log('INSIDE POST1');
-          console.log('INSIDE POST1');
+        console.log('INSIDE POST1');
       // Users.index( {"userAuth.userName" : 'text'});
           console.log('INSIDE POST2');
-          // note: you can only search 'spacebar' seperated words
-          User.find({'userAuth.userName' :/5/ }, function(err, users) {
+          // RegExp(String , Flags) g=global(?resets some internal counter ) i= ignore case
+          var searchStringRegExObj = new RegExp(req.body.searchString,"i");
+          // need regEXP object to put search vairable in
+          // you cant put in variables directly into a regex
+          User.find({'userAuth.userName' : searchStringRegExObj }, function(err, users) {
               if (err) {
                   throw err;
               }
@@ -47,7 +50,7 @@ var router = express.Router();
         console.log(req.body.searchString);
         console.log('INSIDE POST1');
           console.log('INSIDE POST1');
-      // Users.index( {"userAuth.userName" : 'text'});
+      // Users.index( {"userAuth.userName" : 'text'});  // This line needed inside db file to create index
           console.log('INSIDE POST2');
           // note: you can only search 'spacebar' seperated words
           User.find({$text: {$search:'1'}}, function(err, users) {
@@ -60,6 +63,13 @@ var router = express.Router();
           });
           res.end();
       });
+
+
+/*////////////////////////////////
+GROUPS
+///////////////////////////////*/
+
+
 
 
       router.post('/getallgroups', function(req, res) {
@@ -75,6 +85,8 @@ var router = express.Router();
           res.end();
       });
 
+
+      //Non-indexed soon to be depreciated by keywordsearch indexed version
       router.post('/getagroup', function(req, res) {
           console.log(req.body.searchString);
         //  req.body.searchString= 'test3';
@@ -91,6 +103,14 @@ var router = express.Router();
       });
 
 
+
+
+/*////////////////////////////////
+Events
+///////////////////////////////*/
+
+
+
       router.post('/getallevents', function(req, res) {
         console.log(req.body.searchString);
           Event.find({}, function(err, users) {
@@ -104,6 +124,7 @@ var router = express.Router();
           res.end();
       });
 
+      //Non-indexed soon to be depreciated by keywordsearch indexed version
       router.post('/getaevent', function(req, res) {
           console.log(req.body.searchString);
         //  req.body.searchString= 'test3';
@@ -120,6 +141,11 @@ var router = express.Router();
       });
 
 
+/*////////////////////////////////
+Users
+///////////////////////////////*/
+
+
     router.post('/getallusers', function(req, res) {
       console.log(req.body.searchString);
         User.find({}, function(err, users) {
@@ -133,6 +159,7 @@ var router = express.Router();
         res.end();
     });
 
+    //Non-indexed soon to be depreciated by keywordsearch indexed version
     router.post('/getauser', function(req, res) {
         console.log(req.body.searchString);
       //  req.body.searchString= 'test3';
@@ -143,7 +170,7 @@ var router = express.Router();
             }
 
             console.log(users);
-            
+
         });
           res.end();
     });
