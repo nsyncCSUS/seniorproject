@@ -25,9 +25,11 @@ var router = express.Router();
       // Users.index( {"userAuth.userName" : 'text'});
           console.log('INSIDE POST2');
           // RegExp(String , Flags) g=global(?resets some internal counter ) i= ignore case
-          var searchStringRegExObj = new RegExp(req.body.searchString,"i");
           // need regEXP object to put search vairable in
           // you cant put in variables directly into a regex
+          // req.body.searchString is the string from angular
+          var searchStringRegExObj = new RegExp(req.body.searchString,"i");
+
           User.find({'userAuth.userName' : searchStringRegExObj }, function(err, users) {
               if (err) {
                   throw err;
@@ -90,7 +92,7 @@ GROUPS
       router.post('/getagroup', function(req, res) {
           console.log(req.body.searchString);
         //  req.body.searchString= 'test3';
-          Group.findOne({ 'userAuth.userName':req.body.searchString}, function(err, users) {
+          Group.findOne({ 'groupName':req.body.searchString}, function(err, users) {
               if (err) {
                   console.log(err);
                   throw err;
@@ -100,6 +102,26 @@ GROUPS
 
           });
             res.end();
+      });
+
+
+      router.post('/regex', function(req, res) {
+        console.log(req.body.searchString);
+          // RegExp(String , Flags) g=global(?resets some internal counter ) i= ignore case
+          // need regEXP object to put search vairable in
+          // you cant put in variables directly into a regex
+          // req.body.searchString is the string from angular
+          var searchStringRegExObj = new RegExp(req.body.searchString,"i");
+
+          Group.find({'groupName' : searchStringRegExObj }, function(err, users) {
+              if (err) {
+                  throw err;
+              }
+
+              console.log(users);
+
+          });
+          res.end();
       });
 
 
@@ -128,7 +150,7 @@ Events
       router.post('/getaevent', function(req, res) {
           console.log(req.body.searchString);
         //  req.body.searchString= 'test3';
-          Event.findOne({ 'userAuth.userName':req.body.searchString}, function(err, users) {
+          Event.findOne({ 'eventName':req.body.searchString}, function(err, users) {
               if (err) {
                   console.log(err);
                   throw err;
@@ -138,6 +160,25 @@ Events
 
           });
             res.end();
+      });
+
+      router.post('/regex', function(req, res) {
+        console.log(req.body.searchString);
+          // RegExp(String , Flags) g=global(?resets some internal counter ) i= ignore case
+          // need regEXP object to put search vairable in
+          // you cant put in variables directly into a regex
+          // req.body.searchString is the string from angular
+          var searchStringRegExObj = new RegExp(req.body.searchString,"i");
+
+          Event.find({'eventName' : searchStringRegExObj }, function(err, users) {
+              if (err) {
+                  throw err;
+              }
+
+              console.log(users);
+
+          });
+          res.end();
       });
 
 

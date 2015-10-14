@@ -1,51 +1,50 @@
 
 (function(module) {
     'use strict';
-    
+
     var mongoose = require('mongoose');
     var Schema = mongoose.Schema;
-    var ObjectId = Schema.ObjectId; 
+    var ObjectId = Schema.ObjectId;
     var Event = require('./event');
-    var User = require('./user'); 
-    
+    var User = require('./user');
+
     /**
-     * Schema for Group Objects 
+     * Schema for Group Objects
      */
     var GroupSchema = new Schema({
-        GroupName: String,
-        
-        EventList: [{
+        groupName: String,
+
+        eventList: [{
             type: ObjectId,
             ref: 'Event'
         }],
-        
-        CreationDate: Date,
+
+        creationDate: Date,
         city: String,
         state: String,
         zipcode: String,
-        
-        OrganizerList: [{
+
+        organizerList: [{
             type: ObjectId,
             ref: 'User'
         }],
-        
-        SubscriptionList: [{
+
+        subscriptionList: [{
             type: ObjectId,
             ref: 'User'
         }],
-        
-        Decsription: String,
+
+        decsription: String,
         //GooglePlus: {},
         //Facebook: {},
         //LinkedIn: {},
         //Twitter: {},
         //Website: {},
-        Interests: [String] 
-    }); 
-    
-    
-    var Group = mongoose.model('Group', GroupSchema); 
+        interests: [String] 
+    });
+
+
+    var Group = mongoose.model('Group', GroupSchema);
     module.exports = Group;
 
 })(module);
-
