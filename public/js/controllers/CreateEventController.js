@@ -15,8 +15,8 @@
         $scope.event = {
                 
         };
-      $scope.event.startTime = new Date('2015-03-01T00:00:00Z');
-      $scope.event.endTime = new Date('2015-03-01T00:00:00Z');
+      $scope.event.startTimeDate = new Date('2015-03-01T00:00:00Z');
+      $scope.event.endTimeDate = new Date('2015-03-01T00:00:00Z');
 
       console.log($scope.event);
       $scope.hstep = 1;
