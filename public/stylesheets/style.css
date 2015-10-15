@@ -9,7 +9,7 @@ body {
 
 
 a {
-    color: #00B7FF;
+    //color: #00B7FF;
 }
 
  
@@ -150,7 +150,6 @@ a {
     GROUP CSS START
 **********************************************************************/
 .eventRow {
-    padding-left: -3%;
     border-left: solid;
     border-bottom: solid;
     border-top: solid;
@@ -166,8 +165,38 @@ a {
 }
 
 .oneline {
-	white-space: nowrap;
-	overflow: hidden;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/**********************************************************************
+    GROUP CSS END
+**********************************************************************/
+
+/**********************************************************************
+    DASHBOARD CSS START
+**********************************************************************/
+.titleBar {
+    position: relative;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    border-bottom: solid #cccccc;
+}
+
+.selectedTab {
+	font-weight: bold;
+    font-size: 2.4em;
+}
+
+.otherTab {
+    font-size: 1.2em;
+    float: left;
+    padding-top: 5px
+    padding-bottom: 5px;
+    margin-left: 2%;
+    padding-left: 5px;
+    border-left: solid #cc00aa;
 }
 
 /**********************************************************************

@@ -10,7 +10,8 @@
 		//$scope.event = {startTimeDate:"string"}	//will store startTimeDate inside of event, and it will store event inside of scope
 		//$scope.event = {startTimeDate: event.startTimeDate};	//will store startTimeDate inside of event, and it will store event inside of scope
 		
-		this.selectedTab = "yourEvents";
+		$scope.selectedTab = "Upcoming Events";
+		$scope.otherTabs = ["Past Events", "Recommended Events"];
 		$scope.currentDate = new Date();	//returns current date and time
 		
 		
@@ -179,15 +180,25 @@
 								 name: 'Event 2', volunteers: [{name: 'Anthony'}, {name: 'Huy'}, {name: 'Shane'}, {name: 'John'}, {name: 'Vadzim'}, {name: 'Kris'}],
 								 maxVolunteers: '35', interests: [{type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]}];
 		
+		$scope.user.creationDate = new Date();
+		
 		/***************************************************************************
 		 * Functions that controls tabs for searching
 		 **************************************************************************/
 		$scope.setCurrentTab = function(category) {
-			this.selectedTab = category;
+			var oldTab = $scope.selectedTab;
+			$scope.selectedTab = category;
+			
+			angular.forEach($scope.otherTabs, function(tab, index) {
+				if (tab == category){
+					$scope.otherTabs[index] = oldTab;
+				}
+			}); // Used as "this" above
+			////console.log($scope.group.organizersBuilt);
 		}
 		
 		$scope.getCurrentTab = function(category) {
-			if (this.selectedTab === category)
+			if ($scope.selectedTab === category)
 				return true;
 			else
 				return false;
