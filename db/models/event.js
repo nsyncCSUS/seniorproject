@@ -12,33 +12,38 @@
      * Schema for Event objects 
      */
     var EventSchema = new Schema({
-        eventName: String,
-        
-        group: {
-            type: ObjectId,
-            ref: 'Group'
-        },
-        
-        description: String,
-        creationDate: Date,
-        startTimeDate: Date,
-        endTimeDate: Date,
-        address: String,
-        city: String,
-        state: String,
-        zipcode: String,
-        
-        volunteerList: [{
-            type: ObjectId,
-            ref: 'User'
-        }],
-        
+        name: String,
+
         creationUser: {
             type: ObjectId,
             ref: 'User'
         },
         
-        maxVolunteers: Number,
+        group: {
+            type: ObjectId,
+            ref: 'Group'
+        },
+
+        picture: {
+        	type: String,
+    		default: "//placehold.it/500x500/"
+        },
+        
+		description: 	String,
+		creationDate: 	Date,
+		startTimeDate: 	Date,
+		endTimeDate: 	Date,
+		street: 		String, 
+		city: 			String, 
+		state: 			String, 
+		zipcode: 		String,	
+		maxVolunteers: 	Number,
+        
+        volunteers: [{
+            type: ObjectId,
+            ref: 'User'
+        }],
+        
         interests: [String] 
     });
     
@@ -47,3 +52,24 @@
 
 })(module);
 
+
+/*
+	event: {
+		id: 			String,		
+		creatorId: 		String,
+		groupId: 		String,
+		name: 			String,
+		description: 	String,
+		picture: 		String,
+		creationDate: 	DateTime,
+		startTimeDate: 	DateTime,
+		endTimeDate: 	DateTime,
+		street: 		String, 
+		city: 			String, 
+		state: 			String, 
+		zipcode: 		String,	
+		maxVolunteers: 	Number,
+		volunteers:		[{id: String}, {id: String}, ...],
+		interests: 		[String]
+	}
+*/

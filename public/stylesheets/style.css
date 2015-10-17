@@ -7,21 +7,15 @@ body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-
 a {
     //color: #00B7FF;
 }
-
- 
 
 .center-item {
    display:block;
    margin: 0 auto;
 }
 
-.cursor-pointer {
-   cursor: pointer;
-}
 
 .container-fluid {
     padding-right: 20px;
@@ -36,18 +30,54 @@ a {
 .event-description {
     padding-right: 25px;
 }
-.float-right {
-    z-index: 10;
-    position: fixed;
-    right: 1%;
-    top: 80px;
-}
 
 .event-item { 
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
 
+
+
+.subscriber-thumbnail {
+    width: 64px;
+    height: 64px;
+}
+
+.volunteer-thumbnail {
+    width: 54px;
+    height: 54px;
+    padding-right: 2px;
+}
+
+@media screen and (max-width: 768px) {
+    .interests-thumbnail {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 992px) {
+    .volunteer-thumbnail {
+        width: 48px;
+        height: 48px;
+        padding-right: 2px;
+    }
+    .interests-thumbnail {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/**********************************************************************
+    Mouse Cursor CSS START
+**********************************************************************/
+.cursor-pointer {
+   cursor: pointer;
+}
+
+/**********************************************************************
+    Edit CSS START
+**********************************************************************/
 .float-btm {
     z-index: 10;
     position: fixed;
@@ -57,15 +87,13 @@ a {
     margin-right: -125px;
 }
 
-.subscriber-thumbnail {
-    width: 64px;
-    height: 64px;
+.float-right {
+    z-index: 10;
+    position: fixed;
+    right: 1%;
+    top: 80px;
 }
 
-.volunteer-thumbnail {
-    width: 64px;
-    height: 64px;
-}
 /**********************************************************************
     GROUP Edit CSS START
 **********************************************************************/
@@ -142,14 +170,14 @@ a {
 }
 
 /**********************************************************************
-    GROUP Edit CSS END
-**********************************************************************/
-
-
-/**********************************************************************
     GROUP CSS START
 **********************************************************************/
 .eventRow {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.eventBody {
     border-left: solid;
     border-bottom: solid;
     border-top: solid;
@@ -169,9 +197,6 @@ a {
     overflow: hidden;
 }
 
-/**********************************************************************
-    GROUP CSS END
-**********************************************************************/
 
 /**********************************************************************
     DASHBOARD CSS START
@@ -185,25 +210,23 @@ a {
 }
 
 .selectedTab {
+	color: black;
 	font-weight: bold;
-    font-size: 2.4em;
+    font-size: 1.8em;
+    padding-bottom: 5px;
 }
 
 .otherTab {
-    font-size: 1.2em;
-    float: left;
-    padding-top: 5px
-    padding-bottom: 5px;
+    font-size: 1em;
     margin-left: 2%;
     padding-left: 5px;
-    border-left: solid #cc00aa;
+    border-left: solid #000000;
 }
 
-/**********************************************************************
-    GROUP CSS END
-**********************************************************************/
-
-.event-item { 
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    font-weight: bold;
+.volunteerRow {
+	margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top: solid thin ;
 }
+

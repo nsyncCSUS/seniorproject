@@ -120,7 +120,7 @@ div(ng-show='!getIsEditing()')
                         .row
                             .col-xs-6.col-sm-6.col-md-6.col-lg-6
                                 div(ng-show='!getIsEditing()')
-                                    img.img-thumbnail(ng-src='/images/interests/{{interest.type}}.png', ng-repeat='interest in group.interests | orderBy:"type"', tooltip='{{interest.type}}')
+                                    img.img-thumbnail(ng-src='/images/interests/{{interest}}.png', ng-repeat='interest in group.interests | orderBy:interest', tooltip='{{interest}}')
                                     
                             .hidden-xs
                                 .col-xs-12.col-sm-6.col-md-6.col-lg-6
@@ -180,48 +180,53 @@ div(ng-show='!getIsEditing()')
                                                     img.img-thumbnail.subscriber-thumbnail.cursor-pointer(src="//placehold.it/65x64", ng-if='!hasPicture("subscriber", $index)', tooltip='{{subscriber.firstName}} {{subscriber.lastName}}')
                             
                     .col-xs-12.col-sm-8.col-md-8.col-lg-8.panel-success
-                        h4.panel-heading About Us
+                        h3.panel-heading About Us
                         p {{group.description}}
                         p Creation Date Test {{group.creationDate | date:'medium'}}
                         p Current Date Time {{currentDate | date: 'medium'}}
                         
                         .panel-info
-                            h4.panel-heading Upcoming Events
-                            div
-                                .row(ng-repeat='event in group.events | orderBy:"startTimeDate"')
+                            h3.panel-heading Upcoming Events
+                            .panel-body.eventRow
+                                .row.eventRow(ng-repeat='event in group.events | orderBy:"startTimeDate" | checkExpired:false')
                                     .col-xs-12.col-sm-12.col-md-12.col-lg-12.eventDateRow
-                                        h3 <strong>{{event.startTimeDate | date:'MMM d'}}</strong> 
-                                        h5 {{event.startTimeDate | date:'EEEE h:m a'}}
-                                    .col-xs-12.col-sm-12.col-md-12.col-lg-12.eventRow
-                                        h4
-                                            a(ng-href='/events/{{event.id}}/') {{event.name}}
-                                            h5 {{event.location.street}} {{event.location.city}}, {{event.location.state}} {{event.location.zipcode}}
+                                        h3 <strong>{{event.startTimeDate | date:'MMM d, yyyy'}}</strong> 
+                                        h5 {{event.startTimeDate | date:'EEEE h:m a'}} 
+                                        
+                                    .col-xs-12.col-sm-12.col-md-12.col-lg-12.eventBody
+                                    
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                            .row
+                                                h4
+                                                    a(ng-href='/events/{{event.id}}/') {{event.name}}
+                                                h5 {{event.street}} {{event.city}}, {{event.state}} {{event.zipcode}}
                                             
                                         .col-xs-12.col-sm-12.col-md-12.col-lg-12
                                             .row
                                                 .col-xs-12.col-sm-12.col-md-12.col-lg-12.navbar-btn
-                                                    img.img-thumbnail(ng-src='/images/interests/{{interest.type}}.png', ng-repeat='interest in event.interests | orderBy: "type"', tooltip='{{interest.type}}')
-                                        .col-xs-12.col-sm-4.col-md-4.col-lg-4.hidden-xs
-                                            .row
-                                                .col-xs-4.col-sm-12.col-md-12.col-lg-12
-                                                    a(ng-href='/events/{{event.id}}/')
-                                                        img.img-responsive.img-thumbnail(src='{{event.picture}}')
-                                        .col-xs-12.col-sm-8.col-md-8.col-lg-8
-                                            .row
-                                                .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                                                    h5 {{event.description | limitTo:10000}}
-                                            
+                                                    img.img-thumbnail.interests-thumbnail(ng-src='/images/interests/{{interest}}.png', ng-repeat='interest in event.interests | orderBy:interest', tooltip='{{interest}}')
+                                                    
                                         .col-xs-12.col-sm-12.col-md-12.col-lg-12
                                             .row
+                                                .col-xs-12.col-sm-4.col-md-4.col-lg-4.hidden-xs
+                                                    .row
+                                                        .col-xs-4.col-sm-12.col-md-12.col-lg-12
+                                                            a(ng-href='/events/{{event.id}}/')
+                                                                img.img-responsive.img-thumbnail(src='{{event.picture}}')
+                                                .col-xs-12.col-sm-8.col-md-8.col-lg-8
+                                                    .row
+                                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                                            h5 {{event.description | limitTo:10000}}
+                                            
+                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12.volunteerRow
+                                            .row
                                                 .hidden-xs
-                                                    .col-xs-12.col-sm-12.col-md-12.col-lg-8
-                                                        //img.img-thumbnail.volunteer-thumbnail(ng-repeat='volunteer in event.volunteers | limitTo:8', src='{{volunteer.picture}}')
-                                                .col-xs-12.col-sm-12.col-md-12.col-lg-4
+                                                    .col-xs-12.col-sm-6.col-md-7.col-lg-8.oneline
+                                                        img.img-rounded.volunteer-thumbnail(ng-repeat='volunteer in event.volunteers | limitTo:15', src='{{volunteer.picture}}')
+                                                .col-xs-12.col-sm-6.col-md-5.col-lg-4
                                                     h4.text-right {{event.volunteers.length}} / {{event.maxVolunteers}}
                                                         | &nbsp
                                                         button.btn Volunteer Now
-                                    .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                                        | &nbsp
     hr
     
 div(ng-show='!getIsEditing()')
@@ -232,7 +237,7 @@ div(ng-show='!getIsEditing()')
         .col-xs-1.col-sm-3.col-md-3.col-lg-4
     .container-fluid.panel
         .col-xs-12.col-sm-12.col-md-12.col-lg-12.panel-body
-            datepicker
+            //datepicker
 
 div(ng-show='!getIsEditing()')
     h2.text-center.panel-danger
@@ -261,7 +266,7 @@ div(ng-show='!getIsEditing()')
                                 .col-xs-12.col-sm-12.col-md-12.col-lg-12
                                     .row
                                         .col-xs-12.col-sm-12.col-md-12.col-lg-12.navbar-btn
-                                            img.img-thumbnail(ng-src='/images/interests/{{interest.type}}.png', ng-repeat='interest in event.interests | orderBy: "type"', tooltip='{{interest.type}}')
+                                            img.img-thumbnail.interests-thumbnail(ng-src='/images/interests/{{interest.type}}.png', ng-repeat='interest in event.interests | orderBy: "type"', tooltip='{{interest.type}}')
                                         .col-xs-12.col-sm-12.col-md-12.col-lg-12
                                             a(ng-href='/events/{{event.id}}/')
                                                 img.img-responsive.img-thumbnail(src='{{event.picture}}')
@@ -320,7 +325,7 @@ div(ng-show='!getIsEditing()')
                                 .col-xs-12.col-sm-12.col-md-12.col-lg-12
                                     .row
                                         .col-xs-12.col-sm-12.col-md-12.col-lg-12.navbar-btn
-                                            img.img-thumbnail(ng-src='/images/interests/{{interest.type}}.png', ng-repeat='interest in event.interests | orderBy: "type"', tooltip='{{interest.type}}')
+                                            img.img-thumbnail.interests-thumbnail(ng-src='/images/interests/{{interest.type}}.png', ng-repeat='interest in event.interests | orderBy: "type"', tooltip='{{interest.type}}')
                                         .col-xs-12.col-sm-12.col-md-12.col-lg-12
                                             a(ng-href='/events/{{event.id}}/')
                                                 img.img-responsive.img-thumbnail(src='{{event.picture}}')

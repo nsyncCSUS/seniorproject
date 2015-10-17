@@ -1,6 +1,30 @@
 (function() {
     var app = angular.module('groupsController', ['groupService', 'groupFactory']);
 
+	/**
+	 * Checks if an event has expired
+	 *  - displays correctly in upcoming events or past events
+	 */
+	app.filter('checkExpired', function () {
+		return function (events, expiredFlag) {
+			var today = new Date().getTime();
+			var out = [];
+			var eventEndDate = "";
+			for (var i = 0; i < events.length; i++){
+				eventEndDate = new Date(events[i].endTimeDate).getTime();
+				result = eventEndDate - today;
+				
+				if ((result <= 0) && expiredFlag){
+					out.push(events[i]);
+				}
+				else if ((result > 0) && !expiredFlag){
+					out.push(events[i]);
+				}
+			}
+			return out;
+		}
+	});
+	
     app.controller('GroupsController', ['$scope', '$routeParams', '$window', 'GroupService', 'GroupFactory', function($scope, $routeParams, $window, GroupService, GroupFactory) {
 
 		/***************************************************************************
@@ -33,9 +57,9 @@
 					name : "Awesome Event Number 1 asdf asdf asdf asdf",
 					description: "sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem blandit non.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate pellentesque lorem. Donec erat ante, sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem bland center",
 					picture : "//placekitten.com/g/501/500/",
-					startTimeDate : "2015-08-26T18:50:10.111Z",
-					endTimeDate : "2015-08-27T18:50:10.111Z",
-					location: {street: "1234 cool st", city: "Sacramento", state: "CA", zipcode: "95828"},
+					startTimeDate : "2015-10-26T18:50:10.111Z",
+					endTimeDate : "2015-10-27T18:50:10.111Z",
+					street: "1234 cool st", city: "Sacramento", state: "CA", zipcode: "95828",
 					maxVolunteers : 50,
 					volunteers: [{id: "v1", firstName: "Kitten 1", lastName: "1"}, 
 					             {id: "v2", firstName: "Kitten 2", lastName: "1", picture: "//placekitten.com/g/250/251"}, 
@@ -48,7 +72,7 @@
 					             {id: "v9", firstName: "Kitten 9", lastName: "1", picture: "//placekitten.com/g/250/258"}, 
 					             {id: "v10", firstName: "Kitten 10", lastName: "1", picture: "//placekitten.com/g/250/259"}, 
 					             {id: "v11", firstName: "Kitten 11", lastName: "1", picture: "//placekitten.com/g/250/260"}],
-					interests : [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]
+					interests : ["Animals", "Education", "Environment", "People", "Recreation", "Technology", "Youth"]
 									
 				},
 				{
@@ -58,9 +82,9 @@
 					name : "Awesome Event Number 2 asdf asdf asdf asdf",
 					description: "aaaaaaaaaa bbbbbbbbbbbbbbb cccccccccccccccc dddddddddddddddddd eeeeeeeeeeeeeeeeeee fffffffffffffffffff gggggggggggggggggg hhhhhhhhhhhhhh iiiiiiiiiiiiiiiiiiii jjjjjjjjjjjjjjjjjjjj",
 					picture : "//placekitten.com/g/503/500/",
-					location: {street: "4321 cool st", city: "Sacramento", state: "CA", zipcode: "95828"},
-					startTimeDate : "2015-08-28T18:50:10.111Z",
-					endTimeDate : "2015-08-29T18:50:10.111Z",
+					street: "4321 cool st", city: "Sacramento", state: "CA", zipcode: "95828",
+					startTimeDate : "2015-10-28T18:50:10.111Z",
+					endTimeDate : "2015-10-29T18:50:10.111Z",
 					maxVolunteers : 50,
 					volunteers: [{id: "v1", firstName: "Kitten 1", lastName: "1", picture: "//placekitten.com/g/251/250"}, 
 					             {id: "v2", firstName: "Kitten 2", lastName: "1", picture: "//placekitten.com/g/251/251"}, 
@@ -78,7 +102,7 @@
 					             {id: "v14", firstName: "Kitten 14", lastName: "1", picture: "//placekitten.com/g/251/263"}, 
 					             {id: "v15", firstName: "Kitten 15", lastName: "1", picture: "//placekitten.com/g/251/264"}, 
 					             {id: "v16", firstName: "Kitten 16", lastName: "1", picture: "//placekitten.com/g/251/265"}],
-					interests : [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}]
+					interests : ["Animals", "Education", "Environment", "People", "Recreation"]
 				}
 				],
 				organizers : [{id : "org1", firstName : "org1", lastName: "1"},
@@ -97,7 +121,7 @@
 				               {id : "sub8", firstName : "sub8", lastName: "1", picture : "//placekitten.com/g/356/355/"},
 				               {id : "sub9", firstName : "sub9", lastName: "1"},
 				               {id : "sub10", firstName : "sub10", lastName: "1", picture : "//placekitten.com/g/358/355/"}],
-				interests : [{type: "Animals"}, {type: "Education"}, {type: "Environment"}, {type: "People"}, {type: "Recreation"}, {type: "Technology"}, {type: "Youth"}]
+				interests : ["Animals", "Environment", "People", "Recreation", "Technology", "Youth"]
 		};
 
 		$scope.group.organizersToAdd = [];
@@ -263,7 +287,7 @@
 		
 		function buildInterests() {
 			angular.forEach($scope.group.interests, function(interest) {
-				switch(interest.type){
+				switch(interest){
 				case "Animals":
 					$scope.animalsSelected = "selected";
 					break;
@@ -308,7 +332,7 @@
 			var newInterests = [];
 			angular.forEach($scope.group.interests, function(currentInterest, index) {
 				//console.log(currentInterest.type);
-				if (currentInterest.type === interest){
+				if (currentInterest === interest){
 					//console.log("removed " + interest);
 					hasInterest = true;
 					switch(interest) {
@@ -342,7 +366,7 @@
 			});
 			if (hasInterest === false){
 				//console.log("added " + interest);
-				newInterests.push({type: interest});
+				newInterests.push(interest);
 				switch(interest) {
 				case "Animals":
 					$scope.animalsSelected = "selected";
@@ -682,10 +706,10 @@
 			GroupService.saveGroup({groupId: $routeParams.groupId, groupData: $scope.group}, function(res) {
 				switch(res.data.msg){
 				case true:
-					$scope.alerts.push({type: "success", msg: "Saved Successful"});
+					$scope.alerts.push("success", {msg: "Saved Successful"});
 					break;
 				case false:
-					$scope.alerts.push({type: "danger", msg: "Saved Failed"});
+					$scope.alerts.push("danger", {msg: "Saved Failed"});
 					break;
 				}
 			});
@@ -739,70 +763,62 @@
 		email : 		String,
 		birthday : 		Date,
 		age : 			Number,
-		location :		{city: String, state: String, zipcode: String},	
+		city: 			String, 
+		state: 			String, 
+		zipcode: 		String,	
 		phoneNum : 		Number,
-		googlePlus : 	String,
-		facebook : 		String,
-		linkedIn : 		String,
-		twitter : 		String,
-		volunteeredTo : [{id: String}, {id: String}, ...],
-		creatorOf : 	[{id: String}, {id: String}, ...],
-		organizerOf : 	[{id: String}, {id: String}, ...],
-		subscribedTo : 	[{id: String}, {id: String}, ...],
-		interests : 	[{type: String}, {type: String}, ...]
-	}
-*/
-
-/*
-	group: {
-		id : 				String,
-		name : 				String,
-		picture : 			String,
-		creationDate : 		String,
-		location :			[{city: String, state: String, zipcode: String}, ...],
-		description : 		String,
 		googlePlusURL : 	String,
 		facebookURL : 		String,
 		linkInURL : 		String,
 		twitterURL: 		String,
-		personalWebsiteURL: String,
-		events:				[{id: String}, {id: String}, ...],
-		organizers:			[{id: String}, {id: String}, ...],
-		subscribers:		[{id: String}, {id: String}, ...],
-		interests: 			[{type: String}, {type: String}, ...]
-
-/*
-	event: {
-		id: 			String,		
-		creatorId: 		String,
-		groupId: 		String,
-		name: 			String,
-		description: 	String,
-		picture: 		String,
-		creationDate: 	DateTime,
-		startTimeDate: 	DateTime,
-		endTimeDate: 	DateTime,
-		location :		{street: String, city: String, state: String, zipcode: String},	
-		maxVolunteers: 	Number,
-		volunteers:		[{id: String}, {id: String}, ...],
-		interests: 		[{type: String}, {type: String}, ...]
+		volunteeredTo : [{id: String}, {id: String}, ...],
+		creatorOf : 	[{id: String}, {id: String}, ...],
+		organizerOf : 	[{id: String}, {id: String}, ...],
+		subscribedTo : 	[{id: String}, {id: String}, ...],
+		interests : 	[String]
 	}
 */
 
 /*
-	event: {
-		id: 			String,		
-		creatorId: 		String,
-		groupId: 		String,
-		name: 			String,
-		description: 	String,
-		picture: 		String,
-		creationDate: 	DateTime,
-		startTimeDate: 	DateTime,
-		endTimeDate: 	DateTime,
-		location :		{street: String, city: String, state: String, zipcode: String},	
-		maxVolunteers: 	Number,
-		volunteers:		[{id: String}, {id: String}, ...],
-		interests: 		[{type: String}, {type: String}, ...]
-	}
+group: {
+	id : 				String,
+	name : 				String,
+	picture : 			String,
+	creationDate : 		String,
+	city: 				String, 
+	state: 				String, 
+	zipcode: 			String,
+	description : 		String,
+	googlePlusURL : 	String,
+	facebookURL : 		String,
+	linkInURL : 		String,
+	twitterURL: 		String,
+	personalWebsiteURL: String,
+	events:				[{id: String}, {id: String}, ...],
+	organizers:			[{id: String}, {id: String}, ...],
+	subscribers:		[{id: String}, {id: String}, ...],
+	interests: 			[String]
+
+}
+*/
+
+/*
+event: {
+	id: 			String,		
+	creatorId: 		String,
+	groupId: 		String,
+	name: 			String,
+	description: 	String,
+	picture: 		String,
+	creationDate: 	DateTime,
+	startTimeDate: 	DateTime,
+	endTimeDate: 	DateTime,
+	street: 		String, 
+	city: 			String, 
+	state: 			String, 
+	zipcode: 		String,	
+	maxVolunteers: 	Number,
+	volunteers:		[{id: String}, {id: String}, ...],
+	interests: 		[String]
+}
 */
