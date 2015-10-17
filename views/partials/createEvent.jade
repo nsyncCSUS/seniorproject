@@ -35,7 +35,7 @@ div.eventRow(ng-show='!getIsPreviewing()')
                 .col-xs-12.col-sm-12.col-md-12.col-lg-12.panel-default
                     h4.panel-heading Event Picture
                     .col-xs-12.col-sm-12.col-md-12.col-lg-12.cursor-pointer
-                        img.img-responsive.img-rounded(ng-src="//placehold.it/400x400")
+                        img.img-responsive.img-rounded(ng-src="//placehold.it/250x250")
                         .addOverlay
                             span.glyphicon.glyphicon-plus.glyphicon-lg-center
                                                                 
@@ -43,112 +43,110 @@ div.eventRow(ng-show='!getIsPreviewing()')
             .col-xs-12.col-sm-12.col-md-12.col-lg-12.panel-default
                 h4.panel-heading Description
                 textarea.form-control#description(rows='7', ng-model='event.description')
-                
-            .col-xs-12.col-sm-12.col-md-6.col-lg-6
-                .row
-                    .col-xs-12.col-sm-12.col-md-12.col-lg-12.panel-default
-                        h4.panel-heading Location
-                        .row
-                            .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                                .form-group
-                                    label(for='eventAddress') Address
-                                    input.form-control#eventAddress(ng-model='event.location.street')
-                            .col-xs-12.col-sm-12.col-md-12.col-lg-5
-                                .form-group
-                                    label(for='eventCity') City
-                                    input.form-control#eventCity(ng-model='event.location.city')
-                            .col-xs-12.col-sm-6.col-md-4.col-lg-4
-                               .form-group
-                                 label(for='eventState') State
-                                 select.form-control#eventState(ng-model='event.location.state')
-                                      option(value='AL') Alabama
-                                      option(value='AK') Alaska
-                                      option(value='AZ') Arizona
-                                      option(value='AR') Arkansas
-                                      option(value='CA') California
-                                      option(value='CO') Colorado
-                                      option(value='CT') Connecticut
-                                      option(value='DE') Delaware
-                                      option(value='DC') District Of Columbia
-                                      option(value='FL') Florida
-                                      option(value='GA') Georgia
-                                      option(value='HI') Hawaii
-                                      option(value='ID') Idaho
-                                      option(value='IL') Illinois
-                                      option(value='IN') Indiana
-                                      option(value='IA') Iowa
-                                      option(value='KS') Kansas
-                                      option(value='KY') Kentucky
-                                      option(value='LA') Louisiana
-                                      option(value='ME') Maine
-                                      option(value='MD') Maryland
-                                      option(value='MA') Massachusetts
-                                      option(value='MI') Michigan
-                                      option(value='MN') Minnesota
-                                      option(value='MS') Mississippi
-                                      option(value='MO') Missouri
-                                      option(value='MT') Montana
-                                      option(value='NE') Nebraska
-                                      option(value='NV') Nevada
-                                      option(value='NH') New Hampshire
-                                      option(value='NJ') New Jersey
-                                      option(value='NM') New Mexico
-                                      option(value='NY') New York
-                                      option(value='NC') North Carolina
-                                      option(value='ND') North Dakota
-                                      option(value='OH') Ohio
-                                      option(value='OK') Oklahoma
-                                      option(value='OR') Oregon
-                                      option(value='PA') Pennsylvania
-                                      option(value='RI') Rhode Island
-                                      option(value='SC') South Carolina
-                                      option(value='SD') South Dakota
-                                      option(value='TN') Tennessee
-                                      option(value='TX') Texas
-                                      option(value='UT') Utah
-                                      option(value='VT') Vermont
-                                      option(value='VA') Virginia
-                                      option(value='WA') Washington
-                                      option(value='WV') West Virginia
-                                      option(value='WI') Wisconsin
-                                      option(value='WY') Wyoming
-                            .col-xs-12.col-sm-6.col-md-4.col-lg-3
-                               .form-group
-                                 label(for='eventZIP') ZIP Code
-                                 input.form-control#eventZIP(ng-model='event.location.zipcode')          
-                    .col-xs-12.col-sm-12.col-md-12.col-lg-12.panel-default.hidden-sm
-                        h4.panel-heading Time
-                        .row
-                            .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                                label Start Time:
-                                    .form-inline
-                                        input.form-control(type='text', datetime-picker='MM/dd/yyyy HH:mm', ng-model='event.startTimeDate', ng-disabled = 'true', is-open='open.startTimeDate')
-                                        span
-                                            button.btn.btn-default(type='button', ng-click="openCalendar($event, 'startTimeDate'); timediff(event.startTimeDate, event.endTimeDate)")
-                                                i.fa.fa-calendar
-                            .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                                label End Time:
-                                    .form-inline
-                                        input.form-control(type='text', datetime-picker='MM/dd/yyyy HH:mm', ng-model='event.endTimeDate', ng-disabled = 'true', is-open='open.endTimeDate')
-                                        span
-                                            button.btn.btn-default(type='button', ng-click="openCalendar($event, 'endTimeDate')")
-                                                i.fa.fa-calendar
-                            
-            .col-xs-12.col-sm-12.col-md-6.col-lg-6.panel-default
-                    h4.col-xs-12.col-sm-12.col-md-12.col-lg-12.panel-heading
-                        .row
-                            .col-xs-8.col-sm-8.col-md-8.col-lg-12
-                                |Volunteers
+                | </br>
+            
+            .col-xs-12.col-sm-6.col-md-8.col-lg-12    
+                .col-xs-12.col-sm-12.col-md-6.col-lg-6
                     .row
-                        .col-xs-2.col-sm-3.col-md-3.col-lg-3(ng-repeat='volunteer in event.volunteers | limitTo: 12')
-                            a(ng-href='/users/{{volunteer.id}}/')
-                                img.img-responsive.img-rounded(ng-src="{{volunteer.picture}}", tooltip='{{volunteer.firstName}} {{volunteer.lastName}}', ng-if='hasPicture("event", $parent.$index, "volunteer", $index)')
-                                img.img-responsive.img-rounded(ng-src="//placehold.it/250x250", tooltip='{{volunteer.firstName}} {{volunteer.lastName}}', ng-if='!hasPicture("event", $parent.$index, "volunteer", $index)')
-
+                        .col-xs-12.col-sm-12.col-md-12.col-lg-12.panel-default
+                            h4.panel-heading Location
+                            .row
+                                .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                    .form-group
+                                        label(for='eventAddress') Address
+                                        input.form-control#eventAddress(ng-model='event.location.street')
+                                .col-xs-12.col-sm-12.col-md-12.col-lg-5
+                                    .form-group
+                                        label(for='eventCity') City
+                                        input.form-control#eventCity(ng-model='event.location.city')
+                                .col-xs-12.col-sm-6.col-md-4.col-lg-4
+                                   .form-group
+                                     label(for='eventState') State
+                                     select.form-control#eventState(ng-model='event.location.state')
+                                          option(value='AL') Alabama
+                                          option(value='AK') Alaska
+                                          option(value='AZ') Arizona
+                                          option(value='AR') Arkansas
+                                          option(value='CA') California
+                                          option(value='CO') Colorado
+                                          option(value='CT') Connecticut
+                                          option(value='DE') Delaware
+                                          option(value='DC') District Of Columbia
+                                          option(value='FL') Florida
+                                          option(value='GA') Georgia
+                                          option(value='HI') Hawaii
+                                          option(value='ID') Idaho
+                                          option(value='IL') Illinois
+                                          option(value='IN') Indiana
+                                          option(value='IA') Iowa
+                                          option(value='KS') Kansas
+                                          option(value='KY') Kentucky
+                                          option(value='LA') Louisiana
+                                          option(value='ME') Maine
+                                          option(value='MD') Maryland
+                                          option(value='MA') Massachusetts
+                                          option(value='MI') Michigan
+                                          option(value='MN') Minnesota
+                                          option(value='MS') Mississippi
+                                          option(value='MO') Missouri
+                                          option(value='MT') Montana
+                                          option(value='NE') Nebraska
+                                          option(value='NV') Nevada
+                                          option(value='NH') New Hampshire
+                                          option(value='NJ') New Jersey
+                                          option(value='NM') New Mexico
+                                          option(value='NY') New York
+                                          option(value='NC') North Carolina
+                                          option(value='ND') North Dakota
+                                          option(value='OH') Ohio
+                                          option(value='OK') Oklahoma
+                                          option(value='OR') Oregon
+                                          option(value='PA') Pennsylvania
+                                          option(value='RI') Rhode Island
+                                          option(value='SC') South Carolina
+                                          option(value='SD') South Dakota
+                                          option(value='TN') Tennessee
+                                          option(value='TX') Texas
+                                          option(value='UT') Utah
+                                          option(value='VT') Vermont
+                                          option(value='VA') Virginia
+                                          option(value='WA') Washington
+                                          option(value='WV') West Virginia
+                                          option(value='WI') Wisconsin
+                                          option(value='WY') Wyoming
+                                .col-xs-12.col-sm-6.col-md-4.col-lg-3
+                                   .form-group
+                                     label(for='eventZIP') ZIP Code
+                                     input.form-control#eventZIP(ng-model='event.location.zipcode')
+                .col-xs-12.col-sm-12.col-md-6.col-lg-6.panel-default.hidden-sm
+                   h4.panel-heading Time
+                   .row
+                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                           label Start Time:
+                           .form-inline
+                               input.form-control(type='text', datetime-picker='MM/dd/yyyy HH:mm', ng-model='event.startTimeDate', ng-disabled = 'true', is-open='open.startTimeDate')
+                               span
+                                   button.btn.btn-default(type='button', ng-click="openCalendar($event, 'startTimeDate'); timediff(event.startTimeDate, event.endTimeDate)")
+                                       i.fa.fa-calendar
+                           | </br>   
+                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                           label End Time:
+                           .form-inline
+                               input.form-control(type='text', datetime-picker='MM/dd/yyyy HH:mm', ng-model='event.endTimeDate', ng-disabled = 'true', is-open='open.endTimeDate')
+                               span
+                                   button.btn.btn-default(type='button', ng-click="openCalendar($event, 'endTimeDate')")
+                                       i.fa.fa-calendar                      
+                    
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12.panel-default
+                h4.panel-heading Volunteers
+                .button.btn.btn-info.btn-default.btn-block(type='button') Invite Volunteers
+                
+                
 div.titleRow(ng-show='!getIsPreviewing()')
     .container-fluid
         .col-xs-12.col-sm-12.col-md-4.col-lg-12
             pre.alert.alert-info.
+                For testing date/time string purposes, will be removed afterwards
                 Start Time is: {{event.startTimeDate | date:'medium' }}
                 End Time is: {{event.endTimeDate | date:'medium' }}     
 //                label {{$scope.tDifference}} 
