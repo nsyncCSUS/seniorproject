@@ -43,11 +43,6 @@
             type: ObjectId,
             ref: 'User'
         }],
-
-        creationUser: {
-            type: ObjectId,
-            ref: 'User'
-        },
         
         interests: [String] 
     });
