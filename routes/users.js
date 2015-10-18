@@ -1,16 +1,16 @@
-
 (function(module) {
     'use strict';
 
     var express = require('express');
     var mongoose = require('mongoose'); // mongose module
+    mongoose.set('debug',true);
     var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
     var User = require("../db/models/user");
     var Group = require("../db/models/group");
     var Event = require("../db/models/event");
     var util = require("./util");
-
+    var router = express.Router();
 
     /**
      * Collection of relevant constants
@@ -28,7 +28,13 @@
     }
 
 
-    var router = express.Router();
+
+
+    router.post('/test',function(req,res){
+      console.log('tes123123123123123');
+      console.log(req.body);
+      });
+
     router.post('/', function(req, res) {
         console.log(req.body.username);
 
@@ -141,12 +147,12 @@
 
 
     /**
-     * Global User router 
+     * Global User router
      */
     //var router = express.Router();
     router.get('/', function(request, response, next) {
         //var user = util.takeUserProjection(request.params.user);
-        var user = request.params.user; 
+        var user = request.params.user;
         User.find(user, function(err, users) {
             if (err) {
                 return util.err(err, response);
@@ -173,47 +179,51 @@
     router.put('/:id', function(request, response, next) {
         var id = request.params.id;
         //var user = util.takeUserProjection(request.params.user);
-        var user = JSON.parse(request.body.user); 
-        User.findByIdAndUpdate(id, user, {new: true}, function(err, user) {
+        var user = JSON.parse(request.body.user);
+        User.findByIdAndUpdate(id, user, {
+            new: true
+        }, function(err, user) {
             if (err) util.err(err, response);
 
-            return response.send({user: user}); 
+            return response.send({
+                user: user
+            });
         });
     });
 
 
-    // Function handled by Huy's function above 
-    // router.post('/', function(request, response, next) {}); 
+    // Function handled by Huy's function above
+    // router.post('/', function(request, response, next) {});
 
     router.delete('/:id', function(request, response, next) {
         var id = request.params.id;
         User.findByIdAndRemove(id, function(err) {
             if (err) util.err(err, response);
-            return response.end(); 
+            return response.end();
         });
     });
 
 
 
     /**
-     * Nested router for handling event requests 
+     * Nested router for handling event requests
      */
     var events = express.Router({
         mergeParams: true
     });
 
-    
+
     events.get('/', function(request, response, next) {
         var id1 = request.params.id1;
-        var event = request.params.event; 
+        var event = request.params.event;
         return User.findById(id1, function(err, user) {
             if (err) {
                 return util.err(err, response);
             } else {
-                var events = user.events || []; 
+                var events = user.events || [];
                 return response.send({
-                    events: events 
-                 });
+                    events: events
+                });
             }
         });
     });
@@ -230,66 +240,66 @@
                 });
 
                 return response.send({
-                    event: event 
+                    event: event
                 });
             }
         });
     });
 
-    
-    // events.post('/', function(request, response, next) {}); 
-    // events.put('/:id2', function(request, response, next) {}); 
-    // events.delete('/:id2', function(request, response, next) {}); 
+
+    // events.post('/', function(request, response, next) {});
+    // events.put('/:id2', function(request, response, next) {});
+    // events.delete('/:id2', function(request, response, next) {});
 
 
 
     /**
-     * Nested router for handling group requests 
+     * Nested router for handling group requests
      */
     var groups = express.Router({
         mergeParams: true
     });
 
-    
+
     groups.get('/', function(request, response, next) {
         var id1 = request.params.id1;
         User.findById(id1, function(err, user) {
-            if(err) {
+            if (err) {
                 util.err(err, response);
-                return response.end(); 
+                return response.end();
             } else {
                 var groups = user.groups || [];
                 return response.send({
                     groups: groups
-                }); 
-            } 
-        });
-    });
-
-    
-    groups.get('/:id2', function(request, response, next) {
-        var id1 = request.params.id1;
-        var id2 = request.params.id2;
-        User.findById(id1, function(err, user) {
-            if(err) {
-                util.err(err, response);
-                return response.end();
-            } else {
-                var group = user.groups.filter(function(index, item) {
-                    return item._id == id2; 
                 });
-
-                return response.send({
-                    group: group
-                }); 
             }
         });
     });
 
-    
-    // groups.post('/', function(request, response, next) {}); 
-    // groups.put('/:id2', function(request, response, next) {}); 
-    // groups.delete('/:id2', function(request, response, next) {}); 
+
+    groups.get('/:id2', function(request, response, next) {
+        var id1 = request.params.id1;
+        var id2 = request.params.id2;
+        User.findById(id1, function(err, user) {
+            if (err) {
+                util.err(err, response);
+                return response.end();
+            } else {
+                var group = user.groups.filter(function(index, item) {
+                    return item._id == id2;
+                });
+
+                return response.send({
+                    group: group
+                });
+            }
+        });
+    });
+
+
+    // groups.post('/', function(request, response, next) {});
+    // groups.put('/:id2', function(request, response, next) {});
+    // groups.delete('/:id2', function(request, response, next) {});
 
 
     router.use('/:id1/events', events);
