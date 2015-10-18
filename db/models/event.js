@@ -1,15 +1,15 @@
 
 (function(module) {
    'use strict';
-   
+
     var mongoose = require('mongoose');
     var Schema = mongoose.Schema;
-    var ObjectId = Schema.ObjectId; 
+    var ObjectId = Schema.ObjectId;
     var User = require('./user');
-    var Group = require('./group'); 
-    
+    var Group = require('./group');
+
     /**
-     * Schema for Event objects 
+     * Schema for Event objects
      */
     var EventSchema = new Schema({
         name: String,
@@ -46,13 +46,16 @@
         
         interests: [String] 
     });
-    
+
     var Event = mongoose.model('Event', EventSchema);
     module.exports = Event;
 
 })(module);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/dev
 /*
 	event: {
 		id: 			String,		

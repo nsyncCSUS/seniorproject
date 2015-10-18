@@ -10,33 +10,33 @@ var events = require('./events.js');
 router.get('/', function(req, res, next) {
     /*res.render('index', {
         title: 'Senior Project'
-    });*/ 
-   res.render('index.jade'); 
+    });*/
+   res.render('index.jade');
 });
 
 
 /**
- * Render files from compiled build directory. 
+ * Render files from compiled build directory.
  */
 /*router.get('/build/:page', function(req, res, next) {
-    var page = req.params.page; 
+    var page = req.params.page;
     try {
-        res.send(page); 
+        res.send(page);
     } catch (e) {
-        return res.status(404).send('Not Found'); 
-    } 
+        return res.status(404).send('Not Found');
+    }
 });*/
 
 
 router.get('/partials/:page', function(req, res, next) {
     var page = req.params.page;
-    console.log(page); 
-    res.render('partials/' + page); 
+    console.log(page);
+    res.render('partials/' + page);
     //res.render('index', {
     //    title: 'Senior Project'
     //});
-}); 
-//    res.render(page); 
+});
+//    res.render(page);
 //    res.render('index', {
 //        title: 'Senior Project'
 //    });
@@ -53,6 +53,7 @@ router.use('/api/events', events);
 /**
  * Render index if no route matched
  */
+
 router.get('*', function(req, res, next) {
     res.render('index', {
         title: 'Senior Project'

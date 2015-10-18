@@ -1,42 +1,45 @@
 
 (function(module) {
     'use strict';
-    
+
     var bcrypt   = require('bcrypt-nodejs');
     var mongoose = require('mongoose');
     var Schema = mongoose.Schema;
-    var ObjectId = Schema.ObjectId; 
-	
+    var ObjectId = Schema.ObjectId;
+
 	// Also consider:
 	// var Schema = mongoose.Shema;
 	// var UserSchema = new Schema({
 	//     name: String,
-	//     email: String 
+	//     email: String
 	// });
 	//
 	// Spawning a model from a schema:
 	// var User = new mongoose.model('User', UserSchema);
-	// 
+	//
 	// Adding Methods to Model:
 	// UserSchema.methods.getName = function() {
 	//     return this.name;
-	// }; 
-	// 
-	// Creating a new User: 
+	// };
+	//
+	// Creating a new User:
 	// var user = new User({name: 'John'});
-	
-	
+
+
 	var UserSchema = new Schema({
-	
+
 		userAuth: {
+      /*
 		    userName: {
                         type: String,
                         required: true,
-                        unique: true 
+                        unique: true
                     },
-		    password: String 
+                    */
+        userName: String,
+		    password: String
 		},
-		
+
 		fb : {
 		    id : String,
 		    access_token : String,
@@ -44,7 +47,7 @@
 		    lastName : String,
 		    email : String
 		},
-            
+
 		twitter : {
 		    id : String,
 		    token : String,
@@ -52,7 +55,11 @@
 		    displayName : String,
 		    lastStatus : String
 		},
+<<<<<<< HEAD
 		            
+=======
+            
+>>>>>>> refs/remotes/origin/dev
         firstName : String,
 	    middleName : String,
 	    lastName : String,
