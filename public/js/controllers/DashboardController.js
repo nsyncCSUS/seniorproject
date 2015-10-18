@@ -8,6 +8,8 @@
 	 */
 	app.filter('checkExpired', function () {
 		return function (events, expiredFlag) {
+			if (events == null)
+				return;
 			var today = new Date().getTime();
 			var out = [];
 			var eventEndDate = "";

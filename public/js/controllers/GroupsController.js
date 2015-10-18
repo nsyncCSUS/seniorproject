@@ -7,6 +7,9 @@
 	 */
 	app.filter('checkExpired', function () {
 		return function (events, expiredFlag) {
+			if (events == null)
+				return;
+			
 			var today = new Date().getTime();
 			var out = [];
 			var eventEndDate = "";
@@ -25,7 +28,7 @@
 		}
 	});
 	
-    app.controller('GroupsController', ['$scope', '$routeParams', '$window', 'GroupService', 'GroupFactory', function($scope, $routeParams, $window, GroupService, GroupFactory) {
+    app.controller('GroupsController', ['$scope', '$routeParams', '$window', '$anchorScroll', '$timeout', 'GroupService', 'GroupFactory', function($scope, $routeParams, $window, $anchorScroll, $timeout, GroupService, GroupFactory) {
 
 		/***************************************************************************
 		 * Variables (includes ones from scope too)
@@ -44,7 +47,7 @@
 				creationDate : "2015-08-26T18:50:10.111Z",
 				city : "Sacramento",
 				state : "CA",
-				zipCode : 95828,
+				zipcode : 95828,
 				description: "sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem blandit non.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate pellentesque lorem. Donec erat ante, sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem bland center",
 				googlePlusURL : "www.google.com",
 				facebookURL : "https://facebook.com",
@@ -213,6 +216,12 @@
 						currentSearchResult.added = "added";
 				});
 			});
+		}
+		
+		$scope.scrollToResults = function() {
+			$timeout(function() {
+				$anchorScroll('searchResults');
+			}, 1);
 		}
 		/***************************************************************************
 		 * Building Functions
@@ -454,8 +463,20 @@
 		}
 
 		$scope.closeAlert = function(index) {
-		    $scope.alerts.splice(index, 1);
-		  };
+			$scope.alerts.splice(index, 1);
+		}
+
+		$scope.scrollToAdd = function(id) {
+			$timeout(function() {
+				$anchorScroll('add-' + id);
+			}, 1);
+		}
+
+		$scope.scrollToRemove = function(id) {
+			$timeout(function() {
+				$anchorScroll('remove-' + id);
+			}, 1);
+		}
 		  
 		/***********************************************************************
 		 * Boolean Functions
