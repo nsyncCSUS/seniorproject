@@ -55,11 +55,7 @@
 		    displayName : String,
 		    lastStatus : String
 		},
-<<<<<<< HEAD
-		            
-=======
-            
->>>>>>> refs/remotes/origin/dev
+		
         firstName : String,
 	    middleName : String,
 	    lastName : String,

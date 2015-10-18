@@ -52,10 +52,6 @@
 
 })(module);
 
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/dev
 /*
 	event: {
 		id: 			String,		
