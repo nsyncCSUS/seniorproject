@@ -3,7 +3,12 @@
 // After user is confimed logged in logged service is used to change the isLogged Value
 // This will be used for client sided authentication
 
-//$window is the window object inside the browser
+// Dependency Injection Objects
+// $window is the window object inside the browser
+// Upload  is a object from injected into angular called ng-file-upload. it is used
+// in the image uploading process. You call the function upload from it and it takes the form
+// information (ng-file-upload has a specail derective/model that creates the form (inside jade code))
+// and calls a post it to the route with an object that is easily usable.
 (function() {
   var app = angular.module('loginController', ['loginService']);
 
@@ -24,12 +29,12 @@
       console.log($scope.myForm);
       console.log(file);
       Upload.upload({
-        url: '/api/users/upload',
+        url: '/api/users/upload', // which route to post
         fields: {
-          'username': 'test'
+          'username': 'test' // any fields you would like specified
         },
-        file: file
-      }).progress(function(evt) {
+        file: file // the actual image file being passed
+      }).progress(function(evt) { // Useful debugging lines
         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
         console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
       }).success(function(data, status, headers, config) {
@@ -37,11 +42,12 @@
       }).error(function(data, status, headers, config) {
         console.log('Http status: ' + status);
       });
+      //once the upload has completed these 3 lines clear the form fields
       $scope.picFile = null;
       $scope.myForm.$setPristine();
       $scope.myForm.$setUntouched();
     };
-
+    // same concept from signupcontroller.js useing promises if success .then used if failed errocallback used
     $scope.login = function() {
       $http.post('/api/users/login', $scope.user)
         .then(function(response) {
@@ -50,6 +56,10 @@
           console.log($window.sessionStorage);
           $location.path('/home');
           LoginService.isLogged = 'True';
+        },function errorCallBack(response) {
+          console.log('Login failed call back angular');
+          console.log(response);
+          //TODO: add some kind of ng-show error message to tell user login failed
         });
     };
 

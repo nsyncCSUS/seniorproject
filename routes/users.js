@@ -110,6 +110,9 @@
   // res object
   router.post('/login', function(req, res) {
     console.log('login');
+    var statusCode = 200; // initalize the statuscode to ok nothing wrong
+    var errorMessage = "None";
+    var token;      // token for when the user signs in 
     User.findOne({
       'userAuth.userName': req.body.username
     }, function(err, user) {
@@ -118,32 +121,27 @@
       }
       if (!user) {
         console.log("User not found");
-        res.json({
-          success: false,
-          message: 'Authentication failed. Wrong Username.'
-        });
+        statusCode = 500;
+        errorMessage = 'Authentication failed. Wrong Username.';
       } else if (user) {
         if (user.userAuth.password != req.body.password) {
           console.log(req.body.password);
           console.log(user.userAuth.password);
           console.log('Wrong password');
-          res.json({
-            success: false,
-            message: 'Authentication failed. Wrong password.'
-          });
+          statusCode = 500; //http error code
+          errorMessage = "Password incorrect";
         } else {
           console.log('token created');
-          var token = jwt.sign(user, 'secret', {
+            token = jwt.sign(user, 'secret', {
             expiresInMinutes: 1440 // expires in 24 hours
-          });
-
-          res.json({
-            success: true,
-            message: "Token Created",
-            token: token
           });
         }
       }
+    }).then(function() {
+      res.status(statusCode).json({
+        error: errorMessage,
+        token: token
+      });
     });
   });
 
