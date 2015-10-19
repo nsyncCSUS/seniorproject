@@ -11,6 +11,7 @@
   var Event = require("../db/models/event");
   var util = require("./util");
   var router = express.Router();
+  var bcrypt   = require('bcrypt-nodejs');  // used to encryt the passwords
 
   /**
    * Collection of relevant constants
@@ -61,7 +62,8 @@
         var newUser = new User({
           userAuth: {
             userName: req.body.username,
-            password: req.body.password
+            password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null)
+            // encrypts the password before storing note:salt stored inside the passwordhash
           }
         });
 
@@ -112,7 +114,7 @@
     console.log('login');
     var statusCode = 200; // initalize the statuscode to ok nothing wrong
     var errorMessage = "None";
-    var token;      // token for when the user signs in 
+    var token;      // token for when the user signs in
     User.findOne({
       'userAuth.userName': req.body.username
     }, function(err, user) {
@@ -124,7 +126,8 @@
         statusCode = 500;
         errorMessage = 'Authentication failed. Wrong Username.';
       } else if (user) {
-        if (user.userAuth.password != req.body.password) {
+        if(!bcrypt.compareSync(req.body.password, user.userAuth.password)) {
+          // compares the password given with the dbpassword 
           console.log(req.body.password);
           console.log(user.userAuth.password);
           console.log('Wrong password');
@@ -137,7 +140,7 @@
           });
         }
       }
-    }).then(function() {
+    }).then(function() { // sets the statuscode, sends a message about the post and sends token back
       res.status(statusCode).json({
         error: errorMessage,
         token: token
