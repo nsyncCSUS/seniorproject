@@ -11,7 +11,7 @@
   var Event = require("../db/models/event");
   var util = require("./util");
   var router = express.Router();
-  var bcrypt   = require('bcrypt-nodejs');  // used to encryt the passwords
+  var bcrypt = require('bcrypt-nodejs'); // used to encryt the passwords
 
   /**
    * Collection of relevant constants
@@ -28,10 +28,38 @@
     return response.status(404).send(Constants.Http404Message);
   }
 
-  router.post('/test', function(req, res) {
-    console.log('tes123123123123123');
-    console.log(req.body);
+  //file upload
+  var imgur = require('imgur');
+  //imgur.setCredentials('imgurSP', '123456');
+  // 74b836d4d3f31f2 client id imgur
+
+  var fs = require('fs-extra'); //File System-needed for renaming file etc
+
+  router.post('/upload', function(req, res, next) {
+    console.log(req.files);
+    console.log(req.files.file.path);
+    imgur.uploadFile(req.files.file.path)
+      .then(function(json) {
+        console.log(json.data.link);
+
+        var filename = req.files.file.path;
+        filename = filename.split("\\").pop();
+        console.log(filename);
+        fs.remove('./temp/' + filename, function(err) {
+          if (!err) console.log('success!');
+        });
+
+      })
+      .catch(function(err) {
+        console.error(err.message);
+      });
+
+    res.end();
   });
+
+
+
+
 
   // Route for creating a  new user
   router.post('/createuser', function(req, res) {
@@ -63,7 +91,7 @@
           userAuth: {
             userName: req.body.username,
             password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null)
-            // encrypts the password before storing note:salt stored inside the passwordhash
+              // encrypts the password before storing note:salt stored inside the passwordhash
           }
         });
 
@@ -114,7 +142,7 @@
     console.log('login');
     var statusCode = 200; // initalize the statuscode to ok nothing wrong
     var errorMessage = "None";
-    var token;      // token for when the user signs in
+    var token; // token for when the user signs in
     User.findOne({
       'userAuth.userName': req.body.username
     }, function(err, user) {
@@ -126,8 +154,8 @@
         statusCode = 500;
         errorMessage = 'Authentication failed. Wrong Username.';
       } else if (user) {
-        if(!bcrypt.compareSync(req.body.password, user.userAuth.password)) {
-          // compares the password given with the dbpassword 
+        if (!bcrypt.compareSync(req.body.password, user.userAuth.password)) {
+          // compares the password given with the dbpassword
           console.log(req.body.password);
           console.log(user.userAuth.password);
           console.log('Wrong password');
@@ -135,7 +163,7 @@
           errorMessage = "Password incorrect";
         } else {
           console.log('token created');
-            token = jwt.sign(user, 'secret', {
+          token = jwt.sign(user, 'secret', {
             expiresInMinutes: 1440 // expires in 24 hours
           });
         }

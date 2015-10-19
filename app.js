@@ -48,6 +48,7 @@ app.set('view engine', 'jade');
 app.use(multipart({
     uploadDir: './temp/'
 }));
+//app.use(express.static(path.join(__dirname, 'temp')));
 
 
 
