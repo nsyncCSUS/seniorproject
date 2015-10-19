@@ -30,7 +30,7 @@
 
   //file upload
   var imgur = require('imgur');
-  //imgur.setCredentials('imgurSP', '123456');
+  //imgur.setCredentials('imgurSP', '123456');    // Setting login for imgur gives an error 
   // 74b836d4d3f31f2 client id imgur
 
   var fs = require('fs-extra'); //File System-needed for renaming file etc
