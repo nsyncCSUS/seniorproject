@@ -1,22 +1,32 @@
 
 (function(module) {
    'use strict';
-   
+
     var mongoose = require('mongoose');
     var Schema = mongoose.Schema;
-    var ObjectId = Schema.ObjectId; 
+    var ObjectId = Schema.ObjectId;
     var User = require('./user');
-    var Group = require('./group'); 
-    
+    var Group = require('./group');
+
     /**
-     * Schema for Event objects 
+     * Schema for Event objects
      */
     var EventSchema = new Schema({
         eventName: String,
+
+        creationUser: {
+            type: ObjectId,
+            ref: 'User'
+        },
         
         group: {
             type: ObjectId,
             ref: 'Group'
+        },
+
+        picture: {
+        	type: String,
+    		default: "//placehold.it/500x500/"
         },
         
         description: String,
@@ -33,15 +43,9 @@
             ref: 'User'
         }],
         
-        creationUser: {
-            type: ObjectId,
-            ref: 'User'
-        },
-        
-        maxVolunteers: Number,
         interests: [String] 
     });
-    
+
     var Event = mongoose.model('Event', EventSchema);
     module.exports = Event;
 

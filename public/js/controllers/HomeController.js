@@ -35,20 +35,20 @@
                 // Get Groups
                 $scope.groupsSearchResults = HomeService.getGroupSearchResults();
             }
-        }
+        };
 
         /***************************************************************************
          * Functions that controls the view for searching or not search
          **************************************************************************/
         $scope.searching = function() {
-            if (this.isSearching == true)
+            if (this.isSearching === true)
                 return true;
             else
                 return false;
-        }
+        };
         $scope.stopSearching = function() {
             this.isSearching = false;
-        }
+        };
 
 
 
@@ -57,14 +57,14 @@
          **************************************************************************/
         $scope.setCurrentTab = function(category) {
             this.currentTab = category;
-        }
+        };
 
         $scope.getCurrentTab = function(category) {
             if (this.currentTab === category)
                 return true;
             else
                 return false;
-        }
+        };
 
     }]);
 
@@ -80,7 +80,7 @@
 		email : 		String,
 		birthday : 		Date,
 		age : 			Number,
-		location :		{city: String, state: String, zipcode: String},	
+		location :		{city: String, state: String, zipcode: String},
 		phoneNum : 		Number,
 		googlePlus : 	String,
 		facebook : 		String,
@@ -117,7 +117,7 @@
 
 /*
 	event: {
-		id: 			String,		
+		id: 			String,
 		creatorId: 		String,
 		groupId: 		String,
 		name: 			String,
@@ -126,7 +126,7 @@
 		creationDate: 	DateTime,
 		startTimeDate: 	DateTime,
 		endTimeDate: 	DateTime,
-		location :		{street: String, city: String, state: String, zipcode: String},	
+		location :		{street: String, city: String, state: String, zipcode: String},
 		maxVolunteers: 	Number,
 		volunteers:		[{id: String}, {id: String}, ...],
 		interests: 		[{type: String}, {type: String}, ...]
