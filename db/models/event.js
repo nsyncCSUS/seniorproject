@@ -44,7 +44,7 @@
         }],
         
         interests: [String] 
-    });
+   });
 
     var Event = mongoose.model('Event', EventSchema);
     module.exports = Event;

@@ -100,8 +100,8 @@
             
 	    interests : [String]
 	});
-	
-	
+
+  UserSchema.index({"userAuth.userName" :'text'});
 	var User = mongoose.model('User', UserSchema);
 	module.exports = User;
 

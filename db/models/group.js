@@ -1,15 +1,15 @@
 
 (function(module) {
     'use strict';
-    
+
     var mongoose = require('mongoose');
     var Schema = mongoose.Schema;
-    var ObjectId = Schema.ObjectId; 
+    var ObjectId = Schema.ObjectId;
     var Event = require('./event');
-    var User = require('./user'); 
-    
+    var User = require('./user');
+
     /**
-     * Schema for Group Objects 
+     * Schema for Group Objects
      */
     var GroupSchema = new Schema({
         name: String,
