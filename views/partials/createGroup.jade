@@ -29,9 +29,10 @@ div(ng-show='!getIsPreviewing()')
                     img.img-thumbnail.not-selected.cursor-pointer(src='/images/interests/youth.png', ng-class='youthSelected', ng-click='addInterest("Youth")', tooltip='Youth')
         
         .col-xs-12.col-sm-4.col-md-4.col-lg-4
-                .form-group
-                    input(type='file') 
+                .form-group(action='/upload', method='POST', enctype='multipart/form-data')
+                    input(type='file', name='file') 
                     | Might have to use external module for file inputs
+                    h5 File path: {{input.FilePathSelection}}
         
         .col-xs-12.col-sm-8.col-md-8.col-lg-8
                 .form-group

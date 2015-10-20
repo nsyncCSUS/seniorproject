@@ -12,8 +12,6 @@ a {
     color: #00B7FF;
 }
 
-
-
 .center-item {
    display:block;
    margin: 0 auto;
@@ -43,7 +41,7 @@ a {
     top: 80px;
 }
 
-.event-item {
+.event-item { 
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
@@ -174,6 +172,26 @@ a {
 .carousel-control {
   width:5%;
 }
+
+/**********************************************************************
+    CREATE_EVENT CSS START
+**********************************************************************/
+.form-horizontal {
+    width:500px;
+}
+
+.datetime-picker-dropdown {
+
+}
+
+.datetime-picker-dropdown > li.date-picker-menu div > table .btn-default {
+    border: 0;
+}
+
+.datetime-picker-dropdown > li.time-picker-menu div > table {
+
+}
+
 /**********************************************************************
     Event CSS END
 **********************************************************************/
@@ -182,27 +200,3 @@ a {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
-
-/***********************************************************************
-    John's CSS
-***********************************************************************/
-
-
-
-/*.navbar, .navbar-collapse {
-    //background-color: #333;
-    background-color: #0b0715;
-}
-
-html, body {
-    //background-color: #f4f3ee;
-    background-color: #b5b6d7;
-}
-
-.nav, .nav-tabs, .nav li {
-    background-color: #5a5rc4;
-}
-
-.well, .panel, .panel-default, .panel-heading, .panel-body, .panel-footer {
-    //background-color: #9998a5;
-}*/
