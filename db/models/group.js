@@ -34,10 +34,6 @@
             ref: 'Event'
         }],
 
-        creationDate: Date,
-        city: String,
-        state: String,
-        zipcode: String,
         organizerList: [{
             type: ObjectId,
             ref: 'User'

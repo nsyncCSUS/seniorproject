@@ -112,16 +112,6 @@
             ref: 'Event'
         }],
 
-        organizerOf: [{
-            type: ObjectId,
-            ref: 'Group'
-        }],
-
-        subscribedTo: [{
-            type: ObjectId,
-            ref: 'Group'
-        }],
-
         interests: [String],
         skills: [String]
     });
