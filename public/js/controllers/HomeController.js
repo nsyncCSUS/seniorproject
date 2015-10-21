@@ -10,11 +10,14 @@
         $scope.isSearching = false; // Default
         $scope.currentTab = 'events';
 
+        $scope.search;
+        $scope.category = 'Events';
         $scope.searchtext;
         $scope.usersSearchResults;
         $scope.groupsSearchResults;
         $scope.eventsSearchResults;
         $scope.searchbox = '';
+        $scope.advancedSearchToggle = false;
         $scope.descrip = "center sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean ad";
 
         $scope.events = [{
@@ -25,6 +28,7 @@
         },
         
         Description: $scope.descrip,
+        picture: "event stub 1",
         CreationDate: "2015-08-26T18:50:10.111Z",
         StartTimeDate: "2015-08-26T18:50:10.111Z",
         EndTimeDate: "2015-08-26T18:50:10.111Z",
@@ -34,6 +38,10 @@
         Zipcode: "95621",
         
         VolunteerList: [{
+        	Name: "abc"
+        },
+        {
+        	Name: "abc"
         }],
         
         CreationUser: {
@@ -50,6 +58,7 @@
         },
         
         Description: $scope.descrip,
+        picture: "event stub 2",    
         CreationDate: "2015-08-26T18:50:10.111Z",
         StartTimeDate: "2015-08-26T18:50:10.111Z",
         EndTimeDate: "2015-08-26T18:50:10.111Z",
@@ -75,6 +84,7 @@
         },
         
         Description: $scope.descrip,
+        picture: "event stub 1",
         CreationDate: "2015-08-26T18:50:10.111Z",
         StartTimeDate: "2015-08-26T18:50:10.111Z",
         EndTimeDate: "2015-08-26T18:50:10.111Z",
@@ -100,6 +110,7 @@
         },
         
         Description: $scope.descrip,
+        picture: "event stub 2",
         CreationDate: "2015-08-26T18:50:10.111Z",
         StartTimeDate: "2015-08-26T18:50:10.111Z",
         EndTimeDate: "2015-08-26T18:50:10.111Z",
@@ -128,12 +139,12 @@
             if (searchbox.length > 0) {
                 $scope.isSearching = true;
 
-                $scope.searchtext = searchbox;
+                $scope.search.text = searchbox;
                 //$scope.searchbox = '';
                 $scope.currentTab = 'events';
 
                 // Get Events
-                $scope.eventsSearchResults = HomeService.getEventSearchResults();
+                //$scope.eventsSearchResults = HomeService.getEventSearchResults();
                 // Get users
  //               $scope.usersSearchResults = HomeService.getUserSearchResults();
                 // Get Groups
@@ -163,8 +174,6 @@
             $scope.isSearching = false;
         };
 
-
-        $scope.stub = function(){return true;};
         /***************************************************************************
          * Functions that controls tabs for searching
          **************************************************************************/
@@ -172,83 +181,22 @@
             $scope.currentTab = category;
         };
 
-        $scope.getCurrentTab = function(category) {
-            if ($scope.currentTab === category)
+        $scope.getSearchType = function(category) {
+            if ($scope.category === category)
                 return true;
             else
                 return false;
         };
 
+        $scope.toggleAdvancedSearch = function(){
+        	if ($scope.advancedSearch === true){
+        		$scope.advancedSearch = false;
+        	}
+        	else{
+        		$scope.advancedSearch = true;
+        	}
+        };
+
     }]);
 
 })();
-/*
-info: {
-	firstName : 	String,
-	middleName : 	String,
-	lastName : 		String,
-	description : 	String,
-	email : 		String,
-	birthday : 		Date,
-	age : 			Number,
-	city : 			String,
-	state : 		String,
-	zipCode : 		Number,
-	phoneNum : 		Number,
-	picture : 		String,
-	googlePlus : 	String,
-	facebook : 		String,
-	linkedIn : 		String,
-	twitter : 		String,
-	volunteeredTo : [{id: String}, {id: String}, ...],
-	creatorOf : 	[{id: String}, {id: String}, ...],
-	organizerOf : 	[{id: String}, {id: String}, ...],
-	subscribedTo : 	[{id: String}, {id: String}, ...],
-	interests : 	[{type: String}, {type: String}, ...]
-}
-*/
-
-/*
-	info: {
-		id : 				String,
-		groupName : 		String,
-		picture : 			String,
-		creationDate : 		String,
-			//city : 			String,
-			//state : 			String,
-			//zipCode : 		Number,
-		description : 		String,
-		googlePlusURL : 	String,
-		facebookURL : 		String,
-		linkInURL : 		String,
-		twitterURL: 		String,
-		personalWebsiteURL: String,
-		events:			[{id: String}, {id: String}, ...],
-		organizers:		[{id: String}, {id: String}, ...],
-		subscribers:		[{id: String}, {id: String}, ...],
-		interests: 	[{type: String}, {type: String}, ...]
-
-	}
-*/
-
-/*
-info: {
-	id: 			String,		
-	creatorId: 		String,
-	groupId: 		String,
-	eventName: 		String,
-	description: 	String,
-	picture: 		String,
-	creationDate: 	DateTime,
-	startTimeDate: 	DateTime,
-	endTimeDate: 	DateTime,
-	address: 		String,
-	city: 			String,
-	state: 			String,
-	zipcode: 		Number,		
-	maxVolunteers: String,
-	volunteers:	[{id: String}, {id: String}, ...],
-	interests: [{type: String}, {type: String}, ...]
-	
-}
-*/

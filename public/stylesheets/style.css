@@ -23,6 +23,13 @@ a {
     display: block;
 }
 
+.advancedSearchLabel{
+    color: blue;
+    text-indent: 50px;
+    text-decoration: none;
+    padding-top: 15px;
+}
+
 .box-one.ng-hide {
   opacity:0;
 }
@@ -163,13 +170,9 @@ a {
     GROUP CSS START
 **********************************************************************/
 .eventRow {
-    padding-left: -3%;
-    border-left: solid;
-    border-bottom: solid;
-    border-top: solid;
 }
 .eventDateRow {
-    border-left: solid thick #ff0000;
+    background-color: #dfdddd
 }
 
 /**********************************************************************

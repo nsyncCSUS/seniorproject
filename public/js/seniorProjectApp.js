@@ -1,6 +1,6 @@
 (function() {
 
-    // 'ui.bootstrap', 
+    // 'ui.bootstrap',
     var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController',
         'usersController', 'groupsController', 'eventsController', 'signupController',
         'loginController', 'logoutController', 'createGroupController', 'createEventController'
@@ -151,8 +151,8 @@
 
 
     /**
-     * Overrite refresh back event to redirect back 
-     * to application root. 
+     * Overrite refresh back event to redirect back
+     * to application root.
      */
     /*angular.module('app').run(['$document', '$window', function($document, $window) {
         $window.onunload = function(event) {
