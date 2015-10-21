@@ -10,10 +10,13 @@
 // information (ng-file-upload has a specail derective/model that creates the form (inside jade code))
 // and calls a post it to the route with an object that is easily usable.
 (function() {
-  var app = angular.module('loginController', ['loginService']);
+  var app = angular.module('loginController', ['loginService', 'userFactory']);
+  // Note service/factor names are lower cased on module parameter uppercase on controller parameter
 
-  app.controller('LoginController', ['LoginService', '$scope', '$http', '$location', '$window', 'Upload', function(LoginService, $scope, $http, $location, $window, Upload) {
+  app.controller('LoginController', ['LoginService', '$scope', '$http', '$location', '$window', 'Upload', 'UserFactory', function(LoginService, $scope, $http, $location, $window, Upload, UserFactory) {
 
+
+    $scope.userObject = UserFactory.userObject();
 
     // upload later on form submit or something similar
     $scope.submit = function() {
@@ -56,7 +59,7 @@
           console.log($window.sessionStorage);
           $location.path('/home');
           LoginService.isLogged = 'True';
-        },function errorCallBack(response) {
+        }, function errorCallBack(response) {
           console.log('Login failed call back angular');
           console.log(response);
           //TODO: add some kind of ng-show error message to tell user login failed

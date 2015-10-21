@@ -30,7 +30,10 @@
 
   //file upload
   var imgur = require('imgur');
-  //imgur.setCredentials('imgurSP', '123456');    // Setting login for imgur gives an error 
+  //imgur.setCredentials('imgurSP', '123456','74b836d4d3f31f2');
+   // Setting login for imgur gives an error
+   // Huy: will fix later with Curl request if the original author does not fix
+   // for now the imgur photos will not be linked to the imgurSP account, but will be anonamous
   // 74b836d4d3f31f2 client id imgur
 
   var fs = require('fs-extra'); //File System-needed for renaming file etc
