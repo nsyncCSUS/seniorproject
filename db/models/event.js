@@ -1,6 +1,5 @@
-
 (function(module) {
-   'use strict';
+    'use strict';
 
     var mongoose = require('mongoose');
     var Schema = mongoose.Schema;
@@ -18,17 +17,17 @@
             type: ObjectId,
             ref: 'User'
         },
-        
+
         group: {
             type: ObjectId,
             ref: 'Group'
         },
 
         picture: {
-        	type: String,
-    		default: "//placehold.it/500x500/"
+            type: String,
+            default: "//placehold.it/500x500/"
         },
-        
+
         description: String,
         creationDate: Date,
         startTimeDate: Date,
@@ -37,14 +36,15 @@
         city: String,
         state: String,
         zipcode: String,
-        
+
         volunteerList: [{
             type: ObjectId,
             ref: 'User'
         }],
-        
-        interests: [String] 
-   });
+
+        maxVolunteers: Number,
+        interests: [String]
+    });
 
     var Event = mongoose.model('Event', EventSchema);
     module.exports = Event;

@@ -1,4 +1,3 @@
-
 (function(module) {
     'use strict';
 
@@ -13,42 +12,47 @@
      */
     var GroupSchema = new Schema({
         name: String,
-        
+
         picture: {
-        	type: String,
-        	default: "//placehold.it/500x500/"
+            type: String,
+            default: "//placehold.it/500x500/"
         },
-        
-    	creationDate : 		Date,
-    	city: 				String, 
-    	state: 				String, 
-    	zipcode: 			String,
-    	description : 		String,
-    	googlePlusURL : 	String,
-    	facebookURL : 		String,
-    	linkInURL : 		String,
-    	twitterURL: 		String,
-    	personalWebsiteURL: String,
+
+        creationDate: Date,
+        city: String,
+        state: String,
+        zipcode: String,
+        description: String,
+        googlePlusURL: String,
+        facebookURL: String,
+        linkInURL: String,
+        twitterURL: String,
+        personalWebsiteURL: String,
 
         events: [{
             type: ObjectId,
             ref: 'Event'
         }],
-        organizers: [{
+
+        creationDate: Date,
+        city: String,
+        state: String,
+        zipcode: String,
+        organizerList: [{
             type: ObjectId,
             ref: 'User'
         }],
-        
+
         subscriptions: [{
             type: ObjectId,
             ref: 'User'
         }],
-        
-        interests: [String] 
-    }); 
-    
-    
-    var Group = mongoose.model('Group', GroupSchema); 
+
+        interests: [String]
+    });
+
+
+    var Group = mongoose.model('Group', GroupSchema);
     module.exports = Group;
 
 })(module);
