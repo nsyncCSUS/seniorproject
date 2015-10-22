@@ -15,8 +15,18 @@
 
   app.controller('LoginController', ['LoginService', '$scope', '$http', '$location', '$window', 'Upload', 'UserFactory', function(LoginService, $scope, $http, $location, $window, Upload, UserFactory) {
 
+    // problem with this method causes aysnc problems resulting odd return object
+    // it returns an object called d inside of d.$$state.value.data holds the object
+    // that is need (post data)
+  //  $scope.userObject = UserFactory.getAllUsers();
+   //$scope.userObject = UserFactory.getAUserByName('1');
 
-    $scope.userObject = UserFactory.userObject();
+
+   //returns the users you want
+   UserFactory.getAUserByName('1').then(function(data){
+    $scope.userObject = data.data[0];
+  });
+
 
     // upload later on form submit or something similar
     $scope.submit = function() {
@@ -91,7 +101,8 @@
 
     $scope.testAuth2 = function() {
       console.log('testAuth2');
-      $http.post('/api/users/');
+      console.log( $scope.userObject );
+    //  $http.post('/api/users/');
 
     };
 

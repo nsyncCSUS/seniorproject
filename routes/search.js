@@ -38,9 +38,9 @@ router.post('/regexusername', function(req, res) {
     }
 
     console.log(data);
-
+    res.send(data);
   });
-  res.end();
+
 });
 
 // CORE1 CONCEPT OF TEXT search
@@ -67,9 +67,9 @@ router.post('/keywordsearch', function(req, res) {
     }
 
     console.log(data);
-
+    res.send(data);
   });
-  res.end();
+
 });
 
 
@@ -88,9 +88,9 @@ router.post('/getallgroups', function(req, res) {
     }
 
     console.log(data);
-
+    res.send(data);
   });
-  res.end();
+
 });
 
 
@@ -107,9 +107,9 @@ router.post('/getagroup', function(req, res) {
     }
 
     console.log(data);
-
+    res.send(data);
   });
-  res.end();
+
 });
 
 // Find group id
@@ -126,9 +126,9 @@ router.post('/getagroup', function(req, res) {
     }
 
     console.log(data);
-
+    res.send(data);
   });
-  res.end();
+
 });
 
 
@@ -150,9 +150,9 @@ router.post('/regexgroupname', function(req, res) {
     }
 
     console.log(data);
-
+    res.send(data);
   });
-  res.end();
+
 });
 
 
@@ -172,9 +172,9 @@ router.post('/getallevents', function(req, res) {
     }
 
     console.log(data);
-
+    res.send(data);
   });
-  res.end();
+
 });
 
 //Non-indexed soon to be depreciated by keywordsearch indexed version
@@ -190,9 +190,9 @@ router.post('/getaevent', function(req, res) {
     }
 
     console.log(data);
-
+    res.send(data);
   });
-  res.end();
+
 });
 
 // find event id
@@ -209,9 +209,9 @@ router.post('/getaevent', function(req, res) {
     }
 
     console.log(data);
-
+    res.send(data);
   });
-  res.end();
+
 });
 
 router.post('/regexeventname', function(req, res) {
@@ -230,9 +230,9 @@ router.post('/regexeventname', function(req, res) {
     }
 
     console.log(data);
-
+    res.send(data);
   });
-  res.end();
+
 });
 
 
@@ -249,8 +249,6 @@ router.post('/getallusers', function(req, res) {
     }
 
     console.log(data);
-
-  }).then(function(data) {
     res.send(data);
   });
 
@@ -269,14 +267,14 @@ router.post('/getauser', function(req, res) {
     }
 
     console.log(data);
-
+    res.send(data);
   });
-  res.end();
+
 });
 
 // find user id
 //Non-indexed soon to be depreciated by keywordsearch indexed version
-router.post('/getauser', function(req, res) {
+router.post('/getauserbyID', function(req, res) {
   console.log(req.body.searchString);
   //  req.body.searchString= 'test3';
   User.findOne({
@@ -288,10 +286,38 @@ router.post('/getauser', function(req, res) {
     }
 
     console.log(data);
-
+    res.send(data);
   });
-  res.end();
+
 });
+
+router.post('/getauserbyname', function(req, res) {
+  console.log(req.body.searchString);
+  //console.log(Object.keys(req.body)[0]); grabs first value in object
+  //This code might be useful in refactoring since adding this line will grab the search value
+  // regardless of its name
+  // right now its binded to req.body.searchString
+
+  // RegExp(String , Flags) g=global(?resets some internal counter ) i= ignore case
+  // need regEXP object to put search vairable in
+  // you cant put in variables directly into a regex
+  // req.body.searchString is the string from angular
+  var searchStringRegExObj = new RegExp(req.body.searchString, "i");
+
+  User.find({
+    'userAuth.userName': searchStringRegExObj
+  }, function(err, data) {
+    if (err) {
+      throw err;
+    }
+    console.log(data);
+
+      res.send(data);
+  });
+
+});
+
+
 
 
 
