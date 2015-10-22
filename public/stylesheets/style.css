@@ -11,6 +11,28 @@ a {
     //color: #00B7FF;
 }
 
+
+.box-one {
+    -webkit-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    position: relative;
+    display: block;
+}
+
+.advancedSearchLabel{
+    color: blue;
+    text-indent: 50px;
+    text-decoration: none;
+    padding-top: 15px;
+}
+
+.box-one.ng-hide {
+  opacity:0;
+}
+
 .center-item {
    display:block;
    margin: 0 auto;
@@ -31,7 +53,7 @@ a {
     padding-right: 25px;
 }
 
-.event-item { 
+.event-item {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
@@ -184,7 +206,7 @@ a {
 }
 
 .eventDateRow {
-    border-left: solid thick #ff0000;
+    background-color: #dfdddd
 }
 
 .infoRow {

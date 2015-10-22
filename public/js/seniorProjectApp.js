@@ -149,15 +149,4 @@
     });
   }]);
 
-
-  /**
-   * Overrite refresh back event to redirect back
-   * to application root.
-   */
-  /*angular.module('app').run(['$document', '$window', function($document, $window) {
-      $window.onunload = function(event) {
-          $window.location.href = '/';
-      };
-  }]);*/
-
 })();
