@@ -22,8 +22,13 @@
    //$scope.userObject = UserFactory.getAUserByName('1');
 
 
-   //returns the users you want
+      
+    // Example of getting DB data
+   //Creates a userFactory calls a specific function
+   // and it returns the name i specified and places it into $scope.userObject.
+   //
    UserFactory.getAUserByName('1').then(function(data){
+       console.log(data.data[0]);
     $scope.userObject = data.data[0];
   });
 

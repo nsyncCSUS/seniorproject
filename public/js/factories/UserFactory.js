@@ -12,7 +12,7 @@
       },
 
       getAUserByID: function(searchValue){
-        return $http.post('/api/search/getauser',{searchString:searchValue});
+          return $http.post('/api/search/getauserbyID',{searchString:searchValue});
       },
 
       getAUserByName: function(searchValue){
