@@ -2,7 +2,7 @@
 
 	var app = angular.module('createGroupController', ['createGroupService']);
 
-	app.controller('CreateGroupController', [ '$scope', '$location', 'CreateGroupService', function($scope, $location, CreateGroupService) {
+	app.controller('CreateGroupController', [ '$scope', '$location', '$anchorScroll', '$timeout', 'CreateGroupService', function($scope, $location, $anchorScroll, $timeout, CreateGroupService) {
 
 		/***************************************************************************
 		 * Variables (includes ones from scope too)
@@ -40,7 +40,7 @@
 			age : 			24,
 			city : 			"Elk Grove",
 			state : 		"CA",
-			zipCode : 		95624,
+			zipcode : 		95624,
 			phoneNum : 		19162047928,
 			googlePlus : 	"google.com",
 			facebook : 		"facebook.com",
@@ -57,112 +57,11 @@
             $scope.group.organizers = [];
 		$scope.group.organizers.push(user);
 		
-		// Build an array for displaying organizers in a carousel
-		buildOrganizers();
-		// Build one for mobile view also
-		buildOrganizersXS();
 
 
 		/***************************************************************************
 		 * Building Functions
 		 **************************************************************************/
-		/* Builds the organizers list to be compatible with row based bootstrap carousel (SM-MD-LG version)
-		 * group = {
-		 * 			organizers: [{1}, {2}, {3}, ...]
-		 * 			organizersBuilt: [
-		 * 							{ organizers: [ {1},{2},{3},{4} ] }, // $first
-		 * 							{ organizers: [ {5},{6},{7},{8} ] },
-		 * 							{ organizers: [ {9},{10},{11},{12} ] },
-		 * 							{ organizers: [ {13},{14},{15},{16} ] }
-		 * 							]
-		 * 			}
-		 */
-		function buildOrganizers() {
-			// Split into 4 x Y arrays
-			var currentRow = 0;
-			var currentIndex = 0;
-			$scope.group.organizersBuilt = [{organizers: []}];
-			angular.forEach($scope.group.organizers, function(organizer) {
-				// Add new row if the row is filled
-				if (currentIndex === 4) {
-					this.push({organizers: []});
-					currentRow++;
-					currentIndex = 0;
-					this[currentRow].organizers.push(organizer);
-					currentIndex++;
-				}
-				else {
-					this[currentRow].organizers.push(organizer);
-					currentIndex++;
-				}
-			}, $scope.group.organizersBuilt); // Used as "this" above
-			//console.log($scope.group.organizersBuilt);
-			angular.forEach($scope.group.organizersToAdd, function(organizer) {
-				// Add new row if the row is filled
-				if (currentIndex === 4) {
-					this.push({organizers: []});
-					currentRow++;
-					currentIndex = 0;
-					this[currentRow].organizers.push(organizer);
-					currentIndex++;
-				}
-				else {
-					this[currentRow].organizers.push(organizer);
-					currentIndex++;
-				}
-			}, $scope.group.organizersBuilt); // Used as "this" above
-			//console.log($scope.group.organizersBuilt);
-		};
-
-		/* Builds the organizers list to be compatible with row based bootstrap carousel (XS version)
-		 * group = {
-		 * 			organizers: [{1}, {2}, {3}, ...]
-		 * 			organizersBuiltXS: [
-		 * 							{ organizers: [ {1},{2} ] }, // $first
-		 * 							{ organizers: [ {3},{4} ] },
-		 * 							{ organizers: [ {5},{6} ] },
-		 * 							{ organizers: [ {7},{8} ] }
-		 * 							]
-		 * 			}
-		 */
-		function buildOrganizersXS() {
-			// Split into 2 x Y arrays
-			var currentRow = 0;
-			var currentIndex = 0;
-			$scope.group.organizersBuiltXS = [{organizers: []}];
-			angular.forEach($scope.group.organizers, function(organizer) {
-				// Add new row if the row is filled
-				if (currentIndex === 2) {
-					this.push({organizers: []});
-					currentRow++;
-					currentIndex = 0;
-					this[currentRow].organizers.push(organizer);
-					currentIndex++;
-				}
-				// Push an organizer to current working row
-				else {
-					this[currentRow].organizers.push(organizer);
-					currentIndex++;
-				}
-			}, $scope.group.organizersBuiltXS); // Used as "this" above
-			//console.log($scope.group.organizersBuiltXS);
-			angular.forEach($scope.group.organizersToAdd, function(organizer) {
-				// Add new row if the row is filled
-				if (currentIndex === 2) {
-					this.push({organizers: []});
-					currentRow++;
-					currentIndex = 0;
-					this[currentRow].organizers.push(organizer);
-					currentIndex++;
-				}
-				// Push an organizer to current working row
-				else {
-					this[currentRow].organizers.push(organizer);
-					currentIndex++;
-				}
-			}, $scope.group.organizersBuiltXS); // Used as "this" above
-			//console.log($scope.group.organizersBuiltXS);
-		};	
 		
 
 		/***************************************************************************
@@ -206,6 +105,13 @@
 						currentSearchResult.added = "added";
 				});
 			});
+
+		}
+		
+		$scope.scrollToResults = function() {
+			$timeout(function() {
+				$anchorScroll('searchResults');
+			}, 1);
 		}
 		
 		/***************************************************************************
@@ -228,9 +134,9 @@
 			// Rebuild interests array
 			// Checks if the interest selected is in the interest's array
 			angular.forEach($scope.group.interests, function(currentInterest, index) {
-				console.log(currentInterest.type);
+				console.log(currentInterest);
 				// If in array, remove class to show that it is now unselected
-				if (currentInterest.type === interest){
+				if (currentInterest === interest){
 					console.log("removed " + interest);
 					hasInterest = true;
 					switch(interest) {
@@ -266,7 +172,7 @@
 			// Add interest if it was not in array
 			if (hasInterest === false){
 				console.log("added " + interest);
-				newInterests.push({type: interest});
+				newInterests.push(interest);
 				switch(interest) {
 				case "Animals":
 					$scope.animalsSelected = "selected";
@@ -352,6 +258,18 @@
 			// Sets the rebuilt array
 			$scope.group.organizersToAdd = newOrganizersToAdd;
 			console.log($scope.group.organizersToAdd);
+		}
+
+		$scope.scrollToAdd = function(id) {
+			$timeout(function() {
+				$anchorScroll('add-' + id);
+			}, 1);
+		}
+
+		$scope.scrollToRemove = function(id) {
+			$timeout(function() {
+				$anchorScroll('remove-' + id);
+			}, 1);
 		}
 
 		/***************************************************************************

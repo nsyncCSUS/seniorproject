@@ -1,50 +1,77 @@
 
 (function(module) {
     'use strict';
-
+    
     var mongoose = require('mongoose');
     var Schema = mongoose.Schema;
-    var ObjectId = Schema.ObjectId;
+    var ObjectId = Schema.ObjectId; 
     var Event = require('./event');
-    var User = require('./user');
-
+    var User = require('./user'); 
+    
     /**
-     * Schema for Group Objects
+     * Schema for Group Objects 
      */
     var GroupSchema = new Schema({
-        groupName: String,
+        name: String,
+        
+        picture: {
+        	type: String,
+        	default: "//placehold.it/500x500/"
+        },
+        
+    	creationDate : 		Date,
+    	city: 				String, 
+    	state: 				String, 
+    	zipcode: 			String,
+    	description : 		String,
+    	googlePlusURL : 	String,
+    	facebookURL : 		String,
+    	linkInURL : 		String,
+    	twitterURL: 		String,
+    	personalWebsiteURL: String,
 
-        eventList: [{
+        events: [{
             type: ObjectId,
             ref: 'Event'
         }],
-
-        creationDate: Date,
-        city: String,
-        state: String,
-        zipcode: String,
-
-        organizerList: [{
+        organizers: [{
             type: ObjectId,
             ref: 'User'
         }],
-
-        subscriptionList: [{
+        
+        subscriptions: [{
             type: ObjectId,
             ref: 'User'
         }],
-
-        decsription: String,
-        //GooglePlus: {},
-        //Facebook: {},
-        //LinkedIn: {},
-        //Twitter: {},
-        //Website: {},
-        interests: [String]
-    });
-
+        
+        interests: [String] 
+    }); 
     
-    var Group = mongoose.model('Group', GroupSchema);
+    
+    var Group = mongoose.model('Group', GroupSchema); 
     module.exports = Group;
 
 })(module);
+
+/*
+group: {
+	id : 				String,
+	name : 				String,
+	picture : 			String,
+	creationDate : 		String,
+	city: 				String, 
+	state: 				String, 
+	zipcode: 			String,
+	description : 		String,
+	googlePlusURL : 	String,
+	facebookURL : 		String,
+	linkInURL : 		String,
+	twitterURL: 		String,
+	personalWebsiteURL: String,
+	events:				[{id: String}, {id: String}, ...],
+	organizers:			[{id: String}, {id: String}, ...],
+	subscribers:		[{id: String}, {id: String}, ...],
+	interests: 			[String]
+
+}
+*/

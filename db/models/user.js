@@ -55,59 +55,80 @@
 		    displayName : String,
 		    lastStatus : String
 		},
-
-      firstName : String,
+            
+        firstName : String,
 	    middleName : String,
 	    lastName : String,
-	    description : String,
-	    email : String,
-	    birthday : Date,
-	    age : Number,
-	    city : String,
-	    state : String,
-	    zipCode : Number,
-	    phoneNum : Number,
-	    picture : String,
-	    //VolunteeredTo : String,
-	    //CreatorOf : String,
-	    //OrganizerOf : String,
-	    //SubscribedTo : String,
-	    //GooglePlus : String,
-	    //Facebook : String,
-	    //LinkenIn : String,
-	    //Twitter : String,
+	    
+        picture: {
+        	type: String,
+    		default: "//placehold.it/500x500/"
+        },
+        
+	    description : 		String,
+	    email : 			String,
+	    birthday : 			Date,
+	    age : 				Number,
+	    city : 				String,
+	    state : 			String,
+	    zipCode : 			Number,
+	    phoneNum : 			Number,
+		googlePlusURL : 	String,
+		facebookURL : 		String,
+		linkInURL : 		String,
+		twitterURL: 		String,
 
-            events: [{
-                type: ObjectId,
-                ref: 'Event'
-            }],
+        volunteeredTo: [{
+            type: ObjectId,
+            ref: 'Event'
+        }], 
 
-            createdGroups: [{
-                type: ObjectId,
-                ref: 'Group'
-            }],
-
-            createdEvents: [{
-                type: ObjectId,
-                ref: 'Event'
-            }],
-
-            organizerOf: [{
-                type: ObjectId,
-                ref: 'Group'
-             }],
-
-            subscribedTo: [{
-                type: ObjectId,
-                ref: 'Group'
-            }],
-
-	    interests : [String],
-	    skills : [String]
+        creatorOf: [{
+            type: ObjectId,
+            ref: 'Event' 
+        }], 
+        
+        organizerOf: [{
+            type: ObjectId,
+            ref: 'Group' 
+         }], 
+        
+        subscribedTo: [{
+            type: ObjectId,
+            ref: 'Group' 
+        }],
+            
+	    interests : [String]
 	});
-
-  UserSchema.index({"userAuth.userName" :'text'});
+	
+	
 	var User = mongoose.model('User', UserSchema);
 	module.exports = User;
 
 }) (module);
+
+/*
+	user: {
+		firstName : 	String,
+		middleName : 	String,
+		lastName : 		String,
+		description : 	String,
+		picture:		String,
+		email : 		String,
+		birthday : 		Date,
+		age : 			Number,
+		city: 			String, 
+		state: 			String, 
+		zipcode: 		String,	
+		phoneNum : 		Number,
+		googlePlusURL : 	String,
+		facebookURL : 		String,
+		linkInURL : 		String,
+		twitterURL: 		String,
+		volunteeredTo : [{id: String}, {id: String}, ...],
+		creatorOf : 	[{id: String}, {id: String}, ...],
+		organizerOf : 	[{id: String}, {id: String}, ...],
+		subscribedTo : 	[{id: String}, {id: String}, ...],
+		interests : 	[String]
+	}
+*/
