@@ -11,17 +11,21 @@ html(ng-app='app')
         //link(rel='stylesheet', href='/stylesheets/supernice.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
         link(rel='stylesheet', href='/palette.1.scss') 
+        
         // JS
         script(src="http://code.jquery.com/jquery-2.1.4.min.js")
-        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
-        script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
           // Taking out min : using min version of angular makes more difficult to debug
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js")
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js")
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js")
         script(src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.3.js")
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/7.3.6/ng-file-upload.min.js')
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/7.3.6/ng-file-upload-shim.min.js")
+        
         script(src='/js/seniorProjectApp.js')
+        
+        
         script(src='/js/controllers/DashboardController.js')
         script(src='/js/controllers/EventsController.js')
         script(src='/js/controllers/GroupsController.js')
@@ -50,8 +54,7 @@ html(ng-app='app')
         script(src='/js/services/LoginService.js')
         script(src='/js/services/LogoutService.js')
         script(src='/js/services/SignupService.js')
-        script(src='https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/7.3.6/ng-file-upload.min.js')
-        script(src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/7.3.6/ng-file-upload-shim.min.js")
+        
       
     title= title
     
