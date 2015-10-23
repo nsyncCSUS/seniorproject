@@ -16,7 +16,8 @@
       },
 
       getAUserByName: function(searchValue){
-        return $http.post('/api/search/getauserbyname',{searchString:searchValue});
+        console.log('inside getAUserByName');
+        return $http.get('/api/search/user/byname/'+searchValue);
       }
 
     };

@@ -291,8 +291,12 @@ router.post('/getauserbyID', function(req, res) {
 
 });
 
-router.post('/getauserbyname', function(req, res) {
-  console.log(req.body.searchString);
+router.get('/getauserbyname/:username', function(req, res) {
+
+  console.log(req.params.username);
+
+  console.log('GET REQUEST');
+
   //console.log(Object.keys(req.body)[0]); grabs first value in object
   //This code might be useful in refactoring since adding this line will grab the search value
   // regardless of its name
@@ -302,7 +306,7 @@ router.post('/getauserbyname', function(req, res) {
   // need regEXP object to put search vairable in
   // you cant put in variables directly into a regex
   // req.body.searchString is the string from angular
-  var searchStringRegExObj = new RegExp(req.body.searchString, "i");
+  var searchStringRegExObj = new RegExp(req.params.username, "i");
 
   User.find({
     'userAuth.userName': searchStringRegExObj
