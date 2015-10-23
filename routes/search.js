@@ -114,7 +114,7 @@ router.post('/getagroup', function(req, res) {
 
 // Find group id
 //Non-indexed soon to be depreciated by keywordsearch indexed version
-router.post('/getagroup', function(req, res) {
+router.post('/getagroupbyID', function(req, res) {
   console.log(req.body.searchString);
   //  req.body.searchString= 'test3';
   Group.findOne({
@@ -134,7 +134,7 @@ router.post('/getagroup', function(req, res) {
 
 
 
-router.post('/regexgroupname', function(req, res) {
+router.post('/getaeventbyname', function(req, res) {
   console.log(req.body.searchString);
   // RegExp(String , Flags) g=global(?resets some internal counter ) i= ignore case
   // need regEXP object to put search vairable in
@@ -197,7 +197,7 @@ router.post('/getaevent', function(req, res) {
 
 // find event id
 //Non-indexed soon to be depreciated by keywordsearch indexed version
-router.post('/getaevent', function(req, res) {
+router.post('/getaeventbyID', function(req, res) {
   console.log(req.body.searchString);
   //  req.body.searchString= 'test3';
   Event.findOne({
@@ -214,7 +214,7 @@ router.post('/getaevent', function(req, res) {
 
 });
 
-router.post('/regexeventname', function(req, res) {
+router.post('/getaeventbyname', function(req, res) {
   console.log(req.body.searchString);
   // RegExp(String , Flags) g=global(?resets some internal counter ) i= ignore case
   // need regEXP object to put search vairable in
