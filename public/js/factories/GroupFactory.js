@@ -8,19 +8,19 @@
             // Note: parameters in post have to be an object
             // Also name in search.js route uses searchString as name
             getAllGroups: function() {
-                return $http.post('/api/search/getallgroups');
+                return $http.get('/api/search/getallgroups');
             },
 
             getAGroupByID: function(searchValue){
-                return $http.post('/api/search/getagroupbyID',{searchString:searchValue});
+                return $http.get('/api/search/getagroupbyID/'+searchValue);
             },
 
             getAGroupByName: function(searchValue){
-                return $http.post('/api/search/getagroupbyname',{searchString:searchValue});
+                return $http.get('/api/search/getagroupbyname/'+searchValue);
             }
 
-        
-        
+
+
         };
 
         return factory;

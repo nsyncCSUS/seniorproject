@@ -11,20 +11,20 @@
             // Note: parameters in post have to be an object
             // Also name in search.js route uses searchString as name
             getAllEvents: function() {
-                return $http.post('/api/search/getallevents');
+                return $http.get('/api/search/getallevents');
             },
 
             getAEventByID: function(searchValue){
-                return $http.post('/api/search/getaeventbyID',{searchString:searchValue});
+                return $http.get('/api/search/getaeventbyID/'+searchValue);
             },
 
             getAEventByName: function(searchValue){
-                return $http.post('/api/search/getaeventbyname',{searchString:searchValue});
+                return $http.get('/api/search/getaeventbyname/'+searchValue);
             }
 
         };
-        
-       
+
+
 
         return factory;
 
