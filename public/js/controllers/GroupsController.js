@@ -140,18 +140,34 @@
 		$scope.youthSelected = "";
 		
 		$scope.loaded = false;
+
+		$scope.selectedTab = "Upcoming Events";
+		$scope.otherTabs = ["Past Events"];
+
+
+		/***********************************************************************
+		 * Functions that controls tabs for searching
+		 **********************************************************************/
+		$scope.setCurrentTab = function(newTab) {
+			$scope.selectedTab = newTab;
+			
+			switch(newTab){
+			case "Upcoming Events":
+				$scope.otherTabs[0] = "Past Events";
+				break;
+			case "Past Events":
+				$scope.otherTabs[0] = "Upcoming Events";
+				break;
+			}
+		}
 		
-		$scope.limit = [];
-
-		$scope.getLimit = function(i) {
-			return limit[i];
+		$scope.getCurrentTab = function(tabName) {
+			if ($scope.selectedTab === tabName)
+				return true;
+			else
+				return false;
 		}
-		$scope.setLimit = function(i, n) {
-			console.log($scope.limit[i]);
-			$scope.limit.i = n;
-			console.log($scope.limit.i);
-		}
-
+		
 		/***************************************************************************
 		 * Get Functions
 		 **************************************************************************/
