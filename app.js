@@ -4,12 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var sass = require('node-sass-middleware'); 
+var sass = require('node-sass-middleware');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var groups = require('./routes/groups');
 var events = require('./routes/events');
+var search = require('./routes/search');
 
 var expressJwt = require('express-jwt');
 var multipart = require('connect-multiparty');
@@ -61,19 +62,21 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// John: Adding sass compiler to project 
+// John: Adding sass compiler to project
 app.use(sass({
     src: __dirname + '/sass',
     dest: __dirname + '/public/stylesheets',
-    debug: true 
+    debug: true
 }));
 
 
+
+app.use('/api/users', users);
+app.use('/api/groups', groups);
+app.use('/api/events', events);
+app.use('/api/search', search);
 app.use('/', index);
-app.use('/users', users);
-app.use('/groups', groups);
-app.use('/events', events);
-app.use('/', index);
+
 
 
 
@@ -108,10 +111,11 @@ app.use(function(err, req, res, next) {
   });
 });
 
+/*
 //the following code will deal with the user GET code
 //this code will mainly deal with the users page
 app.get('/users', function (req, res){
-	console.log('I received a GET request');
+  console.log('I received a GET request');
 });
-
+*/
 module.exports = app;
