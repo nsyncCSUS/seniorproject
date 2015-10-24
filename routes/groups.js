@@ -74,6 +74,8 @@
             return response.send({group: group}); 
         });
     });
+	
+	
 
 
     // Get user by username, create group, add user as
