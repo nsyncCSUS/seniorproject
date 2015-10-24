@@ -52,7 +52,8 @@
     router.put('/:id', function(request, response, next) {
         var id = request.params.id;
         //console.log(event); 
-        var event = JSON.parse(request.body.event); 
+        var event = request.body.event; 
+		event.VolunteerList = undefined;
         Event.findByIdAndUpdate(id, event, {new: true}, function(err, event) {
             if (err) {
                 return util.err(err, response);

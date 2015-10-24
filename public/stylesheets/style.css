@@ -139,6 +139,19 @@ a {
 /**********************************************************************
     DIV CSS START
 **********************************************************************/
+.aboutMeRow{
+	background-color: #eeeeee
+}
+
+.userContact{
+	background-color: #cccccc
+}
+
+.userHistory{
+	background-color: #483D8B;
+	border-style: solid
+}
+
 .titleRow {
     background-color: #eeeeee;
 }

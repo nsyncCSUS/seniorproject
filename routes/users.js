@@ -65,7 +65,7 @@
                         console.log('Error in saving user:' + err);
                         throw err;
                     }
-                    console.log('User registration sucess');
+                    console.log('User registration success');
                 });
 
             }
@@ -146,7 +146,8 @@
     //var router = express.Router();
     router.get('/', function(request, response, next) {
         //var user = util.takeUserProjection(request.params.user);
-        var user = request.params.user; 
+        var user = request.body.user; 
+		//used to be User.find
         User.find(user, function(err, users) {
             if (err) {
                 return util.err(err, response);
