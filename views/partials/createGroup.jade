@@ -96,7 +96,7 @@ div(ng-show='!getIsPreviewing()')
                             label(for='searchResults') Organizers to be invited
                             .col-xs-12.col-sm-12.col-md-12.col-lg-12#organizersAdded
                                 .row
-                                    .col-xs-4.col-sm-3.col-md-3.col-lg-2.cursor-pointer(id='remove-{{user.id}}', ng-repeat='user in group.organizersToAdd', ng-click='removeOrganizer($index); scrollToAdd(user.id)')
+                                    .col-xs-4.col-sm-3.col-md-3.col-lg-2.cursor-pointer(id='remove-{{user.id}}', ng-repeat='user in organizersToAdd', ng-click='removeOrganizer($index); scrollToAdd(user.id)')
                                         .remove
                                             img.img-responsive.img-thumbnail(src='{{user.picture}}', ng-show='hasPicture("organizerToAdd", $index)')
                                             img.img-responsive.img-thumbnail(src='//placehold.it/350x350', ng-show='!hasPicture("organizerToAdd", $index)')
