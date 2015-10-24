@@ -54,16 +54,41 @@
 		};
 
 
-            $scope.group.organizers = [];
+        $scope.group.organizers = [];
 		$scope.group.organizers.push(user);
 		
 
+		$scope.selectedTab = "Upcoming Events";
+		$scope.otherTabs = ["Past Events"];
 
 		/***************************************************************************
 		 * Building Functions
 		 **************************************************************************/
 		
 
+		/***********************************************************************
+		 * Functions that controls tabs for searching
+		 **********************************************************************/
+		$scope.setCurrentTab = function(newTab) {
+			$scope.selectedTab = newTab;
+			
+			switch(newTab){
+			case "Upcoming Events":
+				$scope.otherTabs[0] = "Past Events";
+				break;
+			case "Past Events":
+				$scope.otherTabs[0] = "Upcoming Events";
+				break;
+			}
+		}
+		
+		$scope.getCurrentTab = function(tabName) {
+			if ($scope.selectedTab === tabName)
+				return true;
+			else
+				return false;
+		}
+		
 		/***************************************************************************
 		 * Get Functions
 		 **************************************************************************/
