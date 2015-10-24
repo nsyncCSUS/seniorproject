@@ -176,10 +176,16 @@ div(ng-show='!getIsEditing()')
                                     .panel-body
                                         .row
                                             .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                                                .col-xs-4.col-sm-12.col-md-6.col-lg-4(ng-repeat='organizer in group.organizers')
-                                                    img.img-responsive.img-thumbnail(src='{{organizer.picture}}')
-                                                    h6.oneline {{organizer.firstName}} {{organizer.lastName}}
-                                                    h6 contact
+                                                .col-xs-6.col-sm-12.col-md-12.col-lg-6(ng-repeat='organizer in group.organizers')
+                                                    .row
+                                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                                            a(href='/users/{{organizer.id}}')
+                                                                h6.oneline {{organizer.firstName}} {{organizer.lastName}}
+                                                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                                            .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                                                                img.img-responsive.img-rounded(src='{{organizer.picture}}')
+                                                            .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                                                                button.btn.btn-default.btn-xs Contact
                             .panel-default
                                 .panel-heading(role='button', data-toggle='collapse', data-target='#subscribers', aria-expanded='true', aria-controls='subscribers')
                                     h4.panel-title
