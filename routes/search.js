@@ -95,11 +95,11 @@ router.get('/getallgroups', function(req, res) {
 
 
 //Non-indexed soon to be depreciated by keywordsearch indexed version
-router.get('/getagroup', function(req, res) {
-  console.log(req.body.searchString);
+router.get('/getagroup/:name', function(req, res) {
+  console.log(req.params.name);
   //  req.body.searchString= 'test3';
   Group.findOne({
-    'groupName': req.body.searchString
+    'name': req.params.name
   }, function(err, data) {
     if (err) {
       console.log(err);
@@ -143,7 +143,7 @@ router.get('/getagroupbyname/:groupname', function(req, res) {
   var searchStringRegExObj = new RegExp(req.params.groupname, "i");
 
   Group.find({
-    'groupName': searchStringRegExObj
+    'name': searchStringRegExObj
   }, function(err, data) {
     if (err) {
       throw err;
@@ -182,7 +182,7 @@ router.get('/getaevent', function(req, res) {
   console.log(req.body.searchString);
   //  req.body.searchString= 'test3';
   Event.findOne({
-    'eventName': req.body.searchString
+    'name': req.body.searchString
   }, function(err, data) {
     if (err) {
       console.log(err);
@@ -210,6 +210,7 @@ router.get('/getaeventbyID/:id', function(req, res) {
 
     console.log(data);
     res.send(data);
+
   });
 
 });
@@ -223,7 +224,7 @@ router.get('/getaeventbyname/:eventname', function(req, res) {
   var searchStringRegExObj = new RegExp(req.params.eventname, "i");
 
   Event.find({
-    'eventName': searchStringRegExObj
+    'name': searchStringRegExObj
   }, function(err, data) {
     if (err) {
       throw err;
@@ -255,11 +256,11 @@ router.get('/getallusers', function(req, res) {
 });
 
 //Non-indexed soon to be depreciated by keywordsearch indexed version
-router.get('/getauser', function(req, res) {
-  console.log(req.body.searchString);
+router.get('/getauserbyfirstname/:firstName', function(req, res) {
+  console.log(req.params.name);
   //  req.body.searchString= 'test3';
   User.findOne({
-    'userAuth.userName': req.body.searchString
+    'firstName': req.params.name
   }, function(err, data) {
     if (err) {
       console.log(err);
