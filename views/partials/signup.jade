@@ -9,8 +9,15 @@ html
       label Username:
         input.form-control(type='text', ng-model='user.username',required)
       br
+      br
       label Password:
-        input.form-control(type='password', ng-model='user.password',required )
+        input.form-control(type='password', ng-model='user.password',required ) 
+      br
+      br
+      label Confirm Password: 
+        input.form-control(ng-model='passwordConfirm', type='password', data-match='user.password', name='confirmPassword',required)
+        br
+        div.bg-danger(data-ng-show='signupForm.confirmPassword.$error.match', myStyle={color:'red'}) Passwords do not match!
       br
       label Email:
           input.form-control(type='email',name= 'email' ng-model='user.email')

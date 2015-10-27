@@ -3,8 +3,10 @@
   // 'ui.bootstrap',
   var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController',
     'usersController', 'groupsController', 'eventsController', 'signupController',
-    'loginController', 'logoutController', 'createGroupController', 'createEventController', 'ngFileUpload'
+                                   'loginController', 'logoutController', 'createGroupController', 'createEventController', 'ngFileUpload','validation.match'
   ]);
+    
+    //validation.match for password match in signup
 
   //Creates object authInterceptor, attaches the token to the config.header
   app.factory('authInterceptor', function($rootScope, $q, $window) {
