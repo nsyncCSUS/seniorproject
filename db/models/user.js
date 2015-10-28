@@ -35,91 +35,99 @@
                         unique: true
                     },
                     */
-            userName: String,
-            password: String
-        },
+        userName: String,
+		    password: String
+		},
 
-        fb: {
-            id: String,
-            access_token: String,
-            firstName: String,
-            lastName: String,
-            email: String
-        },
+		fb : {
+		    id : String,
+		    access_token : String,
+		    firstName : String,
+		    lastName : String,
+		    email : String
+		},
 
-        twitter: {
-            id: String,
-            token: String,
-            username: String,
-            displayName: String,
-            lastStatus: String
-        },
-
-        firstName: String,
-        middleName: String,
-        lastName: String,
-
+		twitter : {
+		    id : String,
+		    token : String,
+		    username : String,
+		    displayName : String,
+		    lastStatus : String
+		},
+            
+        firstName : String,
+	    middleName : String,
+	    lastName : String,
+	    
         picture: {
-            type: String,
-            default: "//placehold.it/500x500/"
+        	type: String,
+    		default: "//placehold.it/500x500/"
         },
-
-        description: String,
-        email: String,
-        birthday: Date,
-        age: Number,
-        city: String,
-        state: String,
-        zipCode: Number,
-        phoneNum: Number,
-        googlePlusURL: String,
-        facebookURL: String,
-        linkInURL: String,
-        twitterURL: String,
+        
+	    description : 		String,
+	    email : 			String,
+	    birthday : 			Date,
+	    age : 				Number,
+	    city : 				String,
+	    state : 			String,
+	    zipCode : 			Number,
+	    phoneNum : 			Number,
+		googlePlusURL : 	String,
+		facebookURL : 		String,
+		linkInURL : 		String,
+		twitterURL: 		String,
 
         volunteeredTo: [{
             type: ObjectId,
             ref: 'Event'
-        }],
+        }], 
 
         creatorOf: [{
             type: ObjectId,
-            ref: 'Event'
-        }],
-
+            ref: 'Event' 
+        }], 
+        
         organizerOf: [{
             type: ObjectId,
-            ref: 'Group'
-        }],
-
+            ref: 'Group' 
+         }], 
+        
         subscribedTo: [{
             type: ObjectId,
-            ref: 'Group'
+            ref: 'Group' 
         }],
+            
+	    interests : [String]
+	});
+	
+	
+	var User = mongoose.model('User', UserSchema);
+	module.exports = User;
 
-        events: [{
-            type: ObjectId,
-            ref: 'Event'
-        }],
+}) (module);
 
-        createdGroups: [{
-            type: ObjectId,
-            ref: 'Group'
-        }],
-
-        createdEvents: [{
-            type: ObjectId,
-            ref: 'Event'
-        }],
-
-        interests: [String],
-        skills: [String]
-    });
-
-    UserSchema.index({
-        "userAuth.userName": 'text'
-    });
-    var User = mongoose.model('User', UserSchema);
-    module.exports = User;
-
-})(module);
+/*
+	user: {
+		firstName : 	String,
+		middleName : 	String,
+		lastName : 		String,
+		description : 	String,
+		picture:		String,
+		email : 		String,
+		birthday : 		Date,
+		age : 			Number,
+		city: 			String, 
+		state: 			String, 
+		zipcode: 		String,	
+		phoneNum : 		Number,
+		googlePlusURL : 	String,
+		facebookURL : 		String,
+		linkInURL : 		String,
+		twitterURL: 		String,
+		volunteeredTo : [{id: String}, {id: String}, ...],
+		creatorOf : 	[{id: String}, {id: String}, ...],
+		organizerOf : 	[{id: String}, {id: String}, ...],
+		subscribedTo : 	[{id: String}, {id: String}, ...],
+		interests : 	[String]
+	}
+*/

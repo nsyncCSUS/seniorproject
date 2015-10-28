@@ -70,12 +70,12 @@ app.use(sass({
 }));
 
 
-app.use('/', index);
+
 app.use('/api/users', users);
 app.use('/api/groups', groups);
 app.use('/api/events', events);
 app.use('/api/search', search);
-
+app.use('/', index);
 
 
 

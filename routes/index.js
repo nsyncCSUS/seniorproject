@@ -1,11 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-
+/* depreciated possibly
+*placed idex at the bottom in app.js
 var users = require('./users.js');
 var groups = require('./groups.js');
 var events = require('./events.js');
-
+var search = require('./search.js');
+*/
 
 router.get('/', function(req, res, next) {
     /*res.render('index', {
@@ -42,13 +44,15 @@ router.get('/partials/:page', function(req, res, next) {
 //    });
 
 
-
+/*depreciated possibly
+*placed idex at the bottom in app.js
 
 router.use('/api/users', users);
 router.use('/api/groups', groups);
 router.use('/api/events', events);
+router.use('/api/search', search);
 
-
+*/
 
 /**
  * Render index if no route matched

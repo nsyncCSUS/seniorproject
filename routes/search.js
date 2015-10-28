@@ -18,7 +18,7 @@ var router = express.Router();
 // CORE1 can only find text seperated by 'spacebar key'
 // This method is slower but you can use REGEX which well allow for more percise search
 
-router.post('/regexusername', function(req, res) {
+router.get('/regexusername', function(req, res) {
   console.log(req.body.searchString);
   console.log('INSIDE POST1');
   console.log('INSIDE POST1');
@@ -50,7 +50,7 @@ router.post('/regexusername', function(req, res) {
 // Example organizer name = 'Dog Hospital' will show up if you search dog or hospital
 // ExampleCONT: if the name is Organizer name = 'DogHospital' dog or hospital will not return this entry
 
-router.post('/keywordsearch', function(req, res) {
+router.get('/keywordsearch', function(req, res) {
   console.log(req.body.searchString);
   console.log('INSIDE POST1');
   console.log('INSIDE POST1');
@@ -80,7 +80,7 @@ GROUPS
 
 
 
-router.post('/getallgroups', function(req, res) {
+router.get('/getallgroups', function(req, res) {
   console.log(req.body.searchString);
   Group.find({}, function(err, data) {
     if (err) {
@@ -95,7 +95,7 @@ router.post('/getallgroups', function(req, res) {
 
 
 //Non-indexed soon to be depreciated by keywordsearch indexed version
-router.post('/getagroup', function(req, res) {
+router.get('/getagroup', function(req, res) {
   console.log(req.body.searchString);
   //  req.body.searchString= 'test3';
   Group.findOne({
@@ -114,11 +114,11 @@ router.post('/getagroup', function(req, res) {
 
 // Find group id
 //Non-indexed soon to be depreciated by keywordsearch indexed version
-router.post('/getagroup', function(req, res) {
-  console.log(req.body.searchString);
+router.get('/getagroupbyID/:id', function(req, res) {
+  console.log(req.params.id);
   //  req.body.searchString= 'test3';
   Group.findOne({
-    '_id.$oid': req.body.searchString
+    '_id.$oid': req.params.id
   }, function(err, data) {
     if (err) {
       console.log(err);
@@ -134,13 +134,13 @@ router.post('/getagroup', function(req, res) {
 
 
 
-router.post('/regexgroupname', function(req, res) {
-  console.log(req.body.searchString);
+router.get('/getagroupbyname/:groupname', function(req, res) {
+  console.log(req.params.groupname);
   // RegExp(String , Flags) g=global(?resets some internal counter ) i= ignore case
   // need regEXP object to put search vairable in
   // you cant put in variables directly into a regex
   // req.body.searchString is the string from angular
-  var searchStringRegExObj = new RegExp(req.body.searchString, "i");
+  var searchStringRegExObj = new RegExp(req.params.groupname, "i");
 
   Group.find({
     'groupName': searchStringRegExObj
@@ -164,7 +164,7 @@ Events
 
 
 
-router.post('/getallevents', function(req, res) {
+router.get('/getallevents', function(req, res) {
   console.log(req.body.searchString);
   Event.find({}, function(err, data) {
     if (err) {
@@ -178,7 +178,7 @@ router.post('/getallevents', function(req, res) {
 });
 
 //Non-indexed soon to be depreciated by keywordsearch indexed version
-router.post('/getaevent', function(req, res) {
+router.get('/getaevent', function(req, res) {
   console.log(req.body.searchString);
   //  req.body.searchString= 'test3';
   Event.findOne({
@@ -197,11 +197,11 @@ router.post('/getaevent', function(req, res) {
 
 // find event id
 //Non-indexed soon to be depreciated by keywordsearch indexed version
-router.post('/getaevent', function(req, res) {
-  console.log(req.body.searchString);
+router.get('/getaeventbyID/:id', function(req, res) {
+  console.log(req.params.id);
   //  req.body.searchString= 'test3';
   Event.findOne({
-    '_id.$oid': req.body.searchString
+    '_id.$oid': req.params.id
   }, function(err, data) {
     if (err) {
       console.log(err);
@@ -214,13 +214,13 @@ router.post('/getaevent', function(req, res) {
 
 });
 
-router.post('/regexeventname', function(req, res) {
-  console.log(req.body.searchString);
+router.get('/getaeventbyname/:eventname', function(req, res) {
+  console.log(req.params.eventname);
   // RegExp(String , Flags) g=global(?resets some internal counter ) i= ignore case
   // need regEXP object to put search vairable in
   // you cant put in variables directly into a regex
   // req.body.searchString is the string from angular
-  var searchStringRegExObj = new RegExp(req.body.searchString, "i");
+  var searchStringRegExObj = new RegExp(req.params.eventname, "i");
 
   Event.find({
     'eventName': searchStringRegExObj
@@ -241,7 +241,7 @@ Users
 ///////////////////////////////*/
 
 
-router.post('/getallusers', function(req, res) {
+router.get('/getallusers', function(req, res) {
   console.log(req.body.searchString);
   User.find({}, function(err, data) {
     if (err) {
@@ -255,7 +255,7 @@ router.post('/getallusers', function(req, res) {
 });
 
 //Non-indexed soon to be depreciated by keywordsearch indexed version
-router.post('/getauser', function(req, res) {
+router.get('/getauser', function(req, res) {
   console.log(req.body.searchString);
   //  req.body.searchString= 'test3';
   User.findOne({
@@ -274,11 +274,12 @@ router.post('/getauser', function(req, res) {
 
 // find user id
 //Non-indexed soon to be depreciated by keywordsearch indexed version
-router.post('/getauserbyID', function(req, res) {
-  console.log(req.body.searchString);
+router.get('/getauserbyID/:id', function(req, res) {
+
+  console.log(req.params.id);
   //  req.body.searchString= 'test3';
   User.findOne({
-    '_id.$oid': req.body.searchString
+    '_id.$oid': req.params.id
   }, function(err, data) {
     if (err) {
       console.log(err);
@@ -291,8 +292,12 @@ router.post('/getauserbyID', function(req, res) {
 
 });
 
-router.post('/getauserbyname', function(req, res) {
-  console.log(req.body.searchString);
+router.get('/getauserbyname/:username', function(req, res) {
+
+  console.log(req.params.username);
+
+  console.log('GET REQUEST');
+
   //console.log(Object.keys(req.body)[0]); grabs first value in object
   //This code might be useful in refactoring since adding this line will grab the search value
   // regardless of its name
@@ -302,7 +307,7 @@ router.post('/getauserbyname', function(req, res) {
   // need regEXP object to put search vairable in
   // you cant put in variables directly into a regex
   // req.body.searchString is the string from angular
-  var searchStringRegExObj = new RegExp(req.body.searchString, "i");
+  var searchStringRegExObj = new RegExp(req.params.username, "i");
 
   User.find({
     'userAuth.userName': searchStringRegExObj
