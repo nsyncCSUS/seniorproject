@@ -11,7 +11,7 @@
 		
 		$scope.group.interests = [];
 		
-		$scope.group.organizersToAdd = [];
+		$scope.organizersToAdd = [];
 		$scope.searchResults = [];
 		
 		$scope.isPreviewing = false;
@@ -54,16 +54,41 @@
 		};
 
 
-            $scope.group.organizers = [];
+        $scope.group.organizers = [];
 		$scope.group.organizers.push(user);
 		
 
+		$scope.selectedTab = "Upcoming Events";
+		$scope.otherTabs = ["Past Events"];
 
 		/***************************************************************************
 		 * Building Functions
 		 **************************************************************************/
 		
 
+		/***********************************************************************
+		 * Functions that controls tabs for searching
+		 **********************************************************************/
+		$scope.setCurrentTab = function(newTab) {
+			$scope.selectedTab = newTab;
+			
+			switch(newTab){
+			case "Upcoming Events":
+				$scope.otherTabs[0] = "Past Events";
+				break;
+			case "Past Events":
+				$scope.otherTabs[0] = "Upcoming Events";
+				break;
+			}
+		}
+		
+		$scope.getCurrentTab = function(tabName) {
+			if ($scope.selectedTab === tabName)
+				return true;
+			else
+				return false;
+		}
+		
 		/***************************************************************************
 		 * Get Functions
 		 **************************************************************************/
@@ -99,7 +124,7 @@
 			];
 			
 			// If the user is already in Organizers to be added list, give the CSS style to that user
-			angular.forEach($scope.group.organizersToAdd, function(currentOrganizerToAdd) {
+			angular.forEach($scope.organizersToAdd, function(currentOrganizerToAdd) {
 				angular.forEach($scope.searchResults, function(currentSearchResult) {
 					if (currentSearchResult.id === currentOrganizerToAdd.id)
 						currentSearchResult.added = "added";
@@ -206,14 +231,14 @@
 		 * Adding/Removing Organizers Function
 		 **************************************************************************/
 		/*
-		 * Adds an organizer to $scope.group.organizersToAdd array
+		 * Adds an organizer to $scope.organizersToAdd array
 		 */
 		$scope.addOrganizer = function(index) {
 			var alreadyAdded = false;
 			// Checks if the organizers to be added array is empty or not
-			if ($scope.group.organizersToAdd.length > 0){
+			if ($scope.organizersToAdd.length > 0){
 				// Checks if user has already been added
-				angular.forEach($scope.group.organizersToAdd, function(currentOrganizerToAdd) {
+				angular.forEach($scope.organizersToAdd, function(currentOrganizerToAdd) {
 					// If user is already in the array, flag will be true
 					if (currentOrganizerToAdd.id === $scope.searchResults[index].id){
 						console.log(currentOrganizerToAdd + "already added");
@@ -223,26 +248,26 @@
 			}
 			// If not added yet, add to array + set class to show it has been added
 			if (!alreadyAdded){
-				$scope.group.organizersToAdd.push($scope.searchResults[index]);
+				$scope.organizersToAdd.push($scope.searchResults[index]);
 				$scope.searchResultsPristine = false;
 				$scope.searchResults[index].added = "added";
 			}
-			console.log($scope.group.organizersToAdd);
+			console.log($scope.organizersToAdd);
 		}
 
 		/*
-		 * Removes an organizer from $scope.group.organizersToAdd array
+		 * Removes an organizer from $scope.organizersToAdd array
 		 */
 		$scope.removeOrganizer = function(index) {
 			// Variable for array to be rebuilt so that there are no empty elements
 			var newOrganizersToAdd = [];
-			// Rebuild $scope.group.organizersToAdd array
-			// Goes through $scope.group.organizersToAdd array to remove "index"
-			angular.forEach($scope.group.organizersToAdd, function(currentOrganizerToAdd) {
+			// Rebuild $scope.organizersToAdd array
+			// Goes through $scope.organizersToAdd array to remove "index"
+			angular.forEach($scope.organizersToAdd, function(currentOrganizerToAdd) {
 				// If the index to be removed is found
 				//		- do not add to rebuilt array
 				//		- remove class in search results that shows that it has been added if applicable
-				if (currentOrganizerToAdd.id === $scope.group.organizersToAdd[index].id){
+				if (currentOrganizerToAdd.id === $scope.organizersToAdd[index].id){
 					console.log("removed " + currentOrganizerToAdd);
 					angular.forEach($scope.searchResults, function(currentSearchResult) {
 						if (currentSearchResult.id === currentOrganizerToAdd.id)
@@ -256,8 +281,8 @@
 				}
 			});
 			// Sets the rebuilt array
-			$scope.group.organizersToAdd = newOrganizersToAdd;
-			console.log($scope.group.organizersToAdd);
+			$scope.organizersToAdd = newOrganizersToAdd;
+			console.log($scope.organizersToAdd);
 		}
 
 		$scope.scrollToAdd = function(id) {
@@ -370,9 +395,9 @@
 				else 
 					return false;
 			case "organizerToAdd":
-				if ($scope.group.organizersToAdd != null){
-					if ($scope.group.organizersToAdd[index1].picture != null){
-						if ($scope.group.organizersToAdd[index1].picture.length > 0)
+				if ($scope.organizersToAdd != null){
+					if ($scope.organizersToAdd[index1].picture != null){
+						if ($scope.organizersToAdd[index1].picture.length > 0)
 							return true;
 						else
 							return false;
@@ -423,8 +448,8 @@
 			if ($scope.group.organizers != null){
 				total += $scope.group.organizers.length;
 			}
-			if ($scope.group.organizersToAdd != null){
-				total += $scope.group.organizersToAdd.length;
+			if ($scope.organizersToAdd != null){
+				total += $scope.organizersToAdd.length;
 			}
 			if (total > amount)
 				return true;
@@ -444,7 +469,7 @@
 		}
 		
 		$scope.hasOrganizersToAdd = function() {
-			if ($scope.group.organizersToAdd != null && $scope.group.organizersToAdd.length > 0)
+			if ($scope.organizersToAdd != null && $scope.organizersToAdd.length > 0)
 				return true;
 			else
 				return false;

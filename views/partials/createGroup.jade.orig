@@ -229,6 +229,13 @@ div(ng-show='!getIsPreviewing()')
                                                     h4.text-right {{event.volunteers.length}} / {{event.maxVolunteers}}
                                                         | &nbsp
                                                         button.btn Volunteer Now
+<<<<<<< HEAD
+    hr
+    
+||||||| merged common ancestors
+    hr
+    
+=======
                                                         
                             .panel-body.eventRow(ng-show='getCurrentTab("Past Events")')
                                 .row.eventRow(ng-repeat='event in group.events | orderBy:"-startTimeDate" | checkExpired:true')
@@ -271,3 +278,4 @@ div(ng-show='!getIsPreviewing()')
                                                         | &nbsp
                                                         button.btn Volunteer Now
     
+>>>>>>> anthonysBranch_v2
