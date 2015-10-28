@@ -172,9 +172,13 @@ a {
 /**********************************************************************
     GROUP CSS START
 **********************************************************************/
-.eventRow {
-    padding-top: 5px;
-    padding-bottom: 5px;
+.aboutMeRow {
+    background-color: #0000ff
+}
+
+
+.titleRow {
+    background-color: #eeeeee;
 }
 
 .eventBody {
