@@ -37,6 +37,7 @@
      */
     //var router = express.Router();
 
+	//tested sends the groups _id, __v, Interests, SubscriptionList, OrganizerList, and EventList
     router.get('/', function(request, response, next) {
         var group = util.takeGroupProjection(request.params.group); 
         Group.find(request.params.group, function(err, groups) {
@@ -73,6 +74,8 @@
             return response.send({group: group}); 
         });
     });
+	
+	
 
 
     // Get user by username, create group, add user as

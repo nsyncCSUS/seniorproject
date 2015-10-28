@@ -34,6 +34,9 @@ var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000
 //Connect to the DB
 mongoose.connect(dbConfig.url, options); // Corrected URI
 
+//save the mongoose connection for the routers DATE OF COMMENT 10/10/2015
+var db = mongoose.connection;
+
 //create the models for each of the collections
 //this first model will deal with the users collection
 // ************ MOVED TO ./db/models/user.js *******************************
@@ -70,12 +73,11 @@ app.use(sass({
 }));
 
 
-
-app.use('/api/users', users);
-app.use('/api/groups', groups);
-app.use('/api/events', events);
-app.use('/api/search', search);
 app.use('/', index);
+app.use('/users', users);
+app.use('/groups', groups);
+app.use('/events', events);
+
 
 
 
