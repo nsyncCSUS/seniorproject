@@ -20,6 +20,101 @@
             Http404Message: 'Not Found'
         });
 
+<<<<<<< HEAD
+||||||| merged common ancestors
+      })
+      .catch(function(err) {
+        console.error(err.message);
+      });
+
+    res.end();
+  });
+
+
+
+
+
+  // Route for creating a  new user
+  router.post('/createuser', function(req, res) {
+    console.log(req.body.username);
+    // Uses mongoose's findOne function to search for userAuth.userName in the User model
+    // if the user does not exist in the mongodb it is created line52
+    // If there is an error and StatusCode and errorMessage will be set and returned
+    // to angular in the promise (.then) signupcontroller.js
+    var statusCode = 200; // initalize the statuscode to ok nothing wrong
+    var errorMessage = "None";
+    User.findOne({
+      'userAuth.userName': req.body.username
+    }, function(err, user) {
+      // error checking
+      if (err) {
+        console.log('Error in Signup:' + err);
+        statusCode = 500; //http error code
+        errorMessage = err;
+      }
+      //if user already exsists
+      if (user) {
+        console.log('Username taken try again' + req.body.username);
+        statusCode = 500; //http error code
+        errorMessage = "Username taken try again";
+
+      } else {
+        // if no user exist create one
+        var newUser = new User({
+          userAuth: {
+            userName: req.body.username,
+            password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null)
+              // encrypts the password before storing note:salt stored inside the passwordhash
+          }
+        });
+=======
+      })
+      .catch(function(err) {
+        console.error(err.message);
+      });
+
+    res.end();
+  });
+
+
+
+
+
+  // Route for creating a  new user
+  router.post('/createuser', function(req, res) {
+    console.log(req.body.username);
+    // Uses mongoose's findOne function to search for userAuth.userName in the User model
+    // if the user does not exist in the mongodb it is created line52
+    // If there is an error and StatusCode and errorMessage will be set and returned
+    // to angular in the promise (.then) signupcontroller.js
+    var statusCode = 200; // initalize the statuscode to ok nothing wrong
+    var errorMessage = "None";
+    User.findOne({
+      'userAuth.userName': req.body.username
+    }, function(err, user) {
+      // error checking
+      if (err) {
+        console.log('Error in Signup:' + err);
+        statusCode = 500; //http error code
+        errorMessage = err;
+      }
+      //if user already exsists
+      if (user) {
+        console.log('Username taken try again' + req.body.username);
+        statusCode = 500; //http error code
+        errorMessage = "Username taken try again";
+
+      } else {
+        // if no user exist create one
+        var newUser = new User({
+          userAuth: {
+            userName: req.body.username,
+            password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null)
+              // encrypts the password before storing note:salt stored inside the passwordhash
+          },
+          email: req.body.email
+        });
+>>>>>>> huy/UserConnect
 
         /**
          * Function for returning an Http404

@@ -8,7 +8,6 @@ html(ng-app='app')
         meta(name="viewport" content="width=device-width, initial-scale=0.85, maximum-scale=1, user-scalable=no")
         // CSS
         link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" )
-        link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css")
         //link(rel='stylesheet', href='/stylesheets/supernice.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
         link(rel='stylesheet', href='/palette.1.scss') 
@@ -26,6 +25,10 @@ html(ng-app='app')
         script(src="https://cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js") // decode base64 in angular
         
         script(src='/js/seniorProjectApp.js')
+
+        script(src='/scripts/angular-validation-match.js')
+        
+        
         script(src='/js/controllers/DashboardController.js')
         script(src='/js/controllers/EventsController.js')
         script(src='/js/controllers/GroupsController.js')

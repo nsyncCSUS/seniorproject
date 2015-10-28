@@ -3,8 +3,10 @@
   // 'ui.bootstrap',
   var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController',
     'usersController', 'groupsController', 'eventsController', 'signupController',
-                                   'loginController', 'logoutController', 'createGroupController', 'createEventController', 'ngFileUpload','angular-jwt'
+                                   'loginController', 'logoutController', 'createGroupController', 'createEventController', 'ngFileUpload', 'angular-jwt', 'validation.match'
   ]);
+    
+    //validation.match for password match in signup
 
   //Creates object authInterceptor, attaches the token to the config.header
     app.factory('authInterceptor', function($rootScope, $q, $window,jwtHelper) {
@@ -13,9 +15,6 @@
         config.headers = config.headers || {};
         if ($window.sessionStorage.token) {
           console.log($window.sessionStorage.token);
-            var decodedToken = jwtHelper.decodeToken($window.sessionStorage.token);
-            console.log(decodedToken);
-            $window.sessionStorage.userInfo = decodedToken; 
           config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
         }
         return config;
@@ -151,5 +150,16 @@
       requireBase: false
     });
   }]);
+
+
+  /**
+   * Overrite refresh back event to redirect back
+   * to application root.
+   */
+  /*angular.module('app').run(['$document', '$window', function($document, $window) {
+      $window.onunload = function(event) {
+          $window.location.href = '/';
+      };
+  }]);*/
 
 })();
