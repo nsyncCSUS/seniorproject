@@ -3,7 +3,7 @@
   // 'ui.bootstrap',
   var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController',
     'usersController', 'groupsController', 'eventsController', 'signupController',
-                                   'loginController', 'logoutController', 'createGroupController', 'createEventController', 'ngFileUpload', 'angular-jwt', 'validation.match'
+                                   'loginController', 'logoutController', 'createGroupController', 'createEventController', 'ngFileUpload', 'angular-jwt', 'validation.match','angularMoment'
   ]);
     
     //validation.match for password match in signup
