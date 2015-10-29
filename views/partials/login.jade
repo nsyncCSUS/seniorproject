@@ -2,11 +2,18 @@
 // using an object(user) to make it easier to pass the information otherwise you would
 // have to pass user and password seperatly
 html
+  head
+    style.
+      body {
+       text-align: center;
+      }
   body
     h1 Login
-    input.form-control(type='text', ng-model='user.username', placeholder='username')
+    label Username:
+      input.form-control(type='text', ng-model='user.username', placeholder='username')
     br
-    input.form-control(type='password', ng-model='user.password', placeholder='password')
+    label Password:
+      input.form-control(type='password', ng-model='user.password', placeholder='password')
     br
     br
     button.btn.btn-default(ng-click='login()') Login
