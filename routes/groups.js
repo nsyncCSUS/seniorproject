@@ -81,9 +81,44 @@
     // groups list 
     router.post('/', function(request, response, next) {
         var username = request.body.username; 
-        var params = request.params.group; 
-        var group = new Group(group);
+        var group = request.params.group; 
 
+        console.log(request.body.group.name);
+        var newGroup = new Group(group);
+        
+        //return response.send({'msg': true});
+        Group.findOne({
+            'name': request.params.group.name
+        }, function(err, g) {
+            // error checking
+            if (err) {
+                console.log('Error in Signup:' + err);
+            }
+            //if group already exsists
+            if (g) {
+                console.log('Group name taken try again. ' + g.name);
+            } else {
+                // if no group exist create one
+            	console.log("hi");
+                var newGroup = new Group(group);
+
+                console.log(newGroup);
+
+                //save group
+                newGroup.save(function(err) {
+                    if (err) {
+                        console.log('Error in saving user:' + err);
+                        throw err;
+                    }
+                    console.log('Group registration success');
+                    response.send({'msg': true});
+                });
+
+            }
+        });
+        
+        
+        /*
         User.findOne({'userAuth.userName': username}, function(err, user) {
             if(err) return util.err(err, response); 
             group.CreationUser = user;
@@ -94,7 +129,9 @@
                     return response.send({group: group}); 
                 }); 
             }); 
-        }); 
+        });
+        */ 
+        
     });
 
     
