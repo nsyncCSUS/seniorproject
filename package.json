@@ -40,7 +40,7 @@
     "grunt-contrib-uglify": "^0.9.2",
     "grunt-html": "^5.0.0",
     "htmlmin": "0.0.4",
-    "imgur": "^0.1.6",
+    "imgur": "^0.1.7",
     "jade": "~1.9.2",
     "jquery": "^2.1.4",
     "jsonwebtoken": "^5.0.4",
@@ -50,6 +50,7 @@
     "ng-file-upload": "^7.3.8",
     "node-sass": "^3.3.3",
     "node-sass-middleware": "^0.9.6",
-    "serve-favicon": "~2.2.1"
+    "serve-favicon": "~2.2.1",
+    "fs-extra":"*"
   }
 }
