@@ -12,21 +12,27 @@
      * Schema for Group Objects 
      */
     var GroupSchema = new Schema({
-        name: String,
+        name: {
+        	type: String,
+        	required: true
+        },
         
         picture: {
         	type: String,
         	default: "//placehold.it/500x500/"
         },
         
-    	creationDate : 		Date,
+    	creationDate: {
+    		type: Date,
+    		required: true
+    	},
     	city: 				String, 
     	state: 				String, 
     	zipcode: 			String,
     	description : 		String,
     	googlePlusURL : 	String,
     	facebookURL : 		String,
-    	linkInURL : 		String,
+    	linkedInURL : 		String,
     	twitterURL: 		String,
     	personalWebsiteURL: String,
 
