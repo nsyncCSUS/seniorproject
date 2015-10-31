@@ -89,6 +89,7 @@
     router.post('/', function(request, response, next) {
         var group = request.body.group; 
         var user = request.body.user;
+        var organizersToAdd = request.body.organizersToAdd;
         
         //return response.send({'msg': true});
         Group.findOne({
