@@ -10,7 +10,7 @@
 		$scope.group =  
 		{
 				id : "nsync",
-				name: "N.Sync().......... .............. ................ ............. ..........................",
+				name: "N.Sync()",
 				picture : "//placekitten.com/g/500/500/",
 				creationDate : "2015-08-26T18:50:10.111Z",
 				city : "Sacramento",
@@ -94,7 +94,8 @@
 				               {id : "sub10", firstName : "sub10", lastName: "1", picture : "//placekitten.com/g/358/355/"}],
 				interests : ["Animals", "Environment", "People", "Recreation", "Technology", "Youth"]
 		};
-		
+
+		$scope.alerts = [];
 		$scope.group.interests = [];
 		
 		$scope.organizersToAdd = [];
@@ -102,6 +103,7 @@
 		
 		$scope.isPreviewing = false;
 		$scope.isSearching = false;
+		$scope.isCreating = false;
 
 		$scope.animalsSelected = "";
 		$scope.educationSelected = "";
@@ -229,9 +231,26 @@
 		 * Posting Functions
 		 **************************************************************************/
 		$scope.createGroup = function() {
+			$scope.group.creationDate = new Date();
+			$scope.isCreating = true;
 			// Send new group to server
-			GroupService.post({group: $scope.group}, function(res) {
-				$scope.savedSuccessMsg = res.data.msg;
+			GroupService.post({group: $scope.group, user: user}, function(res) {
+				switch(res.data.flag){
+				case true:
+					$scope.alerts.push({type: "success", msg: res.data.msg});
+					$timeout(function() {
+						$location.path("/groups/" + res.data.group._id).replace;
+					}, 3000);
+					break;
+				case false:
+					$scope.alerts.push({type: "danger", msg: res.data.msg});
+					console.log($scope.alerts);
+					$timeout(function() {
+						$scope.isCreating = false;
+					}, 3000);
+					break;
+				}
+				
 			});
 		}
 
@@ -566,10 +585,6 @@
 		 **************************************************************************/
 		$scope.enablePreview = function() {
 			$scope.isPreviewing = true;
-			// Build an array for displaying organizers in a carousel
-			buildOrganizers();
-			// Build one for mobile view also
-			buildOrganizersXS();
 		}
 		
 		$scope.cancelPreview = function() {
@@ -589,7 +604,10 @@
 		$scope.cancelCreateGroup = function() {
 			$location.path("/home").replace;
 		}
-		
+
+		$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
+		}
 	} ]);
 
 })();

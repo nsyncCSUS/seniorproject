@@ -59,7 +59,7 @@
                 util.err(err, response);
                 return response.end();
             } else {
-                return response.send({group: group}); 
+                return response.send({'group': group}); 
             }
         });
     });
@@ -80,30 +80,47 @@
     // add user to organizers list, add group to user's
     // groups list 
     router.post('/', function(request, response, next) {
-        var username = request.body.username; 
-        var group = request.params.group; 
-
-        console.log(request.body.group.name);
-        var newGroup = new Group(group);
+        var group = request.body.group; 
+        var user = request.body.user;
         
         //return response.send({'msg': true});
         Group.findOne({
-            'name': request.params.group.name
+            'name': group.name
         }, function(err, g) {
             // error checking
             if (err) {
-                console.log('Error in Signup:' + err);
+                console.log('Error in Group Creation: ' + err);
             }
             //if group already exsists
             if (g) {
                 console.log('Group name taken try again. ' + g.name);
+                response.send({'flag': false, 'msg': "Group name taken, try again."});
             } else {
                 // if no group exist create one
-            	console.log("hi");
-                var newGroup = new Group(group);
-
-                console.log(newGroup);
-
+                var newGroup = new Group({
+                	name: group.name,
+                    /*
+                    picture: {
+                    	type: String,
+                    	default: "//placehold.it/500x500/"
+                    },
+                    */
+                	creationDate : 		group.creationDate,
+                	city: 				group.city, 
+                	state: 				group.state, 
+                	zipcode: 			group.zipcode,
+                	description : 		group.description,
+                	googlePlusURL : 	group.googlePlusURL,
+                	facebookURL : 		group.facebookURL,
+                	linkedInURL : 		group.linkedInURL,
+                	twitterURL: 		group.twitterURL,
+                	personalWebsiteURL: group.personalWebsiteURL,
+                	interests:			group.interests
+                });
+                
+                // Adds the user to group's organizer list
+                //newGroup.organizers.push(user);
+                
                 //save group
                 newGroup.save(function(err) {
                     if (err) {
@@ -111,27 +128,11 @@
                         throw err;
                     }
                     console.log('Group registration success');
-                    response.send({'msg': true});
+                    response.send({'group': newGroup, 'flag': true, 'msg': "Group successfully created, redirecting to " + newGroup.name});
                 });
-
+                
             }
         });
-        
-        
-        /*
-        User.findOne({'userAuth.userName': username}, function(err, user) {
-            if(err) return util.err(err, response); 
-            group.CreationUser = user;
-            return group.save(function(err, group) {
-                if(err) util.err(err, response); 
-                return group.update({$push:{}}, function(err, group) {
-                    if(err) return util.err(err, response); 
-                    return response.send({group: group}); 
-                }); 
-            }); 
-        });
-        */ 
-        
     });
 
     

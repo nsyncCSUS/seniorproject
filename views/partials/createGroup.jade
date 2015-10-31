@@ -1,14 +1,19 @@
+.creatingOverlay(ng-show='isCreating')
+
 h1 CREATE GROUP
 
 div
     div
         .float-right.fixed
-            button.btn.btn-warning(ng-show='!getIsPreviewing()', ng-click='enablePreview()') Preview
-            button.btn.btn-warning(ng-show='getIsPreviewing()', ng-click='cancelPreview()') Cancel Preview
+            button.btn.btn-warning(ng-show='!getIsPreviewing()', ng-click='enablePreview()', ng-disabled='isCreating') Preview
+            button.btn.btn-warning(ng-show='getIsPreviewing()', ng-click='cancelPreview()', ng-disabled='isCreating') Cancel Preview
             | &nbsp
-            button.btn.btn-info(ng-click='createGroup()') Create
+            button.btn.btn-info(ng-click='createGroup()', ng-disabled='isCreating') Create
             | &nbsp
-            button.btn.btn-danger(ng-click='cancelCreateGroup()') Cancel
+            button.btn.btn-danger(ng-click='cancelCreateGroup()', ng-disabled='isCreating') Cancel
+.float-btm.text-center
+    alert(ng-repeat='alert in alerts', type='{{alert.type}}', close='closeAlert($index)', dismiss-on-timeout='5000') {{alert.msg}}
+    
             
 div(ng-show='!getIsPreviewing()')
     .container-fluid
@@ -136,10 +141,9 @@ div(ng-show='!getIsPreviewing()')
                 .row
                     .col-xs-12.col-sm-4.col-md-4.col-lg-4
                         .col-xs-6.col-sm-12.col-md-12.col-lg-12
-                            img.img-responsive.img-thumbnail.center-item(ng-if='hasPicture("group")', src="{{group.picture}}")
-                            img.img-responsive.img-thumbnail.center-item(ng-if='!hasPicture("group")', src="//placehold.it/500x500")
+                            img.img-responsive.img-thumbnail.center-item(src='{{group.picture}}')
                         .col-xs-6.col-sm-12.col-md-12.col-lg-12.text-center.infoRow
-                            h5 Founded in: {{group.creationDate | date:'MMM yyyy'}}
+                            h5 Founded on: {{group.creationDate | date:'MMM dd, yyyy'}}
                             hr
                             button.btn.btn-default.center-item(ng-click='subscribe()')
                                 h4 Subscribe
@@ -158,6 +162,7 @@ div(ng-show='!getIsPreviewing()')
                                                 .col-xs-6.col-sm-12.col-md-12.col-lg-6(ng-repeat='organizer in group.organizers')
                                                     .row
                                                         .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                                            a(href='/users/{{organizer.id}}')
                                                                 h6.oneline {{organizer.firstName}} {{organizer.lastName}}
                                                         .col-xs-12.col-sm-12.col-md-12.col-lg-12
                                                             .col-xs-6.col-sm-6.col-md-6.col-lg-6
@@ -174,15 +179,11 @@ div(ng-show='!getIsPreviewing()')
                                         .row
                                             .col-xs-12.col-sm-12.col-md-12.col-lg-12
                                                 a(ng-href='/users/{{subscriber.id}}/', ng-repeat='subscriber in group.subscribers | limitTo: 100')
-                                                    img.img-thumbnail.subscriber-thumbnail.cursor-pointer(src="{{subscriber.picture}}", ng-if='hasPicture("subscriber", $index)', tooltip='{{subscriber.firstName}} {{subscriber.lastName}}')
-                                                a(ng-href='/users/{{subscriber.id}}/', ng-repeat='subscriber in group.subscribers | limitTo: 100')
-                                                    img.img-thumbnail.subscriber-thumbnail.cursor-pointer(src="//placehold.it/65x64", ng-if='!hasPicture("subscriber", $index)', tooltip='{{subscriber.firstName}} {{subscriber.lastName}}')
+                                                    img.img-thumbnail.subscriber-thumbnail.cursor-pointer(src="{{subscriber.picture}}", tooltip='{{subscriber.firstName}} {{subscriber.lastName}}')
                             
                     .col-xs-12.col-sm-8.col-md-8.col-lg-8.panel-success
                         h3.panel-heading About Us
                         p {{group.description}}
-                        p Creation Date Test {{group.creationDate | date:'medium'}}
-                        p Current Date Time {{currentDate | date: 'medium'}}
                         
                         .panel-info
                             .panel-heading
@@ -270,4 +271,3 @@ div(ng-show='!getIsPreviewing()')
                                                     h4.text-right {{event.volunteers.length}} / {{event.maxVolunteers}}
                                                         | &nbsp
                                                         button.btn Volunteer Now
-    
