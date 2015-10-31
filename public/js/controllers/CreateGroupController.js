@@ -244,7 +244,6 @@
 					break;
 				case false:
 					$scope.alerts.push({type: "danger", msg: res.data.msg});
-					console.log($scope.alerts);
 					$timeout(function() {
 						$scope.isCreating = false;
 					}, 3000);

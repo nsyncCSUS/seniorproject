@@ -16,12 +16,14 @@ div(ng-show='isAdmin')
             button.btn.btn-default(ng-show='!getIsEditing()', ng-click='enableEdit()') Edit Group
     div(ng-show='getIsEditing()')
         .float-right
-            button.btn.btn-info(ng-show='getIsEditing()', ng-click='submitEdit()') Save
+            button.btn.btn-info(ng-show='getIsEditing()', ng-click='submitEdit()', ng-disabled='isUpdating') Save
             | &nbsp
-            button.btn.btn-danger(ng-show='getIsEditing()', ng-click='cancelEdit()') Cancel
+            button.btn.btn-danger(ng-show='getIsEditing()', ng-click='cancelEdit()', ng-disabled='isUpdating') Cancel
 .float-btm.text-center
     alert(ng-repeat='alert in alerts', type='{{alert.type}}', close='closeAlert($index)', dismiss-on-timeout='5000') {{alert.msg}}
     
+.creatingOverlay(ng-show='isUpdating')    
+
 div(ng-show='getIsEditing()')
     .container-fluid
         .col-xs-12.col-sm-12.col-md-12.col-lg-12

@@ -33,11 +33,13 @@
 		/***************************************************************************
 		 * Variables (includes ones from scope too)
 		 **************************************************************************/
+		$scope.isAdmin = true;
+		
 		$scope.groupId = $routeParams.groupId;
 		
 		$scope.isEditing = false;
 		$scope.isSearching = false;
-		$scope.currentDate = new Date();
+		$scope.isUpdating = false;
 		
 		
 
@@ -543,7 +545,27 @@
 		}
 
 		$scope.submitEdit = function() {
-			$scope.isEditing = false;
+			$scope.isUpdating = true;
+			// Send changes to server
+			GroupService.put({id: $routeParams.groupId, group: $scope.group}, function(res) {
+				switch(res.data.flag){
+				case true:
+					$scope.group = res.data.group;
+					$scope.alerts.push({type: "success", msg: res.data.msg});
+					$timeout(function() {
+						$scope.isEditing = false;
+						$scope.isUpdating = false;
+					}, 3000);
+					break;
+				case false:
+					$scope.alerts.push({type: "danger", msg: res.data.msg});
+					$timeout(function() {
+						$scope.isUpdating = false;
+					}, 3000);
+					break;
+				}
+			});
+			// Keep changes made
 			$scope.group_bak = {};
 			$scope.animalsSelected_bak = "";
 			$scope.educationSelected_bak = "";
@@ -552,18 +574,6 @@
 			$scope.recreationSelected_bak = "";
 			$scope.technologySelected_bak = "";
 			$scope.youthSelected_bak = "";
-			// Send changes to server
-			GroupService.saveGroup({groupId: $routeParams.groupId, groupData: $scope.group}, function(res) {
-				switch(res.data.msg){
-				case true:
-					$scope.alerts.push("success", {msg: "Saved Successful"});
-					break;
-				case false:
-					$scope.alerts.push("danger", {msg: "Saved Failed"});
-					break;
-				}
-			});
-			// Keep changes made
 		}
 
 		/***************************************************************************
@@ -576,7 +586,6 @@
 		/***************************************************************************
 		 * Admin Testing
 		 **************************************************************************/
-		$scope.isAdmin = false;
 		$scope.toggleAdmin = function() {
 			$scope.isAdmin = !$scope.isAdmin;
 		}

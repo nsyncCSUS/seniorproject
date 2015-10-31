@@ -68,9 +68,16 @@
     router.put('/:id', function(request, response, next) {
         var id = request.params.id;
         //console.log(request.body.group); 
-        var group = JSON.parse(request.body.group); 
+        var group = request.body.group; 
         Group.findByIdAndUpdate(id, group, {new: true}, function(err, group) {
-            return response.send({group: group}); 
+        	if (err){
+                console.log('Error in Group Creation: ' + err);
+                response.send({'flag': false, 'msg': "Error updating group. Try again."});
+        	}
+        	if (group){
+        		response.send({'group': group, 'flag': true, 'msg': "Saved Successful"});
+        	}
+        	
         });
     });
 
