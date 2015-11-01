@@ -60,7 +60,6 @@
 		$scope.selectedTab = "Upcoming Events";
 		$scope.otherTabs = ["Past Events"];
 
-
 		/***********************************************************************
 		 * Functions that controls tabs for searching
 		 **********************************************************************/
