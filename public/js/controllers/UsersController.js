@@ -27,9 +27,6 @@
 
 
     }]);
-
-})();
-
 /*
 	user: {
 		firstName : 	String,
