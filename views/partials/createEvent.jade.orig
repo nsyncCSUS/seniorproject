@@ -1,3 +1,54 @@
+<<<<<<< HEAD
+h1 CREATE EVENT
+div
+    div
+        .float-right.fixed
+            button.btn.btn-warning(ng-show='!getIsPreviewing()', ng-click='enablePreview()') Preview
+            button.btn.btn-warning(ng-show='getIsPreviewing()', ng-click='cancelPreview()') Cancel Preview
+            | &nbsp
+            button.btn.btn-info(ng-click='createEvent()') Create
+            | &nbsp
+            button.btn.btn-danger(ng-click='cancelCreateEvent()') Cancel
+
+div.descriptionRow
+  h2.text-center Event Creation
+
+div.titleRow(ng-show='!getIsPreviewing()')
+    .container-fluid
+        .col-xs-12.col-sm-12.col-md-4.col-lg-4
+          .form-group
+            label(for='eventName') Name of Event
+            input.form-control#eventName(ng-model='event.name')
+        .col-xs-4.col-sm-2.col-md-1.col-lg-1
+           .form-group
+              label(for='startTime') Start Time
+              input.form-control#startTime(ng-model='event.startTime')
+        .col-xs-4.col-sm-2.col-md-1.col-lg-1
+           .form-group
+             label(for='endTime') End Time
+             input.form-control#endTime(ng-model='event.endTime')
+        .col-xs-12.col-sm-6.col-md-4.col-lg-4
+           .form-group
+             label(for='eventLocation') Location
+             input.form-control#eventLocation(ng-model='event.location')
+        .col-xs-4.col-sm-2.col-md-2.col-lg-2
+           .form-group
+             label(for='eventVolunteer') Volunteer
+             input.form-control#eventVolunteer(ng-model='event.volunteer')
+
+div.descriptionRow(ng-show='!getIsPreviewing()')
+   h2.text-center Description
+    .container-fluid
+        .col-xs-12.col-sm-6.col-md-4.col-lg-4
+                .form-group
+                    input(type='file') 
+                    | Might have to use external module for file inputs
+        .col-xs-12.col-sm-6.col-md-6.col-lg-6
+                label(for='description') 
+                textarea.form-control#description(rows='10', ng-model='event.description')
+||||||| merged common ancestors
+h1 CREATE EVENT
+=======
 h1 CREATE EVENT
 div
     div
@@ -316,3 +367,4 @@ div.organizersRow
                         span.glyphicon.glyphicon-chevron-left
                     a.right.carousel-control(href='#organizerCarousel-xs', data-slide='next')
                         span.glyphicon.glyphicon-chevron-right
+>>>>>>> vadzimBranch

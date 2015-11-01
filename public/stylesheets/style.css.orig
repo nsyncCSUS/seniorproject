@@ -3,13 +3,27 @@
 }
 
 body {
+<<<<<<< HEAD
+    padding-top: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+||||||| merged common ancestors
+	padding-top: 40px;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+=======
     padding-top: 40px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+>>>>>>> vadzimBranch
 }
 
 
 a {
+<<<<<<< HEAD
+    //color: #00B7FF;
+||||||| merged common ancestors
+	
+=======
     color: #00B7FF;
+>>>>>>> vadzimBranch
 }
 
  
@@ -78,6 +92,7 @@ a {
    cursor: pointer;
 }
 
+<<<<<<< HEAD
 /**********************************************************************
     Edit CSS START
 **********************************************************************/
@@ -87,8 +102,24 @@ a {
     top: 90%;
     right: 20%;
     width: 60%;
+||||||| merged common ancestors
+.container-fluid {
+    padding: 0px;
+=======
+.container-fluid {
+    padding-right: 20px;
+    padding-left: 20px;
 }
 
+.events-pane {
+    margin-top: 5px;
+    margin-bottom: 5px;
+>>>>>>> vadzimBranch
+}
+
+.event-description {
+    padding-right: 25px;
+}
 .float-right {
     z-index: 10;
     position: fixed;
@@ -96,6 +127,7 @@ a {
     top: 80px;
 }
 
+<<<<<<< HEAD
 .creatingOverlay {
 	z-index: 5;
 	position: absolute;
@@ -103,6 +135,28 @@ a {
 	opacity: .2;
 	height: 91%;
 	width: 100%;
+||||||| merged common ancestors
+.float-btm {
+    z-index: 10;
+    position: fixed;
+    top: 90%;
+    right: 50%;
+    width: 250px;
+    margin-right: -125px;
+=======
+.event-item { 
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+
+.float-btm {
+    z-index: 10;
+    position: fixed;
+    top: 90%;
+    right: 50%;
+    width: 250px;
+    margin-right: -125px;
+>>>>>>> vadzimBranch
 }
 
 /**********************************************************************
@@ -114,15 +168,10 @@ a {
 
 .selected {
     opacity: 1;
-	background: rgba(39, 62, 84, 0.82);
-	overflow: hidden;
-	height: 100%;
-	z-index: 2;
-}
-
-.subscriber-thumbnail {
-    width: 64px;
-    height: 64px;
+    background: rgba(39, 62, 84, 0.82);
+    overflow: hidden;
+    height: 100%;
+    z-index: 2;
 }
 
 .add:hover {
@@ -130,6 +179,18 @@ a {
     position:relative;
     display:inline-block;
 }
+.add:hover {
+    border: 2px solid #000000;
+    position:relative;
+    display:inline-block;
+}
+.add:hover {
+    border: 2px solid #000000;
+    position:relative;
+    display:inline-block;
+}
+
+
 
 .remove:hover {
     border: 2px solid #000000;
@@ -179,8 +240,15 @@ a {
     opacity: .4;
 }
 
+<<<<<<< HEAD
+||||||| merged common ancestors
+.added:hover
 
 
+=======
+
+
+>>>>>>> vadzimBranch
 /**********************************************************************
     GROUP CSS START
 **********************************************************************/
@@ -241,6 +309,12 @@ a {
     padding-bottom: 5px;
     border-top: solid thin ;
 }
+<<<<<<< HEAD
+||||||| merged common ancestors
+/**********************************************************************
+    Event CSS END
+**********************************************************************/
+=======
 
 /**********************************************************************
     CREATE_EVENT CSS START
@@ -264,8 +338,17 @@ a {
 /**********************************************************************
     Event CSS END
 **********************************************************************/
+>>>>>>> vadzimBranch
 
+<<<<<<< HEAD
+||||||| merged common ancestors
 .event-item { 
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
+=======
+.event-item { 
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+>>>>>>> vadzimBranch

@@ -2,15 +2,28 @@
 
     var app = angular.module('groupFactory', []);
 
+<<<<<<< HEAD
     app.factory('GroupFactory', ['$http',function($http) {
+||||||| merged common ancestors
+	app.factory('GroupFactory', [ function() {
+=======
+    app.factory('GroupFactory', [function() {
+>>>>>>> vadzimBranch
 
+<<<<<<< HEAD
         var factory = {
             // Note: parameters in post have to be an object
             // Also name in search.js route uses searchString as name
             getAllGroups: function() {
                 return $http.get('/api/search/getallgroups');
             },
+||||||| merged common ancestors
+		var factory = {};
+=======
+        var factory = {};
+>>>>>>> vadzimBranch
 
+<<<<<<< HEAD
             getAGroupByID: function(searchValue){
                 return $http.get('/api/search/getagroupbyID/'+searchValue);
             },
@@ -26,3 +39,12 @@
         return factory;
     }]);
 })();
+||||||| merged common ancestors
+		return factory;
+	} ]);
+})();
+=======
+        return factory;
+    }]);
+})();
+>>>>>>> vadzimBranch

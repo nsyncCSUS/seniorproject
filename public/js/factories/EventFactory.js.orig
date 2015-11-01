@@ -2,22 +2,47 @@
 
     var app = angular.module('eventFactory', []);
 
+<<<<<<< HEAD
     /**
      * Factory class for Event objects
      */
     app.factory('EventFactory', ['$http',function($http) {
+||||||| merged common ancestors
+	/**
+	 * Factory class for Event objects
+	 */
+	app.factory('EventFactory', [ function() {
+=======
+    /**
+     * Factory class for Event objects
+     */
+    app.factory('EventFactory', [function() {
+>>>>>>> vadzimBranch
 
+<<<<<<< HEAD
         var factory = {
             // Note: parameters in post have to be an object
             // Also name in search.js route uses searchString as name
             getAllEvents: function() {
                 return $http.get('/api/search/getallevents');
             },
+||||||| merged common ancestors
+		var factory = {};
+=======
+        var factory = {};
+>>>>>>> vadzimBranch
 
+<<<<<<< HEAD
             getAEventByID: function(searchValue){
                 return $http.get('/api/search/getaeventbyID/'+searchValue);
             },
+||||||| merged common ancestors
+		return factory;
+=======
+        return factory;
+>>>>>>> vadzimBranch
 
+<<<<<<< HEAD
             getAEventByName: function(searchValue){
                 return $http.get('/api/search/getaeventbyname/'+searchValue);
             }
@@ -30,3 +55,10 @@
 
     }]);
 })();
+||||||| merged common ancestors
+	} ]);
+})();
+=======
+    }]);
+})();
+>>>>>>> vadzimBranch

@@ -1,0 +1,31 @@
+<<<<<<< HEAD
+//HL 2 variables accessiable in the signupController scope user.username & user.password 
+// using an object(user) to make it easier to pass the information otherwise you would
+// have to pass user and password seperatly
+html
+  body
+    h1 Register
+    input.form-control(type='text', ng-model='user.username', placeholder='username')
+    br
+    input.form-control(type='password', ng-model='user.password', placeholder='password')
+    br
+    br
+    button.btn.btn-default(ng-click='register()') Register
+    //HL calls the register function inside the signupController
+||||||| merged common ancestors
+h1 SIGN UP
+=======
+//HL 2 variables accessiable in the signupController scope user.username & user.password 
+// using an object(user) to make it easier to pass the information otherwise you would
+// have to pass user and password seperatly
+html
+  body
+    h1 Register
+    input(type='text', ng-model='user.username', placeholder='username')
+    br
+    input(type='password', ng-model='user.password', placeholder='password')
+    br
+    br
+    button(ng-click='register()') Register
+    //HL calls the register function inside the signupController
+>>>>>>> vadzimBranch

@@ -1,6 +1,11 @@
 (function() {
     var app = angular.module('createEventController', ['createEventService']);
 
+<<<<<<< HEAD
+    app.controller('CreateEventController', ['$scope', 'CreateEventService', function($scope, CreateEventService) {
+||||||| merged common ancestors
+	app.controller('CreateEventController', [ '$scope', 'CreateEventService', function($scope, CreateEventService) {
+=======
     app.controller('CreateEventController', ['$scope', 'CreateEventService', 'amMoment', function($scope, CreateEventService, moment) {
         
 //    	console.log("Moment: " + moment);
@@ -17,7 +22,13 @@
         };
       $scope.event.startTimeDate = new Date('2015-03-01T00:00:00Z');
       $scope.event.endTimeDate = new Date('2015-03-01T00:00:00Z');
+>>>>>>> vadzimBranch
 
+<<<<<<< HEAD
+    }]);
+||||||| merged common ancestors
+	} ]);
+=======
       console.log($scope.event);
       $scope.hstep = 1;
       $scope.mstep = 15;
@@ -226,6 +237,7 @@
         $scope.mytime = null;
       };*/
     }]);
+>>>>>>> vadzimBranch
 
 })();
 

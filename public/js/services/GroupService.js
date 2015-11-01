@@ -17,7 +17,7 @@
          * Construct a url from different url components
          */
         function constructUrl(item1, item2, item3, item4) {
-            var url = '';
+            var url = '/';
             if (item1 != null && item1 != undefined) url += item1 + '/';
             if (item2 != null && item2 != undefined) url += item2 + '/';
             if (item3 != null && item3 != undefined) url += item3 + '/';
@@ -57,8 +57,7 @@
                 console.log(response);
                 callback(response);
             }, function(response) {
-            	console.log("Error: " + error);
-                //error(response);
+                error(response);
             });
         };
 

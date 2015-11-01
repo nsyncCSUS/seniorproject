@@ -1,6 +1,11 @@
 (function() {
     var app = angular.module('createEventService', []);
 
+<<<<<<< HEAD
+    app.service('CreateEventService', [function() {
+||||||| merged common ancestors
+	app.service('CreateEventService', [ function() {
+=======
     app.service('CreateEventService', [function() {
     	this.createEvent = function(params, callback, error) {
             var url = "/create/event";
@@ -12,5 +17,16 @@
             });
         }
     }]);
+>>>>>>> vadzimBranch
+
+<<<<<<< HEAD
+    }]);
 
 })();
+||||||| merged common ancestors
+	} ]);
+
+})();
+=======
+})();
+>>>>>>> vadzimBranch
