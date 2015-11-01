@@ -1,4 +1,3 @@
-
 (function(module) {
   'use strict';
 
@@ -14,6 +13,12 @@
   var router = express.Router();
   var bcrypt = require('bcrypt-nodejs'); // used to encryt the passwords
 
+  /**
+   * Collection of relevant constants
+   */
+  var Constants = Object.freeze({
+    Http404Message: 'Not Found'
+  });
 
 
   /**
@@ -55,18 +60,7 @@
     res.end();
   });
 
-                // set the user's local credentails
-                //newUser.userName= req.body.username;
-                //  newUser.password = req.body.password;
 
-                //save user
-                newUser.save(function(err) {
-                    if (err) {
-                        console.log('Error in saving user:' + err);
-                        throw err;
-                    }
-                    console.log('User registration sucess');
-                });
 
 
 
@@ -143,37 +137,6 @@
     }]
   };
 
-    //HL the users name then password to see if they match
-    // if they match a token is generated and returned in the
-    // res object
-    router.post('/login', function(req, res) {
-        console.log('login');
-        User.findOne({
-            'userAuth.userName': req.body.username
-        }, function(err, user) {
-            if (err) {
-                console.log('Error in Signup:' + err);
-            }
-            if (!user) {
-                console.log("User not found");
-                res.json({
-                    success: false,
-                    message: 'Authentication failed. Wrong Username.'
-                });
-            } else if (user) {
-                if (user.userAuth.password != req.body.password) {
-                    console.log(req.body.password);
-                    console.log(user.userAuth.password);
-                    console.log('Wrong password');
-                    res.json({
-                        success: false,
-                        message: 'Authentication failed. Wrong password.'
-                    });
-                } else {
-                    console.log('token created');
-                    var token = jwt.sign(user, 'secret', {
-                        expiresInMinutes: 1440 // expires in 24 hours
-                    });
 
   //HL the users name then password to see if they match
   // if they match a token is generated and returned in the
@@ -319,22 +282,12 @@
     });
   });
 
-    
-    // events.post('/', function(request, response, next) {}); 
-    // events.put('/:id2', function(request, response, next) {}); 
-    // events.delete('/:id2', function(request, response, next) {}); 
 
   // events.post('/', function(request, response, next) {});
   // events.put('/:id2', function(request, response, next) {});
   // events.delete('/:id2', function(request, response, next) {});
 
 
-    /**
-     * Nested router for handling group requests 
-     */
-    var groups = express.Router({
-        mergeParams: true
-    });
 
   /**
    * Nested router for handling group requests
@@ -359,18 +312,6 @@
     });
   });
 
-    
-    groups.get('/:id2', function(request, response, next) {
-        var id1 = request.params.id1;
-        var id2 = request.params.id2;
-        User.findById(id1, function(err, user) {
-            if(err) {
-                util.err(err, response);
-                return response.end();
-            } else {
-                var group = user.groups.filter(function(index, item) {
-                    return item._id == id2; 
-                });
 
   groups.get('/:id2', function(request, response, next) {
     var id1 = request.params.id1;
@@ -391,17 +332,11 @@
     });
   });
 
-    
-    // groups.post('/', function(request, response, next) {}); 
-    // groups.put('/:id2', function(request, response, next) {}); 
-    // groups.delete('/:id2', function(request, response, next) {}); 
 
   // groups.post('/', function(request, response, next) {});
   // groups.put('/:id2', function(request, response, next) {});
   // groups.delete('/:id2', function(request, response, next) {});
 
-    router.use('/:id1/events', events);
-    router.use('/:id1/groups', groups);
 
   router.use('/:id1/events', events);
   router.use('/:id1/groups', groups);
