@@ -103,7 +103,7 @@ var mongoose = require('mongoose');
 	});
 	
 	
-	var User = mongoose.model('User', UserSchema);
+	var User = mongoose.model('Users', UserSchema);
 	module.exports = User;
 
 }) (module);

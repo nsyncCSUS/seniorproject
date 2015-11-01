@@ -224,6 +224,9 @@ a {
     overflow: hidden;
 }
 
+.upcomingEventsRow {
+    background-color: #eeeeee;
+}
 
 /**********************************************************************
     DASHBOARD CSS START
@@ -255,6 +258,14 @@ a {
     padding-top: 5px;
     padding-bottom: 5px;
     border-top: solid thin ;
+}
+
+.carousel-control {
+  width:5%;
+}
+
+.organizersRow {
+    background-color: #eeeeee;
 }
 
 /**********************************************************************
