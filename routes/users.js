@@ -183,14 +183,21 @@
 
 
 
+
+
+
   /**
    * Global User router
    */
   //var router = express.Router();
+
+  //Finds all users in db
   router.get('/', function(request, response, next) {
     //var user = util.takeUserProjection(request.params.user);
-    var user = request.params.user;
-    User.find(user, function(err, users) {
+    console.log(request.params.user);
+  //  var user = request.params.user;
+  // not sure why var user was place in User.find
+    User.find({},function(err, users) {
       if (err) {
         return util.err(err, response);
       } else {
@@ -201,9 +208,10 @@
     });
   });
 
-
+  // Get user from db using user id
   router.get('/:id', function(request, response, next) {
     var id = request.params.id;
+    console.log(request.params.id);
     User.findById(id, function(err, user) {
       if (err) return util.err(err, response);
       else return response.send({
@@ -212,7 +220,8 @@
     });
   });
 
-
+  //Takes a User object and updates the values
+  // Params request.body must contain user object
   router.put('/:id', function(request, response, next) {
     var id = request.params.id;
     //var user = util.takeUserProjection(request.params.user);
@@ -230,8 +239,8 @@
 
 
   // Function handled by Huy's function above
-  // router.post('/', function(request, response, next) {});
-
+  // router.post('/createuser', function(request, response, next) {});
+  // Deletes a User from the db using id
   router.delete('/:id', function(request, response, next) {
     var id = request.params.id;
     User.findByIdAndRemove(id, function(err) {
@@ -244,28 +253,124 @@
 
   /**
    * Nested router for handling event requests
+   * Example of nested routers
+   * http://stackoverflow.com/questions/25260818/rest-with-express-js-nested-router
    */
+  // Used to get parameters from the root router * all the stuff above this
   var events = express.Router({
     mergeParams: true
   });
 
+  // For less typing else you would have to write the user+ event routes
+  router.use('/:uid/events', events);
+  /*
+    USER EVENTS(volunteeredTo) ********************************************************************
+    -Get all events user has volunteeredTo
+    -Put event into users volunteeredTo array
+    -Delete event from users volunteeredTo array
+  */
 
+
+
+  // Get list of events from this user
   events.get('/', function(request, response, next) {
-    var id1 = request.params.id1;
-    var event = request.params.event;
-    return User.findById(id1, function(err, user) {
+    var uid = request.params.uid;
+    //var event = request.params.event;
+    User.findById(uid, function(err, user) {
       if (err) {
         return util.err(err, response);
       } else {
-        var events = user.events || [];
+        var eventsList = user.volunteeredTo;
         return response.send({
-          events: events
+          events: eventsList    // Note : error this returns the list prior to the update
         });
       }
     });
   });
 
 
+  // Add an event to a users Voulenter list(event list)
+  // parameter must be a ObjectId
+  events.put('/:eid', function(request, response, next) {
+    var uid = request.params.uid;
+    var eventToAdd = request.params.eid;
+    User.findByIdAndUpdate(uid,{$addToSet: {"volunteeredTo":eventToAdd}}, function(err, user) {
+      if (err) {
+        return util.err(err, response);
+      }
+    });
+  });
+
+  // Deletes an event from a users volunteeredTo list
+    // parameter must be a ObjectId
+  events.delete('/:eid', function(request, response, next) {
+    var uid = request.params.uid;
+    var eventToDelete = request.params.eid;
+    User.findByIdAndUpdate(uid,{$pull: {"volunteeredTo":eventToDelete}}, function(err, user) {
+      if (err) {
+        return util.err(err, response);
+      }
+    });
+  });
+
+
+  /*
+    CREATOROF EVENT ********************************************************************
+    -Get all events user is creator of
+    - Put a new event to the user creatorof list
+    - Delete an event from users creator of list
+  */
+
+  // Get all events user is creator of
+  events.get('/creatorof', function(request, response, next) {
+    var uid = request.params.uid;
+    User.findById(uid, function(err, user) {
+      if (err) {
+        return util.err(err, response);
+      } else {
+        var creatorOfList = user.creatorOf;
+        return response.send({
+          eventsCreated: creatorOfList    // Note : error this returns the list prior to the update
+        });
+      }
+    });
+  });
+
+  //Put a new event to the user creatorof list
+    // parameter must be a ObjectId
+  events.put('/creatorof/:eid', function(request, response, next) {
+    var uid = request.params.uid;
+    var eventToAdd = request.params.eid;
+    User.findByIdAndUpdate(uid,{$addToSet: {"creatorOf":eventToAdd}}, function(err, user) {
+      if (err) {
+        return util.err(err, response);
+      }
+    });
+  });
+
+  //  Delete an event from users creator of list
+    // parameter must be a ObjectId
+  events.delete('/creatorof/:eid', function(request, response, next) {
+    var uid = request.params.uid;
+    var eventToDelete = request.params.eid;
+    User.findByIdAndUpdate(uid,{$pull: {"creatorOf":eventToDelete}}, function(err, user) {
+      if (err) {
+        return util.err(err, response);
+      }
+    });
+  });
+
+
+
+
+
+
+  // ??? id1 = event id2 = event2
+  // user.events.filter function?? * no mongoose function filter
+  //    - Function returns true or false?? then sends this back in response
+  // Guess is function checks if event 2 is in users event list
+
+  /* Not sure what this does write comments if you know
   events.get('/:id2', function(request, response, next) {
     var id1 = request.params.id1;
     var id2 = request.params.id2;
@@ -282,6 +387,11 @@
       }
     });
   });
+  */
+
+
+
+
 
 
   // events.post('/', function(request, response, next) {});
@@ -297,23 +407,116 @@
     mergeParams: true
   });
 
+  router.use('/:uid/groups', groups);
+
+
+   /*
+     User Groups(subscribedTo)  ********************************************************************
+     -Get all Groups users subscribedTo
+     -Put event into users subscribedTo array
+     -Delete event from users subscribedTo array
+   */
 
   groups.get('/', function(request, response, next) {
-    var id1 = request.params.id1;
-    User.findById(id1, function(err, user) {
+    var uid = request.params.uid;
+    User.findById(uid, function(err, user) {
       if (err) {
         util.err(err, response);
         return response.end();
       } else {
-        var groups = user.groups || [];
+        var subscribedToList = user.subscribedTo;
         return response.send({
-          groups: groups
+          groups: subscribedToList
         });
       }
     });
   });
 
+  groups.put('/:gid', function(request, response, next) {
+    var uid = request.params.uid;
+    var groupToAdd = request.params.gid;
+    User.findByIdAndUpdate(uid,{$addToSet: {"subscribedTo":groupToAdd}}, function(err, user) {
+      if (err) {
+        return util.err(err, response);
+      }
+    });
+  });
 
+  // Deletes an event from a users volunteeredTo list
+  groups.delete('/:gid', function(request, response, next) {
+    var uid = request.params.uid;
+    var groupToDelete = request.params.gid;
+    User.findByIdAndUpdate(uid,{$pull: {"subscribedTo":groupToDelete}}, function(err, user) {
+      if (err) {
+        return util.err(err, response);
+      }
+    });
+  });
+
+  /*
+    User Groups(organizerof)  ********************************************************************
+    -Get all Groups users organizerof
+    -Put event into users organizerof array
+    -Delete event from users organizerof array
+  */
+
+
+  // Get all events user is creator of
+  events.get('/organizerof', function(request, response, next) {
+    var uid = request.params.uid;
+    User.findById(uid, function(err, user) {
+      if (err) {
+        return util.err(err, response);
+      } else {
+        var creatorOfList = user.creatorOf;
+        return response.send({
+          eventsCreated: creatorOfList    // Note : error this returns the list prior to the update
+        });
+      }
+    });
+  });
+
+  //Put a new event to the user creatorof list
+    // parameter must be a ObjectId
+  events.put('/organizerof/:gid', function(request, response, next) {
+    var uid = request.params.uid;
+    var groupToAdd = request.params.gid;
+    User.findByIdAndUpdate(uid,{$addToSet: {"organizerof":groupToAdd}}, function(err, user) {
+      if (err) {
+        return util.err(err, response);
+      }
+    });
+  });
+
+  //  Delete an event from users creator of list
+    // parameter must be a ObjectId
+  events.delete('/organizerof/:gid', function(request, response, next) {
+    var uid = request.params.uid;
+    var groupToDelete = request.params.gid;
+    User.findByIdAndUpdate(uid,{$pull: {"organizerof":groupToDelete}}, function(err, user) {
+      if (err) {
+        return util.err(err, response);
+      }
+    });
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* Not sure what this does write comments if you know
   groups.get('/:id2', function(request, response, next) {
     var id1 = request.params.id1;
     var id2 = request.params.id2;
@@ -332,6 +535,7 @@
       }
     });
   });
+*/
 
 
   // groups.post('/', function(request, response, next) {});
@@ -339,8 +543,6 @@
   // groups.delete('/:id2', function(request, response, next) {});
 
 
-  router.use('/:id1/events', events);
-  router.use('/:id1/groups', groups);
 
 
   module.exports = router;
