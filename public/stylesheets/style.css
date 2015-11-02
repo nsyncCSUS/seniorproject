@@ -3,13 +3,13 @@
 }
 
 body {
-    padding-top: 40px;
+    padding-top: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 
 a {
-    color: #00B7FF;
+    //color: #00B7FF;
 }
 
  
@@ -105,15 +105,6 @@ a {
     top: 80px;
 }
 
-.creatingOverlay {
-	z-index: 5;
-	position: absolute;
-	background-color: #aaaaaa;
-	opacity: .2;
-	height: 91%;
-	width: 100%;
-}
-
 /**********************************************************************
     GROUP Edit CSS START
 **********************************************************************/
@@ -123,10 +114,10 @@ a {
 
 .selected {
     opacity: 1;
-	background: rgba(39, 62, 84, 0.82);
-	overflow: hidden;
-	height: 100%;
-	z-index: 2;
+    background: rgba(39, 62, 84, 0.82);
+    overflow: hidden;
+    height: 100%;
+    z-index: 2;
 }
 
 .subscriber-thumbnail {

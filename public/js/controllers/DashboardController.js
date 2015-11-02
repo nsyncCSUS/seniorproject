@@ -50,6 +50,30 @@
 			$scope.event = response.event;
 		}); */
 		
+//		$scope.user = {
+//				firstName : 	"",
+//				middleName : 	"",
+//				lastName : 		"",
+//				description : 	"",
+//				picture:		"",
+//				email : 		"",
+//				birthday : 		"",
+//				age : 			"",
+//				city : 			"",
+//				state : 		"",
+//				zipCode : 		"",
+//				phoneNum : 		"",
+//				googlePlus : 	"",
+//				facebook : 		"",
+//				linkedIn : 		"",
+//				twitter : 		"",
+//				volunteeredTo : [{id: ""}, {id: ""}],
+//				creatorOf : 	[{id: ""}, {id: ""}],
+//				organizerOf : 	[{id: ""}, {id: ""}],
+//				subscribedTo : 	[{id: ""}, {id: ""}],
+//				interests : 	[{type: ""}, {type: ""}]
+//			};
+		
 		$scope.user = {
 				firstName : 	"",
 				middleName : 	"",
@@ -106,8 +130,8 @@
 					description: "aaaaaaaaaa bbbbbbbbbbbbbbb cccccccccccccccc dddddddddddddddddd eeeeeeeeeeeeeeeeeee fffffffffffffffffff gggggggggggggggggg hhhhhhhhhhhhhh iiiiiiiiiiiiiiiiiiii jjjjjjjjjjjjjjjjjjjj",
 					picture : "//placekitten.com/g/504/500/",
 					street: "6234 cool st", city: "Sacramento", state: "CA", zipcode: "95828",
-					startTimeDate : "2016-11-28T18:50:10.111Z",
-					endTimeDate : "2016-11-29T18:50:10.111Z",
+					startTimeDate : "2015-10-28T18:50:10.111Z",
+					endTimeDate : "2015-10-29T18:50:10.111Z",
 					maxVolunteers : 50,
 					volunteers: [{id: "v1", firstName: "Kitten 1", lastName: "1", picture: "//placekitten.com/g/251/250"}, 
 					             {id: "v2", firstName: "Kitten 2", lastName: "1", picture: "//placekitten.com/g/251/251"}, 

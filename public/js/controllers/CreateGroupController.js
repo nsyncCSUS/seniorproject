@@ -2,7 +2,7 @@
 
 	var app = angular.module('createGroupController', ['createGroupService']);
 
-	app.controller('CreateGroupController', [ '$scope', '$location', 'CreateGroupService', function($scope, $location, CreateGroupService) {
+	app.controller('CreateGroupController', [ '$scope', '$location', '$anchorScroll', '$timeout', 'CreateGroupService', function($scope, $location, $anchorScroll, $timeout, CreateGroupService) {
 
 		/***************************************************************************
 		 * Variables (includes ones from scope too)
@@ -11,7 +11,7 @@
 		
 		$scope.group.interests = [];
 		
-		$scope.group.organizersToAdd = [];
+		$scope.organizersToAdd = [];
 		$scope.searchResults = [];
 		
 		$scope.isPreviewing = false;
@@ -40,7 +40,7 @@
 			age : 			24,
 			city : 			"Elk Grove",
 			state : 		"CA",
-			zipCode : 		95624,
+			zipcode : 		95624,
 			phoneNum : 		19162047928,
 			googlePlus : 	"google.com",
 			facebook : 		"facebook.com",
@@ -54,117 +54,41 @@
 		};
 
 
-            $scope.group.organizers = [];
+        $scope.group.organizers = [];
 		$scope.group.organizers.push(user);
 		
-		// Build an array for displaying organizers in a carousel
-		buildOrganizers();
-		// Build one for mobile view also
-		buildOrganizersXS();
 
+		$scope.selectedTab = "Upcoming Events";
+		$scope.otherTabs = ["Past Events"];
 
 		/***************************************************************************
 		 * Building Functions
 		 **************************************************************************/
-		/* Builds the organizers list to be compatible with row based bootstrap carousel (SM-MD-LG version)
-		 * group = {
-		 * 			organizers: [{1}, {2}, {3}, ...]
-		 * 			organizersBuilt: [
-		 * 							{ organizers: [ {1},{2},{3},{4} ] }, // $first
-		 * 							{ organizers: [ {5},{6},{7},{8} ] },
-		 * 							{ organizers: [ {9},{10},{11},{12} ] },
-		 * 							{ organizers: [ {13},{14},{15},{16} ] }
-		 * 							]
-		 * 			}
-		 */
-		function buildOrganizers() {
-			// Split into 4 x Y arrays
-			var currentRow = 0;
-			var currentIndex = 0;
-			$scope.group.organizersBuilt = [{organizers: []}];
-			angular.forEach($scope.group.organizers, function(organizer) {
-				// Add new row if the row is filled
-				if (currentIndex === 4) {
-					this.push({organizers: []});
-					currentRow++;
-					currentIndex = 0;
-					this[currentRow].organizers.push(organizer);
-					currentIndex++;
-				}
-				else {
-					this[currentRow].organizers.push(organizer);
-					currentIndex++;
-				}
-			}, $scope.group.organizersBuilt); // Used as "this" above
-			//console.log($scope.group.organizersBuilt);
-			angular.forEach($scope.group.organizersToAdd, function(organizer) {
-				// Add new row if the row is filled
-				if (currentIndex === 4) {
-					this.push({organizers: []});
-					currentRow++;
-					currentIndex = 0;
-					this[currentRow].organizers.push(organizer);
-					currentIndex++;
-				}
-				else {
-					this[currentRow].organizers.push(organizer);
-					currentIndex++;
-				}
-			}, $scope.group.organizersBuilt); // Used as "this" above
-			//console.log($scope.group.organizersBuilt);
-		};
-
-		/* Builds the organizers list to be compatible with row based bootstrap carousel (XS version)
-		 * group = {
-		 * 			organizers: [{1}, {2}, {3}, ...]
-		 * 			organizersBuiltXS: [
-		 * 							{ organizers: [ {1},{2} ] }, // $first
-		 * 							{ organizers: [ {3},{4} ] },
-		 * 							{ organizers: [ {5},{6} ] },
-		 * 							{ organizers: [ {7},{8} ] }
-		 * 							]
-		 * 			}
-		 */
-		function buildOrganizersXS() {
-			// Split into 2 x Y arrays
-			var currentRow = 0;
-			var currentIndex = 0;
-			$scope.group.organizersBuiltXS = [{organizers: []}];
-			angular.forEach($scope.group.organizers, function(organizer) {
-				// Add new row if the row is filled
-				if (currentIndex === 2) {
-					this.push({organizers: []});
-					currentRow++;
-					currentIndex = 0;
-					this[currentRow].organizers.push(organizer);
-					currentIndex++;
-				}
-				// Push an organizer to current working row
-				else {
-					this[currentRow].organizers.push(organizer);
-					currentIndex++;
-				}
-			}, $scope.group.organizersBuiltXS); // Used as "this" above
-			//console.log($scope.group.organizersBuiltXS);
-			angular.forEach($scope.group.organizersToAdd, function(organizer) {
-				// Add new row if the row is filled
-				if (currentIndex === 2) {
-					this.push({organizers: []});
-					currentRow++;
-					currentIndex = 0;
-					this[currentRow].organizers.push(organizer);
-					currentIndex++;
-				}
-				// Push an organizer to current working row
-				else {
-					this[currentRow].organizers.push(organizer);
-					currentIndex++;
-				}
-			}, $scope.group.organizersBuiltXS); // Used as "this" above
-			//console.log($scope.group.organizersBuiltXS);
-		};	
 		
 
+		/***********************************************************************
+		 * Functions that controls tabs for searching
+		 **********************************************************************/
+		$scope.setCurrentTab = function(newTab) {
+			$scope.selectedTab = newTab;
+			
+			switch(newTab){
+			case "Upcoming Events":
+				$scope.otherTabs[0] = "Past Events";
+				break;
+			case "Past Events":
+				$scope.otherTabs[0] = "Upcoming Events";
+				break;
+			}
+		}
+		
+		$scope.getCurrentTab = function(tabName) {
+			if ($scope.selectedTab === tabName)
+				return true;
+			else
+				return false;
+		}
+		
 		/***************************************************************************
 		 * Get Functions
 		 **************************************************************************/
@@ -200,12 +124,19 @@
 			];
 			
 			// If the user is already in Organizers to be added list, give the CSS style to that user
-			angular.forEach($scope.group.organizersToAdd, function(currentOrganizerToAdd) {
+			angular.forEach($scope.organizersToAdd, function(currentOrganizerToAdd) {
 				angular.forEach($scope.searchResults, function(currentSearchResult) {
 					if (currentSearchResult.id === currentOrganizerToAdd.id)
 						currentSearchResult.added = "added";
 				});
 			});
+
+		}
+		
+		$scope.scrollToResults = function() {
+			$timeout(function() {
+				$anchorScroll('searchResults');
+			}, 1);
 		}
 		
 		/***************************************************************************
@@ -228,9 +159,9 @@
 			// Rebuild interests array
 			// Checks if the interest selected is in the interest's array
 			angular.forEach($scope.group.interests, function(currentInterest, index) {
-				console.log(currentInterest.type);
+				console.log(currentInterest);
 				// If in array, remove class to show that it is now unselected
-				if (currentInterest.type === interest){
+				if (currentInterest === interest){
 					console.log("removed " + interest);
 					hasInterest = true;
 					switch(interest) {
@@ -266,7 +197,7 @@
 			// Add interest if it was not in array
 			if (hasInterest === false){
 				console.log("added " + interest);
-				newInterests.push({type: interest});
+				newInterests.push(interest);
 				switch(interest) {
 				case "Animals":
 					$scope.animalsSelected = "selected";
@@ -300,14 +231,14 @@
 		 * Adding/Removing Organizers Function
 		 **************************************************************************/
 		/*
-		 * Adds an organizer to $scope.group.organizersToAdd array
+		 * Adds an organizer to $scope.organizersToAdd array
 		 */
 		$scope.addOrganizer = function(index) {
 			var alreadyAdded = false;
 			// Checks if the organizers to be added array is empty or not
-			if ($scope.group.organizersToAdd.length > 0){
+			if ($scope.organizersToAdd.length > 0){
 				// Checks if user has already been added
-				angular.forEach($scope.group.organizersToAdd, function(currentOrganizerToAdd) {
+				angular.forEach($scope.organizersToAdd, function(currentOrganizerToAdd) {
 					// If user is already in the array, flag will be true
 					if (currentOrganizerToAdd.id === $scope.searchResults[index].id){
 						console.log(currentOrganizerToAdd + "already added");
@@ -317,26 +248,26 @@
 			}
 			// If not added yet, add to array + set class to show it has been added
 			if (!alreadyAdded){
-				$scope.group.organizersToAdd.push($scope.searchResults[index]);
+				$scope.organizersToAdd.push($scope.searchResults[index]);
 				$scope.searchResultsPristine = false;
 				$scope.searchResults[index].added = "added";
 			}
-			console.log($scope.group.organizersToAdd);
+			console.log($scope.organizersToAdd);
 		}
 
 		/*
-		 * Removes an organizer from $scope.group.organizersToAdd array
+		 * Removes an organizer from $scope.organizersToAdd array
 		 */
 		$scope.removeOrganizer = function(index) {
 			// Variable for array to be rebuilt so that there are no empty elements
 			var newOrganizersToAdd = [];
-			// Rebuild $scope.group.organizersToAdd array
-			// Goes through $scope.group.organizersToAdd array to remove "index"
-			angular.forEach($scope.group.organizersToAdd, function(currentOrganizerToAdd) {
+			// Rebuild $scope.organizersToAdd array
+			// Goes through $scope.organizersToAdd array to remove "index"
+			angular.forEach($scope.organizersToAdd, function(currentOrganizerToAdd) {
 				// If the index to be removed is found
 				//		- do not add to rebuilt array
 				//		- remove class in search results that shows that it has been added if applicable
-				if (currentOrganizerToAdd.id === $scope.group.organizersToAdd[index].id){
+				if (currentOrganizerToAdd.id === $scope.organizersToAdd[index].id){
 					console.log("removed " + currentOrganizerToAdd);
 					angular.forEach($scope.searchResults, function(currentSearchResult) {
 						if (currentSearchResult.id === currentOrganizerToAdd.id)
@@ -350,8 +281,20 @@
 				}
 			});
 			// Sets the rebuilt array
-			$scope.group.organizersToAdd = newOrganizersToAdd;
-			console.log($scope.group.organizersToAdd);
+			$scope.organizersToAdd = newOrganizersToAdd;
+			console.log($scope.organizersToAdd);
+		}
+
+		$scope.scrollToAdd = function(id) {
+			$timeout(function() {
+				$anchorScroll('add-' + id);
+			}, 1);
+		}
+
+		$scope.scrollToRemove = function(id) {
+			$timeout(function() {
+				$anchorScroll('remove-' + id);
+			}, 1);
 		}
 
 		/***************************************************************************
@@ -452,9 +395,9 @@
 				else 
 					return false;
 			case "organizerToAdd":
-				if ($scope.group.organizersToAdd != null){
-					if ($scope.group.organizersToAdd[index1].picture != null){
-						if ($scope.group.organizersToAdd[index1].picture.length > 0)
+				if ($scope.organizersToAdd != null){
+					if ($scope.organizersToAdd[index1].picture != null){
+						if ($scope.organizersToAdd[index1].picture.length > 0)
 							return true;
 						else
 							return false;
@@ -505,8 +448,8 @@
 			if ($scope.group.organizers != null){
 				total += $scope.group.organizers.length;
 			}
-			if ($scope.group.organizersToAdd != null){
-				total += $scope.group.organizersToAdd.length;
+			if ($scope.organizersToAdd != null){
+				total += $scope.organizersToAdd.length;
 			}
 			if (total > amount)
 				return true;
@@ -526,7 +469,7 @@
 		}
 		
 		$scope.hasOrganizersToAdd = function() {
-			if ($scope.group.organizersToAdd != null && $scope.group.organizersToAdd.length > 0)
+			if ($scope.organizersToAdd != null && $scope.organizersToAdd.length > 0)
 				return true;
 			else
 				return false;

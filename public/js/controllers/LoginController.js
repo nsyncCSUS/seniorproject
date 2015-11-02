@@ -23,6 +23,10 @@
     
                                        
 
+		// upload later on form submit or something similar
+		    $scope.submit = function() {
+					console.log('testasdf');
+		      if (form.file.$valid && $scope.file && !$scope.file.$error) {
 
     // Example of getting DB data
    //Creates a userFactory calls a specific function
