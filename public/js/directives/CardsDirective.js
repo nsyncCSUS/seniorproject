@@ -1,6 +1,6 @@
 (function() {
 
-	var app = angular.module('cardsDirective', []);
+	var app = angular.module('app');
 
 	app.directive('groupCard', function() {
 		return {
