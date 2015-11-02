@@ -7,17 +7,16 @@
                                    'cardsDirective',
                                    'ngFileUpload','angular-jwt'
   ]);
+    
+    //validation.match for password match in signup
 
   //Creates object authInterceptor, attaches the token to the config.header
-    app.factory('authInterceptor', function($rootScope, $q, $window,jwtHelper) {
+  app.factory('authInterceptor', function($rootScope, $q, $window) {
     return {
       request: function(config) {
         config.headers = config.headers || {};
         if ($window.sessionStorage.token) {
           console.log($window.sessionStorage.token);
-            var decodedToken = jwtHelper.decodeToken($window.sessionStorage.token);
-            console.log(decodedToken);
-            $window.sessionStorage.userInfo = decodedToken; 
           config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
         }
         return config;
