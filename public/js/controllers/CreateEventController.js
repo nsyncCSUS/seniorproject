@@ -1,5 +1,5 @@
 (function() {
-    var app = angular.module('createEventController', ['createEventService']);
+    var app = angular.module('createEventController', ['createEventService', 'angularMoment']);
 
     app.controller('CreateEventController', ['$scope', 'CreateEventService', 'amMoment', function($scope, CreateEventService, moment) {
         
