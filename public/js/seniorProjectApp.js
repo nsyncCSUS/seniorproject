@@ -3,8 +3,7 @@
   // 'ui.bootstrap',
   var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController',
     'usersController', 'groupsController', 'eventsController', 'signupController',
-                                   'loginController', 'logoutController', 'createGroupController', 'createEventController', 
-                                   'cardsDirective',
+                                   'loginController', 'logoutController', 'createGroupController', 'createEventController',
                                    'ngFileUpload','angular-jwt'
   ]);
 
