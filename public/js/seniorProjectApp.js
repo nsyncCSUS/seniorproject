@@ -3,7 +3,8 @@
   // 'ui.bootstrap',
   var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController',
     'usersController', 'groupsController', 'eventsController', 'signupController',
-                                   'loginController', 'logoutController', 'createGroupController', 'createEventController', 'ngFileUpload','angular-jwt'
+                                   'loginController', 'logoutController', 'createGroupController', 'createEventController',
+                                   'ngFileUpload','angular-jwt'
   ]);
 
   //Creates object authInterceptor, attaches the token to the config.header

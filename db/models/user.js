@@ -55,7 +55,7 @@
 		    displayName : String,
 		    lastStatus : String
 		},
-            
+		
         firstName : String,
 	    middleName : String,
 	    lastName : String,
