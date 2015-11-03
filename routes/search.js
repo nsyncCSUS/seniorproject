@@ -210,6 +210,7 @@ router.get('/getaeventbyID/:id', function(req, res) {
 
     console.log(data);
     res.send(data);
+    
   });
 
 });
