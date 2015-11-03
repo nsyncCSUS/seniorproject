@@ -17,7 +17,7 @@
           console.log($window.sessionStorage.token);
             var decodedToken = jwtHelper.decodeToken($window.sessionStorage.token);
             console.log(decodedToken);
-            $window.sessionStorage.userInfo = decodedToken; 
+            $window.sessionStorage.userID = decodedToken._id; 
           config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
         }
         return config;

@@ -117,9 +117,7 @@ router.get('/getagroup', function(req, res) {
 router.get('/getagroupbyID/:id', function(req, res) {
   console.log(req.params.id);
   //  req.body.searchString= 'test3';
-  Group.findOne({
-    '_id.$oid': req.params.id
-  }, function(err, data) {
+    Group.findById(req.params.id, function(err, data) {
     if (err) {
       console.log(err);
       throw err;
@@ -200,9 +198,8 @@ router.get('/getaevent', function(req, res) {
 router.get('/getaeventbyID/:id', function(req, res) {
   console.log(req.params.id);
   //  req.body.searchString= 'test3';
-  Event.findOne({
-    '_id.$oid': req.params.id
-  }, function(err, data) {
+Event.findById(req.params.id
+  , function(err, data) {
     if (err) {
       console.log(err);
       throw err;
@@ -278,10 +275,10 @@ router.get('/getauser', function(req, res) {
 router.get('/getauserbyID/:id', function(req, res) {
 
   console.log(req.params.id);
+   
   //  req.body.searchString= 'test3';
-  User.findOne({
-    '_id.$oid': req.params.id
-  }, function(err, data) {
+    User.findById(req.params.id
+  , function(err, data) {
     if (err) {
       console.log(err);
       throw err;
