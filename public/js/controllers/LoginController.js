@@ -13,40 +13,37 @@
   var app = angular.module('loginController', ['loginService', 'userFactory']);
   // Note service/factor names are lower cased on module parameter uppercase on controller parameter
 
-    app.controller('LoginController', ['LoginService', '$scope', '$http', '$location', '$window', 'Upload', 'UserFactory','jwtHelper', function(LoginService, $scope, $http, $location, $window, Upload, UserFactory,jwtHelper) {
+  app.controller('LoginController', ['LoginService', '$scope', '$http', '$location', '$window', 'Upload', 'UserFactory', function(LoginService, $scope, $http, $location, $window, Upload, UserFactory) {
 
     // problem with this method causes aysnc problems resulting odd return object
     // it returns an object called d inside of d.$$state.value.data holds the object
     // that is need (post data)
   //  $scope.userObject = UserFactory.getAllUsers();
    //$scope.userObject = UserFactory.getAUserByName('1');
-    
-                                       
 
-        // upload later on form submit or something similar
-        $scope.submit = function() {
-            console.log('testasdf');
-            if (form.file.$valid && $scope.file && !$scope.file.$error) {
+
 
     // Example of getting DB data
    //Creates a userFactory calls a specific function
    // and it returns the name i specified and places it into $scope.userObject.
-   //
+
+   /*
    UserFactory.getAUserByName('1').then(function(data){
-                                       console.log(data.data[0]);
-    var token ='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjJiZDhiZDZmNDk4NmM4MGVkNTg4NDEiLCJfX3YiOjAsImludGVyZXN0cyI6W10sInN1YnNjcmliZWRUbyI6W10sIm9yZ2FuaXplck9mIjpbXSwiY3JlYXRvck9mIjpbXSwidm9sdW50ZWVyZWRUbyI6W10sInBpY3R1cmUiOiIvL3BsYWNlaG9sZC5pdC81MDB4NTAwLyIsInVzZXJBdXRoIjp7InVzZXJOYW1lIjoiNyIsInBhc3N3b3JkIjoiJDJhJDA4JGlYVW82c2VoNXBMSUdFRGpFdHhYSC5YSlgvcEg5Nk5rdTFRa3g2dHlwTXlhZmRDLmJJWlNxIn19.WFvZQGSZ_hQj0TSXby8IiyjKYKLv6eccYtV2XGqZryw';
-   
-       var tokenPayload = jwtHelper.decodeToken(token);
-      // console.log(tokenPayload);
+       console.log(data.data[0]);
     $scope.userObject = data.data[0];
-  });
+  });*/
+
   /* test for all users
   UserFactory.getAllUsers().then(function(data){
       console.log(data.data[0]);
    $scope.userObject = data.data[0];
  });
 
+
+
 */
+
+  $http.get('/api/search/getagroup/3');
 
     // upload later on form submit or something similar
     $scope.submit = function() {
