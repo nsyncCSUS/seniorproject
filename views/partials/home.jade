@@ -1,197 +1,87 @@
 
-.container-fluid
-    .row
-        .col-xs-12.col-sm-12.col-md-12.col-lg-12
-            .img-responsive
-                img(src='/images/banner/1.png', alt='Cinque Terre', width='320', height='250')
-                img(src='/images/banner/2.png', alt='Cinque Terre', width='320', height='250')
-                img(src='/images/banner/3.png', alt='Cinque Terre', width='320', height='250')
 
-    hr
+.container-fluid
+    .box-one(ng-show='!isSearching')
+        .row
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                .img-responsive
+                    img(src='/images/banner/1.png', alt='Cinque Terre', width='320', height='250')
+                    img(src='/images/banner/2.png', alt='Cinque Terre', width='320', height='250')
+                    img(src='/images/banner/3.png', alt='Cinque Terre', width='320', height='250')
+                    label abcd {{userObject}}
+    
+    div(ng-click='stopSearching()')
+        |</br> </br>
 
     .well
         form.form-horizontal
             .form-group
-                .col-xs-8.col-sm-10.col-md-10.col-lg-10
-                    input.form-control#searchBox(type='text', placeholder='search', ng-model='searchbox') 
-                .col-xs-4.col-sm-2.col-md-2.col-lg-2
-                    button.btn.btn-default(ng-click='search(searchbox)') Search
+                .col-xs-12.col-sm-10.col-md-11.col-lg-11
+                    input.form-control#searchBox(type='text', placeholder='search', ng-model='search.text') 
+                .col-xs-12.col-sm-2.col-md-1.col-lg-1
+                    .text-right
+                        button.btn.btn-default(ng-click='search(search.text)') Search
                 .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                    .advancedSearchLabel.text-right
+                        label(ng-click='toggleAdvancedSearch()') 
+                            | Advanced Search
 
+            .well.box-one(ng-show='search.advanced')
+                form.form-inline
+                    .form-group
+                        .col-xs-12.col-sm-6.col-md-4.col-lg-4
+                            form(role='form')
+                                .btn-group(data-toggle)
+                                      label.btn.active.btn-default(tooltip='Find something to do', tooltip-append-to-body='true', ng-model='search.type', btn-radio="'Events'", checked='') Events
+                                      label.btn.btn-default(tooltip='Find your friends', tooltip-append-to-body='true', ng-model='search.type', btn-radio="'People'") People
+                                      label.btn.btn-default(tooltip='Find a cause', tooltip-append-to-body='true', ng-model='search.type', btn-radio="'Groups'") Groups
+                        .col-xs-12.col-sm-6.col-md-4.col-lg-4
+                            .box-one(ng-show='search.type === "Events" || search.type === "Groups"')
+                                .visible-xs
+                                    |</br></br>
+                                img.img-thumbnail(ng-src='/images/interests/animals.png',  width='35', height='35', tooltip='Animals', ng-class="{selectedInterest : search.animals}", ng-click='search.animals = !search.animals')
+                                img.img-thumbnail(ng-src='/images/interests/education.png',  width='35', height='35', tooltip='Education',  ng-class="{selectedInterest : search.education}", ng-click='search.education = !search.education')
+                                img.img-thumbnail(ng-src='/images/interests/environment.png',  width='35', height='35', tooltip='Environment',  ng-class="{selectedInterest : search.environment}", ng-click='search.environment = !search.environment')
+                                img.img-thumbnail(ng-src='/images/interests/people.png',  width='35', height='35', tooltip='People',  ng-class="{selectedInterest : search.people}", ng-click='search.people = !search.people')
+                                img.img-thumbnail(ng-src='/images/interests/recreation.png',  width='35', height='35', tooltip='Recreation',  ng-class="{selectedInterest : search.recreation}", ng-click='search.recreation = !search.recreation')
+                                img.img-thumbnail(ng-src='/images/interests/technology.png',  width='35', height='35', tooltip='Technology',  ng-class="{selectedInterest : search.technology}", ng-click='search.technology = !search.technology')
+                                img.img-thumbnail(ng-src='/images/interests/youth.png',  width='35', height='35', tooltip='Youth',  ng-class="{selectedInterest : search.youth}", ng-click='search.youth = !search.youth')
+                        .col-xs-1.col-sm-1.col-md-1.col-lg-1
+                            label Date
+                        .col-xs-11.col-sm-3.col-md-3.col-lg-3
+                            input.form-control#dateBox(type='text', placeholder='', ng-model='search.date') 
 
-    .well
-            
-            ul.nav.nav-tabs
-                li#events(ng-click='setCurrentTab("events")', ng-class='{ active:getCurrentTab("events") }')
-                    a(href='') Events
-                li#groups(ng-click='setCurrentTab("groups")', ng-class='{ active:getCurrentTab("groups") }')
-                    a(href='') Groups
-                li#users(ng-click='setCurrentTab("users")', ng-class='{ active:getCurrentTab("users") }')
-                    a(href='') Users
-
-            div(ng-show='getCurrentTab("events")')
-                div(ng-repeat='event in eventsSearchResults')
-                    .panel.panel-default
-                        .panel-heading
-                            h4 
-                                a(href='http://localhost:3000') American River Cleanup!
-                        .panel-body
-                            .col-xs-12.col-sm-4.col-md-3.col-lg-2
-                                img(src = '/images/stub photos/event stub 1.jpg', alt='Cinque Terre', width='200', height='200') 
-                                .event-item
-                                    a(href='http://localhost:3000') Concerned Citizens for Rivers
-                                .visible-sm.visible-xs
-                                    br
-                            .col-xs-12.col-sm-8.col-md-9.col-lg-10
-                                .col-xs-12.col-sm-12.col-md-6.col-lg-4
-                                    .event-item
-                                        .visible-lg
-                                            .text-center
-                                                | 100 attending of 200
-                                        .visible-md.visible-sm.visible-xs
-                                            | 100 attending of 200
-                                .col-xs-12.col-sm-12.col-md-6.col-lg-4
-                                    .event-item
-                                        .visible-lg.visible-md
-                                            .text-center
-                                                | Aug 26, 2015 11:50 AM - Aug 26, 2015 11:50 AM
-                                        .visible-sm.visible-xs
-                                            | 1/1/2015 12:00AM - 1/1/2015 12:00PM
-                                .col-xs-12.col-sm-12.col-md-12.col-lg-4
-                                    .event-item
-                                        .visible-lg
-                                            .text-center
-                                                | 1234 Fake Street, Sacramento
-                                        .visible-md.visible-sm.visible-xs
-                                            | 1234 Fake Street, Sacramento
-                                .col-lg-1.visible-lg
-                                    | 
-                                .col-xs-11.col-sm-11.col-md-11.col-lg-11
-                                    hr
-                                    .text-center
-                                        | center sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem blandit non.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        .panel-footer
-                             img(src = '/images/interests/environment.png', alt='Cinque Terre', width='40', height='40')
-                             img(src = '/images/interests/people.png', alt='Cinque Terre', width='40', height='40')
-                             img(src = '/images/interests/youth.png', alt='Cinque Terre', width='40', height='40')
-                        br
-                        .panel-heading
-                            h4 
-                                a(href='http://localhost:3000') Animal Shelter Needs Love
-                        .panel-body
-                            .col-xs-12.col-sm-4.col-md-3.col-lg-2
-                                img(src = '/images/stub photos/event stub 2.jpg', alt='Cinque Terre', width='200', height='200') 
-                                .event-item
-                                    a(href='http://localhost:3000') Folsom Animal Shelter
-                                .visible-sm.visible-xs
-                                    br
-                            .col-xs-12.col-sm-8.col-md-9.col-lg-10
-                                .col-xs-12.col-sm-12.col-md-6.col-lg-4
-                                    .event-item
-                                        .visible-lg
-                                            .text-center
-                                                | 100 attending of 200
-                                        .visible-md.visible-sm.visible-xs
-                                            | 100 attending of 200
-                                .col-xs-12.col-sm-12.col-md-6.col-lg-4
-                                    .event-item
-                                        .visible-lg.visible-md
-                                            .text-center
-                                                | Aug 26, 2015 11:50 AM - Aug 26, 2015 11:50 AM
-                                        .visible-sm.visible-xs
-                                            | 1/1/2015 12:00AM - 1/1/2015 12:00PM
-                                .col-xs-12.col-sm-12.col-md-12.col-lg-4
-                                    .event-item
-                                        .visible-lg
-                                            .text-center
-                                                | 1234 Fake Street, Sacramento
-                                        .visible-md.visible-sm.visible-xs
-                                            | 1234 Fake Street, Sacramento
-                                .col-lg-1.visible-lg
-                                    | 
-                                .col-xs-11.col-sm-11.col-md-11.col-lg-11
-                                    hr
-                                    .text-center
-                                        | center sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem blandit non.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        .panel-footer
-                             img(src = '/images/interests/animals.png', alt='Cinque Terre', width='40', height='40')
-                        br
-                        .panel-heading
-                            h4 
-                                a(href='http://localhost:3000') Hacker Lab Meetup
-                        .panel-body
-                            .col-xs-12.col-sm-4.col-md-3.col-lg-2
-                                img(src = '/images/stub photos/event stub 3.jpg', alt='Cinque Terre', width='200', height='200') 
-                                .event-item
-                                    a(href='http://localhost:3000') Code for Sacramento
-                                .visible-sm.visible-xs
-                                    br
-                            .col-xs-12.col-sm-8.col-md-9.col-lg-10
-                                .col-xs-12.col-sm-12.col-md-6.col-lg-4
-                                    .event-item
-                                        .visible-lg
-                                            .text-center
-                                                | 100 attending of 200
-                                        .visible-md.visible-sm.visible-xs
-                                            | 100 attending of 200
-                                .col-xs-12.col-sm-12.col-md-6.col-lg-4
-                                    .event-item
-                                        .visible-lg.visible-md
-                                            .text-center
-                                                | Aug 26, 2015 11:50 AM - Aug 26, 2015 11:50 AM
-                                        .visible-sm.visible-xs
-                                            | 1/1/2015 12:00AM - 1/1/2015 12:00PM
-                                .col-xs-12.col-sm-12.col-md-12.col-lg-4
-                                    .event-item
-                                        .visible-lg
-                                            .text-center
-                                                | 1234 Fake Street, Sacramento
-                                        .visible-md.visible-sm.visible-xs
-                                            | 1234 Fake Street, Sacramento
-                                .col-lg-1.visible-lg
-                                    | 
-                                .col-xs-11.col-sm-11.col-md-11.col-lg-11
-                                    hr
-                                    .text-center
-                                        | center sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem blandit non.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        .panel-footer
-                             img(src = '/images/interests/technology.png', alt='Cinque Terre', width='40', height='40')
-                             img(src = '/images/interests/people.png', alt='Cinque Terre', width='40', height='40')
-                        br
-
-
-//                    .panel.panel-default
-//                        img.img-responsive(src='{{event.picture}}', height='64', width='64')
-//                        h6 Name: {{event.ename}}
-//                        h6 Description: {{event.description}}
-//                        h6 Volunteer List:
-//                        div(ng-repeat='volunteer in event.volunteerList')
-//                            img.img-responsive(src='{{volunteer.picture}}', height='64', width='64')
-//                            h6 Name: {{volunteer.fname}} {{volunteer.lname}}
-//                            h6 Age: {{volunteer.age}}
-//                            h6 Interests:
-//                            div(ng-repeat='interest in volunteer.interests')
-//                                h6 -{{interest.type}}
-//                        h6 Interests:
-//                        div(ng-repeat='interest in event.interests')
-//                            h6 -{{interest.type}}               
-            div(ng-show='getCurrentTab("users")')
-                div(ng-repeat='user in usersSearchResults')
-                    .panel.panel-default
-                        img.img-responsive(src='{{user.picture}}', height='64', width='64')
-                        h6 Name: {{user.fname}} {{user.lname}}
-                        h6 Age: {{user.age}}
-                        h6 Interests:
-                        div(ng-repeat='interest in user.interests')
-                            h6 -{{interest.type}}
-            div(ng-show='getCurrentTab("groups")')
-                div(ng-repeat='group in groupsSearchResults')
-                    .panel.panel-default
-                        img.img-responsive(src='{{group.picture}}', height='64', width='64')
-                        h6 Name: {{group.gname}}
-                        h6 Description: {{group.description}}
-                        h6 Interests:
-                        div(ng-repeat='interest in group.interests')
-                            h6 -{{interest.type}}
+    .panel-group 
+        .col-xs-12.col-sm-12.col-md-6.col-lg-6(ng-repeat='event in events | orderBy:"StartTimeDate"', ng-show='getSearchType("Events")')              
+            .panel.panel-default
+                .panel-heading
+                    h3 <strong>{{event.StartTimeDate | date:'MMM d'}}</strong> 
+                    h5 {{event.StartTimeDate | date:'EEEE h:m a'}}
+                .panel-body
+                    .row
+                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                            h4
+                                a(ng-href='/events/{{event._id}}/') {{event.EventName}}
+                                h5 {{event.Address}} {{event.City}}, {{event.State}} {{event.Zipcode}} 
+                            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                .row
+                                    .col-xs-12.col-sm-12.col-md-12.col-lg-12.navbar-btn
+                                        img(ng-src='/images/interests/{{interest}}.png',  width='25', height='25', ng-repeat='interest in event.Interests', tooltip='{{interest}}')
+                            .col-xs-12.col-sm-3.col-md-5.col-lg-4
+                                .row
+                                    .col-xs-4.col-sm-12.col-md-12.col-lg-12
+                                        a(ng-href='/events/{{event._id}}/')
+                                            img(src='/images/event/{{event.picture}}.jpg', width='150', height='150')
+                            .col-xs-12.col-sm-9.col-md-7.col-lg-8
+                                .row
+                                    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                        h5 {{event.Description | limitTo:350}}
+                            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                .row
+                                    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                                        h4.text-right {{event.VolunteerList.length}} / {{event.MaxVolunteers}}
+                                            | &nbsp
+                                            button.btn.btn-primary Volunteer Now
+            |</br>
 
     
