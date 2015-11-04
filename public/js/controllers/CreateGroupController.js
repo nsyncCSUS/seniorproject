@@ -1,14 +1,30 @@
 (function() {
 
-	var app = angular.module('createGroupController', ['createGroupService']);
+	var app = angular.module('createGroupController', ['groupService']);
 
-	app.controller('CreateGroupController', [ '$scope', '$location', '$anchorScroll', '$timeout', 'CreateGroupService', function($scope, $location, $anchorScroll, $timeout, CreateGroupService) {
+	app.controller('CreateGroupController', [ '$scope', '$location', '$anchorScroll', '$timeout', 'GroupService', function($scope, $location, $anchorScroll, $timeout, GroupService) {
 
 		/***************************************************************************
 		 * Variables (includes ones from scope too)
 		 **************************************************************************/
-		$scope.group = {};
-		
+		$scope.group =  
+		{
+				id : "nsync",
+				name: "N.Sync()",
+				picture : "//placekitten.com/g/500/500/",
+				creationDate : "2015-08-26T18:50:10.111Z",
+				city : "Sacramento",
+				state : "CA",
+				zipcode : 95828,
+				description: "sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem blandit non.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate pellentesque lorem. Donec erat ante, sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem bland center",
+				googlePlusURL : "www.google.com",
+				facebookURL : "https://facebook.com",
+				linkedInURL : "https://linkedin.com",
+				twitterURL : "https://twitter.com",
+				interests : ["Animals", "Environment", "People", "Recreation", "Technology", "Youth"]
+		};
+
+		$scope.alerts = [];
 		$scope.group.interests = [];
 		
 		$scope.organizersToAdd = [];
@@ -16,6 +32,7 @@
 		
 		$scope.isPreviewing = false;
 		$scope.isSearching = false;
+		$scope.isCreating = false;
 
 		$scope.animalsSelected = "";
 		$scope.educationSelected = "";
@@ -143,9 +160,25 @@
 		 * Posting Functions
 		 **************************************************************************/
 		$scope.createGroup = function() {
+			$scope.group.creationDate = new Date();
+			$scope.isCreating = true;
 			// Send new group to server
-			CreateGroupService.createGroup({groupData: $scope.group}, function(res) {
-				$scope.savedSuccessMsg = res.data.msg;
+			GroupService.post({group: $scope.group, user: user}, function(res) {
+				switch(res.data.flag){
+				case true:
+					$scope.alerts.push({type: "success", msg: res.data.msg});
+					$timeout(function() {
+						$location.path("/groups/" + res.data.group._id).replace;
+					}, 3000);
+					break;
+				case false:
+					$scope.alerts.push({type: "danger", msg: res.data.msg});
+					$timeout(function() {
+						$scope.isCreating = false;
+					}, 3000);
+					break;
+				}
+				
 			});
 		}
 
@@ -480,10 +513,6 @@
 		 **************************************************************************/
 		$scope.enablePreview = function() {
 			$scope.isPreviewing = true;
-			// Build an array for displaying organizers in a carousel
-			buildOrganizers();
-			// Build one for mobile view also
-			buildOrganizersXS();
 		}
 		
 		$scope.cancelPreview = function() {
@@ -503,7 +532,10 @@
 		$scope.cancelCreateGroup = function() {
 			$location.path("/home").replace;
 		}
-		
+
+		$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
+		}
 	} ]);
 
 })();

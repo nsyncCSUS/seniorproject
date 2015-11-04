@@ -125,6 +125,15 @@ a {
     top: 80px;
 }
 
+.creatingOverlay {
+	z-index: 5;
+	position: absolute;
+	background-color: #aaaaaa;
+	opacity: .2;
+	height: 91%;
+	width: 100%;
+}
+
 /**********************************************************************
     GROUP Edit CSS START
 **********************************************************************/

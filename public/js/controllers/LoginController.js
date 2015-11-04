@@ -23,18 +23,23 @@
     
                                        
 
+        // upload later on form submit or something similar
+        $scope.submit = function() {
+            console.log('testasdf');
+            if (form.file.$valid && $scope.file && !$scope.file.$error) {
 
     // Example of getting DB data
    //Creates a userFactory calls a specific function
    // and it returns the name i specified and places it into $scope.userObject.
    //
-        UserFactory.getLoggedInUserObject().then(function(data){
-            console.log(data.data);
-            console.log(data);    
-
-            $scope.userObject = data.data;
-            console.log($scope.userObject);
-        });
+   UserFactory.getAUserByName('1').then(function(data){
+                                       console.log(data.data[0]);
+    var token ='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjJiZDhiZDZmNDk4NmM4MGVkNTg4NDEiLCJfX3YiOjAsImludGVyZXN0cyI6W10sInN1YnNjcmliZWRUbyI6W10sIm9yZ2FuaXplck9mIjpbXSwiY3JlYXRvck9mIjpbXSwidm9sdW50ZWVyZWRUbyI6W10sInBpY3R1cmUiOiIvL3BsYWNlaG9sZC5pdC81MDB4NTAwLyIsInVzZXJBdXRoIjp7InVzZXJOYW1lIjoiNyIsInBhc3N3b3JkIjoiJDJhJDA4JGlYVW82c2VoNXBMSUdFRGpFdHhYSC5YSlgvcEg5Nk5rdTFRa3g2dHlwTXlhZmRDLmJJWlNxIn19.WFvZQGSZ_hQj0TSXby8IiyjKYKLv6eccYtV2XGqZryw';
+   
+       var tokenPayload = jwtHelper.decodeToken(token);
+      // console.log(tokenPayload);
+    $scope.userObject = data.data[0];
+  });
   /* test for all users
   UserFactory.getAllUsers().then(function(data){
       console.log(data.data[0]);

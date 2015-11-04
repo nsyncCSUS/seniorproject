@@ -3,8 +3,7 @@
   // 'ui.bootstrap',
   var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController',
     'usersController', 'groupsController', 'eventsController', 'signupController',
-                                   'loginController', 'logoutController', 'createGroupController', 'createEventController', 
-                                   'cardsDirective',
+                                   'loginController', 'logoutController', 'createGroupController', 'createEventController',
                                    'ngFileUpload','angular-jwt'
   ]);
 
@@ -17,7 +16,7 @@
           console.log($window.sessionStorage.token);
             var decodedToken = jwtHelper.decodeToken($window.sessionStorage.token);
             console.log(decodedToken);
-            $window.sessionStorage.userID = decodedToken._id; 
+            $window.sessionStorage.userInfo = decodedToken; 
           config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
         }
         return config;

@@ -1,3 +1,4 @@
+
 var express = require('express');
 var mongoose = require('mongoose'); // mongose module
 mongoose.set('debug', true);
@@ -117,7 +118,9 @@ router.get('/getagroup', function(req, res) {
 router.get('/getagroupbyID/:id', function(req, res) {
   console.log(req.params.id);
   //  req.body.searchString= 'test3';
-    Group.findById(req.params.id, function(err, data) {
+  Group.findOne({
+    '_id.$oid': req.params.id
+  }, function(err, data) {
     if (err) {
       console.log(err);
       throw err;
@@ -198,8 +201,9 @@ router.get('/getaevent', function(req, res) {
 router.get('/getaeventbyID/:id', function(req, res) {
   console.log(req.params.id);
   //  req.body.searchString= 'test3';
-Event.findById(req.params.id
-  , function(err, data) {
+  Event.findOne({
+    '_id.$oid': req.params.id
+  }, function(err, data) {
     if (err) {
       console.log(err);
       throw err;
@@ -207,7 +211,6 @@ Event.findById(req.params.id
 
     console.log(data);
     res.send(data);
-    
   });
 
 });
@@ -275,10 +278,10 @@ router.get('/getauser', function(req, res) {
 router.get('/getauserbyID/:id', function(req, res) {
 
   console.log(req.params.id);
-   
   //  req.body.searchString= 'test3';
-    User.findById(req.params.id
-  , function(err, data) {
+  User.findOne({
+    '_id.$oid': req.params.id
+  }, function(err, data) {
     if (err) {
       console.log(err);
       throw err;

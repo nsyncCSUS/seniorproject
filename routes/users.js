@@ -95,8 +95,7 @@
             userName: req.body.username,
             password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null)
               // encrypts the password before storing note:salt stored inside the passwordhash
-          },
-          email: req.body.email
+          }
         });
 
         console.log(newUser);
