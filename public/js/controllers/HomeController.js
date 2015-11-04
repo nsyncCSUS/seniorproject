@@ -1,23 +1,41 @@
 (function() {
-    var app = angular.module('homeController', ['homeService', 'homeFactory']);
+    var app = angular.module('homeController', ['homeService', 'homeFactory', 'userFactory']);
 
 
-    app.controller('HomeController', ['$scope', 'HomeService', 'HomeFactory', function($scope, HomeService, HomeFactory) {
+    app.controller('HomeController', ['$scope', 'HomeService', 'HomeFactory', 'UserFactory', function($scope, HomeService, HomeFactory, UserFactory) {
 
         /***************************************************************************
          * Variables (includes ones from scope too)
          **************************************************************************/
+        UserFactory.getAUserByName('1').then(function(data){
+            $scope.userObject = data.data[0];
+            //console.log(data.data[0]);
+        });
+        
+        $scope.event = {
+               
+       };
+        $scope.event.startTimeDate = new Date('2015-03-01T00:00:00Z');
+        $scope.event.endTimeDate = new Date('2015-03-01T00:00:00Z');
         $scope.isSearching = false; // Default
         $scope.currentTab = 'events';
+        $scope.search = {
+            "text" : '',
+            "advanced": false,
+            "type": 'Events',
+            "animals": false,
+            "education": false,
+            "environment": false,
+            "people": false,
+            "recreation": false,
+            "youth": false
+        };
 
-        $scope.search;
         $scope.category = 'Events';
-        $scope.searchtext;
         $scope.usersSearchResults;
         $scope.groupsSearchResults;
         $scope.eventsSearchResults;
         $scope.searchbox = '';
-        $scope.advancedSearchToggle = false;
         $scope.descrip = "center sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean ad";
 
         $scope.events = [{
@@ -38,10 +56,10 @@
         Zipcode: "95621",
         
         VolunteerList: [{
-        	Name: "abc"
+            Name: "abc"
         },
         {
-        	Name: "abc"
+            Name: "abc"
         }],
         
         CreationUser: {
@@ -51,7 +69,7 @@
         Interests: ['environment', 'people', 'youth'] 
         },
         {
-       	EventName: "American River Cleanup!",
+        EventName: "American River Cleanup!",
         
         Group: {
             GroupName:"Concerned Citizens for Rivers",
@@ -77,7 +95,7 @@
         Interests: ['environment', 'people', 'youth'] 
         }, 
         {
-       	EventName: "American River Cleanup!",
+        EventName: "American River Cleanup!",
         
         Group: {
             GroupName:"Concerned Citizens for Rivers",
@@ -101,9 +119,9 @@
         
         MaxVolunteers: 200,
         Interests: ['environment', 'people', 'youth'] 
-    	},
-    	{
-    	 EventName: "American River Cleanup!",
+        },
+        {
+         EventName: "American River Cleanup!",
         
         Group: {
             GroupName:"Concerned Citizens for Rivers",
@@ -129,11 +147,12 @@
         Interests: ['environment', 'people', 'youth']
     }];
 
+
         /***************************************************************************
          * Initialize the search for users, groups, events based on keywords
-         * 	- Search Users
-         * 	- Search Groups
-         * 	- Search Events
+         *  - Search Users
+         *  - Search Groups
+         *  - Search Events
          **************************************************************************/
         $scope.search = function(searchbox) {
             if (searchbox.length > 0) {
@@ -153,15 +172,15 @@
         };
 
         $scope.getSearchBox = function(){
-        	if (typeof searchbox !== 'undefined'){
-        		return searchbox;
-        	}
-        	else{
-        		return '';
-        	}
+            if (typeof searchbox !== 'undefined'){
+                return searchbox;
+            }
+            else{
+                return '';
+            }
         };
 
-        /***************************************************************************
+        /***********************************************************https://github.com/nsyncCSUS/seniorproject.git****************
          * Functions that controls the view for searching or not search
          **************************************************************************/
         $scope.searching = function() {
@@ -189,77 +208,63 @@
         };
 
         $scope.toggleAdvancedSearch = function(){
-        	if ($scope.advancedSearch === true){
-        		$scope.advancedSearch = false;
-        	}
-        	else{
-        		$scope.advancedSearch = true;
-        	}
+            if ($scope.search.advanced === true){
+                $scope.search.advanced = false;
+            }
+            else{
+                $scope.search.advanced = true;
+            }
         };
+
+        $scope.toggleInterest = function(interest){
+            if (interest === true){
+                interest = false;
+            }
+            else{
+                interest = true;
+            }
+        };
+
+     // Disable weekend selection
+     $scope.disabled = function(date, mode) {
+       return (mode === 'day' && (new Date().toDateString() == date.toDateString()));
+     };
+
+     $scope.dateOptions = {
+       showWeeks: false,
+       startingDay: 1
+     };
+     
+     $scope.timeOptions = {
+       readonlyInput: false,
+       showMeridian: false
+     };
+     
+     $scope.dateModeOptions = {
+       minMode: 'year',
+       maxMode: 'year'
+     };
+     
+     $scope.openCalendar = function(e, date) {
+         $scope.open[date] = true;
+     };
+     
+     // watch date4 and date5 to calculate difference
+     $scope.calculateWatch = $scope.$watch(function() {
+       return $scope.dates;
+     }, function() {
+       if ($scope.event.startTime && $scope.event.endTime) {
+         var diff = $scope.event.startTime.getTime() - $scope.event.endTime.getTime();
+         $scope.dayRange = Math.round(Math.abs(diff/(1000*60*60*24)))
+       } else {
+         $scope.dayRange = 'n/a';
+       }
+     }, true);
+     
+     $scope.$on('$destroy', function() {
+       $scope.calculateWatch();
+     });
 
     }]);
 
 })();
-
-/*
-	user: {
-		firstName : 	String,
-		middleName : 	String,
-		lastName : 		String,
-		description : 	String,
-		picture:		String,
-		email : 		String,
-		birthday : 		Date,
-		age : 			Number,
-		location :		{city: String, state: String, zipcode: String},	
-		phoneNum : 		Number,
-		googlePlus : 	String,
-		facebook : 		String,
-		linkedIn : 		String,
-		twitter : 		String,
-		volunteeredTo : [{id: String}, {id: String}, ...],
-		creatorOf : 	[{id: String}, {id: String}, ...],
-		organizerOf : 	[{id: String}, {id: String}, ...],
-		subscribedTo : 	[{id: String}, {id: String}, ...],
-		interests : 	[{type: String}, {type: String}, ...]
-	}
-*/
-
-/*
-	group: {
-		id : 				String,
-		name : 				String,
-		picture : 			String,
-		creationDate : 		String,
-		location :			[{city: String, state: String, zipcode: String}, ...],
-		description : 		String,
-		googlePlusURL : 	String,
-		facebookURL : 		String,
-		linkInURL : 		String,
-		twitterURL: 		String,
-		personalWebsiteURL: String,
-		events:				[{id: String}, {id: String}, ...],
-		organizers:			[{id: String}, {id: String}, ...],
-		subscribers:		[{id: String}, {id: String}, ...],
-		interests: 			[{type: String}, {type: String}, ...]
-
-	}
-*/
-
-/*
-	event: {
-		id: 			String,		
-		creatorId: 		String,
-		groupId: 		String,
-		name: 			String,
-		description: 	String,
-		picture: 		String,
-		creationDate: 	DateTime,
-		startTimeDate: 	DateTime,
-		endTimeDate: 	DateTime,
-		location :		{street: String, city: String, state: String, zipcode: String},	
-		maxVolunteers: 	Number,
-		volunteers:		[{id: String}, {id: String}, ...],
-		interests: 		[{type: String}, {type: String}, ...]
-	}
-*/

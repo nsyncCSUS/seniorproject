@@ -7,11 +7,9 @@ body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-
 a {
     //color: #00B7FF;
 }
-
 
 .box-one {
     -webkit-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
@@ -34,14 +32,28 @@ a {
   opacity:0;
 }
 
+.notSelected{
+    background-color:white;  
+}
+
+.selectedInterest{  
+     background-color: lightgrey;
+}
+
+
+.float-right {
+    z-index: 10;
+    position: fixed;
+    right: 1%;
+    top: 80px;
+}
+
+
 .center-item {
    display:block;
    margin: 0 auto;
 }
 
-.cursor-pointer {
-   cursor: pointer;
-}
 
 .container-fluid {
     padding-right: 20px;
@@ -56,14 +68,8 @@ a {
 .event-description {
     padding-right: 25px;
 }
-.float-right {
-    z-index: 10;
-    position: fixed;
-    right: 1%;
-    top: 80px;
-}
 
-.event-item {
+.event-item { 
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
@@ -149,11 +155,6 @@ a {
     z-index: 2;
 }
 
-.subscriber-thumbnail {
-    width: 64px;
-    height: 64px;
-}
-
 .add:hover {
     border: 2px solid #000000;
     position:relative;
@@ -215,11 +216,6 @@ a {
 }
 
 /**********************************************************************
-    GROUP Edit CSS END
-**********************************************************************/
-
-
-/**********************************************************************
     GROUP CSS START
 **********************************************************************/
 .eventRow {
@@ -247,9 +243,6 @@ a {
     overflow: hidden;
 }
 
-.upcomingEventsRow {
-    background-color: #eeeeee;
-}
 
 /**********************************************************************
     DASHBOARD CSS START
@@ -283,38 +276,3 @@ a {
     border-top: solid thin ;
 }
 
-.carousel-control {
-  width:5%;
-}
-
-.organizersRow {
-    background-color: #eeeeee;
-}
-
-/**********************************************************************
-    CREATE_EVENT CSS START
-**********************************************************************/
-.form-horizontal {
-    width:500px;
-}
-
-.datetime-picker-dropdown {
-
-}
-
-.datetime-picker-dropdown > li.date-picker-menu div > table .btn-default {
-    border: 0;
-}
-
-.datetime-picker-dropdown > li.time-picker-menu div > table {
-
-}
-
-/**********************************************************************
-    Event CSS END
-**********************************************************************/
-
-.event-item {
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    font-weight: bold;
-}

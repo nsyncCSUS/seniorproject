@@ -1,3 +1,5 @@
+
+
 .container-fluid
     .box-one(ng-show='!isSearching')
         .row
@@ -6,6 +8,7 @@
                     img(src='/images/banner/1.png', alt='Cinque Terre', width='320', height='250')
                     img(src='/images/banner/2.png', alt='Cinque Terre', width='320', height='250')
                     img(src='/images/banner/3.png', alt='Cinque Terre', width='320', height='250')
+                    label abcd {{userObject}}
     
     div(ng-click='stopSearching()')
         |</br> </br>
@@ -23,27 +26,30 @@
                         label(ng-click='toggleAdvancedSearch()') 
                             | Advanced Search
 
-            .well.box-one(ng-show='advancedSearch')
+            .well.box-one(ng-show='search.advanced')
                 form.form-inline
                     .form-group
                         .col-xs-12.col-sm-6.col-md-4.col-lg-4
                             form(role='form')
                                 .btn-group(data-toggle)
-                                      label.btn.active.btn-default(tooltip='Find something to do', tooltip-append-to-body='true', ng-model='search.advanced.type', btn-radio="'Events'", checked='') Events
-                                      label.btn.btn-default(tooltip='Find your friends', tooltip-append-to-body='true', ng-model='search.advanced.type', btn-radio="'People'") People
-                                      label.btn.btn-default(tooltip='Find a cause', tooltip-append-to-body='true', ng-model='search.advanced.type', btn-radio="'Groups'") Groups
+                                      label.btn.active.btn-default(tooltip='Find something to do', tooltip-append-to-body='true', ng-model='search.type', btn-radio="'Events'", checked='') Events
+                                      label.btn.btn-default(tooltip='Find your friends', tooltip-append-to-body='true', ng-model='search.type', btn-radio="'People'") People
+                                      label.btn.btn-default(tooltip='Find a cause', tooltip-append-to-body='true', ng-model='search.type', btn-radio="'Groups'") Groups
                         .col-xs-12.col-sm-6.col-md-4.col-lg-4
-                            .visible-xs
-                                |</br></br>
-                            img.img-thumbnail(ng-src='/images/interests/animals.png',  width='35', height='35', tooltip='Animals', style='background-color: lightgrey')
-                            img.img-thumbnail(ng-src='/images/interests/education.png',  width='35', height='35', tooltip='Education')
-                            img.img-thumbnail(ng-src='/images/interests/environment.png',  width='35', height='35', tooltip='Environment')
-                            img.img-thumbnail(ng-src='/images/interests/people.png',  width='35', height='35', tooltip='People')
-                            img.img-thumbnail(ng-src='/images/interests/recreation.png',  width='35', height='35', tooltip='Recreation')
-                            img.img-thumbnail(ng-src='/images/interests/technology.png',  width='35', height='35', tooltip='Technology')
-                            img.img-thumbnail(ng-src='/images/interests/youth.png',  width='35', height='35', tooltip='Youth')
-
-
+                            .box-one(ng-show='search.type === "Events" || search.type === "Groups"')
+                                .visible-xs
+                                    |</br></br>
+                                img.img-thumbnail(ng-src='/images/interests/animals.png',  width='35', height='35', tooltip='Animals', ng-class="{selectedInterest : search.animals}", ng-click='search.animals = !search.animals')
+                                img.img-thumbnail(ng-src='/images/interests/education.png',  width='35', height='35', tooltip='Education',  ng-class="{selectedInterest : search.education}", ng-click='search.education = !search.education')
+                                img.img-thumbnail(ng-src='/images/interests/environment.png',  width='35', height='35', tooltip='Environment',  ng-class="{selectedInterest : search.environment}", ng-click='search.environment = !search.environment')
+                                img.img-thumbnail(ng-src='/images/interests/people.png',  width='35', height='35', tooltip='People',  ng-class="{selectedInterest : search.people}", ng-click='search.people = !search.people')
+                                img.img-thumbnail(ng-src='/images/interests/recreation.png',  width='35', height='35', tooltip='Recreation',  ng-class="{selectedInterest : search.recreation}", ng-click='search.recreation = !search.recreation')
+                                img.img-thumbnail(ng-src='/images/interests/technology.png',  width='35', height='35', tooltip='Technology',  ng-class="{selectedInterest : search.technology}", ng-click='search.technology = !search.technology')
+                                img.img-thumbnail(ng-src='/images/interests/youth.png',  width='35', height='35', tooltip='Youth',  ng-class="{selectedInterest : search.youth}", ng-click='search.youth = !search.youth')
+                        .col-xs-1.col-sm-1.col-md-1.col-lg-1
+                            label Date
+                        .col-xs-11.col-sm-3.col-md-3.col-lg-3
+                            input.form-control#dateBox(type='text', placeholder='', ng-model='search.date') 
 
     .panel-group 
         .col-xs-12.col-sm-12.col-md-6.col-lg-6(ng-repeat='event in events | orderBy:"StartTimeDate"', ng-show='getSearchType("Events")')              
@@ -77,3 +83,5 @@
                                             | &nbsp
                                             button.btn.btn-primary Volunteer Now
             |</br>
+
+    
