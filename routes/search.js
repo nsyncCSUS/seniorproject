@@ -95,11 +95,11 @@ router.get('/getallgroups', function(req, res) {
 
 
 //Non-indexed soon to be depreciated by keywordsearch indexed version
-router.get('/getagroup/:name', function(req, res) {
-  console.log(req.params.name);
+router.get('/getagroup', function(req, res) {
+  console.log(req.body.searchString);
   //  req.body.searchString= 'test3';
   Group.findOne({
-    'name': req.params.name
+    'groupName': req.body.searchString
   }, function(err, data) {
     if (err) {
       console.log(err);
@@ -117,9 +117,7 @@ router.get('/getagroup/:name', function(req, res) {
 router.get('/getagroupbyID/:id', function(req, res) {
   console.log(req.params.id);
   //  req.body.searchString= 'test3';
-  Group.findOne({
-    '_id.$oid': req.params.id
-  }, function(err, data) {
+    Group.findById(req.params.id, function(err, data) {
     if (err) {
       console.log(err);
       throw err;
@@ -143,7 +141,7 @@ router.get('/getagroupbyname/:groupname', function(req, res) {
   var searchStringRegExObj = new RegExp(req.params.groupname, "i");
 
   Group.find({
-    'name': searchStringRegExObj
+    'groupName': searchStringRegExObj
   }, function(err, data) {
     if (err) {
       throw err;
@@ -182,7 +180,7 @@ router.get('/getaevent', function(req, res) {
   console.log(req.body.searchString);
   //  req.body.searchString= 'test3';
   Event.findOne({
-    'name': req.body.searchString
+    'eventName': req.body.searchString
   }, function(err, data) {
     if (err) {
       console.log(err);
@@ -200,9 +198,8 @@ router.get('/getaevent', function(req, res) {
 router.get('/getaeventbyID/:id', function(req, res) {
   console.log(req.params.id);
   //  req.body.searchString= 'test3';
-  Event.findOne({
-    '_id.$oid': req.params.id
-  }, function(err, data) {
+Event.findById(req.params.id
+  , function(err, data) {
     if (err) {
       console.log(err);
       throw err;
@@ -210,7 +207,7 @@ router.get('/getaeventbyID/:id', function(req, res) {
 
     console.log(data);
     res.send(data);
-
+    
   });
 
 });
@@ -224,7 +221,7 @@ router.get('/getaeventbyname/:eventname', function(req, res) {
   var searchStringRegExObj = new RegExp(req.params.eventname, "i");
 
   Event.find({
-    'name': searchStringRegExObj
+    'eventName': searchStringRegExObj
   }, function(err, data) {
     if (err) {
       throw err;
@@ -256,11 +253,11 @@ router.get('/getallusers', function(req, res) {
 });
 
 //Non-indexed soon to be depreciated by keywordsearch indexed version
-router.get('/getauserbyfirstname/:firstName', function(req, res) {
-  console.log(req.params.name);
+router.get('/getauser', function(req, res) {
+  console.log(req.body.searchString);
   //  req.body.searchString= 'test3';
   User.findOne({
-    'firstName': req.params.name
+    'userAuth.userName': req.body.searchString
   }, function(err, data) {
     if (err) {
       console.log(err);
@@ -278,10 +275,10 @@ router.get('/getauserbyfirstname/:firstName', function(req, res) {
 router.get('/getauserbyID/:id', function(req, res) {
 
   console.log(req.params.id);
+   
   //  req.body.searchString= 'test3';
-  User.findOne({
-    '_id.$oid': req.params.id
-  }, function(err, data) {
+    User.findById(req.params.id
+  , function(err, data) {
     if (err) {
       console.log(err);
       throw err;

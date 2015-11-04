@@ -3,19 +3,21 @@
   // 'ui.bootstrap',
   var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'ngAnimate', 'homeController', 'dashboardController',
     'usersController', 'groupsController', 'eventsController', 'signupController',
-    'loginController', 'logoutController', 'createGroupController', 'createEventController', 
-    'cardsDirective', 'ngFileUpload', 'angular-jwt'
+                                   'loginController', 'logoutController', 'createGroupController', 'createEventController', 
+                                   'cardsDirective',
+                                   'ngFileUpload','angular-jwt'
   ]);
-    
-    //validation.match for password match in signup
 
   //Creates object authInterceptor, attaches the token to the config.header
-  app.factory('authInterceptor', function($rootScope, $q, $window) {
+    app.factory('authInterceptor', function($rootScope, $q, $window,jwtHelper) {
     return {
       request: function(config) {
         config.headers = config.headers || {};
         if ($window.sessionStorage.token) {
           console.log($window.sessionStorage.token);
+            var decodedToken = jwtHelper.decodeToken($window.sessionStorage.token);
+            console.log(decodedToken);
+            $window.sessionStorage.userID = decodedToken._id; 
           config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
         }
         return config;

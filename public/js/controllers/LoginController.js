@@ -13,37 +13,35 @@
   var app = angular.module('loginController', ['loginService', 'userFactory']);
   // Note service/factor names are lower cased on module parameter uppercase on controller parameter
 
-  app.controller('LoginController', ['LoginService', '$scope', '$http', '$location', '$window', 'Upload', 'UserFactory', function(LoginService, $scope, $http, $location, $window, Upload, UserFactory) {
+    app.controller('LoginController', ['LoginService', '$scope', '$http', '$location', '$window', 'Upload', 'UserFactory','jwtHelper', function(LoginService, $scope, $http, $location, $window, Upload, UserFactory,jwtHelper) {
 
     // problem with this method causes aysnc problems resulting odd return object
     // it returns an object called d inside of d.$$state.value.data holds the object
     // that is need (post data)
   //  $scope.userObject = UserFactory.getAllUsers();
    //$scope.userObject = UserFactory.getAUserByName('1');
-
+    
+                                       
 
 
     // Example of getting DB data
    //Creates a userFactory calls a specific function
    // and it returns the name i specified and places it into $scope.userObject.
+   //
+        UserFactory.getLoggedInUserObject().then(function(data){
+            console.log(data.data);
+            console.log(data);    
 
-   /*
-   UserFactory.getAUserByName('1').then(function(data){
-       console.log(data.data[0]);
-    $scope.userObject = data.data[0];
-  });*/
-
+            $scope.userObject = data.data;
+            console.log($scope.userObject);
+        });
   /* test for all users
   UserFactory.getAllUsers().then(function(data){
       console.log(data.data[0]);
    $scope.userObject = data.data[0];
  });
 
-
-
 */
-
-  $http.get('/api/search/getagroup/3');
 
     // upload later on form submit or something similar
     $scope.submit = function() {
