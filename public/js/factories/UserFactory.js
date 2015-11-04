@@ -18,14 +18,13 @@
       getAUserByName: function(searchValue){
         console.log('inside getAUserByName');
         return $http.get('/api/search/getauserbyname/'+searchValue);
-      }
-
-    };
+      },
 
       getCurrentUserObject: function(){
-          var userID = $window.sessionStorage.userInfo._id
+          var userID = $window.sessionStorage.userInfo._id;
           return $http.get('/api/search/getauserbyID/'+userID);
       }
+    };
 
 
     return factory;
