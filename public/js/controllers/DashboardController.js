@@ -50,6 +50,30 @@
 			$scope.event = response.event;
 		}); */
 		
+//		$scope.user = {
+//				firstName : 	"",
+//				middleName : 	"",
+//				lastName : 		"",
+//				description : 	"",
+//				picture:		"",
+//				email : 		"",
+//				birthday : 		"",
+//				age : 			"",
+//				city : 			"",
+//				state : 		"",
+//				zipCode : 		"",
+//				phoneNum : 		"",
+//				googlePlus : 	"",
+//				facebook : 		"",
+//				linkedIn : 		"",
+//				twitter : 		"",
+//				volunteeredTo : [{id: ""}, {id: ""}],
+//				creatorOf : 	[{id: ""}, {id: ""}],
+//				organizerOf : 	[{id: ""}, {id: ""}],
+//				subscribedTo : 	[{id: ""}, {id: ""}],
+//				interests : 	[{type: ""}, {type: ""}]
+//			};
+		
 		$scope.user = {
 				firstName : 	"",
 				middleName : 	"",

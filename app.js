@@ -40,6 +40,7 @@ mongoose.connect(dbConfig.url, options); // Corrected URI
 //mongoose.model('Users', {FirstName: String, MiddleName: String, LastName: String, Description: String, Email: String, Birthday: Date, Age: Number, City: String, State: String, ZipCode: Number, PhoneNum: Number, Picture: String, VolunteeredTo: String, CreatorOf: String, OrganizerOf: String, SubscribedTo: String, GooglePlus: String, Facebook: String, LinkenIn: String, Twitter: String, Interests: String, Skills: String })
 
 var app = express();
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

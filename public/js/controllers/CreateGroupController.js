@@ -116,7 +116,7 @@
 			$scope.searchResults = [{
 				id :			"huy",
 				firstName : 	"Huy",
-				lastName : 		"Le"
+				lastName : 		"Lee"
 			},{
 				id :			"kris",
 				firstName : 	"Kristopher",
@@ -125,7 +125,7 @@
 			},{
 				id :			"vadzim",
 				firstName : 	"Vadzim",
-				lastName : 		"LN",
+				lastName : 		"Savenok",
 				picture : 		"//placekitten.com/g/1002/1002/"
 			},{
 				id :			"shane",
@@ -135,7 +135,7 @@
 			},{
 				id :			"john",
 				firstName : 	"John",
-				lastName : 		"LN",
+				lastName : 		"Ellis",
 				picture : 		"//placekitten.com/g/1004/1004/"
 			}
 			];

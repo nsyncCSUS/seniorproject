@@ -11,6 +11,44 @@ a {
     //color: #00B7FF;
 }
 
+.box-one {
+    -webkit-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    position: relative;
+    display: block;
+}
+
+.advancedSearchLabel{
+    color: blue;
+    text-indent: 50px;
+    text-decoration: none;
+    padding-top: 15px;
+}
+
+.box-one.ng-hide {
+  opacity:0;
+}
+
+.notSelected{
+    background-color:white;  
+}
+
+.selectedInterest{  
+     background-color: lightgrey;
+}
+
+
+.float-right {
+    z-index: 10;
+    position: fixed;
+    right: 1%;
+    top: 80px;
+}
+
+
 .center-item {
    display:block;
    margin: 0 auto;

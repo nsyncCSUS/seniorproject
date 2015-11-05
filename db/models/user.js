@@ -48,14 +48,14 @@
 		    email : String
 		},
 
-		twitter : {
-		    id : String,
-		    token : String,
-		    username : String,
-		    displayName : String,
-		    lastStatus : String
-		},
-		
+    twitter : {
+        id : String,
+        token : String,
+        username : String,
+        displayName : String,
+        lastStatus : String
+    },
+
         firstName : String,
 	    middleName : String,
 	    lastName : String,
@@ -97,13 +97,13 @@
             type: ObjectId,
             ref: 'Group' 
         }],
-            
-	    interests : [String]
-	});
-	
-	
-	var User = mongoose.model('User', UserSchema);
-	module.exports = User;
+
+      interests : [String]
+  });
+
+
+  var User = mongoose.model('User', UserSchema);
+  module.exports = User;
 
 }) (module);
 
