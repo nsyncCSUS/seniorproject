@@ -2,34 +2,8 @@
 
 	var app = angular.module('dashboardController', ['dashboardService', 'dashboardFactory']);	//creating new module
 	
-	/**
-	 * Checks if an event has expired
-	 *  - displays correctly in upcoming events or past events
-	 */
-	app.filter('checkExpired', function () {
-		return function (events, expiredFlag) {
-			if (events == null)
-				return;
-			var today = new Date().getTime();
-			var out = [];
-			var eventEndDate = "";
-			for (var i = 0; i < events.length; i++){
-				eventEndDate = new Date(events[i].endTimeDate).getTime();
-				result = eventEndDate - today;
-				
-				if ((result <= 0) && expiredFlag){
-					out.push(events[i]);
-				}
-				else if ((result > 0) && !expiredFlag){
-					out.push(events[i]);
-				}
-			}
-			return out;
-		}
-	});
-	
 	/*create new controller; [] is a list of dependencies to fetch, and pass them all into a constructor function*/
-	app.controller('DashboardController', [ '$scope', 'DashboardService', 'DashboardFactory', 'EventService', function($scope, DashboardService, DashboardFactory, EventService) {
+	app.controller('DashboardController', [ '$scope', 'DashboardService', 'DashboardFactory', 'EventService', '$anchorScroll', '$timeout', function($scope, DashboardService, DashboardFactory, EventService, $anchorScroll, $timeout) {
 		/***************************************************************************
 		 * Variables (includes ones from scope too)
 		 **************************************************************************/
@@ -75,22 +49,24 @@
 //			};
 		
 		$scope.user = {
-				firstName : 	"",
-				middleName : 	"",
-				lastName : 		"",
-				description : 	"",
-				picture:		"",
+				id : "AnthonyNguyen",
+				firstName : "Anthony",
+				middleName: "middle",
+				lastName : "Nguyen",
+				description: "sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem blandit non.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate pellentesque lorem. Donec erat ante, sodales malesuada accumsan vel, condimentum eget eros. Mauris consectetur nisi in ex pharetra commodo. Nullam aliquam velit sem, nec molestie risus eleifend ac. In fringilla, nisl ac gravida convallis, turpis eros accumsan urna, sed molestie tortor libero sit amet lacus. Nulla porttitor euismod purus, ut hendrerit leo vehicula sed. Aenean a lobortis metus, ut ornare erat. Suspendisse tincidunt molestie lacus, non molestie sem bland center",
+				picture : "//placekitten.com/g/500/500/",
+				creationDate : "2015-08-26T18:50:10.111Z",
 				email : 		"",
 				birthday : 		"",
 				age : 			"",
-				city : 			"",
-				state : 		"",
-				zipCode : 		"",
+				city : "Sacramento",
+				state : "CA",
+				zipcode : 95828,
 				phoneNum : 		"",
-				googlePlus : 	"",
-				facebook : 		"",
-				linkedIn : 		"",
-				twitter : 		"",
+				googlePlusURL : "www.google.com",
+				facebookURL : "https://facebook.com",
+				linkedInURL : "https://linkedin.com",
+				twitterURL : "https://twitter.com",
 				volunteeredTo : [ {
 					id : "event1",
 					creatorId: "",
@@ -225,7 +201,6 @@
 
 		$scope.selectedTab = "Upcoming Events";
 		$scope.otherTabs = ["Past Events", "Recommended Events"];
-		$scope.user.creationDate = new Date().getTime();
 		
 		/***********************************************************************
 		 * Building Functions
@@ -251,6 +226,10 @@
 				$scope.otherTabs[1] = "Past Events";
 				break;
 			}
+			
+			$timeout(function() {
+				$anchorScroll('tabs');
+			}, 1);
 		}
 		
 		$scope.getCurrentTab = function(tabName) {
@@ -278,156 +257,7 @@
 				return false;
 		}
 		
-		/*
-		 * Checks if the gorup has a picture, the view will display a default
-		 * picture if no picture is found.
-		 */
-		$scope.hasPicture = function(type1, index1, type2, index2) {
-			switch(type1){
-			case "group":
-				if ($scope.group.picture != null){
-					if ($scope.group.picture.length > 0)
-						return true;
-					else
-						return false;
-					}
-				else{
-					if ($scope.loaded == false)
-						return true;
-					else
-						return false;
-				}
-			case "organizer":
-				if ($scope.group.organizersBuilt != null){
-					if ($scope.group.organizersBuilt[index1].organizers[index2].picture != null){
-						if ($scope.group.organizersBuilt[index1].organizers[index2].picture.length > 0)
-							return true;
-						else
-							return false;
-						}
-					else
-						return false;
-				}
-			case "organizerXS":
-				if ($scope.group.organizersBuiltXS != null){
-					if ($scope.group.organizersBuiltXS[index1].organizers[index2].picture != null){
-						if ($scope.group.organizersBuiltXS[index1].organizers[index2].picture.length > 0)
-							return true;
-						else
-							return false;
-						}
-					else
-						return false;
-				}
-			case "subscriber":
-				if ($scope.group.subscribers != null){
-					if ($scope.group.subscribers[index1].picture != null){
-						if ($scope.group.subscribers[index1].picture.length > 0)
-							return true;
-						else
-							return false;
-						}
-					else
-						return false;
-				}
-			case "event":
-				if ($scope.upcomingEvents != null){
-					if (type2 != null) {
-						switch(type2){
-						case "volunteer":
-							if ($scope.upcomingEvents[index1].volunteers[index2].picture != null) {
-								if ($scope.upcomingEvents[index1].volunteers[index2].picture.length > 0) 
-									return true;
-								else
-									return false;
-							}
-						}
-					}
-					else{
-						if ($scope.upcomingEvents[index1].picture != null){
-							if ($scope.upcomingEvents[index1].picture.length > 0)
-								return true;
-							else
-								return false;
-							}
-						else
-							return false;
-					}
-				}
-			}
-		}
 		
 		}]);
 
 })();
-
-
-/*
-	user: {
-		firstName : 	String,
-		middleName : 	String,
-		lastName : 		String,
-		description : 	String,
-		picture:		String,
-		email : 		String,
-		birthday : 		Date,
-		age : 			Number,
-		city: 			String, 
-		state: 			String, 
-		zipcode: 		String,	
-		phoneNum : 		Number,
-		googlePlusURL : 	String,
-		facebookURL : 		String,
-		linkInURL : 		String,
-		twitterURL: 		String,
-		volunteeredTo : [{id: String}, {id: String}, ...],
-		creatorOf : 	[{id: String}, {id: String}, ...],
-		organizerOf : 	[{id: String}, {id: String}, ...],
-		subscribedTo : 	[{id: String}, {id: String}, ...],
-		interests : 	[String]
-	}
-*/
-
-/*
-	group: {
-		id : 				String,
-		name : 				String,
-		picture : 			String,
-		creationDate : 		String,
-		city: 				String, 
-		state: 				String, 
-		zipcode: 			String,
-		description : 		String,
-		googlePlusURL : 	String,
-		facebookURL : 		String,
-		linkInURL : 		String,
-		twitterURL: 		String,
-		personalWebsiteURL: String,
-		events:				[{id: String}, {id: String}, ...],
-		organizers:			[{id: String}, {id: String}, ...],
-		subscribers:		[{id: String}, {id: String}, ...],
-		interests: 			[String]
-
-	}
-*/
-
-/*
-	event: {
-		id: 			String,		
-		creatorId: 		String,
-		groupId: 		String,
-		name: 			String,
-		description: 	String,
-		picture: 		String,
-		creationDate: 	DateTime,
-		startTimeDate: 	DateTime,
-		endTimeDate: 	DateTime,
-		street: 		String, 
-		city: 			String, 
-		state: 			String, 
-		zipcode: 		String,	
-		maxVolunteers: 	Number,
-		volunteers:		[{id: String}, {id: String}, ...],
-		interests: 		[String]
-	}
-*/
