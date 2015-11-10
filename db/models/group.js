@@ -12,35 +12,45 @@
      * Schema for Group Objects 
      */
     var GroupSchema = new Schema({
-        GroupName: String,
+        name: {
+        	type: String,
+        	required: true
+        },
         
-        EventList: [{
+        picture: {
+        	type: String,
+        	default: "//placehold.it/500x500/"
+        },
+        
+    	creationDate: {
+    		type: Date,
+    		required: true
+    	},
+    	city: 				String, 
+    	state: 				String, 
+    	zipcode: 			String,
+    	description : 		String,
+    	googlePlusURL : 	String,
+    	facebookURL : 		String,
+    	linkedInURL : 		String,
+    	twitterURL: 		String,
+    	personalWebsiteURL: String,
+
+        events: [{
             type: ObjectId,
             ref: 'Event'
         }],
-        
-        CreationDate: Date,
-        city: String,
-        state: String,
-        zipcode: String,
-        
-        OrganizerList: [{
+        organizers: [{
             type: ObjectId,
             ref: 'User'
         }],
         
-        SubscriptionList: [{
+        subscriptions: [{
             type: ObjectId,
             ref: 'User'
         }],
         
-        Decsription: String,
-        //GooglePlus: {},
-        //Facebook: {},
-        //LinkedIn: {},
-        //Twitter: {},
-        //Website: {},
-        Interests: [String] 
+        interests: [String] 
     }); 
     
     

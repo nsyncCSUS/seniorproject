@@ -60,7 +60,7 @@
                 util.err(err, response);
                 return response.end();
             } else {
-                return response.send({group: group}); 
+                return response.send({'group': group}); 
             }
         });
     });
@@ -69,9 +69,16 @@
     router.put('/:id', function(request, response, next) {
         var id = request.params.id;
         //console.log(request.body.group); 
-        var group = JSON.parse(request.body.group); 
+        var group = request.body.group; 
         Group.findByIdAndUpdate(id, group, {new: true}, function(err, group) {
-            return response.send({group: group}); 
+        	if (err){
+                console.log('Error in Group Creation: ' + err);
+                response.send({'flag': false, 'msg': "Error updating group. Try again."});
+        	}
+        	if (group){
+        		response.send({'group': group, 'flag': true, 'msg': "Saved Successful"});
+        	}
+        	
         });
     });
 	
@@ -83,21 +90,60 @@
     // add user to organizers list, add group to user's
     // groups list 
     router.post('/', function(request, response, next) {
-        var username = request.body.username; 
-        var params = request.params.group; 
-        var group = new Group(group);
-
-        User.findOne({'userAuth.userName': username}, function(err, user) {
-            if(err) return util.err(err, response); 
-            group.CreationUser = user;
-            return group.save(function(err, group) {
-                if(err) util.err(err, response); 
-                return group.update({$push:{}}, function(err, group) {
-                    if(err) return util.err(err, response); 
-                    return response.send({group: group}); 
-                }); 
-            }); 
-        }); 
+        var group = request.body.group; 
+        var user = request.body.user;
+        var organizersToAdd = request.body.organizersToAdd;
+        
+        //return response.send({'msg': true});
+        Group.findOne({
+            'name': group.name
+        }, function(err, g) {
+            // error checking
+            if (err) {
+                console.log('Error in Group Creation: ' + err);
+            }
+            //if group already exsists
+            if (g) {
+                console.log('Group name taken try again. ' + g.name);
+                response.send({'flag': false, 'msg': "Group name taken, try again."});
+            } else {
+                // if no group exist create one
+                var newGroup = new Group({
+                	name: group.name,
+                    /*
+                    picture: {
+                    	type: String,
+                    	default: "//placehold.it/500x500/"
+                    },
+                    */
+                	creationDate : 		group.creationDate,
+                	city: 				group.city, 
+                	state: 				group.state, 
+                	zipcode: 			group.zipcode,
+                	description : 		group.description,
+                	googlePlusURL : 	group.googlePlusURL,
+                	facebookURL : 		group.facebookURL,
+                	linkedInURL : 		group.linkedInURL,
+                	twitterURL: 		group.twitterURL,
+                	personalWebsiteURL: group.personalWebsiteURL,
+                	interests:			group.interests
+                });
+                
+                // Adds the user to group's organizer list
+                //newGroup.organizers.push(user);
+                
+                //save group
+                newGroup.save(function(err) {
+                    if (err) {
+                        console.log('Error in saving user:' + err);
+                        throw err;
+                    }
+                    console.log('Group registration success');
+                    response.send({'group': newGroup, 'flag': true, 'msg': "Group successfully created, redirecting to " + newGroup.name});
+                });
+                
+            }
+        });
     });
 
     
